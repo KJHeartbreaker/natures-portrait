@@ -1,11 +1,11 @@
-import {GrDocument as icon} from 'react-icons/gr'
+import {GoHome as icon} from 'react-icons/go'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {BsSearch} from 'react-icons/bs'
 
-export const page = defineType({
+export const home = defineType({
+  name: 'home',
+  title: 'Home',
   type: 'document',
-  name: 'page',
-  title: 'Page',
   icon,
   groups: [
     {
@@ -17,19 +17,45 @@ export const page = defineType({
   ],
   fields: [
     defineField({
-      type: 'string',
       name: 'title',
+      description: 'Homepage title.',
       title: 'Title',
+      type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
-      type: 'slug',
-      name: 'slug',
-      title: 'Slug',
-      options: {
-        source: 'title',
-      },
-      validation: (rule) => rule.required(),
+      name: 'overview',
+      description: 'Used both for the <meta> description tag for SEO, and the homepage subheader.',
+      title: 'Description',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          lists: [],
+          marks: {
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [
+                  {
+                    name: 'href',
+                    type: 'url',
+                    title: 'Url',
+                  },
+                ],
+              },
+            ],
+            decorators: [
+              {title: 'Italic', value: 'em'},
+              {title: 'Strong', value: 'strong'},
+            ],
+          },
+          styles: [],
+          type: 'block',
+        }),
+      ],
+      validation: (rule) => rule.max(155).required(),
     }),
     defineField({
       name: 'seo',
@@ -37,34 +63,6 @@ export const page = defineType({
       title: 'SEO Settings',
       description: 'Configure how this page appears in search engines',
       group: 'seo',
-    }),
-    defineField({
-      name: 'overview',
-      description:
-        'Used both for the <meta> description tag for SEO, and the personal website subheader.',
-      title: 'Overview',
-      type: 'array',
-      of: [
-        // Paragraphs
-        defineArrayMember({
-          lists: [],
-          marks: {
-            annotations: [],
-            decorators: [
-              {
-                title: 'Italic',
-                value: 'em',
-              },
-              {
-                title: 'Strong',
-                value: 'strong',
-              },
-            ],
-          },
-          styles: [],
-          type: 'block',
-        }),
-      ],
     }),
     defineField({
       name: 'content',
@@ -95,13 +93,12 @@ export const page = defineType({
   preview: {
     select: {
       title: 'title',
-      slug: 'slug.current',
     },
-    prepare({title, slug}) {
+    prepare({title}) {
       return {
         title,
-        subtitle: `/${slug}`,
       }
     },
   },
 })
+

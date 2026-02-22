@@ -1,105 +1,126 @@
-import {DocumentTextIcon} from '@sanity/icons'
-import {format, parseISO} from 'date-fns'
-import {defineField, defineType} from 'sanity'
-import type {Post} from '../../../sanity.types'
-
-/**
- * Post schema.  Define and edit the fields for the 'post' content type.
- * Learn more: https://www.sanity.io/docs/schema-types
- */
+import {defineArrayMember, defineField, defineType} from 'sanity'
+import {BsSearch} from 'react-icons/bs'
+import {VscSettings} from 'react-icons/vsc'
+import {TbMeat} from 'react-icons/tb'
+import {FaBullhorn as icon} from 'react-icons/fa'
 
 export const post = defineType({
   name: 'post',
   title: 'Post',
-  icon: DocumentTextIcon,
   type: 'document',
+  icon,
+  groups: [
+    {
+      title: 'SEO',
+      name: 'seo',
+      icon: BsSearch,
+      default: true,
+    },
+    {
+      title: 'Post Settings',
+      name: 'postSettings',
+      icon: VscSettings,
+    },
+    {
+      title: 'Post Content',
+      name: 'postContent',
+      icon: TbMeat,
+    },
+  ],
   fields: [
     defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (rule) => rule.required(),
+      group: 'postSettings',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      description: 'A slug is required for the post to show up in the preview',
+      validation: (Rule) => Rule.required(),
       options: {
         source: 'title',
         maxLength: 96,
-        isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
-      validation: (rule) => rule.required(),
+      group: 'postSettings',
     }),
     defineField({
-      name: 'content',
-      title: 'Content',
-      type: 'blockContent',
+      name: 'seo',
+      type: 'seo',
+      title: 'SEO Settings',
+      description: 'Configure how this post appears in search engines',
+      group: 'seo',
+    }),
+    defineField({
+      name: 'overview',
+      description:
+        'Used both for the <meta> description tag for SEO, and the personal website subheader. Should be fewer than 160 characters.',
+      title: 'Overview',
+      type: 'array',
+      of: [
+        // Paragraphs
+        defineArrayMember({
+          lists: [],
+          marks: {
+            annotations: [],
+            decorators: [
+              {
+                title: 'Italic',
+                value: 'em',
+              },
+              {
+                title: 'Strong',
+                value: 'strong',
+              },
+            ],
+          },
+          styles: [],
+          type: 'block',
+        }),
+      ],
+      group: 'postSettings',
     }),
     defineField({
       name: 'excerpt',
       title: 'Excerpt',
-      type: 'text',
+      type: 'simplePortableText',
+      description:
+        'This field will appear in places where this post is linked. For example, in a related resources grid.',
+      group: 'postSettings',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'coverImage',
-      title: 'Cover Image',
-      type: 'image',
+      name: 'image',
+      title: 'Header Image',
+      type: 'mainImage',
       options: {
         hotspot: true,
-        aiAssist: {
-          imageDescriptionField: 'alt',
-        },
       },
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative text',
-          description: 'Important for SEO and accessibility.',
-          validation: (rule) => {
-            // Custom validation to ensure alt text is provided if the image is present. https://www.sanity.io/docs/validation
-            return rule.custom((alt, context) => {
-              const document = context.document as Post
-              if (document?.coverImage?.asset?._ref && !alt) {
-                return 'Required'
-              }
-              return true
-            })
-          },
-        },
-      ],
+      group: 'postContent',
     }),
     defineField({
-      name: 'date',
-      title: 'Date',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
+      name: 'subheader',
+      title: 'Subheader',
+      type: 'string',
+      group: 'postContent',
     }),
     defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: [{type: 'person'}],
+      name: 'body',
+      title: 'Body',
+      type: 'mainPortableText',
+      group: 'postContent',
+      validation: (Rule) => Rule.required(),
     }),
   ],
-  // List preview configuration. https://www.sanity.io/docs/previews-list-views
   preview: {
     select: {
       title: 'title',
-      authorFirstName: 'author.firstName',
-      authorLastName: 'author.lastName',
-      date: 'date',
-      media: 'coverImage',
+      media: 'image',
     },
-    prepare({title, media, authorFirstName, authorLastName, date}) {
-      const subtitles = [
-        authorFirstName && authorLastName && `by ${authorFirstName} ${authorLastName}`,
-        date && `on ${format(parseISO(date), 'LLL d, yyyy')}`,
-      ].filter(Boolean)
-
-      return {title, media, subtitle: subtitles.join(' ')}
+    prepare(selection) {
+      return selection
     },
   },
 })

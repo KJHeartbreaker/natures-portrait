@@ -1,11 +1,11 @@
-import {GrDocument as icon} from 'react-icons/gr'
+import {GoMegaphone as icon} from 'react-icons/go'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {BsSearch} from 'react-icons/bs'
 
-export const page = defineType({
+export const blogLandingPage = defineType({
+  name: 'blogLandingPage',
+  title: 'Blog',
   type: 'document',
-  name: 'page',
-  title: 'Page',
   icon,
   groups: [
     {
@@ -17,9 +17,10 @@ export const page = defineType({
   ],
   fields: [
     defineField({
-      type: 'string',
       name: 'title',
+      description: 'Blog page meta title.',
       title: 'Title',
+      type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -42,14 +43,27 @@ export const page = defineType({
       name: 'overview',
       description:
         'Used both for the <meta> description tag for SEO, and the personal website subheader.',
-      title: 'Overview',
+      title: 'Description',
       type: 'array',
       of: [
         // Paragraphs
         defineArrayMember({
           lists: [],
           marks: {
-            annotations: [],
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [
+                  {
+                    name: 'href',
+                    type: 'url',
+                    title: 'Url',
+                  },
+                ],
+              },
+            ],
             decorators: [
               {
                 title: 'Italic',
@@ -65,6 +79,7 @@ export const page = defineType({
           type: 'block',
         }),
       ],
+      validation: (rule) => rule.max(155).required(),
     }),
     defineField({
       name: 'content',
@@ -87,7 +102,6 @@ export const page = defineType({
         defineArrayMember({type: 'heroBanner'}),
         defineArrayMember({type: 'heroTwoPanel'}),
         defineArrayMember({type: 'singleColumnContentBlock'}),
-        defineArrayMember({type: 'rowContainer'}),
         defineArrayMember({type: 'postsGridContainer'}),
       ],
     }),
@@ -95,13 +109,12 @@ export const page = defineType({
   preview: {
     select: {
       title: 'title',
-      slug: 'slug.current',
     },
-    prepare({title, slug}) {
+    prepare({title}) {
       return {
         title,
-        subtitle: `/${slug}`,
       }
     },
   },
 })
+

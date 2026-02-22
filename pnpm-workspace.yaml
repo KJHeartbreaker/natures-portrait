@@ -1,0 +1,10 @@
+packages:
+  - "studio"
+  - "web"
+
+# pnpm v10 blocks dependency build scripts by default unless approved.
+# These are required by Next.js/Sanity tooling (native/bundled deps).
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - unrs-resolver

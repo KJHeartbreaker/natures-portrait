@@ -14,821 +14,1343 @@
 
 // Source: ../sanity.schema.json
 export type ContentBlock = {
-  portableTextBlock?: MainPortableText;
-};
+  portableTextBlock?: MainPortableText
+}
 
 export type SingleColumnContentBlock = {
-  _type: "singleColumnContentBlock";
-  title?: string;
-  backgroundColor?: "#ffffff" | "#e2e2e2" | "#61c8e9" | "#013b63" | "#feca2d";
-  removeBottomPadding?: boolean;
-  skinny?: boolean;
-  centerContent?: boolean;
-  contentBlock?: ContentBlock;
-  disabled?: boolean;
-};
+  _type: 'singleColumnContentBlock'
+  title?: string
+  backgroundColor?: '#ffffff' | '#e2e2e2' | '#61c8e9' | '#013b63' | '#feca2d'
+  removeBottomPadding?: boolean
+  skinny?: boolean
+  centerContent?: boolean
+  contentBlock?: ContentBlock
+  disabled?: boolean
+}
 
 export type RowContainer = {
-  _type: "rowContainer";
-  title?: string;
-  hideTitle?: boolean;
-  centerTitle?: boolean;
-  titleColor?: "#333333" | "#16abcc" | "#ee6d08" | "#feca2d" | "#ffffff";
-  row?: "twoColumn" | "threeColumn";
-  removeBottomPadding?: boolean;
-  condensedCopy?: boolean;
-  centerCopy?: boolean;
-  image?: MainImage;
-  overlay?: "noOverlay" | "darkOverlay" | "blueOverlay";
-  backgroundColor?: "#ffffff" | "#e2e2e2" | "#16abcc" | "#ee6d08" | "#feca2d";
-  rowContent?: Array<{
-    _key: string;
-  } & Carousel | {
-    _key: string;
-  } & MainImage | {
-    _key: string;
-  } & MainPortableText>;
-  disabled?: boolean;
-};
+  _type: 'rowContainer'
+  title?: string
+  hideTitle?: boolean
+  centerTitle?: boolean
+  titleColor?: '#333333' | '#16abcc' | '#ee6d08' | '#feca2d' | '#ffffff'
+  row?: 'twoColumn' | 'threeColumn'
+  removeBottomPadding?: boolean
+  condensedCopy?: boolean
+  centerCopy?: boolean
+  image?: MainImage
+  overlay?: 'noOverlay' | 'darkOverlay' | 'blueOverlay'
+  backgroundColor?: '#ffffff' | '#e2e2e2' | '#16abcc' | '#ee6d08' | '#feca2d'
+  rowContent?: Array<
+    | ({
+        _key: string
+      } & Carousel)
+    | ({
+        _key: string
+      } & MainImage)
+    | ({
+        _key: string
+      } & MainPortableText)
+  >
+  disabled?: boolean
+}
 
 export type ContactInfo = {
-  _type: "contactInfo";
-  headline?: string;
-  phoneNumber: string;
-  phoneLabel?: string;
-  email: string;
-  textColor?: "white" | "blue";
-  size?: "normal" | "large";
-};
+  _type: 'contactInfo'
+  headline?: string
+  phoneNumber: string
+  phoneLabel?: string
+  email: string
+  textColor?: 'white' | 'blue'
+  size?: 'normal' | 'large'
+}
 
 export type PageReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "page";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'page'
+}
 
 export type PostReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "post";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'post'
+}
 
 export type BlogLandingPageReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "blogLandingPage";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'blogLandingPage'
+}
 
 export type SimplePortableText = {
-  _type: "simplePortableText";
+  _type: 'simplePortableText'
   portableTextBlock?: Array<{
     children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      blank?: boolean;
-      _type: "link";
-      _key: string;
-    } | {
-      item?: PageReference | PostReference | BlogLandingPageReference;
-      _type: "internalLink";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-};
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<
+      | {
+          href?: string
+          blank?: boolean
+          _type: 'link'
+          _key: string
+        }
+      | {
+          item?: PageReference | PostReference | BlogLandingPageReference
+          _type: 'internalLink'
+          _key: string
+        }
+    >
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+}
 
 export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
 
 export type MainPortableText = {
-  _type: "mainPortableText";
-  portableTextBlock?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      blank?: boolean;
-      _type: "link";
-      _key: string;
-    } | {
-      item?: PageReference | PostReference | BlogLandingPageReference;
-      _type: "internalLink";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    _key: string;
-  } & Cta | {
-    hr?: string;
-    size?: string;
-    width?: string;
-    _type: "hr";
-    _key: string;
-  } | {
-    _key: string;
-  } & ContactInfo | {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }>;
-};
+  _type: 'mainPortableText'
+  portableTextBlock?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<
+          | {
+              href?: string
+              blank?: boolean
+              _type: 'link'
+              _key: string
+            }
+          | {
+              item?: PageReference | PostReference | BlogLandingPageReference
+              _type: 'internalLink'
+              _key: string
+            }
+        >
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Cta)
+    | {
+        hr?: string
+        size?: string
+        width?: string
+        _type: 'hr'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & ContactInfo)
+    | {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt?: string
+        _type: 'image'
+        _key: string
+      }
+  >
+}
 
 export type MainImage = {
-  _type: "mainImage";
-  asset?: SanityImageAssetReference;
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  width?: number;
-  height?: number;
-  alt?: string;
-};
+  _type: 'mainImage'
+  asset?: SanityImageAssetReference
+  media?: unknown
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  width?: number
+  height?: number
+  alt?: string
+}
 
 export type Icon = {
-  _type: "icon";
-  asset?: SanityImageAssetReference;
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt: string;
-};
+  _type: 'icon'
+  asset?: SanityImageAssetReference
+  media?: unknown
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  alt: string
+}
 
 export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-};
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
 
 export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
-};
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
 
 export type HeroTwoPanel = {
-  _type: "heroTwoPanel";
-  size?: "standard" | "x-large";
-  image?: MainImage;
-  backgroundColor?: "#16abcc" | "#ee6d08" | "#feca2d" | "#ffffff" | "#323943";
-  mainPortableText?: MainPortableText;
-  centerText?: boolean;
-  disabled?: boolean;
-};
+  _type: 'heroTwoPanel'
+  size?: 'standard' | 'x-large'
+  image?: MainImage
+  backgroundColor?: '#16abcc' | '#ee6d08' | '#feca2d' | '#ffffff' | '#323943'
+  mainPortableText?: MainPortableText
+  centerText?: boolean
+  disabled?: boolean
+}
 
 export type HeroBanner = {
-  _type: "heroBanner";
-  size?: "standard" | "x-large";
-  subheading?: string;
-  subHeadingColor?: "white" | "orange" | "blue" | "yellow" | "grey33";
-  heading: string;
-  headingColor?: "white" | "orange" | "blue" | "yellow" | "grey33";
-  copy?: SimplePortableText;
-  copyColor?: "white" | "orange" | "blue" | "yellow" | "grey33";
-  image?: MainImage;
-  overlay?: "noOverlay" | "darkOverlay" | "blueOverlay";
-  cta?: Cta;
-  disabled?: boolean;
-};
+  _type: 'heroBanner'
+  size?: 'standard' | 'x-large'
+  subheading?: string
+  subHeadingColor?: 'white' | 'orange' | 'blue' | 'yellow' | 'grey33'
+  heading: string
+  headingColor?: 'white' | 'orange' | 'blue' | 'yellow' | 'grey33'
+  copy?: SimplePortableText
+  copyColor?: 'white' | 'orange' | 'blue' | 'yellow' | 'grey33'
+  image?: MainImage
+  overlay?: 'noOverlay' | 'darkOverlay' | 'blueOverlay'
+  cta?: Cta
+  disabled?: boolean
+}
 
 export type SanityFileAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+}
 
 export type Cta = {
-  _type: "cta";
-  title?: string;
-  kind?: "button" | "link";
-  arrow?: boolean;
-  landingPageRoute?: PageReference | PostReference | BlogLandingPageReference;
-  link?: string;
-  anchor?: string;
+  _type: 'cta'
+  title?: string
+  kind?: 'button' | 'link'
+  arrow?: boolean
+  landingPageRoute?: PageReference | PostReference | BlogLandingPageReference
+  link?: string
+  anchor?: string
   fileDownload?: {
-    asset?: SanityFileAssetReference;
-    media?: unknown;
-    _type: "file";
-  };
-};
+    asset?: SanityFileAssetReference
+    media?: unknown
+    _type: 'file'
+  }
+}
 
 export type Carousel = {
-  _type: "carousel";
-  carouselImages?: Array<{
-    _key: string;
-  } & MainImage>;
-};
+  _type: 'carousel'
+  carouselImages?: Array<
+    {
+      _key: string
+    } & MainImage
+  >
+}
 
 export type NavDropdownCTA = {
-  _type: "navDropdownCTA";
-  cta?: Cta;
-  subnav?: Array<{
-    _key: string;
-  } & Cta>;
-};
+  _type: 'navDropdownCTA'
+  cta?: Cta
+  subnav?: Array<
+    {
+      _key: string
+    } & Cta
+  >
+}
 
 export type NavCTA = {
-  _type: "navCTA";
-  cta?: Cta;
-};
+  _type: 'navCTA'
+  cta?: Cta
+}
 
 export type Seo = {
-  _type: "seo";
-  seoTitle?: string;
-  seoDescription?: string;
-  noindex?: boolean;
-  canonicalUrl?: string;
+  _type: 'seo'
+  seoTitle?: string
+  seoDescription?: string
+  noindex?: boolean
+  canonicalUrl?: string
   ogImage?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-};
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+}
 
 export type PostsGridContainer = {
-  _type: "postsGridContainer";
-  backgroundColor?: "#ffffff" | "#e2e2e2" | "#61c8e9" | "#feca2d";
-  posts?: Array<{
-    _key: string;
-  } & PostReference>;
-};
+  _type: 'postsGridContainer'
+  backgroundColor?: '#ffffff' | '#e2e2e2' | '#61c8e9' | '#feca2d'
+  posts?: Array<
+    {
+      _key: string
+    } & PostReference
+  >
+}
 
-export type Settings = {
-  _id: string;
-  _type: "settings";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  menuItems?: Array<{
-    _key: string;
-  } & NavCTA | {
-    _key: string;
-  } & NavDropdownCTA | {
-    title: string;
-    slug: Slug;
-    seo?: Seo;
-    overview: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    content?: Array<{
-      _key: string;
-    } & HeroBanner | {
-      _key: string;
-    } & HeroTwoPanel | {
-      _key: string;
-    } & SingleColumnContentBlock | {
-      _key: string;
-    } & PostsGridContainer>;
-    _type: "blogLandingPage";
-    _key: string;
-  }>;
-  ogImage?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    metadataBase?: string;
-    _type: "image";
-  };
-};
-
-export type Page = {
-  _id: string;
-  _type: "page";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  slug: Slug;
-  seo?: Seo;
-  overview?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: null;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  content?: Array<{
-    _key: string;
-  } & HeroBanner | {
-    _key: string;
-  } & HeroTwoPanel | {
-    _key: string;
-  } & SingleColumnContentBlock | {
-    _key: string;
-  } & RowContainer | {
-    _key: string;
-  } & PostsGridContainer>;
-};
-
-export type Post = {
-  _id: string;
-  _type: "post";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  slug: Slug;
-  seo?: Seo;
-  overview?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: null;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  excerpt: SimplePortableText;
-  image?: MainImage;
-  subheader?: string;
-  body: MainPortableText;
-};
-
-export type BlogLandingPage = {
-  _id: string;
-  _type: "blogLandingPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  slug: Slug;
-  seo?: Seo;
+export type Home = {
+  _id: string
+  _type: 'home'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
   overview: Array<{
     children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
     markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  content?: Array<{
-    _key: string;
-  } & HeroBanner | {
-    _key: string;
-  } & HeroTwoPanel | {
-    _key: string;
-  } & SingleColumnContentBlock | {
-    _key: string;
-  } & PostsGridContainer>;
-};
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  seo?: Seo
+  content?: Array<
+    | ({
+        _key: string
+      } & HeroBanner)
+    | ({
+        _key: string
+      } & HeroTwoPanel)
+    | ({
+        _key: string
+      } & SingleColumnContentBlock)
+    | ({
+        _key: string
+      } & RowContainer)
+    | ({
+        _key: string
+      } & PostsGridContainer)
+  >
+}
+
+export type Settings = {
+  _id: string
+  _type: 'settings'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  menuItems?: Array<
+    | ({
+        _key: string
+      } & NavCTA)
+    | ({
+        _key: string
+      } & NavDropdownCTA)
+    | {
+        title: string
+        slug: Slug
+        seo?: Seo
+        overview: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        content?: Array<
+          | ({
+              _key: string
+            } & HeroBanner)
+          | ({
+              _key: string
+            } & HeroTwoPanel)
+          | ({
+              _key: string
+            } & SingleColumnContentBlock)
+          | ({
+              _key: string
+            } & PostsGridContainer)
+        >
+        _type: 'blogLandingPage'
+        _key: string
+      }
+  >
+  ogImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    metadataBase?: string
+    _type: 'image'
+  }
+}
+
+export type Page = {
+  _id: string
+  _type: 'page'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  slug: Slug
+  seo?: Seo
+  overview?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  content?: Array<
+    | ({
+        _key: string
+      } & HeroBanner)
+    | ({
+        _key: string
+      } & HeroTwoPanel)
+    | ({
+        _key: string
+      } & SingleColumnContentBlock)
+    | ({
+        _key: string
+      } & RowContainer)
+    | ({
+        _key: string
+      } & PostsGridContainer)
+  >
+}
+
+export type Post = {
+  _id: string
+  _type: 'post'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  slug: Slug
+  seo?: Seo
+  overview?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  excerpt: SimplePortableText
+  image?: MainImage
+  subheader?: string
+  body: MainPortableText
+}
+
+export type BlogLandingPage = {
+  _id: string
+  _type: 'blogLandingPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  slug: Slug
+  seo?: Seo
+  overview: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  content?: Array<
+    | ({
+        _key: string
+      } & HeroBanner)
+    | ({
+        _key: string
+      } & HeroTwoPanel)
+    | ({
+        _key: string
+      } & SingleColumnContentBlock)
+    | ({
+        _key: string
+      } & PostsGridContainer)
+  >
+}
 
 export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
-};
+  _type: 'slug'
+  current: string
+  source?: string
+}
 
 export type SanityAssistInstructionTask = {
-  _type: "sanity.assist.instructionTask";
-  path?: string;
-  instructionKey?: string;
-  started?: string;
-  updated?: string;
-  info?: string;
-};
+  _type: 'sanity.assist.instructionTask'
+  path?: string
+  instructionKey?: string
+  started?: string
+  updated?: string
+  info?: string
+}
 
 export type SanityAssistTaskStatus = {
-  _type: "sanity.assist.task.status";
-  tasks?: Array<{
-    _key: string;
-  } & SanityAssistInstructionTask>;
-};
+  _type: 'sanity.assist.task.status'
+  tasks?: Array<
+    {
+      _key: string
+    } & SanityAssistInstructionTask
+  >
+}
 
 export type SanityAssistSchemaTypeAnnotations = {
-  _type: "sanity.assist.schemaType.annotations";
-  title?: string;
-  fields?: Array<{
-    _key: string;
-  } & SanityAssistSchemaTypeField>;
-};
+  _type: 'sanity.assist.schemaType.annotations'
+  title?: string
+  fields?: Array<
+    {
+      _key: string
+    } & SanityAssistSchemaTypeField
+  >
+}
 
 export type SanityAssistOutputType = {
-  _type: "sanity.assist.output.type";
-  type?: string;
-};
+  _type: 'sanity.assist.output.type'
+  type?: string
+}
 
 export type SanityAssistOutputField = {
-  _type: "sanity.assist.output.field";
-  path?: string;
-};
+  _type: 'sanity.assist.output.field'
+  path?: string
+}
 
 export type AssistInstructionContextReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "assist.instruction.context";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'assist.instruction.context'
+}
 
 export type SanityAssistInstructionContext = {
-  _type: "sanity.assist.instruction.context";
-  reference: AssistInstructionContextReference;
-};
+  _type: 'sanity.assist.instruction.context'
+  reference: AssistInstructionContextReference
+}
 
 export type AssistInstructionContext = {
-  _id: string;
-  _type: "assist.instruction.context";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
+  _id: string
+  _type: 'assist.instruction.context'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
   context?: Array<{
     children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: null;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-};
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+}
 
 export type SanityAssistInstructionUserInput = {
-  _type: "sanity.assist.instruction.userInput";
-  message: string;
-  description?: string;
-};
+  _type: 'sanity.assist.instruction.userInput'
+  message: string
+  description?: string
+}
 
 export type SanityAssistInstructionPrompt = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  } | {
-    _key: string;
-  } & SanityAssistInstructionFieldRef | {
-    _key: string;
-  } & SanityAssistInstructionContext | {
-    _key: string;
-  } & SanityAssistInstructionUserInput>;
-  style?: "normal";
-  listItem?: never;
-  markDefs?: null;
-  level?: number;
-  _type: "block";
-  _key: string;
-}>;
+  children?: Array<
+    | {
+        marks?: Array<string>
+        text?: string
+        _type: 'span'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & SanityAssistInstructionFieldRef)
+    | ({
+        _key: string
+      } & SanityAssistInstructionContext)
+    | ({
+        _key: string
+      } & SanityAssistInstructionUserInput)
+  >
+  style?: 'normal'
+  listItem?: never
+  markDefs?: null
+  level?: number
+  _type: 'block'
+  _key: string
+}>
 
 export type SanityAssistInstructionFieldRef = {
-  _type: "sanity.assist.instruction.fieldRef";
-  path?: string;
-};
+  _type: 'sanity.assist.instruction.fieldRef'
+  path?: string
+}
 
 export type SanityAssistInstruction = {
-  _type: "sanity.assist.instruction";
-  prompt?: SanityAssistInstructionPrompt;
-  icon?: string;
-  title?: string;
-  userId?: string;
-  createdById?: string;
-  output?: Array<{
-    _key: string;
-  } & SanityAssistOutputField | {
-    _key: string;
-  } & SanityAssistOutputType>;
-};
+  _type: 'sanity.assist.instruction'
+  prompt?: SanityAssistInstructionPrompt
+  icon?: string
+  title?: string
+  userId?: string
+  createdById?: string
+  output?: Array<
+    | ({
+        _key: string
+      } & SanityAssistOutputField)
+    | ({
+        _key: string
+      } & SanityAssistOutputType)
+  >
+}
 
 export type SanityAssistSchemaTypeField = {
-  _type: "sanity.assist.schemaType.field";
-  path?: string;
-  instructions?: Array<{
-    _key: string;
-  } & SanityAssistInstruction>;
-};
+  _type: 'sanity.assist.schemaType.field'
+  path?: string
+  instructions?: Array<
+    {
+      _key: string
+    } & SanityAssistInstruction
+  >
+}
+
+export type MediaTag = {
+  _id: string
+  _type: 'media.tag'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: Slug
+}
 
 export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
+  _type: 'sanity.imagePaletteSwatch'
+  background?: string
+  foreground?: string
+  population?: number
+  title?: string
+}
 
 export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
+  _type: 'sanity.imagePalette'
+  darkMuted?: SanityImagePaletteSwatch
+  lightVibrant?: SanityImagePaletteSwatch
+  darkVibrant?: SanityImagePaletteSwatch
+  vibrant?: SanityImagePaletteSwatch
+  dominant?: SanityImagePaletteSwatch
+  lightMuted?: SanityImagePaletteSwatch
+  muted?: SanityImagePaletteSwatch
+}
 
 export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
-  height: number;
-  width: number;
-  aspectRatio: number;
-};
+  _type: 'sanity.imageDimensions'
+  height: number
+  width: number
+  aspectRatio: number
+}
 
 export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  thumbHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
+  _type: 'sanity.imageMetadata'
+  location?: Geopoint
+  dimensions?: SanityImageDimensions
+  palette?: SanityImagePalette
+  lqip?: string
+  blurHash?: string
+  thumbHash?: string
+  hasAlpha?: boolean
+  isOpaque?: boolean
+}
 
 export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
+  _id: string
+  _type: 'sanity.fileAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash?: string
+  extension?: string
+  mimeType?: string
+  size?: number
+  assetId?: string
+  uploadId?: string
+  path?: string
+  url?: string
+  source?: SanityAssetSourceData
+}
 
 export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
+  _type: 'sanity.assetSourceData'
+  name?: string
+  id?: string
+  url?: string
+}
 
 export type SanityImageAsset = {
-  _id: string;
-  _type: "sanity.imageAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  metadata?: SanityImageMetadata;
-  source?: SanityAssetSourceData;
-};
+  _id: string
+  _type: 'sanity.imageAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash?: string
+  extension?: string
+  mimeType?: string
+  size?: number
+  assetId?: string
+  uploadId?: string
+  path?: string
+  url?: string
+  metadata?: SanityImageMetadata
+  source?: SanityAssetSourceData
+}
 
 export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
+  _type: 'geopoint'
+  lat?: number
+  lng?: number
+  alt?: number
+}
 
-export type AllSanitySchemaTypes = ContentBlock | SingleColumnContentBlock | RowContainer | ContactInfo | PageReference | PostReference | BlogLandingPageReference | SimplePortableText | SanityImageAssetReference | MainPortableText | MainImage | Icon | SanityImageCrop | SanityImageHotspot | HeroTwoPanel | HeroBanner | SanityFileAssetReference | Cta | Carousel | NavDropdownCTA | NavCTA | Seo | PostsGridContainer | Settings | Page | Post | BlogLandingPage | Slug | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | AssistInstructionContextReference | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes =
+  | ContentBlock
+  | SingleColumnContentBlock
+  | RowContainer
+  | ContactInfo
+  | PageReference
+  | PostReference
+  | BlogLandingPageReference
+  | SimplePortableText
+  | SanityImageAssetReference
+  | MainPortableText
+  | MainImage
+  | Icon
+  | SanityImageCrop
+  | SanityImageHotspot
+  | HeroTwoPanel
+  | HeroBanner
+  | SanityFileAssetReference
+  | Cta
+  | Carousel
+  | NavDropdownCTA
+  | NavCTA
+  | Seo
+  | PostsGridContainer
+  | Home
+  | Settings
+  | Page
+  | Post
+  | BlogLandingPage
+  | Slug
+  | SanityAssistInstructionTask
+  | SanityAssistTaskStatus
+  | SanityAssistSchemaTypeAnnotations
+  | SanityAssistOutputType
+  | SanityAssistOutputField
+  | AssistInstructionContextReference
+  | SanityAssistInstructionContext
+  | AssistInstructionContext
+  | SanityAssistInstructionUserInput
+  | SanityAssistInstructionPrompt
+  | SanityAssistInstructionFieldRef
+  | SanityAssistInstruction
+  | SanityAssistSchemaTypeField
+  | MediaTag
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageMetadata
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint
 
-export declare const internalGroqTypeReferenceTo: unique symbol;
+export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]
+// Query: *[_type == "settings"][0]{    _id,    _type,    menuItems[]{      ...,      _type == "navCTA" => {        ...,        cta{          ...,          "landingPage": landingPageRoute->{            _type,            "slug": slug.current          }        }      },      _type == "navDropdownCTA" => {        ...,        cta{          ...,          "landingPage": landingPageRoute->{            _type,            "slug": slug.current          }        },        subnav[]{          ...,          "landingPage": landingPageRoute->{            _type,            "slug": slug.current          }        }      }    },    ogImage{      ...,      alt,      metadataBase    }  }
 export type SettingsQueryResult = {
-  _id: string;
-  _type: "settings";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  menuItems?: Array<{
-    _key: string;
-  } & NavCTA | {
-    _key: string;
-  } & NavDropdownCTA | {
-    title: string;
-    slug: Slug;
-    seo?: Seo;
-    overview: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    content?: Array<{
-      _key: string;
-    } & HeroBanner | {
-      _key: string;
-    } & HeroTwoPanel | {
-      _key: string;
-    } & PostsGridContainer | {
-      _key: string;
-    } & SingleColumnContentBlock>;
-    _type: "blogLandingPage";
-    _key: string;
-  }>;
-  ogImage?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    metadataBase?: string;
-    _type: "image";
-  };
-} | null;
+  _id: string
+  _type: 'settings'
+  menuItems: Array<
+    | {
+        title: string
+        slug: Slug
+        seo?: Seo
+        overview: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        content?: Array<
+          | ({
+              _key: string
+            } & HeroBanner)
+          | ({
+              _key: string
+            } & HeroTwoPanel)
+          | ({
+              _key: string
+            } & PostsGridContainer)
+          | ({
+              _key: string
+            } & SingleColumnContentBlock)
+        >
+        _type: 'blogLandingPage'
+        _key: string
+      }
+    | {
+        _key: string
+        _type: 'navCTA'
+        cta: {
+          _type: 'cta'
+          title?: string
+          kind?: 'button' | 'link'
+          arrow?: boolean
+          landingPageRoute?: BlogLandingPageReference | PageReference | PostReference
+          link?: string
+          anchor?: string
+          fileDownload?: {
+            asset?: SanityFileAssetReference
+            media?: unknown
+            _type: 'file'
+          }
+          landingPage:
+            | {
+                _type: 'blogLandingPage'
+                slug: string
+              }
+            | {
+                _type: 'page'
+                slug: string
+              }
+            | {
+                _type: 'post'
+                slug: string
+              }
+            | null
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'navDropdownCTA'
+        cta: {
+          _type: 'cta'
+          title?: string
+          kind?: 'button' | 'link'
+          arrow?: boolean
+          landingPageRoute?: BlogLandingPageReference | PageReference | PostReference
+          link?: string
+          anchor?: string
+          fileDownload?: {
+            asset?: SanityFileAssetReference
+            media?: unknown
+            _type: 'file'
+          }
+          landingPage:
+            | {
+                _type: 'blogLandingPage'
+                slug: string
+              }
+            | {
+                _type: 'page'
+                slug: string
+              }
+            | {
+                _type: 'post'
+                slug: string
+              }
+            | null
+        } | null
+        subnav: Array<{
+          _key: string
+          _type: 'cta'
+          title?: string
+          kind?: 'button' | 'link'
+          arrow?: boolean
+          landingPageRoute?: BlogLandingPageReference | PageReference | PostReference
+          link?: string
+          anchor?: string
+          fileDownload?: {
+            asset?: SanityFileAssetReference
+            media?: unknown
+            _type: 'file'
+          }
+          landingPage:
+            | {
+                _type: 'blogLandingPage'
+                slug: string
+              }
+            | {
+                _type: 'page'
+                slug: string
+              }
+            | {
+                _type: 'post'
+                slug: string
+              }
+            | null
+        }> | null
+      }
+  > | null
+  ogImage: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string | null
+    metadataBase: string | null
+    _type: 'image'
+  } | null
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: homeQuery
+// Query: *[_type == "home" && _id == "home"][0]{    _id,    _type,    title,    overview,    seo,    content[]{      ...,      cta{        ...,        "landingPage": landingPageRoute->{          _type,          "slug": slug.current        }      }    }  }
+export type HomeQueryResult = {
+  _id: 'home'
+  _type: 'home'
+  title: string
+  overview: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  seo: Seo | null
+  content: Array<
+    | {
+        _key: string
+        _type: 'heroBanner'
+        size?: 'standard' | 'x-large'
+        subheading?: string
+        subHeadingColor?: 'blue' | 'grey33' | 'orange' | 'white' | 'yellow'
+        heading: string
+        headingColor?: 'blue' | 'grey33' | 'orange' | 'white' | 'yellow'
+        copy?: SimplePortableText
+        copyColor?: 'blue' | 'grey33' | 'orange' | 'white' | 'yellow'
+        image?: MainImage
+        overlay?: 'blueOverlay' | 'darkOverlay' | 'noOverlay'
+        cta: {
+          _type: 'cta'
+          title?: string
+          kind?: 'button' | 'link'
+          arrow?: boolean
+          landingPageRoute?: BlogLandingPageReference | PageReference | PostReference
+          link?: string
+          anchor?: string
+          fileDownload?: {
+            asset?: SanityFileAssetReference
+            media?: unknown
+            _type: 'file'
+          }
+          landingPage:
+            | {
+                _type: 'blogLandingPage'
+                slug: string
+              }
+            | {
+                _type: 'page'
+                slug: string
+              }
+            | {
+                _type: 'post'
+                slug: string
+              }
+            | null
+        } | null
+        disabled?: boolean
+      }
+    | {
+        _key: string
+        _type: 'heroTwoPanel'
+        size?: 'standard' | 'x-large'
+        image?: MainImage
+        backgroundColor?: '#16abcc' | '#323943' | '#ee6d08' | '#feca2d' | '#ffffff'
+        mainPortableText?: MainPortableText
+        centerText?: boolean
+        disabled?: boolean
+        cta: null
+      }
+    | {
+        _key: string
+        _type: 'postsGridContainer'
+        backgroundColor?: '#61c8e9' | '#e2e2e2' | '#feca2d' | '#ffffff'
+        posts?: Array<
+          {
+            _key: string
+          } & PostReference
+        >
+        cta: null
+      }
+    | {
+        _key: string
+        _type: 'rowContainer'
+        title?: string
+        hideTitle?: boolean
+        centerTitle?: boolean
+        titleColor?: '#16abcc' | '#333333' | '#ee6d08' | '#feca2d' | '#ffffff'
+        row?: 'threeColumn' | 'twoColumn'
+        removeBottomPadding?: boolean
+        condensedCopy?: boolean
+        centerCopy?: boolean
+        image?: MainImage
+        overlay?: 'blueOverlay' | 'darkOverlay' | 'noOverlay'
+        backgroundColor?: '#16abcc' | '#e2e2e2' | '#ee6d08' | '#feca2d' | '#ffffff'
+        rowContent?: Array<
+          | ({
+              _key: string
+            } & Carousel)
+          | ({
+              _key: string
+            } & MainImage)
+          | ({
+              _key: string
+            } & MainPortableText)
+        >
+        disabled?: boolean
+        cta: null
+      }
+    | {
+        _key: string
+        _type: 'singleColumnContentBlock'
+        title?: string
+        backgroundColor?: '#013b63' | '#61c8e9' | '#e2e2e2' | '#feca2d' | '#ffffff'
+        removeBottomPadding?: boolean
+        skinny?: boolean
+        centerContent?: boolean
+        contentBlock?: ContentBlock
+        disabled?: boolean
+        cta: null
+      }
+  > | null
+} | null
 
 // Source: sanity/lib/queries.ts
 // Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {        ...,        button {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },    },  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    slug,    title,    overview,    seo,    content[]{      ...,      cta{        ...,        "landingPage": landingPageRoute->{          _type,          "slug": slug.current        }      }    }  }
 export type GetPageQueryResult = {
-  _id: string;
-  _type: "page";
-  name: null;
-  slug: Slug;
-  heading: null;
-  subheading: null;
-  pageBuilder: null;
-} | null;
+  _id: string
+  _type: 'page'
+  slug: Slug
+  title: string
+  overview: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }> | null
+  seo: Seo | null
+  content: Array<
+    | {
+        _key: string
+        _type: 'heroBanner'
+        size?: 'standard' | 'x-large'
+        subheading?: string
+        subHeadingColor?: 'blue' | 'grey33' | 'orange' | 'white' | 'yellow'
+        heading: string
+        headingColor?: 'blue' | 'grey33' | 'orange' | 'white' | 'yellow'
+        copy?: SimplePortableText
+        copyColor?: 'blue' | 'grey33' | 'orange' | 'white' | 'yellow'
+        image?: MainImage
+        overlay?: 'blueOverlay' | 'darkOverlay' | 'noOverlay'
+        cta: {
+          _type: 'cta'
+          title?: string
+          kind?: 'button' | 'link'
+          arrow?: boolean
+          landingPageRoute?: BlogLandingPageReference | PageReference | PostReference
+          link?: string
+          anchor?: string
+          fileDownload?: {
+            asset?: SanityFileAssetReference
+            media?: unknown
+            _type: 'file'
+          }
+          landingPage:
+            | {
+                _type: 'blogLandingPage'
+                slug: string
+              }
+            | {
+                _type: 'page'
+                slug: string
+              }
+            | {
+                _type: 'post'
+                slug: string
+              }
+            | null
+        } | null
+        disabled?: boolean
+      }
+    | {
+        _key: string
+        _type: 'heroTwoPanel'
+        size?: 'standard' | 'x-large'
+        image?: MainImage
+        backgroundColor?: '#16abcc' | '#323943' | '#ee6d08' | '#feca2d' | '#ffffff'
+        mainPortableText?: MainPortableText
+        centerText?: boolean
+        disabled?: boolean
+        cta: null
+      }
+    | {
+        _key: string
+        _type: 'postsGridContainer'
+        backgroundColor?: '#61c8e9' | '#e2e2e2' | '#feca2d' | '#ffffff'
+        posts?: Array<
+          {
+            _key: string
+          } & PostReference
+        >
+        cta: null
+      }
+    | {
+        _key: string
+        _type: 'rowContainer'
+        title?: string
+        hideTitle?: boolean
+        centerTitle?: boolean
+        titleColor?: '#16abcc' | '#333333' | '#ee6d08' | '#feca2d' | '#ffffff'
+        row?: 'threeColumn' | 'twoColumn'
+        removeBottomPadding?: boolean
+        condensedCopy?: boolean
+        centerCopy?: boolean
+        image?: MainImage
+        overlay?: 'blueOverlay' | 'darkOverlay' | 'noOverlay'
+        backgroundColor?: '#16abcc' | '#e2e2e2' | '#ee6d08' | '#feca2d' | '#ffffff'
+        rowContent?: Array<
+          | ({
+              _key: string
+            } & Carousel)
+          | ({
+              _key: string
+            } & MainImage)
+          | ({
+              _key: string
+            } & MainPortableText)
+        >
+        disabled?: boolean
+        cta: null
+      }
+    | {
+        _key: string
+        _type: 'singleColumnContentBlock'
+        title?: string
+        backgroundColor?: '#013b63' | '#61c8e9' | '#e2e2e2' | '#feca2d' | '#ffffff'
+        removeBottomPadding?: boolean
+        skinny?: boolean
+        centerContent?: boolean
+        contentBlock?: ContentBlock
+        disabled?: boolean
+        cta: null
+      }
+  > | null
+} | null
 
 // Source: sanity/lib/queries.ts
 // Variable: sitemapData
-// Query: *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
-export type SitemapDataResult = Array<{
-  slug: string;
-  _type: "page";
-  _updatedAt: string;
-} | {
-  slug: string;
-  _type: "post";
-  _updatedAt: string;
-}>;
+// Query: *[_type in ["page", "post"] && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
+export type SitemapDataResult = Array<
+  | {
+      slug: string
+      _type: 'page'
+      _updatedAt: string
+    }
+  | {
+      slug: string
+      _type: 'post'
+      _updatedAt: string
+    }
+>
 
 // Source: sanity/lib/queries.ts
 // Variable: allPostsQuery
-// Query: *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
+// Query: *[_type == "post" && defined(slug.current)] | order(_updatedAt desc) {      _id,  _type,  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  image,  _updatedAt,  }
 export type AllPostsQueryResult = Array<{
-  _id: string;
-  status: "draft" | "published";
-  title: string;
-  slug: string;
-  excerpt: SimplePortableText;
-  coverImage: null;
-  date: string;
-  author: null;
-}>;
+  _id: string
+  _type: 'post'
+  title: string
+  slug: string
+  excerpt: SimplePortableText
+  image: MainImage | null
+  _updatedAt: string
+}>
 
 // Source: sanity/lib/queries.ts
 // Variable: morePostsQuery
-// Query: *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
+// Query: *[_type == "post" && _id != $skip && defined(slug.current)] | order(_updatedAt desc) [0...$limit] {      _id,  _type,  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  image,  _updatedAt,  }
 export type MorePostsQueryResult = Array<{
-  _id: string;
-  status: "draft" | "published";
-  title: string;
-  slug: string;
-  excerpt: SimplePortableText;
-  coverImage: null;
-  date: string;
-  author: null;
-}>;
+  _id: string
+  _type: 'post'
+  title: string
+  slug: string
+  excerpt: SimplePortableText
+  image: MainImage | null
+  _updatedAt: string
+}>
 
 // Source: sanity/lib/queries.ts
 // Variable: postQuery
-// Query: *[_type == "post" && slug.current == $slug] [0] {    content[]{    ...,    markDefs[]{      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }    }  },      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
+// Query: *[_type == "post" && slug.current == $slug][0]{    _id,    _type,    title,    slug,    seo,    overview,    excerpt,    image,    subheader,    body,    _updatedAt  }
 export type PostQueryResult = {
-  content: null;
-  _id: string;
-  status: "draft" | "published";
-  title: string;
-  slug: string;
-  excerpt: SimplePortableText;
-  coverImage: null;
-  date: string;
-  author: null;
-} | null;
+  _id: string
+  _type: 'post'
+  title: string
+  slug: Slug
+  seo: Seo | null
+  overview: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }> | null
+  excerpt: SimplePortableText
+  image: MainImage | null
+  subheader: string | null
+  body: MainPortableText
+  _updatedAt: string
+} | null
 
 // Source: sanity/lib/queries.ts
 // Variable: postPagesSlugs
 // Query: *[_type == "post" && defined(slug.current)]  {"slug": slug.current}
 export type PostPagesSlugsResult = Array<{
-  slug: string;
-}>;
+  slug: string
+}>
 
 // Source: sanity/lib/queries.ts
 // Variable: pagesSlugs
 // Query: *[_type == "page" && defined(slug.current)]  {"slug": slug.current}
 export type PagesSlugsResult = Array<{
-  slug: string;
-}>;
+  slug: string
+}>
 
 // Query TypeMap
-import "@sanity/client";
-declare module "@sanity/client" {
+import '@sanity/client'
+declare module '@sanity/client' {
   interface SanityQueries {
-    "*[_type == \"settings\"][0]": SettingsQueryResult;
-    "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        ...,\n        button {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"post\": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == \"infoSection\" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"post\": post->slug.current\n  }\n\n          }\n        }\n      },\n    },\n  }\n": GetPageQueryResult;
-    "\n  *[_type == \"page\" || _type == \"post\" && defined(slug.current)] | order(_type asc) {\n    \"slug\": slug.current,\n    _type,\n    _updatedAt,\n  }\n": SitemapDataResult;
-    "\n  *[_type == \"post\" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": AllPostsQueryResult;
-    "\n  *[_type == \"post\" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": MorePostsQueryResult;
-    "\n  *[_type == \"post\" && slug.current == $slug] [0] {\n    content[]{\n    ...,\n    markDefs[]{\n      ...,\n      \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"post\": post->slug.current\n  }\n\n    }\n  },\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": PostQueryResult;
-    "\n  *[_type == \"post\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": PostPagesSlugsResult;
-    "\n  *[_type == \"page\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": PagesSlugsResult;
+    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    menuItems[]{\n      ...,\n      _type == "navCTA" => {\n        ...,\n        cta{\n          ...,\n          "landingPage": landingPageRoute->{\n            _type,\n            "slug": slug.current\n          }\n        }\n      },\n      _type == "navDropdownCTA" => {\n        ...,\n        cta{\n          ...,\n          "landingPage": landingPageRoute->{\n            _type,\n            "slug": slug.current\n          }\n        },\n        subnav[]{\n          ...,\n          "landingPage": landingPageRoute->{\n            _type,\n            "slug": slug.current\n          }\n        }\n      }\n    },\n    ogImage{\n      ...,\n      alt,\n      metadataBase\n    }\n  }\n': SettingsQueryResult
+    '\n  *[_type == "home" && _id == "home"][0]{\n    _id,\n    _type,\n    title,\n    overview,\n    seo,\n    content[]{\n      ...,\n      cta{\n        ...,\n        "landingPage": landingPageRoute->{\n          _type,\n          "slug": slug.current\n        }\n      }\n    }\n  }\n': HomeQueryResult
+    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    slug,\n    title,\n    overview,\n    seo,\n    content[]{\n      ...,\n      cta{\n        ...,\n        "landingPage": landingPageRoute->{\n          _type,\n          "slug": slug.current\n        }\n      }\n    }\n  }\n': GetPageQueryResult
+    '\n  *[_type in ["page", "post"] && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
+    '\n  *[_type == "post" && defined(slug.current)] | order(_updatedAt desc) {\n    \n  _id,\n  _type,\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  image,\n  _updatedAt,\n\n  }\n': AllPostsQueryResult
+    '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(_updatedAt desc) [0...$limit] {\n    \n  _id,\n  _type,\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  image,\n  _updatedAt,\n\n  }\n': MorePostsQueryResult
+    '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    _type,\n    title,\n    slug,\n    seo,\n    overview,\n    excerpt,\n    image,\n    subheader,\n    body,\n    _updatedAt\n  }\n': PostQueryResult
+    '\n  *[_type == "post" && defined(slug.current)]\n  {"slug": slug.current}\n': PostPagesSlugsResult
+    '\n  *[_type == "page" && defined(slug.current)]\n  {"slug": slug.current}\n': PagesSlugsResult
   }
 }
-

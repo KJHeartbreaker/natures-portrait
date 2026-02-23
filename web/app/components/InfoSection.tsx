@@ -1,32 +1,24 @@
 import {type PortableTextBlock} from 'next-sanity'
 
 import PortableText from '@/app/components/PortableText'
-import {InfoSection} from '@/sanity.types'
+import type {SingleColumnContentBlock} from '@/sanity.types'
 
 type InfoProps = {
-  block: InfoSection
+  block: SingleColumnContentBlock
   index: number
   // Needed if you want to createDataAttributes to do non-text overlays in Presentation (Visual Editing)
   pageId: string
   pageType: string
 }
 
-export default function CTA({block}: InfoProps) {
+export default function InfoSection({block}: InfoProps) {
+  const portableText = block.contentBlock?.portableTextBlock?.portableTextBlock
   return (
-    <div className="container my-12">
-      <div className="max-w-3xl">
-        {block?.heading && <h2 className="text-2xl md:text-3xl lg:text-4xl">{block.heading}</h2>}
-        {block?.subheading && (
-          <span className="block mt-4 mb-8 text-lg uppercase font-light text-gray-900/70">
-            {block.subheading}
-          </span>
-        )}
-        <div className="mt-4">
-          {block?.content?.length && (
-            <PortableText className="" value={block.content as PortableTextBlock[]} />
-          )}
-        </div>
+    <section className="container my-12">
+      <div className="max-w-3xl space-y-4">
+        {block.title ? <h2 className="text-2xl md:text-3xl lg:text-4xl">{block.title}</h2> : null}
+        {portableText?.length ? <PortableText className="" value={portableText as PortableTextBlock[]} /> : null}
       </div>
-    </div>
+    </section>
   )
 }

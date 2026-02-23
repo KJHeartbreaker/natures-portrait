@@ -2,8 +2,8 @@ import type {Metadata, ResolvingMetadata} from 'next'
 import {notFound} from 'next/navigation'
 import {type PortableTextBlock} from 'next-sanity'
 import {Suspense} from 'react'
+import {toPlainText} from 'next-sanity'
 
-import Avatar from '@/app/components/Avatar'
 import {MorePosts} from '@/app/components/Posts'
 import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
@@ -42,15 +42,13 @@ export async function generateMetadata(props: Props, parent: ResolvingMetadata):
     stega: false,
   })
   const previousImages = (await parent).openGraph?.images || []
-  const ogImage = resolveOpenGraphImage(post?.coverImage)
+  const ogImage = resolveOpenGraphImage(post?.seo?.ogImage || post?.image)
 
   return {
-    authors:
-      post?.author?.firstName && post?.author?.lastName
-        ? [{name: `${post.author.firstName} ${post.author.lastName}`}]
-        : [],
-    title: post?.title,
-    description: post?.excerpt,
+    title: post?.seo?.seoTitle || post?.title,
+    description:
+      post?.seo?.seoDescription ||
+      (post?.overview ? toPlainText(post.overview) : post?.excerpt ? toPlainText(post.excerpt.portableTextBlock || []) : undefined),
     openGraph: {
       images: ogImage ? [ogImage, ...previousImages] : previousImages,
     },
@@ -73,34 +71,34 @@ export default async function PostPage(props: Props) {
             <div className="pb-6 grid gap-6 mb-6 border-b border-gray-100">
               <div className="max-w-3xl flex flex-col gap-6">
                 <h1 className="text-4xl text-gray-900 sm:text-5xl lg:text-7xl">{post.title}</h1>
-              </div>
-              <div className="max-w-3xl flex gap-4 items-center">
-                {post.author && post.author.firstName && post.author.lastName && (
-                  <Avatar person={post.author} date={post.date} />
-                )}
+                {post.subheader ? (
+                  <p className="text-base lg:text-lg leading-relaxed text-gray-600 uppercase font-light">
+                    {post.subheader}
+                  </p>
+                ) : null}
               </div>
             </div>
             <article className="gap-6 grid max-w-4xl">
               <div className="">
-                {post?.coverImage && (
+                {post?.image?.asset?._ref ? (
                   <Image
-                    id={post.coverImage.asset?._ref || ''}
-                    alt={post.coverImage.alt || ''}
+                    id={post.image.asset._ref}
+                    alt={post.image.alt || ''}
                     className="rounded-sm w-full"
                     width={1024}
                     height={538}
                     mode="cover"
-                    hotspot={post.coverImage.hotspot}
-                    crop={post.coverImage.crop}
+                    hotspot={post.image.hotspot}
+                    crop={post.image.crop}
                   />
-                )}
+                ) : null}
               </div>
-              {post.content?.length && (
+              {post?.body?.portableTextBlock?.length ? (
                 <PortableText
                   className="max-w-2xl prose-headings:font-medium prose-headings:tracking-tight"
-                  value={post.content as PortableTextBlock[]}
+                  value={post.body.portableTextBlock as PortableTextBlock[]}
                 />
-              )}
+              ) : null}
             </article>
           </div>
         </div>

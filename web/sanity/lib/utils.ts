@@ -1,9 +1,9 @@
-import {Link} from '@/sanity.types'
 import {dataset, projectId, studioUrl} from '@/sanity/lib/api'
 import {createDataAttribute, CreateDataAttributeProps} from 'next-sanity'
 import imageUrlBuilder from '@sanity/image-url'
-import type {SanityImageSource} from '@sanity/image-url/lib/types/types'
-import {DereferencedLink} from '@/sanity/lib/types'
+import type {SanityImageSource} from '@sanity/image-url'
+import type {Cta} from '@/sanity.types'
+import type {PortableTextLink, ResolvedLandingPage} from '@/sanity/lib/types'
 
 const builder = imageUrlBuilder({
   projectId: projectId || '',
@@ -22,34 +22,45 @@ export function resolveOpenGraphImage(
   height = 627,
 ) {
   if (!image) return
-  const url = urlForImage(image)?.width(1200).height(627).fit('crop').url()
+  const url = urlForImage(image)?.width(width).height(height).fit('crop').url()
   if (!url) return
   return {url, alt: (image as {alt?: string})?.alt || '', width, height}
 }
 
-// Depending on the type of link, we need to fetch the corresponding page, post, or URL.  Otherwise return null.
-export function linkResolver(link: Link | DereferencedLink | undefined) {
-  if (!link) return null
+type CtaLike = Cta & {
+  landingPage?: ResolvedLandingPage
+}
 
-  // If linkType is not set but href is, lets set linkType to "href".  This comes into play when pasting links into the portable text editor because a link type is not assumed.
-  if (!link.linkType && link.href) {
-    link.linkType = 'href'
-  }
-
-  switch (link.linkType) {
-    case 'href':
-      return link.href || null
-    case 'page':
-      if (link?.page && typeof link.page === 'string') {
-        return `/${link.page}`
-      }
+function resolveLandingPageHref(landingPage: ResolvedLandingPage): string | null {
+  if (!landingPage?.slug) return null
+  switch (landingPage._type) {
     case 'post':
-      if (link?.post && typeof link.post === 'string') {
-        return `/posts/${link.post}`
-      }
+      return `/posts/${landingPage.slug}`
+    case 'page':
+    case 'blogLandingPage':
+      return `/${landingPage.slug}`
     default:
       return null
   }
+}
+
+// Resolve URL/href for common link-like objects used in this project.
+export function linkResolver(link: PortableTextLink | CtaLike | undefined) {
+  if (!link) return null
+
+  // Portable Text external link annotation
+  if ('href' in link && typeof link.href === 'string') return link.href
+
+  // CTA object (or CTA-like, after GROQ projection)
+  if ('anchor' in link || 'link' in link || 'landingPage' in link) {
+    const cta = link as CtaLike
+
+    if (cta.anchor) return cta.anchor
+    if (cta.link) return cta.link
+    if (cta.landingPage) return resolveLandingPageHref(cta.landingPage)
+  }
+
+  return null
 }
 
 type DataAttributeConfig = CreateDataAttributeProps &

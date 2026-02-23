@@ -6,7 +6,7 @@ import {useOptimistic} from 'next-sanity/hooks'
 import BlockRenderer from '@/app/components/BlockRenderer'
 import {GetPageQueryResult} from '@/sanity.types'
 import {dataAttr} from '@/sanity/lib/utils'
-import {PageBuilderSection} from '@/sanity/lib/types'
+import {PageSection} from '@/sanity/lib/types'
 
 type PageBuilderPageProps = {
   page: GetPageQueryResult
@@ -15,18 +15,18 @@ type PageBuilderPageProps = {
 type PageData = {
   _id: string
   _type: string
-  pageBuilder?: PageBuilderSection[]
+  content?: PageSection[]
 }
 
 /**
- * The PageBuilder component is used to render the blocks from the `pageBuilder` field in the Page type in your Sanity Studio.
+ * The PageBuilder component is used to render the blocks from the `content` field in the Page type in your Sanity Studio.
  */
 
 function RenderSections({
-  pageBuilderSections,
+  sections,
   page,
 }: {
-  pageBuilderSections: PageBuilderSection[]
+  sections: PageSection[]
   page: GetPageQueryResult
 }) {
   if (!page) {
@@ -37,13 +37,12 @@ function RenderSections({
       data-sanity={dataAttr({
         id: page._id,
         type: page._type,
-        path: `pageBuilder`,
+        path: `content`,
       }).toString()}
     >
-      {pageBuilderSections.map((block: PageBuilderSection, index: number) => (
+      {sections.map((block: PageSection) => (
         <BlockRenderer
           key={block._key}
-          index={index}
           block={block}
           pageId={page._id}
           pageType={page._type}
@@ -64,7 +63,7 @@ function RenderEmptyState({page}: {page: GetPageQueryResult}) {
       data-sanity={dataAttr({
         id: page._id,
         type: 'page',
-        path: `pageBuilder`,
+        path: `content`,
       }).toString()}
     >
       <div className="prose">
@@ -76,10 +75,10 @@ function RenderEmptyState({page}: {page: GetPageQueryResult}) {
 }
 
 export default function PageBuilder({page}: PageBuilderPageProps) {
-  const pageBuilderSections = useOptimistic<
-    PageBuilderSection[] | undefined,
+  const sections = useOptimistic<
+    PageSection[] | undefined,
     SanityDocument<PageData>
-  >(page?.pageBuilder || [], (currentSections, action) => {
+  >(page?.content || [], (currentSections, action) => {
     // The action contains updated document data from Sanity
     // when someone makes an edit in the Studio
 
@@ -89,9 +88,9 @@ export default function PageBuilder({page}: PageBuilderPageProps) {
     }
 
     // If there are sections in the updated document, use them
-    if (action.document.pageBuilder) {
+    if (action.document.content) {
       // Reconcile References. https://www.sanity.io/docs/enabling-drag-and-drop#ffe728eea8c1
-      return action.document.pageBuilder.map(
+      return action.document.content.map(
         (section) => currentSections?.find((s) => s._key === section?._key) || section,
       )
     }
@@ -100,8 +99,8 @@ export default function PageBuilder({page}: PageBuilderPageProps) {
     return currentSections
   })
 
-  return pageBuilderSections && pageBuilderSections.length > 0 ? (
-    <RenderSections pageBuilderSections={pageBuilderSections} page={page} />
+  return sections && sections.length > 0 ? (
+    <RenderSections sections={sections} page={page} />
   ) : (
     <RenderEmptyState page={page} />
   )

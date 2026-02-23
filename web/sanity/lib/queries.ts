@@ -1,92 +1,131 @@
 import {defineQuery} from 'next-sanity'
 
-export const settingsQuery = defineQuery(`*[_type == "settings"][0]`)
-
-const postFields = /* groq */ `
-  _id,
-  "status": select(_originalId in path("drafts.**") => "draft", "published"),
-  "title": coalesce(title, "Untitled"),
-  "slug": slug.current,
-  excerpt,
-  coverImage,
-  "date": coalesce(date, _updatedAt),
-  "author": author->{firstName, lastName, picture},
-`
-
-const linkReference = /* groq */ `
-  _type == "link" => {
-    "page": page->slug.current,
-    "post": post->slug.current
-  }
-`
-
-const linkFields = /* groq */ `
-  link {
+export const settingsQuery = defineQuery(`
+  *[_type == "settings"][0]{
+    _id,
+    _type,
+    menuItems[]{
       ...,
-      ${linkReference}
+      _type == "navCTA" => {
+        ...,
+        cta{
+          ...,
+          "landingPage": landingPageRoute->{
+            _type,
+            "slug": slug.current
+          }
+        }
+      },
+      _type == "navDropdownCTA" => {
+        ...,
+        cta{
+          ...,
+          "landingPage": landingPageRoute->{
+            _type,
+            "slug": slug.current
+          }
+        },
+        subnav[]{
+          ...,
+          "landingPage": landingPageRoute->{
+            _type,
+            "slug": slug.current
+          }
+        }
       }
-`
+    },
+    ogImage{
+      ...,
+      alt,
+      metadataBase
+    }
+  }
+`)
+
+export const homeQuery = defineQuery(`
+  *[_type == "home" && _id == "home"][0]{
+    _id,
+    _type,
+    title,
+    overview,
+    seo,
+    content[]{
+      ...,
+      cta{
+        ...,
+        "landingPage": landingPageRoute->{
+          _type,
+          "slug": slug.current
+        }
+      }
+    }
+  }
+`)
 
 export const getPageQuery = defineQuery(`
   *[_type == 'page' && slug.current == $slug][0]{
     _id,
     _type,
-    name,
     slug,
-    heading,
-    subheading,
-    "pageBuilder": pageBuilder[]{
+    title,
+    overview,
+    seo,
+    content[]{
       ...,
-      _type == "callToAction" => {
+      cta{
         ...,
-        button {
-          ...,
-          ${linkFields}
+        "landingPage": landingPageRoute->{
+          _type,
+          "slug": slug.current
         }
-      },
-      _type == "infoSection" => {
-        content[]{
-          ...,
-          markDefs[]{
-            ...,
-            ${linkReference}
-          }
-        }
-      },
-    },
+      }
+    }
   }
 `)
 
 export const sitemapData = defineQuery(`
-  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {
+  *[_type in ["page", "post"] && defined(slug.current)] | order(_type asc) {
     "slug": slug.current,
     _type,
     _updatedAt,
   }
 `)
 
+const postFields = /* groq */ `
+  _id,
+  _type,
+  "title": coalesce(title, "Untitled"),
+  "slug": slug.current,
+  excerpt,
+  image,
+  _updatedAt,
+`
+
 export const allPostsQuery = defineQuery(`
-  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {
+  *[_type == "post" && defined(slug.current)] | order(_updatedAt desc) {
     ${postFields}
   }
 `)
 
 export const morePostsQuery = defineQuery(`
-  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {
+  *[_type == "post" && _id != $skip && defined(slug.current)] | order(_updatedAt desc) [0...$limit] {
     ${postFields}
   }
 `)
 
 export const postQuery = defineQuery(`
-  *[_type == "post" && slug.current == $slug] [0] {
-    content[]{
-    ...,
-    markDefs[]{
-      ...,
-      ${linkReference}
-    }
-  },
-    ${postFields}
+  *[_type == "post" && slug.current == $slug][0]{
+    _id,
+    _type,
+    title,
+    slug,
+    seo,
+    overview,
+    excerpt,
+    image,
+    subheader,
+    body,
+    _updatedAt
   }
 `)
 

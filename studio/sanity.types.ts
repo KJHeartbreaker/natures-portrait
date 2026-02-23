@@ -14,665 +14,825 @@
 
 // Source: ../sanity.schema.json
 export type ContentBlock = {
-  portableTextBlock?: MainPortableText;
-};
+  portableTextBlock?: MainPortableText
+}
 
 export type SingleColumnContentBlock = {
-  _type: "singleColumnContentBlock";
-  title?: string;
-  backgroundColor?: "#ffffff" | "#e2e2e2" | "#61c8e9" | "#013b63" | "#feca2d";
-  removeBottomPadding?: boolean;
-  skinny?: boolean;
-  centerContent?: boolean;
-  contentBlock?: ContentBlock;
-  disabled?: boolean;
-};
+  _type: 'singleColumnContentBlock'
+  title?: string
+  backgroundColor?: '#ffffff' | '#e2e2e2' | '#61c8e9' | '#013b63' | '#feca2d'
+  removeBottomPadding?: boolean
+  skinny?: boolean
+  centerContent?: boolean
+  contentBlock?: ContentBlock
+  disabled?: boolean
+}
 
 export type RowContainer = {
-  _type: "rowContainer";
-  title?: string;
-  hideTitle?: boolean;
-  centerTitle?: boolean;
-  titleColor?: "#333333" | "#16abcc" | "#ee6d08" | "#feca2d" | "#ffffff";
-  row?: "twoColumn" | "threeColumn";
-  removeBottomPadding?: boolean;
-  condensedCopy?: boolean;
-  centerCopy?: boolean;
-  image?: MainImage;
-  overlay?: "noOverlay" | "darkOverlay" | "blueOverlay";
-  backgroundColor?: "#ffffff" | "#e2e2e2" | "#16abcc" | "#ee6d08" | "#feca2d";
-  rowContent?: Array<{
-    _key: string;
-  } & Carousel | {
-    _key: string;
-  } & MainImage | {
-    _key: string;
-  } & MainPortableText>;
-  disabled?: boolean;
-};
+  _type: 'rowContainer'
+  title?: string
+  hideTitle?: boolean
+  centerTitle?: boolean
+  titleColor?: '#333333' | '#16abcc' | '#ee6d08' | '#feca2d' | '#ffffff'
+  row?: 'twoColumn' | 'threeColumn'
+  removeBottomPadding?: boolean
+  condensedCopy?: boolean
+  centerCopy?: boolean
+  image?: MainImage
+  overlay?: 'noOverlay' | 'darkOverlay' | 'blueOverlay'
+  backgroundColor?: '#ffffff' | '#e2e2e2' | '#16abcc' | '#ee6d08' | '#feca2d'
+  rowContent?: Array<
+    | ({
+        _key: string
+      } & Carousel)
+    | ({
+        _key: string
+      } & MainImage)
+    | ({
+        _key: string
+      } & MainPortableText)
+  >
+  disabled?: boolean
+}
 
 export type ContactInfo = {
-  _type: "contactInfo";
-  headline?: string;
-  phoneNumber: string;
-  phoneLabel?: string;
-  email: string;
-  textColor?: "white" | "blue";
-  size?: "normal" | "large";
-};
+  _type: 'contactInfo'
+  headline?: string
+  phoneNumber: string
+  phoneLabel?: string
+  email: string
+  textColor?: 'white' | 'blue'
+  size?: 'normal' | 'large'
+}
 
 export type PageReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "page";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'page'
+}
 
 export type PostReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "post";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'post'
+}
 
 export type BlogLandingPageReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "blogLandingPage";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'blogLandingPage'
+}
 
 export type SimplePortableText = {
-  _type: "simplePortableText";
+  _type: 'simplePortableText'
   portableTextBlock?: Array<{
     children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      blank?: boolean;
-      _type: "link";
-      _key: string;
-    } | {
-      item?: PageReference | PostReference | BlogLandingPageReference;
-      _type: "internalLink";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-};
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<
+      | {
+          href?: string
+          blank?: boolean
+          _type: 'link'
+          _key: string
+        }
+      | {
+          item?: PageReference | PostReference | BlogLandingPageReference
+          _type: 'internalLink'
+          _key: string
+        }
+    >
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+}
 
 export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
 
 export type MainPortableText = {
-  _type: "mainPortableText";
-  portableTextBlock?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      blank?: boolean;
-      _type: "link";
-      _key: string;
-    } | {
-      item?: PageReference | PostReference | BlogLandingPageReference;
-      _type: "internalLink";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    _key: string;
-  } & Cta | {
-    hr?: string;
-    size?: string;
-    width?: string;
-    _type: "hr";
-    _key: string;
-  } | {
-    _key: string;
-  } & ContactInfo | {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }>;
-};
+  _type: 'mainPortableText'
+  portableTextBlock?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<
+          | {
+              href?: string
+              blank?: boolean
+              _type: 'link'
+              _key: string
+            }
+          | {
+              item?: PageReference | PostReference | BlogLandingPageReference
+              _type: 'internalLink'
+              _key: string
+            }
+        >
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Cta)
+    | {
+        hr?: string
+        size?: string
+        width?: string
+        _type: 'hr'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & ContactInfo)
+    | {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt?: string
+        _type: 'image'
+        _key: string
+      }
+  >
+}
 
 export type MainImage = {
-  _type: "mainImage";
-  asset?: SanityImageAssetReference;
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  width?: number;
-  height?: number;
-  alt?: string;
-};
+  _type: 'mainImage'
+  asset?: SanityImageAssetReference
+  media?: unknown
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  width?: number
+  height?: number
+  alt?: string
+}
 
 export type Icon = {
-  _type: "icon";
-  asset?: SanityImageAssetReference;
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt: string;
-};
+  _type: 'icon'
+  asset?: SanityImageAssetReference
+  media?: unknown
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  alt: string
+}
 
 export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-};
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
 
 export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
-};
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
 
 export type HeroTwoPanel = {
-  _type: "heroTwoPanel";
-  size?: "standard" | "x-large";
-  image?: MainImage;
-  backgroundColor?: "#16abcc" | "#ee6d08" | "#feca2d" | "#ffffff" | "#323943";
-  mainPortableText?: MainPortableText;
-  centerText?: boolean;
-  disabled?: boolean;
-};
+  _type: 'heroTwoPanel'
+  size?: 'standard' | 'x-large'
+  image?: MainImage
+  backgroundColor?: '#16abcc' | '#ee6d08' | '#feca2d' | '#ffffff' | '#323943'
+  mainPortableText?: MainPortableText
+  centerText?: boolean
+  disabled?: boolean
+}
 
 export type HeroBanner = {
-  _type: "heroBanner";
-  size?: "standard" | "x-large";
-  subheading?: string;
-  subHeadingColor?: "white" | "orange" | "blue" | "yellow" | "grey33";
-  heading: string;
-  headingColor?: "white" | "orange" | "blue" | "yellow" | "grey33";
-  copy?: SimplePortableText;
-  copyColor?: "white" | "orange" | "blue" | "yellow" | "grey33";
-  image?: MainImage;
-  overlay?: "noOverlay" | "darkOverlay" | "blueOverlay";
-  cta?: Cta;
-  disabled?: boolean;
-};
+  _type: 'heroBanner'
+  size?: 'standard' | 'x-large'
+  subheading?: string
+  subHeadingColor?: 'white' | 'orange' | 'blue' | 'yellow' | 'grey33'
+  heading: string
+  headingColor?: 'white' | 'orange' | 'blue' | 'yellow' | 'grey33'
+  copy?: SimplePortableText
+  copyColor?: 'white' | 'orange' | 'blue' | 'yellow' | 'grey33'
+  image?: MainImage
+  overlay?: 'noOverlay' | 'darkOverlay' | 'blueOverlay'
+  cta?: Cta
+  disabled?: boolean
+}
 
 export type SanityFileAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+}
 
 export type Cta = {
-  _type: "cta";
-  title?: string;
-  kind?: "button" | "link";
-  arrow?: boolean;
-  landingPageRoute?: PageReference | PostReference | BlogLandingPageReference;
-  link?: string;
-  anchor?: string;
+  _type: 'cta'
+  title?: string
+  kind?: 'button' | 'link'
+  arrow?: boolean
+  landingPageRoute?: PageReference | PostReference | BlogLandingPageReference
+  link?: string
+  anchor?: string
   fileDownload?: {
-    asset?: SanityFileAssetReference;
-    media?: unknown;
-    _type: "file";
-  };
-};
+    asset?: SanityFileAssetReference
+    media?: unknown
+    _type: 'file'
+  }
+}
 
 export type Carousel = {
-  _type: "carousel";
-  carouselImages?: Array<{
-    _key: string;
-  } & MainImage>;
-};
+  _type: 'carousel'
+  carouselImages?: Array<
+    {
+      _key: string
+    } & MainImage
+  >
+}
 
 export type NavDropdownCTA = {
-  _type: "navDropdownCTA";
-  cta?: Cta;
-  subnav?: Array<{
-    _key: string;
-  } & Cta>;
-};
+  _type: 'navDropdownCTA'
+  cta?: Cta
+  subnav?: Array<
+    {
+      _key: string
+    } & Cta
+  >
+}
 
 export type NavCTA = {
-  _type: "navCTA";
-  cta?: Cta;
-};
+  _type: 'navCTA'
+  cta?: Cta
+}
 
 export type Seo = {
-  _type: "seo";
-  seoTitle?: string;
-  seoDescription?: string;
-  noindex?: boolean;
-  canonicalUrl?: string;
+  _type: 'seo'
+  seoTitle?: string
+  seoDescription?: string
+  noindex?: boolean
+  canonicalUrl?: string
   ogImage?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-};
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+}
 
 export type PostsGridContainer = {
-  _type: "postsGridContainer";
-  backgroundColor?: "#ffffff" | "#e2e2e2" | "#61c8e9" | "#feca2d";
-  posts?: Array<{
-    _key: string;
-  } & PostReference>;
-};
+  _type: 'postsGridContainer'
+  backgroundColor?: '#ffffff' | '#e2e2e2' | '#61c8e9' | '#feca2d'
+  posts?: Array<
+    {
+      _key: string
+    } & PostReference
+  >
+}
 
-export type Settings = {
-  _id: string;
-  _type: "settings";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  menuItems?: Array<{
-    _key: string;
-  } & NavCTA | {
-    _key: string;
-  } & NavDropdownCTA | {
-    title: string;
-    slug: Slug;
-    seo?: Seo;
-    overview: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    content?: Array<{
-      _key: string;
-    } & HeroBanner | {
-      _key: string;
-    } & HeroTwoPanel | {
-      _key: string;
-    } & SingleColumnContentBlock | {
-      _key: string;
-    } & PostsGridContainer>;
-    _type: "blogLandingPage";
-    _key: string;
-  }>;
-  ogImage?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    metadataBase?: string;
-    _type: "image";
-  };
-};
-
-export type Page = {
-  _id: string;
-  _type: "page";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  slug: Slug;
-  seo?: Seo;
-  overview?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: null;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  content?: Array<{
-    _key: string;
-  } & HeroBanner | {
-    _key: string;
-  } & HeroTwoPanel | {
-    _key: string;
-  } & SingleColumnContentBlock | {
-    _key: string;
-  } & RowContainer | {
-    _key: string;
-  } & PostsGridContainer>;
-};
-
-export type Post = {
-  _id: string;
-  _type: "post";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  slug: Slug;
-  seo?: Seo;
-  overview?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: null;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  excerpt: SimplePortableText;
-  image?: MainImage;
-  subheader?: string;
-  body: MainPortableText;
-};
-
-export type BlogLandingPage = {
-  _id: string;
-  _type: "blogLandingPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  slug: Slug;
-  seo?: Seo;
+export type Home = {
+  _id: string
+  _type: 'home'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
   overview: Array<{
     children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
     markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  content?: Array<{
-    _key: string;
-  } & HeroBanner | {
-    _key: string;
-  } & HeroTwoPanel | {
-    _key: string;
-  } & SingleColumnContentBlock | {
-    _key: string;
-  } & PostsGridContainer>;
-};
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  seo?: Seo
+  content?: Array<
+    | ({
+        _key: string
+      } & HeroBanner)
+    | ({
+        _key: string
+      } & HeroTwoPanel)
+    | ({
+        _key: string
+      } & SingleColumnContentBlock)
+    | ({
+        _key: string
+      } & RowContainer)
+    | ({
+        _key: string
+      } & PostsGridContainer)
+  >
+}
+
+export type Settings = {
+  _id: string
+  _type: 'settings'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  menuItems?: Array<
+    | ({
+        _key: string
+      } & NavCTA)
+    | ({
+        _key: string
+      } & NavDropdownCTA)
+    | {
+        title: string
+        slug: Slug
+        seo?: Seo
+        overview: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'normal'
+          listItem?: never
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }>
+        content?: Array<
+          | ({
+              _key: string
+            } & HeroBanner)
+          | ({
+              _key: string
+            } & HeroTwoPanel)
+          | ({
+              _key: string
+            } & SingleColumnContentBlock)
+          | ({
+              _key: string
+            } & PostsGridContainer)
+        >
+        _type: 'blogLandingPage'
+        _key: string
+      }
+  >
+  ogImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    metadataBase?: string
+    _type: 'image'
+  }
+}
+
+export type Page = {
+  _id: string
+  _type: 'page'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  slug: Slug
+  seo?: Seo
+  overview?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  content?: Array<
+    | ({
+        _key: string
+      } & HeroBanner)
+    | ({
+        _key: string
+      } & HeroTwoPanel)
+    | ({
+        _key: string
+      } & SingleColumnContentBlock)
+    | ({
+        _key: string
+      } & RowContainer)
+    | ({
+        _key: string
+      } & PostsGridContainer)
+  >
+}
+
+export type Post = {
+  _id: string
+  _type: 'post'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  slug: Slug
+  seo?: Seo
+  overview?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  excerpt: SimplePortableText
+  image?: MainImage
+  subheader?: string
+  body: MainPortableText
+}
+
+export type BlogLandingPage = {
+  _id: string
+  _type: 'blogLandingPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  slug: Slug
+  seo?: Seo
+  overview: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  content?: Array<
+    | ({
+        _key: string
+      } & HeroBanner)
+    | ({
+        _key: string
+      } & HeroTwoPanel)
+    | ({
+        _key: string
+      } & SingleColumnContentBlock)
+    | ({
+        _key: string
+      } & PostsGridContainer)
+  >
+}
 
 export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
-};
+  _type: 'slug'
+  current: string
+  source?: string
+}
 
 export type SanityAssistInstructionTask = {
-  _type: "sanity.assist.instructionTask";
-  path?: string;
-  instructionKey?: string;
-  started?: string;
-  updated?: string;
-  info?: string;
-};
+  _type: 'sanity.assist.instructionTask'
+  path?: string
+  instructionKey?: string
+  started?: string
+  updated?: string
+  info?: string
+}
 
 export type SanityAssistTaskStatus = {
-  _type: "sanity.assist.task.status";
-  tasks?: Array<{
-    _key: string;
-  } & SanityAssistInstructionTask>;
-};
+  _type: 'sanity.assist.task.status'
+  tasks?: Array<
+    {
+      _key: string
+    } & SanityAssistInstructionTask
+  >
+}
 
 export type SanityAssistSchemaTypeAnnotations = {
-  _type: "sanity.assist.schemaType.annotations";
-  title?: string;
-  fields?: Array<{
-    _key: string;
-  } & SanityAssistSchemaTypeField>;
-};
+  _type: 'sanity.assist.schemaType.annotations'
+  title?: string
+  fields?: Array<
+    {
+      _key: string
+    } & SanityAssistSchemaTypeField
+  >
+}
 
 export type SanityAssistOutputType = {
-  _type: "sanity.assist.output.type";
-  type?: string;
-};
+  _type: 'sanity.assist.output.type'
+  type?: string
+}
 
 export type SanityAssistOutputField = {
-  _type: "sanity.assist.output.field";
-  path?: string;
-};
+  _type: 'sanity.assist.output.field'
+  path?: string
+}
 
 export type AssistInstructionContextReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "assist.instruction.context";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'assist.instruction.context'
+}
 
 export type SanityAssistInstructionContext = {
-  _type: "sanity.assist.instruction.context";
-  reference: AssistInstructionContextReference;
-};
+  _type: 'sanity.assist.instruction.context'
+  reference: AssistInstructionContextReference
+}
 
 export type AssistInstructionContext = {
-  _id: string;
-  _type: "assist.instruction.context";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
+  _id: string
+  _type: 'assist.instruction.context'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
   context?: Array<{
     children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: null;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-};
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+}
 
 export type SanityAssistInstructionUserInput = {
-  _type: "sanity.assist.instruction.userInput";
-  message: string;
-  description?: string;
-};
+  _type: 'sanity.assist.instruction.userInput'
+  message: string
+  description?: string
+}
 
 export type SanityAssistInstructionPrompt = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  } | {
-    _key: string;
-  } & SanityAssistInstructionFieldRef | {
-    _key: string;
-  } & SanityAssistInstructionContext | {
-    _key: string;
-  } & SanityAssistInstructionUserInput>;
-  style?: "normal";
-  listItem?: never;
-  markDefs?: null;
-  level?: number;
-  _type: "block";
-  _key: string;
-}>;
+  children?: Array<
+    | {
+        marks?: Array<string>
+        text?: string
+        _type: 'span'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & SanityAssistInstructionFieldRef)
+    | ({
+        _key: string
+      } & SanityAssistInstructionContext)
+    | ({
+        _key: string
+      } & SanityAssistInstructionUserInput)
+  >
+  style?: 'normal'
+  listItem?: never
+  markDefs?: null
+  level?: number
+  _type: 'block'
+  _key: string
+}>
 
 export type SanityAssistInstructionFieldRef = {
-  _type: "sanity.assist.instruction.fieldRef";
-  path?: string;
-};
+  _type: 'sanity.assist.instruction.fieldRef'
+  path?: string
+}
 
 export type SanityAssistInstruction = {
-  _type: "sanity.assist.instruction";
-  prompt?: SanityAssistInstructionPrompt;
-  icon?: string;
-  title?: string;
-  userId?: string;
-  createdById?: string;
-  output?: Array<{
-    _key: string;
-  } & SanityAssistOutputField | {
-    _key: string;
-  } & SanityAssistOutputType>;
-};
+  _type: 'sanity.assist.instruction'
+  prompt?: SanityAssistInstructionPrompt
+  icon?: string
+  title?: string
+  userId?: string
+  createdById?: string
+  output?: Array<
+    | ({
+        _key: string
+      } & SanityAssistOutputField)
+    | ({
+        _key: string
+      } & SanityAssistOutputType)
+  >
+}
 
 export type SanityAssistSchemaTypeField = {
-  _type: "sanity.assist.schemaType.field";
-  path?: string;
-  instructions?: Array<{
-    _key: string;
-  } & SanityAssistInstruction>;
-};
+  _type: 'sanity.assist.schemaType.field'
+  path?: string
+  instructions?: Array<
+    {
+      _key: string
+    } & SanityAssistInstruction
+  >
+}
+
+export type MediaTag = {
+  _id: string
+  _type: 'media.tag'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: Slug
+}
 
 export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
+  _type: 'sanity.imagePaletteSwatch'
+  background?: string
+  foreground?: string
+  population?: number
+  title?: string
+}
 
 export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
+  _type: 'sanity.imagePalette'
+  darkMuted?: SanityImagePaletteSwatch
+  lightVibrant?: SanityImagePaletteSwatch
+  darkVibrant?: SanityImagePaletteSwatch
+  vibrant?: SanityImagePaletteSwatch
+  dominant?: SanityImagePaletteSwatch
+  lightMuted?: SanityImagePaletteSwatch
+  muted?: SanityImagePaletteSwatch
+}
 
 export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
-  height: number;
-  width: number;
-  aspectRatio: number;
-};
+  _type: 'sanity.imageDimensions'
+  height: number
+  width: number
+  aspectRatio: number
+}
 
 export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  thumbHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
+  _type: 'sanity.imageMetadata'
+  location?: Geopoint
+  dimensions?: SanityImageDimensions
+  palette?: SanityImagePalette
+  lqip?: string
+  blurHash?: string
+  thumbHash?: string
+  hasAlpha?: boolean
+  isOpaque?: boolean
+}
 
 export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
+  _id: string
+  _type: 'sanity.fileAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash?: string
+  extension?: string
+  mimeType?: string
+  size?: number
+  assetId?: string
+  uploadId?: string
+  path?: string
+  url?: string
+  source?: SanityAssetSourceData
+}
 
 export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
+  _type: 'sanity.assetSourceData'
+  name?: string
+  id?: string
+  url?: string
+}
 
 export type SanityImageAsset = {
-  _id: string;
-  _type: "sanity.imageAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  metadata?: SanityImageMetadata;
-  source?: SanityAssetSourceData;
-};
+  _id: string
+  _type: 'sanity.imageAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash?: string
+  extension?: string
+  mimeType?: string
+  size?: number
+  assetId?: string
+  uploadId?: string
+  path?: string
+  url?: string
+  metadata?: SanityImageMetadata
+  source?: SanityAssetSourceData
+}
 
 export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
+  _type: 'geopoint'
+  lat?: number
+  lng?: number
+  alt?: number
+}
 
-export type AllSanitySchemaTypes = ContentBlock | SingleColumnContentBlock | RowContainer | ContactInfo | PageReference | PostReference | BlogLandingPageReference | SimplePortableText | SanityImageAssetReference | MainPortableText | MainImage | Icon | SanityImageCrop | SanityImageHotspot | HeroTwoPanel | HeroBanner | SanityFileAssetReference | Cta | Carousel | NavDropdownCTA | NavCTA | Seo | PostsGridContainer | Settings | Page | Post | BlogLandingPage | Slug | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | AssistInstructionContextReference | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes =
+  | ContentBlock
+  | SingleColumnContentBlock
+  | RowContainer
+  | ContactInfo
+  | PageReference
+  | PostReference
+  | BlogLandingPageReference
+  | SimplePortableText
+  | SanityImageAssetReference
+  | MainPortableText
+  | MainImage
+  | Icon
+  | SanityImageCrop
+  | SanityImageHotspot
+  | HeroTwoPanel
+  | HeroBanner
+  | SanityFileAssetReference
+  | Cta
+  | Carousel
+  | NavDropdownCTA
+  | NavCTA
+  | Seo
+  | PostsGridContainer
+  | Home
+  | Settings
+  | Page
+  | Post
+  | BlogLandingPage
+  | Slug
+  | SanityAssistInstructionTask
+  | SanityAssistTaskStatus
+  | SanityAssistSchemaTypeAnnotations
+  | SanityAssistOutputType
+  | SanityAssistOutputField
+  | AssistInstructionContextReference
+  | SanityAssistInstructionContext
+  | AssistInstructionContext
+  | SanityAssistInstructionUserInput
+  | SanityAssistInstructionPrompt
+  | SanityAssistInstructionFieldRef
+  | SanityAssistInstruction
+  | SanityAssistSchemaTypeField
+  | MediaTag
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageMetadata
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint
 
-export declare const internalGroqTypeReferenceTo: unique symbol;
-
+export declare const internalGroqTypeReferenceTo: unique symbol

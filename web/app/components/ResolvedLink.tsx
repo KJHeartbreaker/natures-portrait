@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
 import {linkResolver} from '@/sanity/lib/utils'
-import {DereferencedLink} from '@/sanity/lib/types'
+import type {PortableTextLink} from '@/sanity/lib/types'
 
 interface ResolvedLinkProps {
-  link: DereferencedLink
+  link: PortableTextLink & {blank?: boolean}
   children: React.ReactNode
   className?: string
 }
@@ -17,8 +17,8 @@ export default function ResolvedLink({link, children, className}: ResolvedLinkPr
     return (
       <Link
         href={resolvedLink}
-        target={link?.openInNewTab ? '_blank' : undefined}
-        rel={link?.openInNewTab ? 'noopener noreferrer' : undefined}
+        target={link?.blank ? '_blank' : undefined}
+        rel={link?.blank ? 'noopener noreferrer' : undefined}
         className={className}
       >
         {children}

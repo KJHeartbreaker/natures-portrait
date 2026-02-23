@@ -9,6 +9,7 @@ import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './src/schemaTypes'
 import {structure} from './src/structure'
 import {unsplashImageAsset} from 'sanity-plugin-asset-source-unsplash'
+import {media} from 'sanity-plugin-media'
 import {
   presentationTool,
   defineDocuments,
@@ -47,7 +48,7 @@ function resolveHref(documentType?: string, slug?: string): string | undefined {
 // Main Sanity configuration
 export default defineConfig({
   name: 'default',
-  title: 'Sanity + Next.js Starter Template',
+  title: 'Natures Portrait',
 
   projectId,
   dataset,
@@ -129,6 +130,7 @@ export default defineConfig({
     }),
     // Additional plugins for enhanced functionality
     unsplashImageAsset(),
+    media(),
     assist(),
     visionTool(),
   ],

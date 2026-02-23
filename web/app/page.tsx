@@ -5,14 +5,12 @@ import {PortableText} from '@portabletext/react'
 import {AllPosts} from '@/app/components/Posts'
 import GetStartedCode from '@/app/components/GetStartedCode'
 import SideBySideIcons from '@/app/components/SideBySideIcons'
-import {settingsQuery} from '@/sanity/lib/queries'
+import {homeQuery} from '@/sanity/lib/queries'
 import {sanityFetch} from '@/sanity/lib/live'
 import {dataAttr} from '@/sanity/lib/utils'
 
 export default async function Page() {
-  const {data: settings} = await sanityFetch({
-    query: settingsQuery,
-  })
+  const {data: home} = await sanityFetch({query: homeQuery})
 
   return (
     <>
@@ -48,17 +46,17 @@ export default async function Page() {
           <SideBySideIcons />
           <div className="container relative mx-auto max-w-2xl pb-20 pt-10 space-y-6 lg:max-w-4xl lg:px-12 flex flex-col items-center">
             <div className="prose sm:prose-lg md:prose-xl xl:prose-2xl text-gray-700 prose-a:text-gray-700 font-light text-center">
-              {settings?.description && (
+              {home?.overview?.length ? (
                 <div
                   data-sanity={dataAttr({
-                    id: settings._id,
-                    type: 'settings',
-                    path: 'description',
+                    id: home._id,
+                    type: 'home',
+                    path: 'overview',
                   }).toString()}
                 >
-                  <PortableText value={settings.description} />
+                  <PortableText value={home.overview} />
                 </div>
-              )}
+              ) : null}
               <div className="flex items-center flex-col gap-4">
                 <GetStartedCode />
                 <Link

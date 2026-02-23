@@ -1,17 +1,15 @@
 import {GetPageQueryResult} from '@/sanity.types'
 
-export type PageBuilderSection = NonNullable<NonNullable<GetPageQueryResult>['pageBuilder']>[number]
-export type ExtractPageBuilderType<T extends PageBuilderSection['_type']> = Extract<
-  PageBuilderSection,
-  {_type: T}
->
+export type PageSection = NonNullable<NonNullable<GetPageQueryResult>['content']>[number]
+export type ExtractPageSectionType<T extends PageSection['_type']> = Extract<PageSection, {_type: T}>
 
-// Represents a Link after GROQ dereferencing (page/post become slug strings)
-export type DereferencedLink = {
+export type PortableTextLink = {
   _type: 'link'
-  linkType?: 'href' | 'page' | 'post'
   href?: string
-  page?: string | null
-  post?: string | null
-  openInNewTab?: boolean
+  blank?: boolean
 }
+
+export type ResolvedLandingPage = {
+  _type?: 'page' | 'post' | 'blogLandingPage'
+  slug?: string
+} | null

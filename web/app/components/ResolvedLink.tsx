@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
 import {linkResolver} from '@/sanity/lib/utils'
-import type {PortableTextLink} from '@/sanity/lib/types'
+import type {PortableTextMarkLink} from '@/sanity/lib/types'
 
 interface ResolvedLinkProps {
-  link: PortableTextLink & {blank?: boolean}
+  link: PortableTextMarkLink & {blank?: boolean}
   children: React.ReactNode
   className?: string
 }

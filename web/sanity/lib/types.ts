@@ -9,6 +9,16 @@ export type PortableTextLink = {
   blank?: boolean
 }
 
+export type PortableTextInternalLink = {
+  _type: 'internalLink'
+  item?: {
+    _type?: 'page' | 'post' | 'blogLandingPage'
+    slug?: string
+  } | null
+}
+
+export type PortableTextMarkLink = PortableTextLink | PortableTextInternalLink
+
 export type ResolvedLandingPage = {
   _type?: 'page' | 'post' | 'blogLandingPage'
   slug?: string

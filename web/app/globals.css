@@ -23,12 +23,19 @@
 @theme {
   --shadow-layer: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
 
-  --color-framework: #000;
-  --color-black: #0b0b0b;
-  --color-white: #fff;
-  --color-brand: #f50;
-  --color-blue: #0052ff;
-  --color-yellow: #cdea19;
+  /* Natures Portrait palette */
+  --color-luxe-noir: #060d0c;
+  --color-coastal-pine: #3e5954;
+  --color-dusty-sage: #758886;
+  --color-linen-clay: #c6c2bb;
+  --color-soft-oat: #f0ede5;
+
+  --color-framework: var(--color-luxe-noir);
+  --color-black: var(--color-luxe-noir);
+  --color-white: var(--color-soft-oat);
+  --color-brand: var(--color-coastal-pine);
+  --color-blue: var(--color-coastal-pine);
+  --color-yellow: var(--color-linen-clay);
   --color-gray-50: #f6f6f8;
   --color-gray-100: #eeeef1;
   --color-gray-200: #e3e4e8;

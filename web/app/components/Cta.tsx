@@ -1,11 +1,9 @@
 import Link from 'next/link'
 
-import type {Cta as CtaType} from '@/sanity.types'
-import {linkResolver} from '@/sanity/lib/utils'
-import type {ResolvedLandingPage} from '@/sanity/lib/types'
+import {linkResolver, type CtaLike} from '@/sanity/lib/utils'
 
 type CtaProps = {
-  cta: CtaType & {landingPage?: ResolvedLandingPage}
+  cta: CtaLike
   className?: string
 }
 

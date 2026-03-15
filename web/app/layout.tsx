@@ -13,7 +13,7 @@ import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
 import * as demo from '@/sanity/lib/demo'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
-import {homeQuery, settingsQuery} from '@/sanity/lib/queries'
+import {homeMetaQuery, settingsMetaQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
 import {handleError} from '@/app/client-utils'
 
@@ -24,12 +24,12 @@ import {handleError} from '@/app/client-utils'
 export async function generateMetadata(): Promise<Metadata> {
   const [{data: settings}, {data: home}] = await Promise.all([
     sanityFetch({
-      query: settingsQuery,
+      query: settingsMetaQuery,
       // Metadata should never contain stega
       stega: false,
     }),
     sanityFetch({
-      query: homeQuery,
+      query: homeMetaQuery,
       stega: false,
     }),
   ])

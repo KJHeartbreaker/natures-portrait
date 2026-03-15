@@ -1,5 +1,6 @@
 import {TbColumns2 as icon} from 'react-icons/tb'
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import {palette} from '../../palette'
 
 export const rowContainer = defineType({
   name: 'rowContainer',
@@ -26,12 +27,12 @@ export const rowContainer = defineType({
   ],
   initialValue: {
     row: 'twoColumn',
-    backgroundColor: '#ffffff',
+    backgroundColor: palette.softOat.value,
     overlay: 'noOverlay',
     centerTitle: false,
     hideTitle: false,
     // Must match the allowed `options.list` values (hex codes).
-    titleColor: '#333333',
+    titleColor: palette.luxeNoir.value,
     condensedCopy: false,
     centerCopy: false,
   },
@@ -63,11 +64,11 @@ export const rowContainer = defineType({
       description: 'Default is Dark Grey.',
       options: {
         list: [
-          {title: 'Dark Grey', value: '#333333'},
-          {title: 'Blue', value: '#16abcc'},
-          {title: 'Orange', value: '#ee6d08'},
-          {title: 'Yellow', value: '#feca2d'},
-          {title: 'White', value: '#ffffff'},
+          palette.luxeNoir,
+          palette.coastalPine,
+          palette.dustySage,
+          palette.linenClay,
+          palette.softOat,
         ],
         layout: 'radio',
         direction: 'horizontal',
@@ -142,11 +143,11 @@ export const rowContainer = defineType({
         'If no background image is uploaded, you can choose a background colour. If no selection is made, the default is white.',
       options: {
         list: [
-          {title: 'White', value: '#ffffff'},
-          {title: 'Grey', value: '#e2e2e2'},
-          {title: 'Blue', value: '#16abcc'},
-          {title: 'Orange', value: '#ee6d08'},
-          {title: 'Yellow', value: '#feca2d'},
+          palette.luxeNoir,
+          palette.coastalPine,
+          palette.dustySage,
+          palette.linenClay,
+          palette.softOat,
         ],
         layout: 'radio',
         direction: 'horizontal',

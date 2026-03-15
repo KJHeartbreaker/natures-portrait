@@ -1,5 +1,6 @@
 import {FcTemplate as icon} from 'react-icons/fc'
 import {defineField, defineType} from 'sanity'
+import {palette} from '../../palette'
 
 export const heroTwoPanel = defineType({
   title: 'Hero Two Panel',
@@ -8,7 +9,7 @@ export const heroTwoPanel = defineType({
   icon,
   initialValue: {
     size: 'standard',
-    backgroundColor: '#057198',
+    backgroundColor: palette.coastalPine.value,
   },
   fieldsets: [
     {
@@ -64,11 +65,11 @@ export const heroTwoPanel = defineType({
       description: 'Background colour for the copy panel.',
       options: {
         list: [
-          {title: 'Blue', value: '#16abcc'},
-          {title: 'Orange', value: '#ee6d08'},
-          {title: 'Yellow', value: '#feca2d'},
-          {title: 'White', value: '#ffffff'},
-          {title: 'Dark Grey', value: '#323943'},
+          palette.luxeNoir,
+          palette.coastalPine,
+          palette.dustySage,
+          palette.linenClay,
+          palette.softOat,
         ],
         layout: 'radio',
         direction: 'horizontal',

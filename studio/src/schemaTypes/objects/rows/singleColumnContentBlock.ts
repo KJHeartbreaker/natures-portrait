@@ -1,5 +1,6 @@
 import {GiHamburgerMenu as icon} from 'react-icons/gi'
 import {defineField, defineType} from 'sanity'
+import {palette} from '../../palette'
 
 export const singleColumnContentBlock = defineType({
   name: 'singleColumnContentBlock',
@@ -20,7 +21,7 @@ export const singleColumnContentBlock = defineType({
     centerContent: false,
     removeBottomPadding: false,
     skinny: false,
-    backgroundColor: 'White',
+    backgroundColor: palette.softOat.value,
   },
   fields: [
     defineField({
@@ -37,11 +38,11 @@ export const singleColumnContentBlock = defineType({
         'If no background image is uploaded, you can choose a background colour. If no selection is made, the default is white.',
       options: {
         list: [
-          {title: 'White', value: '#ffffff'},
-          {title: 'Grey', value: '#e2e2e2'},
-          {title: 'Blue', value: '#61c8e9'},
-          {title: 'Dark Blue', value: '#013b63'},
-          {title: 'Yellow', value: '#feca2d'},
+          palette.luxeNoir,
+          palette.coastalPine,
+          palette.dustySage,
+          palette.linenClay,
+          palette.softOat,
         ],
         layout: 'radio',
         direction: 'horizontal',

@@ -1,5 +1,6 @@
 import {FcFlashOn as icon} from 'react-icons/fc'
 import {defineField, defineType} from 'sanity'
+import {palette} from '../../palette'
 
 export const heroBanner = defineType({
   title: 'Hero Banner',
@@ -8,9 +9,9 @@ export const heroBanner = defineType({
   icon,
   initialValue: {
     size: 'standard',
-    subHeadingColor: 'orange',
-    headingColor: 'white',
-    copyColor: 'white',
+    subHeadingColor: palette.dustySage.value,
+    headingColor: palette.luxeNoir.value,
+    copyColor: palette.luxeNoir.value,
   },
   fieldsets: [
     {
@@ -62,7 +63,13 @@ export const heroBanner = defineType({
       title: 'Subheading Colour',
       type: 'string',
       options: {
-        list: ['white', 'orange', 'blue', 'yellow', 'grey33'],
+        list: [
+          palette.luxeNoir,
+          palette.coastalPine,
+          palette.dustySage,
+          palette.linenClay,
+          palette.softOat,
+        ],
         layout: 'radio',
         direction: 'horizontal',
       },
@@ -80,7 +87,13 @@ export const heroBanner = defineType({
       title: 'Heading Colour',
       type: 'string',
       options: {
-        list: ['white', 'orange', 'blue', 'yellow', 'grey33'],
+        list: [
+          palette.luxeNoir,
+          palette.coastalPine,
+          palette.dustySage,
+          palette.linenClay,
+          palette.softOat,
+        ],
         layout: 'radio',
         direction: 'horizontal',
       },
@@ -97,7 +110,13 @@ export const heroBanner = defineType({
       title: 'Copy Colour',
       type: 'string',
       options: {
-        list: ['white', 'orange', 'blue', 'yellow', 'grey33'],
+        list: [
+          palette.luxeNoir,
+          palette.coastalPine,
+          palette.dustySage,
+          palette.linenClay,
+          palette.softOat,
+        ],
         layout: 'radio',
         direction: 'horizontal',
       },

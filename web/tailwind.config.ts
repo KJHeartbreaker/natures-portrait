@@ -13,8 +13,13 @@ export default {
         layer: '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
       },
       colors: {
-        black: '#0d0e12',
-        white: '#fff',
+        black: '#060D0C',
+        white: '#F0EDE5',
+        luxeNoir: '#060D0C',
+        coastalPine: '#3E5954',
+        dustySage: '#758886',
+        linenClay: '#C6C2bb',
+        softOat: '#F0EDE5',
         cyan: {
           50: '#e7fefe',
           100: '#c5fcfc',

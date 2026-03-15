@@ -12,6 +12,14 @@ import {PortableText, type PortableTextComponents, type PortableTextBlock} from 
 import ResolvedLink from '@/app/components/ResolvedLink'
 import Image from '@/app/components/SanityImage'
 
+const paletteMarkStyles: Record<string, React.CSSProperties> = {
+  luxeNoir: {color: '#060D0C'},
+  coastalPine: {color: '#3E5954'},
+  dustySage: {color: '#758886'},
+  linenClay: {color: '#C6C2bb'},
+  softOat: {color: '#F0EDE5', backgroundColor: '#060D0C'},
+}
+
 export default function CustomPortableText({
   className,
   value,
@@ -22,17 +30,19 @@ export default function CustomPortableText({
   const components: PortableTextComponents = {
     types: {
       image: ({value}) => {
-        if (!value?.asset?._ref) {
+        const id = value?.asset?._ref || value?.asset?._id
+        if (!id) {
           return null
         }
 
         return (
           <figure className="my-8">
             <Image
-              id={value.asset._ref}
+              id={id}
               alt={value.alt || ''}
               width={672}
               crop={value.crop}
+              hotspot={value.hotspot}
               mode="cover"
               className="rounded-sm"
             />
@@ -98,6 +108,14 @@ export default function CustomPortableText({
       link: ({children, value: link}) => {
         return <ResolvedLink link={link}>{children}</ResolvedLink>
       },
+      internalLink: ({children, value: link}) => {
+        return <ResolvedLink link={link}>{children}</ResolvedLink>
+      },
+      luxeNoir: ({children}) => <span style={paletteMarkStyles.luxeNoir}>{children}</span>,
+      coastalPine: ({children}) => <span style={paletteMarkStyles.coastalPine}>{children}</span>,
+      dustySage: ({children}) => <span style={paletteMarkStyles.dustySage}>{children}</span>,
+      linenClay: ({children}) => <span style={paletteMarkStyles.linenClay}>{children}</span>,
+      softOat: ({children}) => <span style={paletteMarkStyles.softOat}>{children}</span>,
     },
   }
 

@@ -23,19 +23,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
 
   if (allPostsAndPages != null && allPostsAndPages.data.length != 0) {
-    let priority: number
-    let changeFrequency:
-      | 'monthly'
-      | 'always'
-      | 'hourly'
-      | 'daily'
-      | 'weekly'
-      | 'yearly'
-      | 'never'
-      | undefined
-    let url: string
-
     for (const p of allPostsAndPages.data) {
+      let priority = 0.5
+      let changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'] = 'monthly'
+      let url: string | null = null
+
       switch (p._type) {
         case 'page':
           priority = 0.8
@@ -47,7 +39,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           changeFrequency = 'never'
           url = `${domain}/posts/${p.slug}`
           break
+        case 'blogLandingPage':
+          priority = 0.7
+          changeFrequency = 'weekly'
+          url = `${domain}/${p.slug}`
+          break
+        default:
+          url = null
+          break
       }
+      if (!url) continue
       sitemap.push({
         lastModified: p._updatedAt || new Date(),
         priority,

@@ -2,26 +2,29 @@
 import {BsCardText, BsCircle, BsCircleFill} from 'react-icons/bs'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {LiaExternalLinkSquareAltSolid as internalLinkIcon} from 'react-icons/lia'
+import {palette} from '../../palette'
 
-const cmmYellowIcon = () => <BsCircleFill color="#feca2d" />
-const cmmYellowDecorator = (props: any) => <span style={{color: '#feca2d'}}>{props.children}</span>
+const luxeNoirIcon = () => <BsCircleFill color={palette.luxeNoir.value} />
+const luxeNoirDecorator = (props: any) => <span style={{color: palette.luxeNoir.value}}>{props.children}</span>
 
-const cmmBlueIcon = () => <BsCircleFill color="#057198" />
-const cmmBlueDecorator = (props: any) => <span style={{color: '#057198'}}>{props.children}</span>
+const coastalPineIcon = () => <BsCircleFill color={palette.coastalPine.value} />
+const coastalPineDecorator = (props: any) => <span style={{color: palette.coastalPine.value}}>{props.children}</span>
 
-const cmmDarkBlueIcon = () => <BsCircleFill color="#013b63" />
-const cmmDarkBlueDecorator = (props: any) => <span style={{color: '#013b63'}}>{props.children}</span>
+const dustySageIcon = () => <BsCircleFill color={palette.dustySage.value} />
+const dustySageDecorator = (props: any) => <span style={{color: palette.dustySage.value}}>{props.children}</span>
 
-const cmmOrangeIcon = () => <BsCircleFill color="#ee6d08" />
-const cmmOrangeDecorator = (props: any) => <span style={{color: '#ee6d08'}}>{props.children}</span>
+const linenClayIcon = () => <BsCircleFill color={palette.linenClay.value} />
+const linenClayDecorator = (props: any) => <span style={{color: palette.linenClay.value}}>{props.children}</span>
 
-const cmmWhiteIcon = () => <BsCircle />
-const cmmWhiteDecorator = (props: any) => (
-  <span style={{color: 'white', backgroundColor: '#333333'}}>{props.children}</span>
+const softOatIcon = () => <BsCircle color={palette.softOat.value} />
+const softOatDecorator = (props: any) => (
+  <span style={{color: palette.softOat.value, backgroundColor: palette.luxeNoir.value}}>{props.children}</span>
 )
 
-const HighlightIcon = () => <span style={{fontWeight: 'bold', color: 'yellow'}}> H </span>
-const HighlightDecorator = (props: any) => <span style={{backgroundColor: 'yellow'}}>{props.children}</span>
+const HighlightIcon = () => <span style={{fontWeight: 'bold', color: palette.softOat.value}}> H </span>
+const HighlightDecorator = (props: any) => (
+  <span style={{backgroundColor: palette.coastalPine.value, color: palette.softOat.value}}>{props.children}</span>
+)
 
 export const mainPortableText = defineType({
   type: 'object',
@@ -52,34 +55,34 @@ export const mainPortableText = defineType({
           marks: {
             decorators: [
               {
-                title: 'Yellow',
-                value: 'cmmYellow',
-                icon: cmmYellowIcon,
-                component: cmmYellowDecorator,
+                title: palette.luxeNoir.title,
+                value: 'luxeNoir',
+                icon: luxeNoirIcon,
+                component: luxeNoirDecorator,
               },
               {
-                title: 'Orange',
-                value: 'cmmOrange',
-                icon: cmmOrangeIcon,
-                component: cmmOrangeDecorator,
+                title: palette.coastalPine.title,
+                value: 'coastalPine',
+                icon: coastalPineIcon,
+                component: coastalPineDecorator,
               },
               {
-                title: 'Blue',
-                value: 'cmmBlue',
-                icon: cmmBlueIcon,
-                component: cmmBlueDecorator,
+                title: palette.dustySage.title,
+                value: 'dustySage',
+                icon: dustySageIcon,
+                component: dustySageDecorator,
               },
               {
-                title: 'Dark Blue',
-                value: 'cmmDarkBlue',
-                icon: cmmDarkBlueIcon,
-                component: cmmDarkBlueDecorator,
+                title: palette.linenClay.title,
+                value: 'linenClay',
+                icon: linenClayIcon,
+                component: linenClayDecorator,
               },
               {
-                title: 'White',
-                value: 'cmmWhite',
-                icon: cmmWhiteIcon,
-                component: cmmWhiteDecorator,
+                title: palette.softOat.title,
+                value: 'softOat',
+                icon: softOatIcon,
+                component: softOatDecorator,
               },
               {title: 'Strong', value: 'strong'},
               {title: 'Emphasis', value: 'em'},

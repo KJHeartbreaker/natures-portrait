@@ -2,8 +2,7 @@ import {dataset, projectId, studioUrl} from '@/sanity/lib/api'
 import {createDataAttribute, CreateDataAttributeProps} from 'next-sanity'
 import imageUrlBuilder from '@sanity/image-url'
 import type {SanityImageSource} from '@sanity/image-url'
-import type {Cta} from '@/sanity.types'
-import type {PortableTextLink, ResolvedLandingPage} from '@/sanity/lib/types'
+import type {PortableTextMarkLink, ResolvedLandingPage} from '@/sanity/lib/types'
 
 const builder = imageUrlBuilder({
   projectId: projectId || '',
@@ -27,8 +26,20 @@ export function resolveOpenGraphImage(
   return {url, alt: (image as {alt?: string})?.alt || '', width, height}
 }
 
-type CtaLike = Cta & {
-  landingPage?: ResolvedLandingPage
+export type CtaLike = {
+  _type?: 'cta'
+  title?: string | null
+  kind?: 'button' | 'link' | null
+  arrow?: boolean | null
+  anchor?: string | null
+  link?: string | null
+  fileDownload?: {
+    _type?: string
+    asset?: {
+      url?: string | null
+    } | null
+  } | null
+  landingPage?: ResolvedLandingPage | null
 }
 
 function resolveLandingPageHref(landingPage: ResolvedLandingPage): string | null {
@@ -45,11 +56,21 @@ function resolveLandingPageHref(landingPage: ResolvedLandingPage): string | null
 }
 
 // Resolve URL/href for common link-like objects used in this project.
-export function linkResolver(link: PortableTextLink | CtaLike | undefined) {
+export function linkResolver(link: PortableTextMarkLink | CtaLike | undefined) {
   if (!link) return null
 
   // Portable Text external link annotation
   if ('href' in link && typeof link.href === 'string') return link.href
+
+  // Portable Text internal link annotation
+  if ('item' in link) {
+    const item = (link as PortableTextMarkLink & {item?: any}).item
+    if (item?.slug) {
+      if (item._type === 'post') return `/posts/${item.slug}`
+      if (item._type === 'page' || item._type === 'blogLandingPage') return `/${item.slug}`
+      return `/${item.slug}`
+    }
+  }
 
   // CTA object (or CTA-like, after GROQ projection)
   if ('anchor' in link || 'link' in link || 'landingPage' in link) {

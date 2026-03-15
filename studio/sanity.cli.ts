@@ -16,10 +16,26 @@ export default defineCliConfig({
     dataset,
   },
   studioHost: process.env.SANITY_STUDIO_STUDIO_HOST || '', // Visit https://www.sanity.io/docs/studio/environment-variables to learn more about using environment variables for local & production.
-  autoUpdates: true,
+  deployment: {
+    autoUpdates: true,
+  },
+  server: {
+    hostname: 'localhost',
+    port: 3333,
+  },
+  vite: (config) => ({
+    ...config,
+    server: {
+      ...config.server,
+      watch: {
+        ...(config.server?.watch ?? {}),
+        usePolling: true,
+      },
+    },
+  }),
   typegen: {
     path: './src/**/*.{ts,tsx,js,jsx}',
-    schema: '../sanity.schema.json',
+    schema: '../.sanity/schema.json',
     generates: './sanity.types.ts',
     overloadClientMethods: true,
   },

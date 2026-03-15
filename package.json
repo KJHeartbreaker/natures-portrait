@@ -15,12 +15,14 @@
     "url": "https://github.com/sanity-io/sanity-template-nextjs-clean/issues"
   },
   "scripts": {
+    "predev": "pnpm sanity:typegen",
     "dev": "npm-run-all --parallel --print-label dev:*",
     "dev:next": "pnpm --filter web dev",
     "dev:studio": "pnpm --filter studio dev",
     "format": "prettier --cache --write .",
     "import-sample-data": "cd studio && sanity dataset import sample-data.tar.gz --replace",
     "lint": "pnpm --filter web lint",
+    "sanity:typegen": "pnpm --filter studio sanity:typegen && pnpm --filter web sanity:typegen",
     "type-check": "pnpm -r --filter web --filter studio type-check"
   },
   "prettier": "@sanity/prettier-config",

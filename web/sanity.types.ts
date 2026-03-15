@@ -12,7 +12,9 @@
  * ---------------------------------------------------------------------------------
  */
 
-// Source: ../sanity.schema.json
+export declare const internalGroqTypeReferenceTo: unique symbol
+
+// Source: ../.sanity/schema.json
 export type ContentBlock = {
   portableTextBlock?: MainPortableText
 }
@@ -734,14 +736,14 @@ export type SanityFileAsset = {
   title?: string
   description?: string
   altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
+  sha1hash: string
+  extension: string
+  mimeType: string
+  size: number
+  assetId: string
   uploadId?: string
-  path?: string
-  url?: string
+  path: string
+  url: string
   source?: SanityAssetSourceData
 }
 
@@ -763,14 +765,14 @@ export type SanityImageAsset = {
   title?: string
   description?: string
   altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
+  sha1hash: string
+  extension: string
+  mimeType: string
+  size: number
+  assetId: string
   uploadId?: string
-  path?: string
-  url?: string
+  path: string
+  url: string
   metadata?: SanityImageMetadata
   source?: SanityAssetSourceData
 }
@@ -835,8 +837,6 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint
 
-export declare const internalGroqTypeReferenceTo: unique symbol
-
 // Source: sanity/lib/queries.ts
 // Variable: settingsQuery
 // Query: *[_type == "settings"][0]{    _id,    _type,    menuItems[]{      _key,      _type,      _type == "navCTA" => {        _key,        _type,        cta{            _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }        }      },      _type == "navDropdownCTA" => {        _key,        _type,        cta{            _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }        },        subnav[]{          _key,            _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }        }      },      // Defensive: in case this array contains references (or embedded documents)      _type == "reference" => @->{        _id,        _type,        title,        "slug": slug.current      },      _type == "blogLandingPage" => {        _id,        _type,        title,        "slug": slug.current      }    },    ogImage{        _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  },      metadataBase    }  }
@@ -866,7 +866,7 @@ export type SettingsQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.fileAsset'
-              url: string | null
+              url: string
             } | null
           } | null
           landingPage:
@@ -906,7 +906,7 @@ export type SettingsQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.fileAsset'
-              url: string | null
+              url: string
             } | null
           } | null
           landingPage:
@@ -943,7 +943,7 @@ export type SettingsQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.fileAsset'
-              url: string | null
+              url: string
             } | null
           } | null
           landingPage:
@@ -979,7 +979,7 @@ export type SettingsQueryResult = {
     asset: {
       _id: string
       _type: 'sanity.imageAsset'
-      url: string | null
+      url: string
       metadata: {
         dimensions: {
           width: number
@@ -1015,7 +1015,7 @@ export type SettingsMetaQueryResult = {
     asset: {
       _id: string
       _type: 'sanity.imageAsset'
-      url: string | null
+      url: string
       metadata: {
         dimensions: {
           width: number
@@ -1075,7 +1075,7 @@ export type HomeQueryResult = {
       asset: {
         _id: string
         _type: 'sanity.imageAsset'
-        url: string | null
+        url: string
         metadata: {
           dimensions: {
             width: number
@@ -1160,7 +1160,7 @@ export type HomeQueryResult = {
           asset: {
             _id: string
             _type: 'sanity.imageAsset'
-            url: string | null
+            url: string
             metadata: {
               dimensions: {
                 width: number
@@ -1190,7 +1190,7 @@ export type HomeQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.fileAsset'
-              url: string | null
+              url: string
             } | null
           } | null
           landingPage:
@@ -1231,7 +1231,7 @@ export type HomeQueryResult = {
           asset: {
             _id: string
             _type: 'sanity.imageAsset'
-            url: string | null
+            url: string
             metadata: {
               dimensions: {
                 width: number
@@ -1320,7 +1320,7 @@ export type HomeQueryResult = {
                   asset: {
                     _id: string
                     _type: 'sanity.fileAsset'
-                    url: string | null
+                    url: string
                   } | null
                 } | null
                 landingPage:
@@ -1400,7 +1400,7 @@ export type HomeQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.imageAsset'
-              url: string | null
+              url: string
               metadata: {
                 dimensions: {
                   width: number
@@ -1441,7 +1441,7 @@ export type HomeQueryResult = {
           asset: {
             _id: string
             _type: 'sanity.imageAsset'
-            url: string | null
+            url: string
             metadata: {
               dimensions: {
                 width: number
@@ -1474,7 +1474,7 @@ export type HomeQueryResult = {
                 asset: {
                   _id: string
                   _type: 'sanity.imageAsset'
-                  url: string | null
+                  url: string
                   metadata: {
                     dimensions: {
                       width: number
@@ -1503,7 +1503,7 @@ export type HomeQueryResult = {
               asset: {
                 _id: string
                 _type: 'sanity.imageAsset'
-                url: string | null
+                url: string
                 metadata: {
                   dimensions: {
                     width: number
@@ -1594,7 +1594,7 @@ export type HomeQueryResult = {
                       asset: {
                         _id: string
                         _type: 'sanity.fileAsset'
-                        url: string | null
+                        url: string
                       } | null
                     } | null
                     landingPage:
@@ -1735,7 +1735,7 @@ export type HomeQueryResult = {
                     asset: {
                       _id: string
                       _type: 'sanity.fileAsset'
-                      url: string | null
+                      url: string
                     } | null
                   } | null
                   landingPage:
@@ -1873,7 +1873,7 @@ export type GetPageQueryResult =
           asset: {
             _id: string
             _type: 'sanity.imageAsset'
-            url: string | null
+            url: string
             metadata: {
               dimensions: {
                 width: number
@@ -1958,7 +1958,7 @@ export type GetPageQueryResult =
               asset: {
                 _id: string
                 _type: 'sanity.imageAsset'
-                url: string | null
+                url: string
                 metadata: {
                   dimensions: {
                     width: number
@@ -1988,7 +1988,7 @@ export type GetPageQueryResult =
                 asset: {
                   _id: string
                   _type: 'sanity.fileAsset'
-                  url: string | null
+                  url: string
                 } | null
               } | null
               landingPage:
@@ -2029,7 +2029,7 @@ export type GetPageQueryResult =
               asset: {
                 _id: string
                 _type: 'sanity.imageAsset'
-                url: string | null
+                url: string
                 metadata: {
                   dimensions: {
                     width: number
@@ -2118,7 +2118,7 @@ export type GetPageQueryResult =
                       asset: {
                         _id: string
                         _type: 'sanity.fileAsset'
-                        url: string | null
+                        url: string
                       } | null
                     } | null
                     landingPage:
@@ -2198,7 +2198,7 @@ export type GetPageQueryResult =
                 asset: {
                   _id: string
                   _type: 'sanity.imageAsset'
-                  url: string | null
+                  url: string
                   metadata: {
                     dimensions: {
                       width: number
@@ -2299,7 +2299,7 @@ export type GetPageQueryResult =
                         asset: {
                           _id: string
                           _type: 'sanity.fileAsset'
-                          url: string | null
+                          url: string
                         } | null
                       } | null
                       landingPage:
@@ -2395,7 +2395,7 @@ export type GetPageQueryResult =
           asset: {
             _id: string
             _type: 'sanity.imageAsset'
-            url: string | null
+            url: string
             metadata: {
               dimensions: {
                 width: number
@@ -2480,7 +2480,7 @@ export type GetPageQueryResult =
               asset: {
                 _id: string
                 _type: 'sanity.imageAsset'
-                url: string | null
+                url: string
                 metadata: {
                   dimensions: {
                     width: number
@@ -2510,7 +2510,7 @@ export type GetPageQueryResult =
                 asset: {
                   _id: string
                   _type: 'sanity.fileAsset'
-                  url: string | null
+                  url: string
                 } | null
               } | null
               landingPage:
@@ -2551,7 +2551,7 @@ export type GetPageQueryResult =
               asset: {
                 _id: string
                 _type: 'sanity.imageAsset'
-                url: string | null
+                url: string
                 metadata: {
                   dimensions: {
                     width: number
@@ -2640,7 +2640,7 @@ export type GetPageQueryResult =
                       asset: {
                         _id: string
                         _type: 'sanity.fileAsset'
-                        url: string | null
+                        url: string
                       } | null
                     } | null
                     landingPage:
@@ -2720,7 +2720,7 @@ export type GetPageQueryResult =
                 asset: {
                   _id: string
                   _type: 'sanity.imageAsset'
-                  url: string | null
+                  url: string
                   metadata: {
                     dimensions: {
                       width: number
@@ -2761,7 +2761,7 @@ export type GetPageQueryResult =
               asset: {
                 _id: string
                 _type: 'sanity.imageAsset'
-                url: string | null
+                url: string
                 metadata: {
                   dimensions: {
                     width: number
@@ -2794,7 +2794,7 @@ export type GetPageQueryResult =
                     asset: {
                       _id: string
                       _type: 'sanity.imageAsset'
-                      url: string | null
+                      url: string
                       metadata: {
                         dimensions: {
                           width: number
@@ -2823,7 +2823,7 @@ export type GetPageQueryResult =
                   asset: {
                     _id: string
                     _type: 'sanity.imageAsset'
-                    url: string | null
+                    url: string
                     metadata: {
                       dimensions: {
                         width: number
@@ -2914,7 +2914,7 @@ export type GetPageQueryResult =
                           asset: {
                             _id: string
                             _type: 'sanity.fileAsset'
-                            url: string | null
+                            url: string
                           } | null
                         } | null
                         landingPage:
@@ -3055,7 +3055,7 @@ export type GetPageQueryResult =
                         asset: {
                           _id: string
                           _type: 'sanity.fileAsset'
-                          url: string | null
+                          url: string
                         } | null
                       } | null
                       landingPage:

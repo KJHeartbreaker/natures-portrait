@@ -18,9 +18,22 @@ import {
 } from 'sanity/presentation'
 import {assist} from '@sanity/assist'
 
+function assertValue<T>(v: T | undefined, errorMessage: string): T {
+  if (v === undefined) {
+    throw new Error(errorMessage)
+  }
+  return v
+}
+
 // Environment variables for project configuration
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-projectID'
-const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
+const projectId = assertValue(
+  process.env.SANITY_STUDIO_PROJECT_ID,
+  'Missing environment variable: SANITY_STUDIO_PROJECT_ID',
+)
+const dataset = assertValue(
+  process.env.SANITY_STUDIO_DATASET,
+  'Missing environment variable: SANITY_STUDIO_DATASET',
+)
 
 // URL for preview functionality, defaults to localhost:3000 if not set
 const SANITY_STUDIO_PREVIEW_URL = process.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:3000'

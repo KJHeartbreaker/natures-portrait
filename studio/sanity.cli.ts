@@ -7,8 +7,21 @@
 
 import {defineCliConfig} from 'sanity/cli'
 
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID || '<your project ID>'
-const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
+function assertValue<T>(v: T | undefined, errorMessage: string): T {
+  if (v === undefined) {
+    throw new Error(errorMessage)
+  }
+  return v
+}
+
+const projectId = assertValue(
+  process.env.SANITY_STUDIO_PROJECT_ID,
+  'Missing environment variable: SANITY_STUDIO_PROJECT_ID',
+)
+const dataset = assertValue(
+  process.env.SANITY_STUDIO_DATASET,
+  'Missing environment variable: SANITY_STUDIO_DATASET',
+)
 
 export default defineCliConfig({
   api: {
@@ -18,6 +31,7 @@ export default defineCliConfig({
   studioHost: process.env.SANITY_STUDIO_STUDIO_HOST || '', // Visit https://www.sanity.io/docs/studio/environment-variables to learn more about using environment variables for local & production.
   deployment: {
     autoUpdates: true,
+    appId: 'lzlolu8mjqb0n57u8bfr1ft0',
   },
   server: {
     hostname: 'localhost',

@@ -4,11 +4,13 @@ import {home} from './singletons/home'
 import {settings} from './singletons/settings'
 
 // Documents
+import {gear} from './documents/gear'
 import {page} from './documents/page'
 import {post} from './documents/post'
 
 // Objects - Grids
 import {postsGridContainer} from './objects/grids/postsGrid'
+import {photoGridContainer} from './objects/grids/photoGrid'
 
 // Objects - Helpers
 import {seo} from './objects/helpers/seo'
@@ -24,6 +26,7 @@ import {heroBanner} from './objects/pageElements/heroBanner'
 import {heroTwoPanel} from './objects/pageElements/heroTwoPanel'
 import {icon} from './objects/pageElements/icon'
 import {mainImage} from './objects/pageElements/mainImage'
+import {photoItem} from './objects/pageElements/photoItem'
 
 // Objects - Portable Text
 import {mainPortableText} from './objects/portableText/mainPortableText'
@@ -46,8 +49,10 @@ export const schemaTypes = [
   // Documents
   page,
   post,
+  gear,
   // Objects - Grids
   postsGridContainer,
+  photoGridContainer,
   // Objects - Helpers
   seo,
   // Objects - Navigation Components
@@ -60,6 +65,7 @@ export const schemaTypes = [
   heroTwoPanel,
   icon,
   mainImage,
+  photoItem,
   // Objects - Portable Text
   mainPortableText,
   simplePortableText,

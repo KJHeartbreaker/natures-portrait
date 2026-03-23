@@ -87,6 +87,7 @@ export const home = defineType({
         defineArrayMember({type: 'singleColumnContentBlock'}),
         defineArrayMember({type: 'rowContainer'}),
         defineArrayMember({type: 'postsGridContainer'}),
+        defineArrayMember({type: 'photoGridContainer'}),
       ],
     }),
   ],

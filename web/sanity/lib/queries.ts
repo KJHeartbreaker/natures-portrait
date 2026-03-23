@@ -1,5 +1,5 @@
 import {defineQuery} from 'next-sanity'
-import {ctaProjection, imageProjection, portableTextProjection} from '@/sanity/lib/query-fragments'
+import {ctaProjection, gearProjection, imageProjection, portableTextProjection} from '@/sanity/lib/query-fragments'
 
 export const settingsQuery = defineQuery(`
   *[_type == "settings"][0]{
@@ -169,6 +169,34 @@ export const homeQuery = defineQuery(`
             _updatedAt
           }
         }[_type != "reference" || @->._id != null]
+      },
+      _type == "photoGridContainer" => {
+        title,
+        backgroundColor,
+        columns,
+        gap,
+        showCaptions,
+        images[]{
+          _key,
+          title,
+          location,
+          description{
+            ${portableTextProjection}
+          },
+          dateCaptured,
+          cameraText,
+          lensText,
+          cameraRef->{
+            ${gearProjection}
+          },
+          lensRef->{
+            ${gearProjection}
+          },
+          image{
+            ${imageProjection}
+          }
+        },
+        disabled
       }
     }
   }
@@ -301,6 +329,34 @@ export const getPageQuery = defineQuery(`
             _updatedAt
           }
         }[_type != "reference" || @->._id != null]
+      },
+      _type == "photoGridContainer" => {
+        title,
+        backgroundColor,
+        columns,
+        gap,
+        showCaptions,
+        images[]{
+          _key,
+          title,
+          location,
+          description{
+            ${portableTextProjection}
+          },
+          dateCaptured,
+          cameraText,
+          lensText,
+          cameraRef->{
+            ${gearProjection}
+          },
+          lensRef->{
+            ${gearProjection}
+          },
+          image{
+            ${imageProjection}
+          }
+        },
+        disabled
       }
     }
   }

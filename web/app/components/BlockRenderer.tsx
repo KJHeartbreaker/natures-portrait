@@ -5,6 +5,7 @@ import type {PortableTextBlock} from 'next-sanity'
 import Cta from '@/app/components/Cta'
 import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
+import PhotoGrid from '@/app/components/PhotoGrid'
 import UnderConstruction from '@/app/components/UnderConstruction'
 import {dataAttr} from '@/sanity/lib/utils'
 import type {ExtractPageSectionType, PageSection} from '@/sanity/lib/types'
@@ -253,6 +254,23 @@ function PostsGridContainerSection({block}: {block: ExtractPageSectionType<'post
   )
 }
 
+function PhotoGridContainerSection({block}: {block: ExtractPageSectionType<'photoGridContainer'>}) {
+  if (block.disabled) return null
+  return (
+    <UnderConstruction
+      name="PhotoGridContainer"
+      note={block.title ? `“${block.title}”` : undefined}
+      style={
+        block.backgroundColor
+          ? {backgroundColor: block.backgroundColor, paddingTop: '1.5rem', paddingBottom: '1.5rem'}
+          : undefined
+      }
+    >
+      <PhotoGrid images={block.images || []} columns={block.columns} gap={block.gap} showCaptions={block.showCaptions} />
+    </UnderConstruction>
+  )
+}
+
 function UnknownSection({block}: {block: PageSection}) {
   return (
     <UnderConstruction name={block._type} note="No renderer yet">
@@ -286,6 +304,8 @@ export default function BlockRenderer({block, pageId, pageType}: BlockProps) {
             return <RowContainerSection block={block} />
           case 'postsGridContainer':
             return <PostsGridContainerSection block={block} />
+          case 'photoGridContainer':
+            return <PhotoGridContainerSection block={block} />
           default:
             return <UnknownSection block={block} />
         }

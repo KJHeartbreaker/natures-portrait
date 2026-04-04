@@ -11,8 +11,8 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "dev": "CHOKIDAR_USEPOLLING=true sanity dev",
-    "sanity:schema": "sanity schema extract --enforce-required-fields --path ../.sanity",
-    "sanity:typegen": "pnpm sanity:schema && sanity typegen generate",
+    "sanity:schema": "sanity schema extract --enforce-required-fields --path ./schema.json",
+    "sanity:typegen": "pnpm sanity:schema",
     "start": "sanity start",
     "type-check": "tsc --noEmit"
   },

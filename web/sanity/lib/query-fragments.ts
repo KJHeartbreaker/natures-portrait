@@ -106,3 +106,14 @@ export const portableTextProjection = `
     ${portableTextMarkDefsProjection}
   }
 `
+
+export const gearProjection = `
+  _id,
+  _type,
+  kind,
+  brand,
+  model,
+  nickname,
+  notes,
+  link
+`

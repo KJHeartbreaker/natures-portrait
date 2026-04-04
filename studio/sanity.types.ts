@@ -163,6 +163,30 @@ export type MainPortableText = {
   }>;
 };
 
+export type GearReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "gear";
+};
+
+export type PhotoItem = {
+  _type: "photoItem";
+  image: MainImage;
+  title?: string;
+  location?: string;
+  description?: SimplePortableText;
+  dateCaptured?: string;
+  cameraText?: string;
+  lensText?: string;
+  cameraRef?: GearReference;
+  lensRef?: GearReference;
+  focalLength?: number;
+  aperture?: string;
+  shutterSpeed?: string;
+  iso?: number;
+};
+
 export type MainImage = {
   _type: "mainImage";
   asset?: SanityImageAssetReference;
@@ -282,12 +306,41 @@ export type Seo = {
   };
 };
 
+export type PhotoGridContainer = {
+  _type: "photoGridContainer";
+  title?: string;
+  backgroundColor?: "#060D0C" | "#3E5954" | "#758886" | "#C6C2bb" | "#F0EDE5";
+  columns?: 2 | 3 | 4;
+  gap?: 0 | 6 | 12 | 18 | 24;
+  showCaptions?: boolean;
+  images?: Array<{
+    _key: string;
+  } & PhotoItem | {
+    _key: string;
+  } & MainImage>;
+  disabled?: boolean;
+};
+
 export type PostsGridContainer = {
   _type: "postsGridContainer";
   backgroundColor?: "#060D0C" | "#3E5954" | "#758886" | "#C6C2bb" | "#F0EDE5";
   posts?: Array<{
     _key: string;
   } & PostReference>;
+};
+
+export type Gear = {
+  _id: string;
+  _type: "gear";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  kind: "camera" | "lens" | "accessory";
+  brand: string;
+  model: string;
+  nickname?: string;
+  notes?: string;
+  link?: string;
 };
 
 export type Home = {
@@ -326,7 +379,9 @@ export type Home = {
     _key: string;
   } & RowContainer | {
     _key: string;
-  } & PostsGridContainer>;
+  } & PostsGridContainer | {
+    _key: string;
+  } & PhotoGridContainer>;
 };
 
 export type Settings = {
@@ -369,7 +424,9 @@ export type Settings = {
       _key: string;
     } & SingleColumnContentBlock | {
       _key: string;
-    } & PostsGridContainer>;
+    } & PostsGridContainer | {
+      _key: string;
+    } & PhotoGridContainer>;
     _type: "blogLandingPage";
     _key: string;
   }>;
@@ -417,7 +474,9 @@ export type Page = {
     _key: string;
   } & RowContainer | {
     _key: string;
-  } & PostsGridContainer>;
+  } & PostsGridContainer | {
+    _key: string;
+  } & PhotoGridContainer>;
 };
 
 export type Post = {
@@ -484,7 +543,9 @@ export type BlogLandingPage = {
     _key: string;
   } & SingleColumnContentBlock | {
     _key: string;
-  } & PostsGridContainer>;
+  } & PostsGridContainer | {
+    _key: string;
+  } & PhotoGridContainer>;
 };
 
 export type Slug = {
@@ -722,5 +783,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = ContentBlock | SingleColumnContentBlock | RowContainer | ContactInfo | PageReference | PostReference | BlogLandingPageReference | SimplePortableText | SanityImageAssetReference | MainPortableText | MainImage | Icon | SanityImageCrop | SanityImageHotspot | HeroTwoPanel | HeroBanner | SanityFileAssetReference | Cta | Carousel | NavDropdownCTA | NavCTA | Seo | PostsGridContainer | Home | Settings | Page | Post | BlogLandingPage | Slug | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | AssistInstructionContextReference | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = ContentBlock | SingleColumnContentBlock | RowContainer | ContactInfo | PageReference | PostReference | BlogLandingPageReference | SimplePortableText | SanityImageAssetReference | MainPortableText | GearReference | PhotoItem | MainImage | Icon | SanityImageCrop | SanityImageHotspot | HeroTwoPanel | HeroBanner | SanityFileAssetReference | Cta | Carousel | NavDropdownCTA | NavCTA | Seo | PhotoGridContainer | PostsGridContainer | Gear | Home | Settings | Page | Post | BlogLandingPage | Slug | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | AssistInstructionContextReference | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 

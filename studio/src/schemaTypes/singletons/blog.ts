@@ -103,6 +103,7 @@ export const blogLandingPage = defineType({
         defineArrayMember({type: 'heroTwoPanel'}),
         defineArrayMember({type: 'singleColumnContentBlock'}),
         defineArrayMember({type: 'postsGridContainer'}),
+        defineArrayMember({type: 'photoGridContainer'}),
       ],
     }),
   ],

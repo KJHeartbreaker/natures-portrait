@@ -1,6 +1,7 @@
 import {BsSignpostSplit} from 'react-icons/bs'
 import {GiCobweb, GiSettingsKnobs} from 'react-icons/gi'
 import {GoHome, GoMegaphone} from 'react-icons/go'
+import {GiPhotoCamera} from 'react-icons/gi'
 import type {StructureBuilder, StructureResolver} from 'sanity/structure'
 
 /**
@@ -37,4 +38,9 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
         .title('Posts')
         .icon(BsSignpostSplit)
         .child(S.documentTypeList('post').title('Posts')),
+      // Gear
+      S.listItem()
+        .title('Gear')
+        .icon(GiPhotoCamera)
+        .child(S.documentTypeList('gear').title('Gear')),
     ])

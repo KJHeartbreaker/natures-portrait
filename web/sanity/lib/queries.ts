@@ -1,6 +1,11 @@
 import {defineQuery} from 'next-sanity'
 import {ctaProjection, gearProjection, imageProjection, portableTextProjection} from '@/sanity/lib/query-fragments'
 
+// TODO(decision): `photoGridContainer.images` currently allows BOTH `photoItem` and raw `mainImage`.
+// Because that creates two possible shapes, the Photo Grid projections in `homeQuery` and `getPageQuery`
+// normalize with: `"image": coalesce(image, @){ ${imageProjection} }`.
+// If we later restrict Studio to ONLY `photoItem`, update both projections to use `image{ ${imageProjection} }`
+// and remove the `coalesce(image, @)` normalization.
 export const settingsQuery = defineQuery(`
   *[_type == "settings"][0]{
     _id,
@@ -178,6 +183,7 @@ export const homeQuery = defineQuery(`
         showCaptions,
         images[]{
           _key,
+          _type,
           title,
           location,
           description{
@@ -192,9 +198,9 @@ export const homeQuery = defineQuery(`
           lensRef->{
             ${gearProjection}
           },
-          image{
+          "image": coalesce(image, @){
             ${imageProjection}
-          }
+          },
         },
         disabled
       }
@@ -338,6 +344,7 @@ export const getPageQuery = defineQuery(`
         showCaptions,
         images[]{
           _key,
+          _type,
           title,
           location,
           description{
@@ -352,9 +359,9 @@ export const getPageQuery = defineQuery(`
           lensRef->{
             ${gearProjection}
           },
-          image{
+          "image": coalesce(image, @){
             ${imageProjection}
-          }
+          },
         },
         disabled
       }

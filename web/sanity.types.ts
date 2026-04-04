@@ -334,9 +334,12 @@ export type PhotoGridContainer = {
   gap?: 0 | 6 | 12 | 18 | 24
   showCaptions?: boolean
   images?: Array<
-    {
-      _key: string
-    } & PhotoItem
+    | ({
+        _key: string
+      } & PhotoItem)
+    | ({
+        _key: string
+      } & MainImage)
   >
   disabled?: boolean
 }
@@ -1457,108 +1460,122 @@ export type HomeQueryResult = {
         columns: 2 | 3 | 4 | null
         gap: 0 | 12 | 18 | 24 | 6 | null
         showCaptions: boolean | null
-        images: Array<{
-          _key: string
-          title: string | null
-          location: string | null
-          description: {
-            portableTextBlock: Array<{
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
-              style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
-              listItem?: 'bullet' | 'number'
-              markDefs: Array<
-                | {
-                    _key: string
-                    _type: 'internalLink'
-                    item:
-                      | {
-                          _id: string
-                          _type: 'blogLandingPage'
-                          slug: string
-                          title: string
-                        }
-                      | {
-                          _id: string
-                          _type: 'page'
-                          slug: string
-                          title: string
-                        }
-                      | {
-                          _id: string
-                          _type: 'post'
-                          slug: string
-                          title: string
-                        }
-                      | null
-                  }
-                | {
-                    _key: string
-                    _type: 'link'
-                    href: string | null
-                    blank: boolean | null
-                  }
-              > | null
-              level?: number
-              _type: 'block'
+        images: Array<
+          | {
               _key: string
-            }> | null
-          } | null
-          dateCaptured: string | null
-          cameraText: string | null
-          lensText: string | null
-          cameraRef: {
-            _id: string
-            _type: 'gear'
-            kind: 'accessory' | 'camera' | 'lens'
-            brand: string
-            model: string
-            nickname: string | null
-            notes: string | null
-            link: string | null
-          } | null
-          lensRef: {
-            _id: string
-            _type: 'gear'
-            kind: 'accessory' | 'camera' | 'lens'
-            brand: string
-            model: string
-            nickname: string | null
-            notes: string | null
-            link: string | null
-          } | null
-          image: {
-            _type: 'mainImage'
-            alt: string | null
-            width: number | null
-            height: number | null
-            crop: SanityImageCrop | null
-            hotspot: SanityImageHotspot | null
-            asset: {
-              _id: string
-              _type: 'sanity.imageAsset'
-              url: string
-              metadata: {
-                dimensions: {
-                  width: number
-                  height: number
-                  aspectRatio: number
-                } | null
-                lqip: string | null
-                blurhash: null
-                palette: {
-                  dominant: {
-                    background: string | null
+              title: null
+              location: null
+              description: null
+              dateCaptured: null
+              cameraText: null
+              lensText: null
+              cameraRef: null
+              lensRef: null
+              image: null
+            }
+          | {
+              _key: string
+              title: string | null
+              location: string | null
+              description: {
+                portableTextBlock: Array<{
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs: Array<
+                    | {
+                        _key: string
+                        _type: 'internalLink'
+                        item:
+                          | {
+                              _id: string
+                              _type: 'blogLandingPage'
+                              slug: string
+                              title: string
+                            }
+                          | {
+                              _id: string
+                              _type: 'page'
+                              slug: string
+                              title: string
+                            }
+                          | {
+                              _id: string
+                              _type: 'post'
+                              slug: string
+                              title: string
+                            }
+                          | null
+                      }
+                    | {
+                        _key: string
+                        _type: 'link'
+                        href: string | null
+                        blank: boolean | null
+                      }
+                  > | null
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }> | null
+              } | null
+              dateCaptured: string | null
+              cameraText: string | null
+              lensText: string | null
+              cameraRef: {
+                _id: string
+                _type: 'gear'
+                kind: 'accessory' | 'camera' | 'lens'
+                brand: string
+                model: string
+                nickname: string | null
+                notes: string | null
+                link: string | null
+              } | null
+              lensRef: {
+                _id: string
+                _type: 'gear'
+                kind: 'accessory' | 'camera' | 'lens'
+                brand: string
+                model: string
+                nickname: string | null
+                notes: string | null
+                link: string | null
+              } | null
+              image: {
+                _type: 'mainImage'
+                alt: string | null
+                width: number | null
+                height: number | null
+                crop: SanityImageCrop | null
+                hotspot: SanityImageHotspot | null
+                asset: {
+                  _id: string
+                  _type: 'sanity.imageAsset'
+                  url: string
+                  metadata: {
+                    dimensions: {
+                      width: number
+                      height: number
+                      aspectRatio: number
+                    } | null
+                    lqip: string | null
+                    blurhash: null
+                    palette: {
+                      dominant: {
+                        background: string | null
+                      } | null
+                    } | null
                   } | null
                 } | null
-              } | null
-            } | null
-          }
-        }> | null
+              }
+            }
+        > | null
         disabled: boolean | null
       }
     | {
@@ -2367,108 +2384,122 @@ export type GetPageQueryResult =
             columns: 2 | 3 | 4 | null
             gap: 0 | 12 | 18 | 24 | 6 | null
             showCaptions: boolean | null
-            images: Array<{
-              _key: string
-              title: string | null
-              location: string | null
-              description: {
-                portableTextBlock: Array<{
-                  children?: Array<{
-                    marks?: Array<string>
-                    text?: string
-                    _type: 'span'
-                    _key: string
-                  }>
-                  style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
-                  listItem?: 'bullet' | 'number'
-                  markDefs: Array<
-                    | {
-                        _key: string
-                        _type: 'internalLink'
-                        item:
-                          | {
-                              _id: string
-                              _type: 'blogLandingPage'
-                              slug: string
-                              title: string
-                            }
-                          | {
-                              _id: string
-                              _type: 'page'
-                              slug: string
-                              title: string
-                            }
-                          | {
-                              _id: string
-                              _type: 'post'
-                              slug: string
-                              title: string
-                            }
-                          | null
-                      }
-                    | {
-                        _key: string
-                        _type: 'link'
-                        href: string | null
-                        blank: boolean | null
-                      }
-                  > | null
-                  level?: number
-                  _type: 'block'
+            images: Array<
+              | {
                   _key: string
-                }> | null
-              } | null
-              dateCaptured: string | null
-              cameraText: string | null
-              lensText: string | null
-              cameraRef: {
-                _id: string
-                _type: 'gear'
-                kind: 'accessory' | 'camera' | 'lens'
-                brand: string
-                model: string
-                nickname: string | null
-                notes: string | null
-                link: string | null
-              } | null
-              lensRef: {
-                _id: string
-                _type: 'gear'
-                kind: 'accessory' | 'camera' | 'lens'
-                brand: string
-                model: string
-                nickname: string | null
-                notes: string | null
-                link: string | null
-              } | null
-              image: {
-                _type: 'mainImage'
-                alt: string | null
-                width: number | null
-                height: number | null
-                crop: SanityImageCrop | null
-                hotspot: SanityImageHotspot | null
-                asset: {
-                  _id: string
-                  _type: 'sanity.imageAsset'
-                  url: string
-                  metadata: {
-                    dimensions: {
-                      width: number
-                      height: number
-                      aspectRatio: number
-                    } | null
-                    lqip: string | null
-                    blurhash: null
-                    palette: {
-                      dominant: {
-                        background: string | null
+                  title: null
+                  location: null
+                  description: null
+                  dateCaptured: null
+                  cameraText: null
+                  lensText: null
+                  cameraRef: null
+                  lensRef: null
+                  image: null
+                }
+              | {
+                  _key: string
+                  title: string | null
+                  location: string | null
+                  description: {
+                    portableTextBlock: Array<{
+                      children?: Array<{
+                        marks?: Array<string>
+                        text?: string
+                        _type: 'span'
+                        _key: string
+                      }>
+                      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+                      listItem?: 'bullet' | 'number'
+                      markDefs: Array<
+                        | {
+                            _key: string
+                            _type: 'internalLink'
+                            item:
+                              | {
+                                  _id: string
+                                  _type: 'blogLandingPage'
+                                  slug: string
+                                  title: string
+                                }
+                              | {
+                                  _id: string
+                                  _type: 'page'
+                                  slug: string
+                                  title: string
+                                }
+                              | {
+                                  _id: string
+                                  _type: 'post'
+                                  slug: string
+                                  title: string
+                                }
+                              | null
+                          }
+                        | {
+                            _key: string
+                            _type: 'link'
+                            href: string | null
+                            blank: boolean | null
+                          }
+                      > | null
+                      level?: number
+                      _type: 'block'
+                      _key: string
+                    }> | null
+                  } | null
+                  dateCaptured: string | null
+                  cameraText: string | null
+                  lensText: string | null
+                  cameraRef: {
+                    _id: string
+                    _type: 'gear'
+                    kind: 'accessory' | 'camera' | 'lens'
+                    brand: string
+                    model: string
+                    nickname: string | null
+                    notes: string | null
+                    link: string | null
+                  } | null
+                  lensRef: {
+                    _id: string
+                    _type: 'gear'
+                    kind: 'accessory' | 'camera' | 'lens'
+                    brand: string
+                    model: string
+                    nickname: string | null
+                    notes: string | null
+                    link: string | null
+                  } | null
+                  image: {
+                    _type: 'mainImage'
+                    alt: string | null
+                    width: number | null
+                    height: number | null
+                    crop: SanityImageCrop | null
+                    hotspot: SanityImageHotspot | null
+                    asset: {
+                      _id: string
+                      _type: 'sanity.imageAsset'
+                      url: string
+                      metadata: {
+                        dimensions: {
+                          width: number
+                          height: number
+                          aspectRatio: number
+                        } | null
+                        lqip: string | null
+                        blurhash: null
+                        palette: {
+                          dominant: {
+                            background: string | null
+                          } | null
+                        } | null
                       } | null
                     } | null
-                  } | null
-                } | null
-              }
-            }> | null
+                  }
+                }
+            > | null
             disabled: boolean | null
           }
         | {
@@ -3001,108 +3032,122 @@ export type GetPageQueryResult =
             columns: 2 | 3 | 4 | null
             gap: 0 | 12 | 18 | 24 | 6 | null
             showCaptions: boolean | null
-            images: Array<{
-              _key: string
-              title: string | null
-              location: string | null
-              description: {
-                portableTextBlock: Array<{
-                  children?: Array<{
-                    marks?: Array<string>
-                    text?: string
-                    _type: 'span'
-                    _key: string
-                  }>
-                  style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
-                  listItem?: 'bullet' | 'number'
-                  markDefs: Array<
-                    | {
-                        _key: string
-                        _type: 'internalLink'
-                        item:
-                          | {
-                              _id: string
-                              _type: 'blogLandingPage'
-                              slug: string
-                              title: string
-                            }
-                          | {
-                              _id: string
-                              _type: 'page'
-                              slug: string
-                              title: string
-                            }
-                          | {
-                              _id: string
-                              _type: 'post'
-                              slug: string
-                              title: string
-                            }
-                          | null
-                      }
-                    | {
-                        _key: string
-                        _type: 'link'
-                        href: string | null
-                        blank: boolean | null
-                      }
-                  > | null
-                  level?: number
-                  _type: 'block'
+            images: Array<
+              | {
                   _key: string
-                }> | null
-              } | null
-              dateCaptured: string | null
-              cameraText: string | null
-              lensText: string | null
-              cameraRef: {
-                _id: string
-                _type: 'gear'
-                kind: 'accessory' | 'camera' | 'lens'
-                brand: string
-                model: string
-                nickname: string | null
-                notes: string | null
-                link: string | null
-              } | null
-              lensRef: {
-                _id: string
-                _type: 'gear'
-                kind: 'accessory' | 'camera' | 'lens'
-                brand: string
-                model: string
-                nickname: string | null
-                notes: string | null
-                link: string | null
-              } | null
-              image: {
-                _type: 'mainImage'
-                alt: string | null
-                width: number | null
-                height: number | null
-                crop: SanityImageCrop | null
-                hotspot: SanityImageHotspot | null
-                asset: {
-                  _id: string
-                  _type: 'sanity.imageAsset'
-                  url: string
-                  metadata: {
-                    dimensions: {
-                      width: number
-                      height: number
-                      aspectRatio: number
-                    } | null
-                    lqip: string | null
-                    blurhash: null
-                    palette: {
-                      dominant: {
-                        background: string | null
+                  title: null
+                  location: null
+                  description: null
+                  dateCaptured: null
+                  cameraText: null
+                  lensText: null
+                  cameraRef: null
+                  lensRef: null
+                  image: null
+                }
+              | {
+                  _key: string
+                  title: string | null
+                  location: string | null
+                  description: {
+                    portableTextBlock: Array<{
+                      children?: Array<{
+                        marks?: Array<string>
+                        text?: string
+                        _type: 'span'
+                        _key: string
+                      }>
+                      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+                      listItem?: 'bullet' | 'number'
+                      markDefs: Array<
+                        | {
+                            _key: string
+                            _type: 'internalLink'
+                            item:
+                              | {
+                                  _id: string
+                                  _type: 'blogLandingPage'
+                                  slug: string
+                                  title: string
+                                }
+                              | {
+                                  _id: string
+                                  _type: 'page'
+                                  slug: string
+                                  title: string
+                                }
+                              | {
+                                  _id: string
+                                  _type: 'post'
+                                  slug: string
+                                  title: string
+                                }
+                              | null
+                          }
+                        | {
+                            _key: string
+                            _type: 'link'
+                            href: string | null
+                            blank: boolean | null
+                          }
+                      > | null
+                      level?: number
+                      _type: 'block'
+                      _key: string
+                    }> | null
+                  } | null
+                  dateCaptured: string | null
+                  cameraText: string | null
+                  lensText: string | null
+                  cameraRef: {
+                    _id: string
+                    _type: 'gear'
+                    kind: 'accessory' | 'camera' | 'lens'
+                    brand: string
+                    model: string
+                    nickname: string | null
+                    notes: string | null
+                    link: string | null
+                  } | null
+                  lensRef: {
+                    _id: string
+                    _type: 'gear'
+                    kind: 'accessory' | 'camera' | 'lens'
+                    brand: string
+                    model: string
+                    nickname: string | null
+                    notes: string | null
+                    link: string | null
+                  } | null
+                  image: {
+                    _type: 'mainImage'
+                    alt: string | null
+                    width: number | null
+                    height: number | null
+                    crop: SanityImageCrop | null
+                    hotspot: SanityImageHotspot | null
+                    asset: {
+                      _id: string
+                      _type: 'sanity.imageAsset'
+                      url: string
+                      metadata: {
+                        dimensions: {
+                          width: number
+                          height: number
+                          aspectRatio: number
+                        } | null
+                        lqip: string | null
+                        blurhash: null
+                        palette: {
+                          dominant: {
+                            background: string | null
+                          } | null
+                        } | null
                       } | null
                     } | null
-                  } | null
-                } | null
-              }
-            }> | null
+                  }
+                }
+            > | null
             disabled: boolean | null
           }
         | {

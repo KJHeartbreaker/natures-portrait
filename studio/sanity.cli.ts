@@ -23,6 +23,9 @@ const dataset = assertValue(
   'Missing environment variable: SANITY_STUDIO_DATASET',
 )
 
+const autoUpdates =
+  process.env.SANITY_STUDIO_AUTO_UPDATES === 'true' || process.env.SANITY_STUDIO_AUTO_UPDATES === '1'
+
 export default defineCliConfig({
   api: {
     projectId,
@@ -30,7 +33,7 @@ export default defineCliConfig({
   },
   studioHost: process.env.SANITY_STUDIO_STUDIO_HOST || '', // Visit https://www.sanity.io/docs/studio/environment-variables to learn more about using environment variables for local & production.
   deployment: {
-    autoUpdates: true,
+    autoUpdates,
     appId: 'lzlolu8mjqb0n57u8bfr1ft0',
   },
   server: {

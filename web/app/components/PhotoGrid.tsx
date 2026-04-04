@@ -1,9 +1,9 @@
 'use client'
 
-import {useCallback, useEffect, useMemo, useState} from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import Image from '@/app/components/SanityImage'
-import type {SanityImageCrop, SanityImageHotspot} from '@/sanity.types'
+import type { SanityImageCrop, SanityImageHotspot } from '@/sanity.types'
 import PortableText from '@/app/components/PortableText'
 
 type PhotoImageLike = {
@@ -30,7 +30,7 @@ type PhotoItemLike = {
   _key?: string
   title?: string | null
   location?: string | null
-  description?: {portableTextBlock?: any[] | null} | null
+  description?: { portableTextBlock?: any[] | null } | null
   dateCaptured?: string | null
   cameraText?: string | null
   lensText?: string | null
@@ -175,6 +175,11 @@ export default function PhotoGrid({
   const activeCamera = gearLabel(active?.cameraRef) || active?.cameraText || null
   const activeLens = gearLabel(active?.lensRef) || active?.lensText || null
   const hasInfo = Boolean(activeTitle || activeLocation || active?.description?.portableTextBlock?.length || activeCamera || activeLens)
+  const bottomReservePx = (safeItems.length > 1 ? THUMB_BAR_HEIGHT_PX : 0) + (hasInfo ? PEEK_BAR_HEIGHT_PX : 0)
+
+  const toggleDrawer = useCallback(() => {
+    setDrawer((s) => (s === 'open' ? 'peek' : 'open'))
+  }, [])
 
   return (
     <>
@@ -195,7 +200,7 @@ export default function PhotoGrid({
                 type="button"
                 onClick={() => open(i)}
                 className="group relative block w-full overflow-hidden rounded-sm"
-                style={{aspectRatio: '1 / 1'}}
+                style={{ aspectRatio: '1 / 1' }}
                 aria-label={img?.alt ? `Open image: ${img.alt}` : 'Open image'}
               >
                 <Image
@@ -207,7 +212,7 @@ export default function PhotoGrid({
                   crop={img?.crop}
                   hotspot={img?.hotspot}
                   className="w-full h-full object-cover"
-                  style={{width: '100%', height: '100%', objectFit: 'cover'}}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-black/10" />
               </button>
@@ -241,12 +246,12 @@ export default function PhotoGrid({
             </div>
 
             <div className="relative rounded-sm overflow-hidden bg-black/30">
-              {/* Stage: image + separate peek bar + separate thumb nav. */}
-              <div className="relative" style={{height: '80vh'}}>
+              {/* Stage: image + bottom sheet (peek/open) + separate thumb nav. */}
+              <div className="relative" style={{ height: '80vh' }}>
                 <div
                   className="absolute left-0 right-0 top-0"
                   style={{
-                    bottom: `${(safeItems.length > 1 ? THUMB_BAR_HEIGHT_PX : 0) + (hasInfo && drawer === 'peek' ? PEEK_BAR_HEIGHT_PX : 0)}px`,
+                    bottom: `${bottomReservePx}px`,
                   }}
                 >
                   {activeId ? (
@@ -259,7 +264,7 @@ export default function PhotoGrid({
                       crop={activeImage?.crop}
                       hotspot={activeImage?.hotspot}
                       className="w-full h-full"
-                      style={{width: '100%', height: '100%', objectFit: 'contain'}}
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                     />
                   ) : (
                     <div className="h-full flex items-center justify-center text-white/70 font-mono text-sm">
@@ -268,45 +273,18 @@ export default function PhotoGrid({
                   )}
                 </div>
 
-                {/* Peek bar (state 2): outside the drawer and always below the image. */}
-                {hasInfo && drawer === 'peek' ? (
-                  <div
-                    className="absolute left-0 right-0 z-40 bg-black/55 backdrop-blur-md border-t border-white/10 px-4 py-3 text-white"
-                    style={{
-                      height: `${PEEK_BAR_HEIGHT_PX}px`,
-                      bottom: `${safeItems.length > 1 ? THUMB_BAR_HEIGHT_PX : 0}px`,
-                    }}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => setDrawer('open')}
-                      className="w-full text-left"
-                      aria-label="Show details"
-                    >
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="min-w-0">
-                          {activeTitle ? <div className="text-sm font-semibold truncate">{activeTitle}</div> : null}
-                          {activeLocation ? <div className="text-xs text-white/75 truncate">{activeLocation}</div> : null}
-                        </div>
-                        <div className="font-mono text-[11px] text-white/70 shrink-0">{active?.dateCaptured || ''}</div>
-                      </div>
-                      <div className="mt-2 flex items-center gap-3">
-                        <span className="h-1 w-10 rounded bg-white/40" />
-                        <span className="font-mono text-xs text-white/80 underline underline-offset-4">Show details</span>
-                      </div>
-                    </button>
-                  </div>
-                ) : null}
-
-                {/* Drawer (state 3): overlays image only, and is auto-height based on content. */}
+                {/* Bottom sheet: never fully closes; title+chevron always peek. */}
                 {hasInfo ? (
                   <div
                     className="absolute left-0 right-0 z-40"
                     style={{
                       bottom: `${safeItems.length > 1 ? THUMB_BAR_HEIGHT_PX : 0}px`,
-                      transform: drawer === 'open' ? 'translateY(0)' : 'translateY(100%)',
+                      transform:
+                        drawer === 'open'
+                          ? 'translateY(0)'
+                          : `translateY(calc(100% - ${PEEK_BAR_HEIGHT_PX}px))`,
                       transition: 'transform 220ms ease',
-                      pointerEvents: drawer === 'open' ? 'auto' : 'none',
+                      pointerEvents: 'auto',
                     }}
                   >
                     <div
@@ -315,58 +293,74 @@ export default function PhotoGrid({
                         maxHeight: `calc(80vh - ${(safeItems.length > 1 ? THUMB_BAR_HEIGHT_PX : 0)}px)`,
                       }}
                     >
+                      {/* Header (peek area) */}
                       <button
                         type="button"
-                        onClick={() => setDrawer('peek')}
-                        className="w-full flex items-center justify-center gap-2 py-3"
-                        aria-label="Hide details"
+                        onClick={toggleDrawer}
+                        className="w-full px-4 py-3 text-left text-white"
+                        style={{ minHeight: `${PEEK_BAR_HEIGHT_PX}px` }}
+                        aria-label={drawer === 'open' ? 'Hide details' : 'Show details'}
                       >
-                        <span className="h-1 w-10 rounded bg-white/40" />
-                      </button>
-
-                      <div className="px-4 pb-4 space-y-3 text-white overflow-auto">
-                        <div className="flex flex-wrap items-baseline justify-between gap-3">
-                          <div className="min-w-0 space-y-1">
-                            {activeTitle ? <div className="text-base font-semibold truncate">{activeTitle}</div> : null}
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0">
+                            {activeTitle ? <div className="text-sm font-semibold truncate">{activeTitle}</div> : null}
                             {activeLocation ? <div className="text-xs text-white/75 truncate">{activeLocation}</div> : null}
                           </div>
                           <div className="font-mono text-[11px] text-white/70 shrink-0">{active?.dateCaptured || ''}</div>
                         </div>
+                        <div className="mt-2 flex items-center justify-center">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            {drawer === 'open' ? (
+                              <path
+                                d="M6 9l6 6 6-6"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            ) : (
+                              <path
+                                d="M6 15l6-6 6 6"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            )}
+                          </svg>
+                        </div>
+                      </button>
 
-                        {active?.description?.portableTextBlock?.length ? (
-                          <div className="text-white/90">
-                            <PortableText
-                              className="prose prose-invert prose-p:leading-relaxed prose-a:text-white"
-                              value={active.description.portableTextBlock as any[]}
-                            />
-                          </div>
-                        ) : null}
+                      {/* Content (only when open) */}
+                      {drawer === 'open' ? (
+                        <div className="px-4 pb-4 space-y-3 text-white overflow-auto">
+                          {active?.description?.portableTextBlock?.length ? (
+                            <div className="text-white/90">
+                              <PortableText
+                                className="prose prose-invert prose-p:leading-relaxed prose-a:text-white"
+                                value={active.description.portableTextBlock as any[]}
+                              />
+                            </div>
+                          ) : null}
 
-                        {activeCamera || activeLens ? (
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                            {activeCamera ? (
-                              <div>
-                                <div className="font-mono text-xs text-white/70">Camera</div>
-                                <div className="text-white/90">{activeCamera}</div>
-                              </div>
-                            ) : null}
-                            {activeLens ? (
-                              <div>
-                                <div className="font-mono text-xs text-white/70">Lens</div>
-                                <div className="text-white/90">{activeLens}</div>
-                              </div>
-                            ) : null}
-                          </div>
-                        ) : null}
-
-                        <button
-                          type="button"
-                          onClick={() => setDrawer('peek')}
-                          className="font-mono text-xs text-white/80 hover:text-white underline underline-offset-4"
-                        >
-                          Hide details
-                        </button>
-                      </div>
+                          {activeCamera || activeLens ? (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                              {activeCamera ? (
+                                <div>
+                                  <div className="font-mono text-xs text-white/70">Camera</div>
+                                  <div className="text-white/90">{activeCamera}</div>
+                                </div>
+                              ) : null}
+                              {activeLens ? (
+                                <div>
+                                  <div className="font-mono text-xs text-white/70">Lens</div>
+                                  <div className="text-white/90">{activeLens}</div>
+                                </div>
+                              ) : null}
+                            </div>
+                          ) : null}
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 ) : null}
@@ -374,8 +368,8 @@ export default function PhotoGrid({
                 {/* Thumbnail navigation bar (thumbnails only, always visible, totally separate). */}
                 {safeItems.length > 1 ? (
                   <div
-                    className="absolute left-0 right-0 bottom-0 z-50 bg-black/60 backdrop-blur-md border-t border-white/10 px-4 py-3"
-                    style={{height: `${THUMB_BAR_HEIGHT_PX}px`}}
+                    className="absolute left-0 right-0 bottom-0 z-50 bg-black/60 backdrop-blur-md px-4 py-3"
+                    style={{ height: `${THUMB_BAR_HEIGHT_PX}px` }}
                   >
                     <div className="flex gap-2 overflow-x-auto">
                       {safeItems.map((it, i) => {
@@ -389,7 +383,7 @@ export default function PhotoGrid({
                             type="button"
                             onClick={() => setIndex(i)}
                             className={`shrink-0 overflow-hidden rounded-sm border ${isActive ? 'border-white' : 'border-white/30'}`}
-                            style={{width: 64, height: 64}}
+                            style={{ width: 64, height: 64 }}
                             aria-label={`Go to image ${i + 1}`}
                           >
                             <Image
@@ -401,7 +395,7 @@ export default function PhotoGrid({
                               crop={im?.crop}
                               hotspot={im?.hotspot}
                               className="w-full h-full object-cover"
-                              style={{width: '100%', height: '100%', objectFit: 'cover'}}
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
                           </button>
                         )

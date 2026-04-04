@@ -47,6 +47,18 @@ pnpm dev
 
 Sign in to the Studio with the same account you used during the Vercel/Sanity setup.
 
+## Notes: schema extraction + typegen (important for Vercel builds)
+
+This repo commits a generated schema file at `studio/schema.json`. This avoids relying on `.sanity/schema.json` (which is ignored by git) and ensures Vercel can run type generation during builds.
+
+- If you change Studio schemas, regenerate the committed schema file:
+
+```shell
+pnpm --filter studio sanity:schema
+```
+
+- The Next.js build runs type generation automatically via `web`’s `prebuild` script.
+
 ## Step 5. Import sample data (optional)
 
 To get started quickly with pre-built content, run:

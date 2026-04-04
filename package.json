@@ -22,7 +22,7 @@
     "format": "prettier --cache --write .",
     "import-sample-data": "cd studio && sanity dataset import sample-data.tar.gz --replace",
     "lint": "pnpm --filter web lint",
-    "sanity:typegen": "pnpm --filter studio sanity:typegen && pnpm --filter web sanity:typegen",
+    "sanity:typegen": "pnpm --filter studio sanity:schema && pnpm --filter web sanity:typegen",
     "type-check": "pnpm -r --filter web --filter studio type-check"
   },
   "prettier": "@sanity/prettier-config",

@@ -25,5 +25,8 @@
 # Typescript
 *.tsbuildinfo
 
+# Generated types (not used by Studio runtime)
+sanity.types.ts
+
 # Dotenv and similar local-only files
 *.local

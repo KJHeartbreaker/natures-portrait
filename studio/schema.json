@@ -1646,30 +1646,18 @@
           },
           "optional": true
         },
-        "subHeadingColor": {
+        "textTone": {
           "type": "objectAttribute",
           "value": {
             "type": "union",
             "of": [
               {
                 "type": "string",
-                "value": "#060D0C"
+                "value": "light"
               },
               {
                 "type": "string",
-                "value": "#3E5954"
-              },
-              {
-                "type": "string",
-                "value": "#758886"
-              },
-              {
-                "type": "string",
-                "value": "#C6C2bb"
-              },
-              {
-                "type": "string",
-                "value": "#F0EDE5"
+                "value": "dark"
               }
             ]
           },
@@ -1682,69 +1670,11 @@
           },
           "optional": false
         },
-        "headingColor": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "#060D0C"
-              },
-              {
-                "type": "string",
-                "value": "#3E5954"
-              },
-              {
-                "type": "string",
-                "value": "#758886"
-              },
-              {
-                "type": "string",
-                "value": "#C6C2bb"
-              },
-              {
-                "type": "string",
-                "value": "#F0EDE5"
-              }
-            ]
-          },
-          "optional": true
-        },
         "copy": {
           "type": "objectAttribute",
           "value": {
             "type": "inline",
             "name": "simplePortableText"
-          },
-          "optional": true
-        },
-        "copyColor": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "#060D0C"
-              },
-              {
-                "type": "string",
-                "value": "#3E5954"
-              },
-              {
-                "type": "string",
-                "value": "#758886"
-              },
-              {
-                "type": "string",
-                "value": "#C6C2bb"
-              },
-              {
-                "type": "string",
-                "value": "#F0EDE5"
-              }
-            ]
           },
           "optional": true
         },

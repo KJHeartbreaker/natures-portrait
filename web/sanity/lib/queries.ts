@@ -87,13 +87,11 @@ export const homeQuery = defineQuery(`
       _type == "heroBanner" => {
         size,
         subheading,
-        subHeadingColor,
+        textTone,
         heading,
-        headingColor,
         copy{
           ${portableTextProjection}
         },
-        copyColor,
         image{
           ${imageProjection}
         },
@@ -248,13 +246,11 @@ export const getPageQuery = defineQuery(`
       _type == "heroBanner" => {
         size,
         subheading,
-        subHeadingColor,
+        textTone,
         heading,
-        headingColor,
         copy{
           ${portableTextProjection}
         },
-        copyColor,
         image{
           ${imageProjection}
         },

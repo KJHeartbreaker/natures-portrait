@@ -9,7 +9,7 @@
   h4,
   h5,
   h6 {
-    @apply font-medium tracking-tight;
+    @apply font-serif font-medium tracking-tight;
   }
 }
 
@@ -21,6 +21,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /*
+   * Wire next/font variables (set on <html> in layout.tsx) into Tailwind utilities.
+   * Without this, font-sans / font-serif fall back to system stacks and DevTools won’t show Open Sans / Libre Baskerville.
+   */
+  --font-sans: var(--font-open-sans), system-ui, sans-serif;
+  --font-serif: var(--font-libre-baskerville), Georgia, serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
+
   --shadow-layer: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
 
   /* Natures Portrait palette */

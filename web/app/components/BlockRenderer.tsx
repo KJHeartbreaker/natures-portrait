@@ -2,107 +2,19 @@ import React from 'react'
 
 import type {PortableTextBlock} from 'next-sanity'
 
-import Cta from '@/app/components/Cta'
 import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
 import PhotoGrid from '@/app/components/PhotoGrid'
 import UnderConstruction from '@/app/components/UnderConstruction'
+import {HeroBanner, HeroTwoPanel} from '@/app/components/hero'
+import {getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import {dataAttr} from '@/sanity/lib/utils'
 import type {ExtractPageSectionType, PageSection} from '@/sanity/lib/types'
-
-function getImageId(image: any): string | null {
-  return image?.asset?._ref || image?.asset?._id || null
-}
-
-function getImageDims(image: any): {width: number; height: number} | null {
-  const w = image?.asset?.metadata?.dimensions?.width
-  const h = image?.asset?.metadata?.dimensions?.height
-  if (typeof w === 'number' && typeof h === 'number' && w > 0 && h > 0) return {width: w, height: h}
-  return null
-}
 
 type BlockProps = {
   block: PageSection
   pageId: string
   pageType: string
-}
-
-function HeroBannerSection({block}: {block: ExtractPageSectionType<'heroBanner'>}) {
-  if (block.disabled) return null
-  const heroImageId = getImageId(block.image)
-  const heroDims = getImageDims(block.image)
-  return (
-    <UnderConstruction name="HeroBanner">
-      <div className="space-y-4">
-        {heroImageId ? (
-          <div>
-            <Image
-              id={heroImageId}
-              alt={block.image?.alt || ''}
-              className="rounded-sm w-full"
-              width={1200}
-              height={heroDims ? Math.round((1200 / heroDims.width) * heroDims.height) : 650}
-              mode="cover"
-              crop={block.image?.crop}
-              hotspot={block.image?.hotspot}
-            />
-          </div>
-        ) : null}
-        {block.subheading ? (
-          <p className="font-mono text-sm opacity-70" style={block.subHeadingColor ? {color: block.subHeadingColor} : {}}>
-            {block.subheading}
-          </p>
-        ) : null}
-        {block.heading ? (
-          <h2 className="text-2xl font-semibold" style={block.headingColor ? {color: block.headingColor} : {}}>
-            {block.heading}
-          </h2>
-        ) : null}
-        {block.copy?.portableTextBlock?.length ? (
-          <div style={block.copyColor ? {color: block.copyColor} : {}}>
-            <PortableText value={block.copy.portableTextBlock as PortableTextBlock[]} />
-          </div>
-        ) : null}
-        {block.cta ? <Cta cta={block.cta} /> : null}
-      </div>
-    </UnderConstruction>
-  )
-}
-
-function HeroTwoPanelSection({block}: {block: ExtractPageSectionType<'heroTwoPanel'>}) {
-  if (block.disabled) return null
-  const imageId = getImageId(block.image)
-  const dims = getImageDims(block.image)
-  return (
-    <UnderConstruction
-      name="HeroTwoPanel"
-      style={
-        block.backgroundColor
-          ? {backgroundColor: block.backgroundColor, paddingTop: '1.5rem', paddingBottom: '1.5rem'}
-          : undefined
-      }
-    >
-      {imageId ? (
-        <div className="mb-6">
-          <Image
-            id={imageId}
-            alt={block.image?.alt || ''}
-            className="rounded-sm w-full"
-            width={1200}
-            height={dims ? Math.round((1200 / dims.width) * dims.height) : 650}
-            mode="cover"
-            crop={block.image?.crop}
-            hotspot={block.image?.hotspot}
-          />
-        </div>
-      ) : null}
-      {block.mainPortableText?.portableTextBlock?.length ? (
-        <PortableText value={block.mainPortableText.portableTextBlock as PortableTextBlock[]} />
-      ) : (
-        <div className="font-mono text-sm opacity-70">No content yet.</div>
-      )}
-    </UnderConstruction>
-  )
 }
 
 function SingleColumnContentBlockSection({block}: {block: ExtractPageSectionType<'singleColumnContentBlock'>}) {
@@ -295,9 +207,9 @@ export default function BlockRenderer({block, pageId, pageType}: BlockProps) {
       {(() => {
         switch (block._type) {
           case 'heroBanner':
-            return <HeroBannerSection block={block} />
+            return <HeroBanner block={block} />
           case 'heroTwoPanel':
-            return <HeroTwoPanelSection block={block} />
+            return <HeroTwoPanel block={block} />
           case 'singleColumnContentBlock':
             return <SingleColumnContentBlockSection block={block} />
           case 'rowContainer':

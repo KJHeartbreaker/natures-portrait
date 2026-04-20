@@ -99,10 +99,7 @@ export default {
           950: '#14211a',
         },
       },
-      fontFamily: {
-        sans: ['var(--font-inter)'],
-        mono: ['var(--font-ibm-plex-mono)'],
-      },
+      /* font-sans / font-serif / font-mono: see @theme in app/globals.css (Tailwind v4 reads CSS first) */
     },
   },
   future: {

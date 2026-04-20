@@ -2,7 +2,7 @@ import './globals.css'
 
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
-import {Inter, IBM_Plex_Mono} from 'next/font/google'
+import {IBM_Plex_Mono, Libre_Baskerville, Open_Sans} from 'next/font/google'
 import {draftMode} from 'next/headers'
 import {toPlainText} from 'next-sanity'
 import {VisualEditing} from 'next-sanity/visual-editing'
@@ -59,10 +59,19 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const inter = Inter({
-  variable: '--font-inter',
+const openSans = Open_Sans({
+  variable: '--font-open-sans',
   subsets: ['latin'],
   display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+
+/** Libre Baskerville — swap for a self-hosted font if you license classic Baskerville */
+const libreBaskerville = Libre_Baskerville({
+  variable: '--font-libre-baskerville',
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '700'],
 })
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -76,8 +85,11 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   const {isEnabled: isDraftMode} = await draftMode()
 
   return (
-    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable} bg-white text-black`}>
-      <body>
+    <html
+      lang="en"
+      className={`${openSans.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable} bg-white text-black`}
+    >
+      <body className="font-sans antialiased">
         <section className="min-h-screen pt-24">
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
           <Toaster />

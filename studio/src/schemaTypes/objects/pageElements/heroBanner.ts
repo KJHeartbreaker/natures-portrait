@@ -1,6 +1,5 @@
 import {FcFlashOn as icon} from 'react-icons/fc'
 import {defineField, defineType} from 'sanity'
-import {palette} from '../../palette'
 
 export const heroBanner = defineType({
   title: 'Hero Banner',
@@ -9,9 +8,7 @@ export const heroBanner = defineType({
   icon,
   initialValue: {
     size: 'standard',
-    subHeadingColor: palette.dustySage.value,
-    headingColor: palette.luxeNoir.value,
-    copyColor: palette.luxeNoir.value,
+    textTone: 'light',
   },
   fieldsets: [
     {
@@ -59,18 +56,17 @@ export const heroBanner = defineType({
       fieldset: 'heroCopy',
     }),
     defineField({
-      name: 'subHeadingColor',
-      title: 'Subheading Colour',
+      name: 'textTone',
+      title: 'Text style',
       type: 'string',
+      description:
+        'Light: pale type for photos and dark overlays (default). Dark: rich type when the background is very bright or you use no overlay.',
       options: {
-        list: [
-          palette.luxeNoir,
-          palette.coastalPine,
-          palette.dustySage,
-          palette.linenClay,
-          palette.softOat,
-        ],
         layout: 'radio',
+        list: [
+          {title: 'Light — photos & overlays', value: 'light'},
+          {title: 'Dark — light backgrounds', value: 'dark'},
+        ],
         direction: 'horizontal',
       },
       fieldset: 'heroCopy',
@@ -83,43 +79,9 @@ export const heroBanner = defineType({
       fieldset: 'heroCopy',
     }),
     defineField({
-      name: 'headingColor',
-      title: 'Heading Colour',
-      type: 'string',
-      options: {
-        list: [
-          palette.luxeNoir,
-          palette.coastalPine,
-          palette.dustySage,
-          palette.linenClay,
-          palette.softOat,
-        ],
-        layout: 'radio',
-        direction: 'horizontal',
-      },
-      fieldset: 'heroCopy',
-    }),
-    defineField({
       title: 'Copy',
       name: 'copy',
       type: 'simplePortableText',
-      fieldset: 'heroCopy',
-    }),
-    defineField({
-      name: 'copyColor',
-      title: 'Copy Colour',
-      type: 'string',
-      options: {
-        list: [
-          palette.luxeNoir,
-          palette.coastalPine,
-          palette.dustySage,
-          palette.linenClay,
-          palette.softOat,
-        ],
-        layout: 'radio',
-        direction: 'horizontal',
-      },
       fieldset: 'heroCopy',
     }),
     defineField({

@@ -39,7 +39,16 @@ export const gear = defineType({
       name: 'nickname',
       title: 'Nickname (optional)',
       type: 'string',
-      description: 'Shown in the Studio only to help Jill recognize this item.',
+      description: 'Shown in the Studio only to help you recognize this item.',
+    }),
+    defineField({
+      name: 'exifMatchHints',
+      title: 'EXIF match hints (optional)',
+      type: 'array',
+      of: [{type: 'string'}],
+      description:
+        'Phrases that appear in camera or lens EXIF (e.g. ILCE-7M4, 100-400mm). Photo Album uploads auto-link to this gear when a hint matches (case-insensitive). Use for marketing names vs internal codes.',
+      options: {layout: 'tags'},
     }),
     defineField({
       name: 'notes',

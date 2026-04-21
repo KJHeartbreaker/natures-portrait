@@ -5,6 +5,7 @@ import {settings} from './singletons/settings'
 
 // Documents
 import {gear} from './documents/gear'
+import {photo} from './documents/photo'
 import {page} from './documents/page'
 import {post} from './documents/post'
 
@@ -25,6 +26,7 @@ import {cta} from './objects/pageElements/cta'
 import {heroBanner} from './objects/pageElements/heroBanner'
 import {heroTwoPanel} from './objects/pageElements/heroTwoPanel'
 import {icon} from './objects/pageElements/icon'
+import {albumMainImage} from './objects/pageElements/albumMainImage'
 import {mainImage} from './objects/pageElements/mainImage'
 import {photoItem} from './objects/pageElements/photoItem'
 
@@ -50,6 +52,7 @@ export const schemaTypes = [
   page,
   post,
   gear,
+  photo,
   // Objects - Grids
   postsGridContainer,
   photoGridContainer,
@@ -65,6 +68,7 @@ export const schemaTypes = [
   heroTwoPanel,
   icon,
   mainImage,
+  albumMainImage,
   photoItem,
   // Objects - Portable Text
   mainPortableText,

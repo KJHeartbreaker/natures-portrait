@@ -203,6 +203,17 @@ export type PhotoItem = {
   iso?: number
 }
 
+export type AlbumMainImage = {
+  _type: 'albumMainImage'
+  asset?: SanityImageAssetReference
+  media?: unknown
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  width?: number
+  height?: number
+  alt?: string
+}
+
 export type MainImage = {
   _type: 'mainImage'
   asset?: SanityImageAssetReference
@@ -352,6 +363,27 @@ export type PostsGridContainer = {
   >
 }
 
+export type Photo = {
+  _id: string
+  _type: 'photo'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  image: AlbumMainImage
+  title?: string
+  location?: string
+  description?: SimplePortableText
+  dateCaptured?: string
+  cameraText?: string
+  lensText?: string
+  cameraRef?: GearReference
+  lensRef?: GearReference
+  focalLength?: number
+  aperture?: string
+  shutterSpeed?: string
+  iso?: number
+}
+
 export type Gear = {
   _id: string
   _type: 'gear'
@@ -362,6 +394,7 @@ export type Gear = {
   brand: string
   model: string
   nickname?: string
+  exifMatchHints?: Array<string>
   notes?: string
   link?: string
 }
@@ -863,6 +896,7 @@ export type AllSanitySchemaTypes =
   | MainPortableText
   | GearReference
   | PhotoItem
+  | AlbumMainImage
   | MainImage
   | Icon
   | SanityImageCrop
@@ -877,6 +911,7 @@ export type AllSanitySchemaTypes =
   | Seo
   | PhotoGridContainer
   | PostsGridContainer
+  | Photo
   | Gear
   | Home
   | Settings

@@ -5,6 +5,8 @@ import {GiPhotoCamera} from 'react-icons/gi'
 import {MdPhotoAlbum} from 'react-icons/md'
 import type {StructureBuilder, StructureResolver} from 'sanity/structure'
 
+import {editorGuideListItem} from '../guide/structure/editorGuide'
+
 /**
  * Structure builder is useful whenever you want to control how documents are grouped and
  * listed in the studio or for adding additional in-studio previews or content to documents.
@@ -48,4 +50,6 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
         .title('Photo Album')
         .icon(MdPhotoAlbum)
         .child(S.documentTypeList('photo').title('Photo Album')),
+      S.divider(),
+      editorGuideListItem(S),
     ])

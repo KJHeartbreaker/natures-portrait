@@ -8,6 +8,46 @@ export const settings = defineType({
   icon,
   fields: [
     defineField({
+      name: 'siteLogo',
+      title: 'Site logo',
+      type: 'image',
+      description: 'Shown in the header next to the site title (links home).',
+      options: {
+        hotspot: true,
+        aiAssist: {
+          imageDescriptionField: 'alt',
+        },
+      },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternative text',
+          type: 'string',
+          description: 'Important for accessibility.',
+        }),
+      ],
+    }),
+    defineField({
+      name: 'siteFavicon',
+      title: 'Favicon',
+      type: 'image',
+      description:
+        'Browser tab icon. Use a simplified or alternate-colour square mark if the header logo is too detailed at small sizes. Falls back to the site logo when empty.',
+      options: {
+        hotspot: true,
+        aiAssist: {
+          imageDescriptionField: 'alt',
+        },
+      },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternative text',
+          type: 'string',
+        }),
+      ],
+    }),
+    defineField({
       name: 'menuItems',
       title: 'Menu Item list',
       description: 'Links displayed on the header of your site.',

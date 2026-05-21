@@ -14,7 +14,7 @@ import Header from '@/app/components/Header'
 import * as demo from '@/sanity/lib/demo'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {homeMetaQuery, settingsMetaQuery} from '@/sanity/lib/queries'
-import {resolveOpenGraphImage} from '@/sanity/lib/utils'
+import {resolveOpenGraphImage, resolveSiteIcons} from '@/sanity/lib/utils'
 import {handleError} from '@/app/client-utils'
 
 /**
@@ -38,6 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = home?.overview || demo.description
 
   const ogImage = resolveOpenGraphImage(settings?.ogImage)
+  const siteIcons = resolveSiteIcons(settings?.siteFavicon ?? settings?.siteLogo)
   let metadataBase: URL | undefined = undefined
   try {
     metadataBase = settings?.ogImage?.metadataBase
@@ -56,6 +57,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       images: ogImage ? [ogImage] : [],
     },
+    ...(siteIcons ? {icons: siteIcons} : {}),
   }
 }
 
@@ -89,7 +91,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
       lang="en"
       className={`${openSans.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable} bg-white text-black`}
     >
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <section className="min-h-screen pt-24">
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
           <Toaster />

@@ -9,6 +9,9 @@ export const heroBanner = defineType({
   initialValue: {
     size: 'standard',
     textTone: 'light',
+    textAlign: 'left',
+    tintBehindCopy: false,
+    ctaTone: 'light',
   },
   fieldsets: [
     {
@@ -57,15 +60,39 @@ export const heroBanner = defineType({
     }),
     defineField({
       name: 'textTone',
-      title: 'Text style',
+      title: 'Text',
       type: 'string',
       description:
-        'Light: pale type for photos and dark overlays (default). Dark: rich type when the background is very bright or you use no overlay.',
+        'Light: white type on the photo. Dark: rich charcoal type. With tint on, a soft shape sits behind the headline and copy only—a dark splash for light text, a light splash for dark text.',
       options: {
         layout: 'radio',
         list: [
-          {title: 'Light — photos & overlays', value: 'light'},
-          {title: 'Dark — light backgrounds', value: 'dark'},
+          {title: 'Light', value: 'light'},
+          {title: 'Dark', value: 'dark'},
+        ],
+        direction: 'horizontal',
+      },
+      fieldset: 'heroCopy',
+    }),
+    defineField({
+      name: 'tintBehindCopy',
+      title: 'Tint behind copy',
+      type: 'boolean',
+      description:
+        'Adds a very subtle glow on the type so it separates from the photo (faint halo—no box or overlay on the image). Off: clean type with no halo.',
+      fieldset: 'heroCopy',
+    }),
+    defineField({
+      name: 'textAlign',
+      title: 'Text alignment',
+      type: 'string',
+      description: 'Horizontal position of the headline, copy, and CTA.',
+      options: {
+        layout: 'radio',
+        list: [
+          {title: 'Left', value: 'left'},
+          {title: 'Center', value: 'center'},
+          {title: 'Right', value: 'right'},
         ],
         direction: 'horizontal',
       },
@@ -93,24 +120,25 @@ export const heroBanner = defineType({
       fieldset: 'heroImage',
     }),
     defineField({
-      name: 'overlay',
-      type: 'string',
-      title: 'Overlay',
-      options: {
-        list: [
-          {title: 'None', value: 'noOverlay'},
-          {title: 'Dark', value: 'darkOverlay'},
-          {title: 'Blue', value: 'blueOverlay'},
-        ],
-        layout: 'radio',
-        direction: 'horizontal',
-      },
-      fieldset: 'heroImage',
-    }),
-    defineField({
       name: 'cta',
       title: 'CTA',
       type: 'cta',
+      fieldset: 'heroCTA',
+    }),
+    defineField({
+      name: 'ctaTone',
+      title: 'CTA style',
+      type: 'string',
+      description:
+        'Light: pale pill with dark text—stands out on bright areas of the photo. Dark: black pill with white text—stands out on darker areas.',
+      options: {
+        layout: 'radio',
+        list: [
+          {title: 'Light', value: 'light'},
+          {title: 'Dark', value: 'dark'},
+        ],
+        direction: 'horizontal',
+      },
       fieldset: 'heroCTA',
     }),
     defineField({
@@ -137,4 +165,3 @@ export const heroBanner = defineType({
     },
   },
 })
-

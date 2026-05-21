@@ -5,7 +5,7 @@ import {useOptimistic} from 'next-sanity/hooks'
 
 import BlockRenderer from '@/app/components/BlockRenderer'
 import {GetPageQueryResult} from '@/sanity.types'
-import {dataAttr} from '@/sanity/lib/utils'
+import {cleanStegaData, dataAttr} from '@/sanity/lib/utils'
 import {PageSection} from '@/sanity/lib/types'
 
 type PageBuilderPageProps = {
@@ -16,6 +16,10 @@ type PageData = {
   _id: string
   _type: string
   content?: PageSection[]
+}
+
+function mergeSection(existing: PageSection, incoming: PageSection): PageSection {
+  return {...existing, ...incoming}
 }
 
 /**
@@ -75,33 +79,32 @@ function RenderEmptyState({page}: {page: GetPageQueryResult}) {
 }
 
 export default function PageBuilder({page}: PageBuilderPageProps) {
+  const cleanedPage = page ? cleanStegaData(page) : page
+
   const sections = useOptimistic<
     PageSection[] | undefined,
     SanityDocument<PageData>
-  >(page?.content || [], (currentSections, action) => {
-    // The action contains updated document data from Sanity
-    // when someone makes an edit in the Studio
-
-    // If the edit was to a different document, ignore it
+  >(cleanedPage?.content || [], (currentSections, action) => {
     if (action.id !== page?._id) {
       return currentSections
     }
 
-    // If there are sections in the updated document, use them
     if (action.document.content) {
-      // Reconcile References. https://www.sanity.io/docs/enabling-drag-and-drop#ffe728eea8c1
-      return action.document.content.map(
-        (section) => currentSections?.find((s) => s._key === section?._key) || section,
-      )
+      const cleanedContent = cleanStegaData(action.document.content) as PageSection[]
+      return cleanedContent.map((incoming) => {
+        const existing = currentSections?.find((s) => s._key === incoming?._key)
+        if (!existing) return incoming
+        // Merge so layout fields (textTone, textAlign, tintBehindCopy) update live in Presentation
+        return mergeSection(existing, incoming)
+      })
     }
 
-    // Otherwise keep the current sections
     return currentSections
   })
 
   return sections && sections.length > 0 ? (
-    <RenderSections sections={sections} page={page} />
+    <RenderSections sections={sections} page={cleanedPage} />
   ) : (
-    <RenderEmptyState page={page} />
+    <RenderEmptyState page={cleanedPage} />
   )
 }

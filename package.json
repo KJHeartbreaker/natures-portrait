@@ -16,9 +16,7 @@
   },
   "scripts": {
     "predev": "pnpm sanity:typegen",
-    "dev": "npm-run-all --parallel --print-label dev:*",
-    "dev:next": "pnpm --filter web dev",
-    "dev:studio": "pnpm --filter studio dev",
+    "dev": "pnpm -r --parallel dev",
     "format": "prettier --cache --write .",
     "import-sample-data": "cd studio && sanity dataset import sample-data.tar.gz --replace",
     "lint": "pnpm --filter web lint",
@@ -28,7 +26,6 @@
   "prettier": "@sanity/prettier-config",
   "devDependencies": {
     "@sanity/prettier-config": "^3.0.0",
-    "npm-run-all2": "^8.0.4",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.3"
   }
 }

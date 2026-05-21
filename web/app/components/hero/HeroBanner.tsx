@@ -1,3 +1,4 @@
+import type {CSSProperties} from 'react'
 import type {PortableTextBlock} from 'next-sanity'
 
 import Cta from '@/app/components/Cta'
@@ -11,43 +12,62 @@ const sizeHeightClass = {
   'x-large': 'min-h-[520px] md:min-h-[680px] xl:min-h-[800px]',
 } as const
 
-/** Bottom-weighted gradients so type stays legible on bright or busy photos. */
-const overlayClass: Record<NonNullable<ExtractPageSectionType<'heroBanner'>['overlay']>, string> = {
-  noOverlay: '',
-  /* Stronger veil at the bottom where copy sits; lighter toward top so the image still breathes */
-  darkOverlay: 'bg-gradient-to-t from-black/90 via-black/55 to-black/20',
-  blueOverlay: 'bg-gradient-to-t from-coastalPine/90 via-coastalPine/55 to-coastalPine/20',
+type TextAlign = 'left' | 'center' | 'right'
+type TextTone = 'light' | 'dark'
+type CtaTone = 'light' | 'dark'
+
+/** Inline text-shadow so tint always shows (Tailwind may not detect classes built from string constants). */
+function tintTextShadowStyle(tone: TextTone): CSSProperties {
+  if (tone === 'light') {
+    return {
+      textShadow:
+        '0 1px 3px rgba(0,0,0,0.65), 0 4px 28px rgba(0,0,0,0.45), 0 12px 48px rgba(0,0,0,0.25)',
+    }
+  }
+  return {
+    textShadow:
+      '0 1px 2px rgba(255,255,255,0.45), 0 0 20px rgba(255,255,255,0.3), 0 4px 32px rgba(255,255,255,0.2)',
+  }
 }
 
-/** When editors choose “none”, a very light bottom scrim still helps palette-driven text without a full overlay */
-const subtleNoOverlayScrim = 'bg-gradient-to-t from-black/30 via-black/5 to-transparent'
-
-/** Fixed palette tokens per editor choice — no per-field colours in the CMS */
-const textToneClass = {
-  light: {
-    subheading: 'text-linenClay',
-    heading: 'text-softOat',
-    copyWrap:
-      'prose prose-lg max-w-2xl prose-p:leading-relaxed prose-invert text-softOat/95 prose-headings:text-softOat prose-strong:text-softOat prose-p:text-softOat/90',
-    portableText: 'prose-a:text-linenClay hover:prose-a:text-softOat',
-    textShadow:
-      '[&_h1]:drop-shadow-[0_2px_24px_rgba(0,0,0,0.55)] [&_.prose]:drop-shadow-[0_1px_16px_rgba(0,0,0,0.45)]',
-    subShadow: 'drop-shadow-[0_1px_12px_rgba(0,0,0,0.5)]',
-  },
-  dark: {
-    subheading: 'text-dustySage',
-    heading: 'text-luxeNoir',
-    copyWrap:
-      'prose prose-lg max-w-2xl prose-p:leading-relaxed text-luxeNoir prose-headings:text-luxeNoir prose-strong:text-luxeNoir prose-p:text-luxeNoir/90',
-    portableText: 'prose-a:text-coastalPine hover:prose-a:text-coastalPine/90',
-    textShadow:
-      '[&_h1]:drop-shadow-[0_1px_14px_rgba(255,255,255,0.45)] [&_.prose]:drop-shadow-[0_1px_10px_rgba(255,255,255,0.35)]',
-    subShadow: 'drop-shadow-[0_1px_8px_rgba(255,255,255,0.4)]',
-  },
+const lightOnImage = {
+  subheading: 'text-white/85',
+  heading: 'text-white',
+  copyWrap:
+    'prose prose-lg max-w-2xl prose-p:leading-relaxed text-white/95 prose-headings:text-white prose-strong:text-white prose-p:text-white/90',
+  portableText: 'prose-a:text-white hover:prose-a:text-white/85 underline-offset-4',
 } as const
+
+const darkOnImage = {
+  subheading: 'text-dustySage',
+  heading: 'text-luxeNoir',
+  copyWrap:
+    'prose prose-lg max-w-2xl prose-p:leading-relaxed text-luxeNoir prose-headings:text-luxeNoir prose-strong:text-luxeNoir prose-p:text-luxeNoir/90',
+  portableText: 'prose-a:text-coastalPine hover:prose-a:text-coastalPine/90',
+} as const
+
+const alignFlexClass: Record<TextAlign, string> = {
+  left: 'items-start text-left',
+  center: 'items-center text-center',
+  right: 'items-end text-right',
+}
 
 type Props = {
   block: ExtractPageSectionType<'heroBanner'>
+}
+
+/** Legacy blocks used `copyTint` as "yes" | "no" strings before the boolean field was renamed. */
+function tintBehindCopyEnabled(
+  block: ExtractPageSectionType<'heroBanner'> & {copyTint?: boolean | string | null},
+): boolean {
+  if (block.tintBehindCopy === true) {
+    return true
+  }
+  if (block.tintBehindCopy === false) {
+    return false
+  }
+  const legacy = block.copyTint
+  return legacy === true || legacy === 'yes'
 }
 
 export default function HeroBanner({block}: Props) {
@@ -56,13 +76,14 @@ export default function HeroBanner({block}: Props) {
   const heroImageId = getImageId(block.image)
   const heroDims = getImageDims(block.image)
   const size = block.size === 'x-large' ? 'x-large' : 'standard'
-  const overlay =
-    block.overlay && block.overlay !== 'noOverlay' && overlayClass[block.overlay] !== undefined
-      ? block.overlay
-      : 'noOverlay'
+  const textTone: TextTone = block.textTone === 'dark' ? 'dark' : 'light'
+  const tc = textTone === 'light' ? lightOnImage : darkOnImage
 
-  const tone = block.textTone === 'dark' ? 'dark' : 'light'
-  const tc = textToneClass[tone]
+  const textAlign: TextAlign =
+    block.textAlign === 'center' || block.textAlign === 'right' ? block.textAlign : 'left'
+  const ctaTone: CtaTone = block.ctaTone === 'light' ? 'light' : 'dark'
+  const tintOn = tintBehindCopyEnabled(block)
+  const tintStyle = heroImageId && tintOn ? tintTextShadowStyle(textTone) : undefined
 
   const imgW = 1920
   const imgH = heroDims ? Math.round((imgW / heroDims.width) * heroDims.height) : Math.round(imgW * (9 / 16))
@@ -72,7 +93,6 @@ export default function HeroBanner({block}: Props) {
       className={`relative isolate flex w-full flex-col justify-end overflow-hidden ${sizeHeightClass[size]}`}
       aria-labelledby={block.heading ? `hero-banner-heading-${block._key}` : undefined}
     >
-      {/* Photo layer */}
       <div className="absolute inset-0 z-0">
         {heroImageId ? (
           <Image
@@ -91,45 +111,42 @@ export default function HeroBanner({block}: Props) {
         )}
       </div>
 
-      {/* Overlay: full scrims for dark / blue; optional light scrim when overlay is off */}
-      {heroImageId && overlay !== 'noOverlay' ? (
-        <div className={`absolute inset-0 z-1 ${overlayClass[overlay]}`} aria-hidden />
-      ) : null}
-      {heroImageId && overlay === 'noOverlay' ? (
-        <div className={`absolute inset-0 z-1 ${subtleNoOverlayScrim}`} aria-hidden />
-      ) : null}
-
-      {/* Copy — sits above image; generous padding keeps type readable without competing with the frame */}
-      <div className={`relative z-2 w-full ${heroImageId ? tc.textShadow : ''}`}>
-        <div className="container flex max-w-5xl flex-col gap-4 pb-12 pt-24 md:pb-16 md:pt-32">
-          {block.subheading ? (
-            <p
-              className={`font-mono text-xs uppercase tracking-[0.2em] md:text-sm ${tc.subheading} ${heroImageId ? tc.subShadow : ''}`}
-            >
-              {block.subheading}
-            </p>
-          ) : null}
-          {block.heading ? (
-            <h1
-              id={`hero-banner-heading-${block._key}`}
-              className={`max-w-3xl text-4xl font-medium leading-[1.08] tracking-tight md:text-5xl xl:text-6xl ${tc.heading}`}
-            >
-              {block.heading}
-            </h1>
-          ) : null}
-          {block.copy?.portableTextBlock?.length ? (
-            <div className={tc.copyWrap}>
-              <PortableText
-                className={tc.portableText}
-                value={block.copy.portableTextBlock as PortableTextBlock[]}
-              />
-            </div>
-          ) : null}
-          {block.cta ? (
-            <div className="pt-2">
-              <Cta cta={block.cta} />
-            </div>
-          ) : null}
+      <div className="relative z-1 w-full">
+        <div className="container">
+          <div
+            className={`flex w-full flex-col gap-4 pb-12 pt-16 md:pb-16 md:pt-24 ${alignFlexClass[textAlign]}`}
+          >
+            {block.subheading ? (
+              <p
+                className={`font-mono text-xs uppercase tracking-[0.2em] md:text-sm ${tc.subheading}`}
+                style={tintStyle}
+              >
+                {block.subheading}
+              </p>
+            ) : null}
+            {block.heading ? (
+              <h1
+                id={`hero-banner-heading-${block._key}`}
+                className={`max-w-3xl text-4xl font-medium leading-[1.08] tracking-tight md:text-5xl xl:text-6xl ${tc.heading}`}
+                style={tintStyle}
+              >
+                {block.heading}
+              </h1>
+            ) : null}
+            {block.copy?.portableTextBlock?.length ? (
+              <div className={tc.copyWrap} style={tintStyle}>
+                <PortableText
+                  className={tc.portableText}
+                  value={block.copy.portableTextBlock as PortableTextBlock[]}
+                />
+              </div>
+            ) : null}
+            {block.cta ? (
+              <div className="pt-2">
+                <Cta cta={block.cta} variant={ctaTone} />
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     </section>

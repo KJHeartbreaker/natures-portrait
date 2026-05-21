@@ -1,3 +1,4 @@
+import {stegaClean} from '@sanity/client/stega'
 import {dataset, projectId, studioUrl} from '@/sanity/lib/api'
 import {createDataAttribute, CreateDataAttributeProps} from 'next-sanity'
 import imageUrlBuilder from '@sanity/image-url'
@@ -24,6 +25,29 @@ export function resolveOpenGraphImage(
   const url = urlForImage(image)?.width(width).height(height).fit('crop').url()
   if (!url) return
   return {url, alt: (image as {alt?: string})?.alt || '', width, height}
+}
+
+/** Square-cropped PNG URLs for favicon / apple-touch-icon from the site logo. */
+export function resolveSiteIcons(image?: SanityImageSource | null) {
+  if (!image) return undefined
+
+  const squareIcon = (size: number) => {
+    const url = urlForImage(image)?.width(size).height(size).fit('crop').auto('format').url()
+    return url ? {url, sizes: `${size}x${size}`, type: 'image/png' as const} : undefined
+  }
+
+  const icon16 = squareIcon(16)
+  const icon32 = squareIcon(32)
+  const appleUrl = urlForImage(image)?.width(180).height(180).fit('crop').auto('format').url()
+
+  if (!icon32) return undefined
+
+  return {
+    icon: [icon16, icon32].filter((entry): entry is NonNullable<typeof entry> => Boolean(entry)),
+    apple: appleUrl
+      ? [{url: appleUrl, sizes: '180x180', type: 'image/png' as const}]
+      : undefined,
+  }
 }
 
 export type CtaLike = {
@@ -93,4 +117,25 @@ export function dataAttr(config: DataAttributeConfig) {
     dataset,
     baseUrl: studioUrl,
   }).combine(config)
+}
+
+/** Strip stega metadata so layout fields (e.g. textTone) compare and render correctly. */
+export function cleanStegaData<T>(data: T): T {
+  if (data === null || data === undefined) {
+    return data
+  }
+  if (typeof data === 'string') {
+    return stegaClean(data) as T
+  }
+  if (Array.isArray(data)) {
+    return data.map(cleanStegaData) as T
+  }
+  if (typeof data === 'object') {
+    const cleaned = {} as T
+    for (const [key, value] of Object.entries(data)) {
+      ;(cleaned as Record<string, unknown>)[key] = cleanStegaData(value)
+    }
+    return cleaned
+  }
+  return data
 }

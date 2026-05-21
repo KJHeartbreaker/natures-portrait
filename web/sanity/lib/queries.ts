@@ -10,6 +10,9 @@ export const settingsQuery = defineQuery(`
   *[_type == "settings"][0]{
     _id,
     _type,
+    siteLogo{
+      ${imageProjection}
+    },
     menuItems[]{
       _key,
       _type,
@@ -59,6 +62,12 @@ export const settingsMetaQuery = defineQuery(`
   *[_type == "settings"][0]{
     _id,
     _type,
+    siteLogo{
+      ${imageProjection}
+    },
+    siteFavicon{
+      ${imageProjection}
+    },
     ogImage{
       ${imageProjection},
       metadataBase
@@ -88,6 +97,10 @@ export const homeQuery = defineQuery(`
         size,
         subheading,
         textTone,
+        textAlign,
+        tintBehindCopy,
+        copyTint,
+        ctaTone,
         heading,
         copy{
           ${portableTextProjection}
@@ -95,7 +108,6 @@ export const homeQuery = defineQuery(`
         image{
           ${imageProjection}
         },
-        overlay,
         cta{
           ${ctaProjection}
         },
@@ -247,6 +259,10 @@ export const getPageQuery = defineQuery(`
         size,
         subheading,
         textTone,
+        textAlign,
+        tintBehindCopy,
+        copyTint,
+        ctaTone,
         heading,
         copy{
           ${portableTextProjection}
@@ -254,7 +270,6 @@ export const getPageQuery = defineQuery(`
         image{
           ${imageProjection}
         },
-        overlay,
         cta{
           ${ctaProjection}
         },

@@ -1,21 +1,41 @@
 import Link from 'next/link'
-import {homeMetaQuery, settingsQuery} from '@/sanity/lib/queries'
-import {sanityFetch} from '@/sanity/lib/live'
+import { homeMetaQuery, settingsQuery } from '@/sanity/lib/queries'
+import { sanityFetch } from '@/sanity/lib/live'
 import Cta from '@/app/components/Cta'
+import Image from '@/app/components/SanityImage'
+import { getImageId } from '@/app/lib/sanityImageHelpers'
 
 export default async function Header() {
-  const [{data: home}, {data: settings}] = await Promise.all([
-    sanityFetch({query: homeMetaQuery}),
-    sanityFetch({query: settingsQuery}),
+  const [{ data: home }, { data: settings }] = await Promise.all([
+    sanityFetch({ query: homeMetaQuery }),
+    sanityFetch({ query: settingsQuery }),
   ])
 
+  const siteTitle = home?.title || "Nature's Portrait"
+  const logoId = getImageId(settings?.siteLogo)
+  const logoAlt = settings?.siteLogo?.alt || `${siteTitle} logo`
+
   return (
-    <header className="fixed z-50 h-24 inset-0 bg-white/80 flex items-center backdrop-blur-lg">
+    <header className="fixed z-50 h-24 inset-0 flex items-center bg-soft-oat backdrop-blur-lg">
       <div className="container py-6 px-2 sm:px-6">
         <div className="flex items-center justify-between gap-5">
-          <Link className="flex items-center gap-2" href="/">
-            <span className="text-lg sm:text-2xl pl-2 font-semibold">
-              {home?.title || 'Natures Portrait'}
+          <Link className="flex items-center gap-2.5 sm:gap-3 pl-2" href="/">
+            {logoId ? (
+              <span className="block h-18 shrink-0 sm:h-14 md:h-18">
+                <Image
+                  id={logoId}
+                  alt={logoAlt}
+                  width={280}
+                  height={190}
+                  mode="contain"
+                  crop={settings?.siteLogo?.crop}
+                  hotspot={settings?.siteLogo?.hotspot}
+                  className="h-full w-full object-contain object-left"
+                />
+              </span>
+            ) : null}
+            <span className="font-serif text-lg font-bold leading-none text-coastal-pine sm:text-2xl">
+              {siteTitle}
             </span>
           </Link>
 

@@ -35,8 +35,54 @@ const dataset = assertValue(
   'Missing environment variable: SANITY_STUDIO_DATASET',
 )
 
-// URL for preview functionality, defaults to localhost:3000 if not set
-const SANITY_STUDIO_PREVIEW_URL = process.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:3000'
+// Origins Presentation may navigate to (URLPattern syntax). The preview origin is added automatically.
+const presentationAllowOrigins = [
+  'http://localhost:*',
+  'http://127.0.0.1:*',
+  'https://natures-portrait-web.vercel.app',
+]
+
+/** Website origin only — not /api/draft-mode/enable, not the Studio host. */
+function getPreviewOrigin(): string {
+  const raw = process.env.SANITY_STUDIO_PREVIEW_URL
+  if (!raw) return 'http://localhost:3000'
+
+  const trimmed = raw.trim()
+  const withProtocol = (() => {
+    if (/^https?:\/\//i.test(trimmed)) return trimmed
+    if (/^(localhost|127\.0\.0\.1)(:\d+)?$/i.test(trimmed)) return `http://${trimmed}`
+    return `https://${trimmed}`
+  })()
+
+  try {
+    const url = new URL(withProtocol)
+    if (url.pathname.includes('/api/draft-mode')) {
+      console.warn(
+        'SANITY_STUDIO_PREVIEW_URL should be the website origin only (e.g. http://localhost:3000), not the draft-mode API path.',
+        {SANITY_STUDIO_PREVIEW_URL: raw, origin: url.origin},
+      )
+    }
+    return url.origin
+  } catch {
+    console.warn('Invalid SANITY_STUDIO_PREVIEW_URL, falling back to localhost', {
+      SANITY_STUDIO_PREVIEW_URL: raw,
+    })
+    return 'http://localhost:3000'
+  }
+}
+
+const previewOrigin = getPreviewOrigin()
+
+console.info('[Presentation] preview origin:', previewOrigin, {
+  fromEnv: process.env.SANITY_STUDIO_PREVIEW_URL || '(default http://localhost:3000)',
+})
+
+if (previewOrigin.endsWith('.sanity.studio')) {
+  console.warn(
+    'SANITY_STUDIO_PREVIEW_URL points at the Studio. It must be the website origin (where /api/draft-mode/enable lives).',
+    {previewOrigin},
+  )
+}
 
 // Define the home location for the presentation tool
 const homeLocation = {
@@ -70,8 +116,9 @@ export default defineConfig({
   plugins: [
     // Presentation tool configuration for Visual Editing
     presentationTool({
+      allowOrigins: presentationAllowOrigins,
       previewUrl: {
-        origin: SANITY_STUDIO_PREVIEW_URL,
+        initial: `${previewOrigin}/`,
         previewMode: {
           enable: '/api/draft-mode/enable',
         },

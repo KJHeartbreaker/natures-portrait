@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import type { PortableTextBlock } from 'next-sanity'
+
 import Image from '@/app/components/SanityImage'
 import type { SanityImageCrop, SanityImageHotspot } from '@/sanity.types'
 import PortableText from '@/app/components/PortableText'
@@ -30,7 +32,7 @@ type PhotoItemLike = {
   _key?: string
   title?: string | null
   location?: string | null
-  description?: { portableTextBlock?: any[] | null } | null
+  description?: { portableTextBlock?: unknown[] | null } | null
   dateCaptured?: string | null
   cameraText?: string | null
   lensText?: string | null
@@ -144,13 +146,17 @@ export default function PhotoGrid({
     }
   }, [isOpen])
 
-  // Deep link: open if URL has ?photo=<photoItem._key>
+  // Deep link: open if URL has ?photo=<photoItem._key>.
+  // This must run in an effect, not during render: the URL is a client-only
+  // external source, and opening during render would cause a hydration
+  // mismatch (the server renders with the modal closed).
   useEffect(() => {
     if (typeof window === 'undefined') return
     if (isOpen) return
     const key = new URL(window.location.href).searchParams.get('photo')
     if (!key) return
     const nextIndex = safeItems.findIndex((it) => it?._key === key)
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from the URL after hydration
     if (nextIndex >= 0) open(nextIndex)
   }, [safeItems, isOpen, open])
 
@@ -338,7 +344,7 @@ export default function PhotoGrid({
                             <div className="text-white/90">
                               <PortableText
                                 className="prose prose-invert prose-p:leading-relaxed prose-a:text-white"
-                                value={active.description.portableTextBlock as any[]}
+                                value={active.description.portableTextBlock as PortableTextBlock[]}
                               />
                             </div>
                           ) : null}

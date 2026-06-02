@@ -79,7 +79,7 @@ function RowContainerSection({block}: {block: ExtractPageSectionType<'rowContain
         </div>
         {block.rowContent?.length ? (
           <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
-            {block.rowContent.map((item: any) => {
+            {block.rowContent.map((item) => {
               if (!item) return null
               if (item._type === 'mainImage') {
                 const id = getImageId(item)
@@ -142,7 +142,7 @@ function PostsGridContainerSection({block}: {block: ExtractPageSectionType<'post
       </div>
       {block.posts?.length ? (
         <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
-          {block.posts.slice(0, 6).map((p: any) => {
+          {block.posts.slice(0, 6).map((p) => {
             const id = getImageId(p?.image)
             const dims = getImageDims(p?.image)
             if (!id) return null

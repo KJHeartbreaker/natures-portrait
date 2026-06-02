@@ -1,11 +1,15 @@
 import {stegaClean} from '@sanity/client/stega'
 import {dataset, projectId, studioUrl} from '@/sanity/lib/api'
 import {createDataAttribute, CreateDataAttributeProps} from 'next-sanity'
-import imageUrlBuilder from '@sanity/image-url'
+import {createImageUrlBuilder} from '@sanity/image-url'
 import type {SanityImageSource} from '@sanity/image-url'
-import type {PortableTextMarkLink, ResolvedLandingPage} from '@/sanity/lib/types'
+import type {
+  PortableTextInternalLink,
+  PortableTextMarkLink,
+  ResolvedLandingPage,
+} from '@/sanity/lib/types'
 
-const builder = imageUrlBuilder({
+const builder = createImageUrlBuilder({
   projectId: projectId || '',
   dataset: dataset || '',
 })
@@ -88,7 +92,7 @@ export function linkResolver(link: PortableTextMarkLink | CtaLike | undefined) {
 
   // Portable Text internal link annotation
   if ('item' in link) {
-    const item = (link as PortableTextMarkLink & {item?: any}).item
+    const item = (link as PortableTextInternalLink).item
     if (item?.slug) {
       if (item._type === 'post') return `/posts/${item.slug}`
       if (item._type === 'page' || item._type === 'blogLandingPage') return `/${item.slug}`

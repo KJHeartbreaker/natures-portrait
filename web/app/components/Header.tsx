@@ -44,7 +44,7 @@ export default async function Header() {
               role="list"
               className="flex items-center gap-4 md:gap-6 leading-5 text-xs sm:text-base tracking-tight font-mono"
             >
-              {(settings?.menuItems || []).map((item: any) => {
+              {(settings?.menuItems || []).map((item) => {
                 if (!item) return null
                 if (item._type === 'navCTA' && item.cta) {
                   return (
@@ -63,7 +63,7 @@ export default async function Header() {
                         </summary>
                         <div className="absolute right-0 mt-2 bg-white border border-gray-200 rounded p-2 min-w-56 shadow">
                           <ul role="list" className="flex flex-col gap-1">
-                            {(item.subnav || []).map((sub: any) => (
+                            {(item.subnav || []).map((sub) => (
                               <li key={sub._key}>
                                 <Cta cta={sub} className="block px-3 py-2 hover:bg-gray-50 rounded" />
                               </li>
@@ -76,9 +76,9 @@ export default async function Header() {
                 }
 
                 // Embedded document or dereferenced ref projection
-                if (item.slug) {
+                if (item._type === 'blogLandingPage' && item.slug) {
                   return (
-                    <li key={item._key || item._id}>
+                    <li key={item._key}>
                       <Link href={`/${item.slug}`} className="hover:underline">
                         {item.title || 'Untitled'}
                       </Link>

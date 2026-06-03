@@ -17,26 +17,26 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/assist": "^6.0.6",
+    "@sanity/assist": "^6.0.7",
     "@sanity/icons": "^3.7.4",
     "@sanity/ui": "^3.2.0",
-    "@sanity/vision": "^5.26.0",
-    "date-fns": "^4.2.1",
+    "@sanity/vision": "^5.28.0",
+    "date-fns": "^4.4.0",
     "pluralize-esm": "^9.0.5",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "react-icons": "^5.6.0",
     "rxjs": "^7.8.2",
-    "sanity": "^5.26.0",
-    "sanity-plugin-asset-source-unsplash": "^7.0.6",
+    "sanity": "^5.28.0",
+    "sanity-plugin-asset-source-unsplash": "^7.0.7",
     "sanity-plugin-media": "^4.3.0",
     "styled-components": "^6.4.2"
   },
   "devDependencies": {
     "@prettier/plugin-oxc": "^0.1.4",
     "@sanity/eslint-config-studio": "^6.0.0",
-    "@types/react": "^19.2.15",
-    "eslint": "^10.4.0",
+    "@types/react": "^19.2.16",
+    "eslint": "^9.39.4",
     "typescript": "^6.0.3"
   }
 }

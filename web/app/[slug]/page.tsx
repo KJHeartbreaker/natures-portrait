@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
-import { toPlainText, type PortableTextBlock } from 'next-sanity'
+import { toPlainText } from 'next-sanity'
 
 import PageBuilderPage from '@/app/components/PageBuilder'
 import { sanityFetch } from '@/sanity/lib/live'
 import { getPageQuery, pagesSlugs } from '@/sanity/lib/queries'
 import { PageOnboarding } from '@/app/components/Onboarding'
-import PortableText from '@/app/components/PortableText'
 
 type Props = {
   params: Promise<{ slug: string }>

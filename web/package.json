@@ -4,7 +4,7 @@
   "scripts": {
     "prebuild": "pnpm run sanity:typegen",
     "build": "next build",
-    "dev": "WATCHPACK_POLLING=true WATCHPACK_WATCHER_LIMIT=20 next dev -H localhost",
+    "dev": "next dev -H localhost",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "sanity:typegen": "sanity typegen generate",

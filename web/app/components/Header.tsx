@@ -16,7 +16,7 @@ export default async function Header() {
   const logoAlt = settings?.siteLogo?.alt || `${siteTitle} logo`
 
   return (
-    <header className="fixed z-50 h-24 inset-0 flex items-center bg-soft-oat backdrop-blur-lg">
+    <header className="fixed z-50 h-24 inset-0 flex items-center bg-coastal-pine text-soft-oat backdrop-blur-lg">
       <div className="container py-6 px-2 sm:px-6">
         <div className="flex items-center justify-between gap-5">
           <Link className="flex items-center gap-2.5 sm:gap-3 pl-2" href="/">
@@ -34,7 +34,7 @@ export default async function Header() {
                 />
               </span>
             ) : null}
-            <span className="font-serif text-lg font-bold leading-none text-coastal-pine sm:text-2xl">
+            <span className="font-serif text-lg font-bold leading-none text-soft-oat sm:text-2xl">
               {siteTitle}
             </span>
           </Link>

@@ -2835,6 +2835,13 @@ export type GetPageQueryResult =
           }
         | {
             _key: string
+            _type: 'pullQuote'
+            quote: string
+            attribution: string | null
+            disabled: boolean | null
+          }
+        | {
+            _key: string
             _type: 'singleColumnContentBlock'
             title: string | null
             backgroundColor: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5' | null
@@ -3840,6 +3847,13 @@ export type GetPageQueryResult =
               backgroundColor: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5' | null
               centerText: boolean | null
             } | null
+            disabled: boolean | null
+          }
+        | {
+            _key: string
+            _type: 'pullQuote'
+            quote: string
+            attribution: string | null
             disabled: boolean | null
           }
         | {

@@ -9,13 +9,15 @@
   h4,
   h5,
   h6 {
-    @apply font-serif font-medium tracking-tight;
+    @apply font-serif font-light tracking-tight;
   }
 }
 
 @utility container {
   margin: 0 auto;
   padding: 0 2rem;
+  max-width: 1440px;
+  width: 100%;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -25,8 +27,8 @@
    * Wire next/font variables (set on <html> in layout.tsx) into Tailwind utilities.
    * Without this, font-sans / font-serif fall back to system stacks and DevTools won’t show Open Sans / Libre Baskerville.
    */
-  --font-sans: var(--font-open-sans), system-ui, sans-serif;
-  --font-serif: var(--font-libre-baskerville), Georgia, serif;
+  --font-sans: var(--font-open-sans);
+  --font-serif: var(--font-libre-baskerville);
   --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
 
   --shadow-layer: 0 35px 60px -15px rgba(0, 0, 0, 0.3);

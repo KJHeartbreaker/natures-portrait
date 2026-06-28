@@ -19,6 +19,22 @@ export type ContentBlock = {
   portableTextBlock?: MainPortableText
 }
 
+export type TwoColumnPanel = {
+  _type: 'twoColumnPanel'
+  panelType: 'image' | 'text'
+  image?: MainImage
+  content?: MainPortableText
+  backgroundColor?: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5'
+  centerText?: boolean
+}
+
+export type PullQuote = {
+  _type: 'pullQuote'
+  quote: string
+  attribution?: string
+  disabled?: boolean
+}
+
 export type SingleColumnContentBlock = {
   _type: 'singleColumnContentBlock'
   title?: string
@@ -36,24 +52,9 @@ export type RowContainer = {
   hideTitle?: boolean
   centerTitle?: boolean
   titleColor?: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5'
-  row?: 'twoColumn' | 'threeColumn'
-  removeBottomPadding?: boolean
-  condensedCopy?: boolean
-  centerCopy?: boolean
-  image?: MainImage
-  overlay?: 'noOverlay' | 'darkOverlay' | 'blueOverlay'
-  backgroundColor?: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5'
-  rowContent?: Array<
-    | ({
-        _key: string
-      } & Carousel)
-    | ({
-        _key: string
-      } & MainImage)
-    | ({
-        _key: string
-      } & MainPortableText)
-  >
+  split?: '40-60' | '50-50' | '60-40'
+  leftPanel?: TwoColumnPanel
+  rightPanel?: TwoColumnPanel
   disabled?: boolean
 }
 
@@ -903,6 +904,8 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | ContentBlock
+  | TwoColumnPanel
+  | PullQuote
   | SingleColumnContentBlock
   | RowContainer
   | ContactInfo
@@ -1241,7 +1244,7 @@ export type SettingsMetaQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: homeQuery
-// Query: *[_type == "home" && _id == "home"][0]{    _id,    _type,    title,    overview,    seo{      seoTitle,      seoDescription,      noindex,      canonicalUrl,      ogImage{          _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }      }    },    content[]{      _key,      _type,      _type == "heroBanner" => {        size,        subheading,        textTone,        textAlign,        tintBehindCopy,        copyTint,        ctaTone,        heading,        copy{            portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }        },        image{            _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }        },        cta{            _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }        },        disabled      },      _type == "heroTwoPanel" => {        size,        backgroundColor,        image{            _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }        },        mainPortableText{            portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }        },        centerText,        disabled      },      _type == "singleColumnContentBlock" => {        title,        backgroundColor,        removeBottomPadding,        skinny,        centerContent,        contentBlock{          portableTextBlock{              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          }        },        disabled      },      _type == "rowContainer" => {        title,        hideTitle,        centerTitle,        titleColor,        row,        removeBottomPadding,        condensedCopy,        centerCopy,        image{            _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }        },        overlay,        backgroundColor,        rowContent[]{          _key,          _type,          _type == "carousel" => {            carouselImages[]{                _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }            }          },          _type == "mainImage" => {              _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }          },          _type == "mainPortableText" => {              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          }        },        disabled      },      _type == "postsGridContainer" => {        backgroundColor,        "posts": posts[]{          _type == "reference" => @->{            _id,            _type,            title,            "slug": slug.current,            excerpt,            image{                _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }            },            _updatedAt          }        }[_type != "reference" || @->._id != null]      },      _type == "photoGridContainer" => {        title,        backgroundColor,        columns,        gap,        showCaptions,        images[]{          _key,          _type,          title,          location,          description{              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          },          dateCaptured,          cameraText,          lensText,          cameraRef->{              _id,  _type,  kind,  brand,  model,  nickname,  notes,  link          },          lensRef->{              _id,  _type,  kind,  brand,  model,  nickname,  notes,  link          },          "image": coalesce(image, @){              _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }          },        },        disabled      }    }  }
+// Query: *[_type == "home" && _id == "home"][0]{    _id,    _type,    title,    overview,    seo{      seoTitle,      seoDescription,      noindex,      canonicalUrl,      ogImage{          _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }      }    },    content[]{      _key,      _type,      _type == "heroBanner" => {        size,        subheading,        textTone,        textAlign,        tintBehindCopy,        copyTint,        ctaTone,        heading,        copy{            portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }        },        image{            _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }        },        cta{            _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }        },        disabled      },      _type == "heroTwoPanel" => {        size,        backgroundColor,        image{            _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }        },        mainPortableText{            portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }        },        centerText,        disabled      },      _type == "singleColumnContentBlock" => {        title,        backgroundColor,        removeBottomPadding,        skinny,        centerContent,        contentBlock{          portableTextBlock{              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          }        },        disabled      },      _type == "rowContainer" => {        title,        hideTitle,        centerTitle,        titleColor,        split,        leftPanel{          panelType,          image{              _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }          },          content{              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          },          backgroundColor,          centerText        },        rightPanel{          panelType,          image{              _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }          },          content{              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          },          backgroundColor,          centerText        },        disabled      },      _type == "postsGridContainer" => {        backgroundColor,        "posts": posts[]{          _type == "reference" => @->{            _id,            _type,            title,            "slug": slug.current,            excerpt,            image{                _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }            },            _updatedAt          }        }[_type != "reference" || @->._id != null]      },      _type == "photoGridContainer" => {        title,        backgroundColor,        columns,        gap,        showCaptions,        images[]{          _key,          _type,          title,          location,          description{              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          },          dateCaptured,          cameraText,          lensText,          cameraRef->{              _id,  _type,  kind,  brand,  model,  nickname,  notes,  link          },          lensRef->{              _id,  _type,  kind,  brand,  model,  nickname,  notes,  link          },          "image": coalesce(image, @){              _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }          },        },        disabled      }    }  }
 export type HomeQueryResult = {
   _id: 'home'
   _type: 'home'
@@ -1786,231 +1789,329 @@ export type HomeQueryResult = {
         hideTitle: boolean | null
         centerTitle: boolean | null
         titleColor: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5' | null
-        row: 'threeColumn' | 'twoColumn' | null
-        removeBottomPadding: boolean | null
-        condensedCopy: boolean | null
-        centerCopy: boolean | null
-        image: {
-          _type: 'mainImage'
-          alt: string | null
-          width: number | null
-          height: number | null
-          crop: SanityImageCrop | null
-          hotspot: SanityImageHotspot | null
-          asset: {
-            _id: string
-            _type: 'sanity.imageAsset'
-            url: string
-            metadata: {
-              dimensions: {
-                width: number
-                height: number
-                aspectRatio: number
-              } | null
-              lqip: string | null
-              blurhash: null
-              palette: {
-                dominant: {
-                  background: string | null
+        split: '40-60' | '50-50' | '60-40' | null
+        leftPanel: {
+          panelType: 'image' | 'text'
+          image: {
+            _type: 'mainImage'
+            alt: string | null
+            width: number | null
+            height: number | null
+            crop: SanityImageCrop | null
+            hotspot: SanityImageHotspot | null
+            asset: {
+              _id: string
+              _type: 'sanity.imageAsset'
+              url: string
+              metadata: {
+                dimensions: {
+                  width: number
+                  height: number
+                  aspectRatio: number
+                } | null
+                lqip: string | null
+                blurhash: null
+                palette: {
+                  dominant: {
+                    background: string | null
+                  } | null
                 } | null
               } | null
             } | null
           } | null
-        } | null
-        overlay: 'blueOverlay' | 'darkOverlay' | 'noOverlay' | null
-        backgroundColor: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5' | null
-        rowContent: Array<
-          | {
-              _key: string
-              _type: 'carousel'
-              carouselImages: Array<{
-                _type: 'mainImage'
-                alt: string | null
-                width: number | null
-                height: number | null
-                crop: SanityImageCrop | null
-                hotspot: SanityImageHotspot | null
-                asset: {
-                  _id: string
-                  _type: 'sanity.imageAsset'
-                  url: string
-                  metadata: {
-                    dimensions: {
-                      width: number
-                      height: number
-                      aspectRatio: number
+          content: {
+            portableTextBlock: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs: Array<
+                    | {
+                        _key: string
+                        _type: 'internalLink'
+                        item:
+                          | {
+                              _id: string
+                              _type: 'blogLandingPage'
+                              slug: string
+                              title: string
+                            }
+                          | {
+                              _id: string
+                              _type: 'page'
+                              slug: string
+                              title: string
+                            }
+                          | {
+                              _id: string
+                              _type: 'post'
+                              slug: string
+                              title: string
+                            }
+                          | null
+                      }
+                    | {
+                        _key: string
+                        _type: 'link'
+                        href: string | null
+                        blank: boolean | null
+                      }
+                  > | null
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+              | {
+                  _key: string
+                  _type: 'contactInfo'
+                  headline?: string
+                  phoneNumber: string
+                  phoneLabel?: string
+                  email: string
+                  textColor?: 'blue' | 'white'
+                  size?: 'large' | 'normal'
+                  markDefs: null
+                }
+              | {
+                  _key: string
+                  _type: 'cta'
+                  title: string | null
+                  kind: 'button' | 'link' | null
+                  arrow: boolean | null
+                  landingPageRoute?: BlogLandingPageReference | PageReference | PostReference
+                  link: string | null
+                  anchor: string | null
+                  fileDownload: {
+                    _type: 'file'
+                    asset: {
+                      _id: string
+                      _type: 'sanity.fileAsset'
+                      url: string
                     } | null
-                    lqip: string | null
-                    blurhash: null
-                    palette: {
-                      dominant: {
-                        background: string | null
+                  } | null
+                  landingPage:
+                    | {
+                        _id: string
+                        _type: 'blogLandingPage'
+                        slug: string
+                        title: string
+                      }
+                    | {
+                        _id: string
+                        _type: 'page'
+                        slug: string
+                        title: string
+                      }
+                    | {
+                        _id: string
+                        _type: 'post'
+                        slug: string
+                        title: string
+                      }
+                    | null
+                  markDefs: null
+                }
+              | {
+                  hr?: string
+                  size?: string
+                  width?: string
+                  _type: 'hr'
+                  _key: string
+                  markDefs: null
+                }
+              | {
+                  asset: {
+                    _id: string
+                    _type: 'sanity.imageAsset'
+                    metadata: {
+                      dimensions: {
+                        width: number
+                        height: number
+                        aspectRatio: number
                       } | null
+                      lqip: string | null
+                      blurhash: null
                     } | null
                   } | null
+                  media?: unknown
+                  hotspot: SanityImageHotspot | null
+                  crop: SanityImageCrop | null
+                  alt: string | null
+                  _type: 'image'
+                  _key: string
+                  markDefs: null
+                }
+            > | null
+          } | null
+          backgroundColor: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5' | null
+          centerText: boolean | null
+        } | null
+        rightPanel: {
+          panelType: 'image' | 'text'
+          image: {
+            _type: 'mainImage'
+            alt: string | null
+            width: number | null
+            height: number | null
+            crop: SanityImageCrop | null
+            hotspot: SanityImageHotspot | null
+            asset: {
+              _id: string
+              _type: 'sanity.imageAsset'
+              url: string
+              metadata: {
+                dimensions: {
+                  width: number
+                  height: number
+                  aspectRatio: number
                 } | null
-              }> | null
-            }
-          | {
-              _key: string
-              _type: 'mainImage'
-              alt: string | null
-              width: number | null
-              height: number | null
-              crop: SanityImageCrop | null
-              hotspot: SanityImageHotspot | null
-              asset: {
-                _id: string
-                _type: 'sanity.imageAsset'
-                url: string
-                metadata: {
-                  dimensions: {
-                    width: number
-                    height: number
-                    aspectRatio: number
-                  } | null
-                  lqip: string | null
-                  blurhash: null
-                  palette: {
-                    dominant: {
-                      background: string | null
-                    } | null
+                lqip: string | null
+                blurhash: null
+                palette: {
+                  dominant: {
+                    background: string | null
                   } | null
                 } | null
               } | null
-            }
-          | {
-              _key: string
-              _type: 'mainPortableText'
-              portableTextBlock: Array<
-                | {
-                    children?: Array<{
-                      marks?: Array<string>
-                      text?: string
-                      _type: 'span'
-                      _key: string
-                    }>
-                    style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'normal'
-                    listItem?: 'bullet' | 'number'
-                    markDefs: Array<
-                      | {
-                          _key: string
-                          _type: 'internalLink'
-                          item:
-                            | {
-                                _id: string
-                                _type: 'blogLandingPage'
-                                slug: string
-                                title: string
-                              }
-                            | {
-                                _id: string
-                                _type: 'page'
-                                slug: string
-                                title: string
-                              }
-                            | {
-                                _id: string
-                                _type: 'post'
-                                slug: string
-                                title: string
-                              }
-                            | null
-                        }
-                      | {
-                          _key: string
-                          _type: 'link'
-                          href: string | null
-                          blank: boolean | null
-                        }
-                    > | null
-                    level?: number
-                    _type: 'block'
+            } | null
+          } | null
+          content: {
+            portableTextBlock: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
                     _key: string
-                  }
-                | {
-                    _key: string
-                    _type: 'contactInfo'
-                    headline?: string
-                    phoneNumber: string
-                    phoneLabel?: string
-                    email: string
-                    textColor?: 'blue' | 'white'
-                    size?: 'large' | 'normal'
-                    markDefs: null
-                  }
-                | {
-                    _key: string
-                    _type: 'cta'
-                    title: string | null
-                    kind: 'button' | 'link' | null
-                    arrow: boolean | null
-                    landingPageRoute?: BlogLandingPageReference | PageReference | PostReference
-                    link: string | null
-                    anchor: string | null
-                    fileDownload: {
-                      _type: 'file'
-                      asset: {
-                        _id: string
-                        _type: 'sanity.fileAsset'
-                        url: string
-                      } | null
-                    } | null
-                    landingPage:
-                      | {
-                          _id: string
-                          _type: 'blogLandingPage'
-                          slug: string
-                          title: string
-                        }
-                      | {
-                          _id: string
-                          _type: 'page'
-                          slug: string
-                          title: string
-                        }
-                      | {
-                          _id: string
-                          _type: 'post'
-                          slug: string
-                          title: string
-                        }
-                      | null
-                    markDefs: null
-                  }
-                | {
-                    hr?: string
-                    size?: string
-                    width?: string
-                    _type: 'hr'
-                    _key: string
-                    markDefs: null
-                  }
-                | {
+                  }>
+                  style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs: Array<
+                    | {
+                        _key: string
+                        _type: 'internalLink'
+                        item:
+                          | {
+                              _id: string
+                              _type: 'blogLandingPage'
+                              slug: string
+                              title: string
+                            }
+                          | {
+                              _id: string
+                              _type: 'page'
+                              slug: string
+                              title: string
+                            }
+                          | {
+                              _id: string
+                              _type: 'post'
+                              slug: string
+                              title: string
+                            }
+                          | null
+                      }
+                    | {
+                        _key: string
+                        _type: 'link'
+                        href: string | null
+                        blank: boolean | null
+                      }
+                  > | null
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+              | {
+                  _key: string
+                  _type: 'contactInfo'
+                  headline?: string
+                  phoneNumber: string
+                  phoneLabel?: string
+                  email: string
+                  textColor?: 'blue' | 'white'
+                  size?: 'large' | 'normal'
+                  markDefs: null
+                }
+              | {
+                  _key: string
+                  _type: 'cta'
+                  title: string | null
+                  kind: 'button' | 'link' | null
+                  arrow: boolean | null
+                  landingPageRoute?: BlogLandingPageReference | PageReference | PostReference
+                  link: string | null
+                  anchor: string | null
+                  fileDownload: {
+                    _type: 'file'
                     asset: {
                       _id: string
-                      _type: 'sanity.imageAsset'
-                      metadata: {
-                        dimensions: {
-                          width: number
-                          height: number
-                          aspectRatio: number
-                        } | null
-                        lqip: string | null
-                        blurhash: null
-                      } | null
+                      _type: 'sanity.fileAsset'
+                      url: string
                     } | null
-                    media?: unknown
-                    hotspot: SanityImageHotspot | null
-                    crop: SanityImageCrop | null
-                    alt: string | null
-                    _type: 'image'
-                    _key: string
-                    markDefs: null
-                  }
-              > | null
-            }
-        > | null
+                  } | null
+                  landingPage:
+                    | {
+                        _id: string
+                        _type: 'blogLandingPage'
+                        slug: string
+                        title: string
+                      }
+                    | {
+                        _id: string
+                        _type: 'page'
+                        slug: string
+                        title: string
+                      }
+                    | {
+                        _id: string
+                        _type: 'post'
+                        slug: string
+                        title: string
+                      }
+                    | null
+                  markDefs: null
+                }
+              | {
+                  hr?: string
+                  size?: string
+                  width?: string
+                  _type: 'hr'
+                  _key: string
+                  markDefs: null
+                }
+              | {
+                  asset: {
+                    _id: string
+                    _type: 'sanity.imageAsset'
+                    metadata: {
+                      dimensions: {
+                        width: number
+                        height: number
+                        aspectRatio: number
+                      } | null
+                      lqip: string | null
+                      blurhash: null
+                    } | null
+                  } | null
+                  media?: unknown
+                  hotspot: SanityImageHotspot | null
+                  crop: SanityImageCrop | null
+                  alt: string | null
+                  _type: 'image'
+                  _key: string
+                  markDefs: null
+                }
+            > | null
+          } | null
+          backgroundColor: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5' | null
+          centerText: boolean | null
+        } | null
         disabled: boolean | null
       }
     | {
@@ -2192,7 +2293,7 @@ export type HomeMetaQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: getPageQuery
-// Query: *[_type in ["page","blogLandingPage"] && slug.current == $slug][0]{    _id,    _type,    slug,    title,    overview,    seo{      seoTitle,      seoDescription,      noindex,      canonicalUrl,      ogImage{          _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }      }    },    content[]{      _key,      _type,      _type == "heroBanner" => {        size,        subheading,        textTone,        textAlign,        tintBehindCopy,        copyTint,        ctaTone,        heading,        copy{            portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }        },        image{            _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }        },        cta{            _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }        },        disabled      },      _type == "heroTwoPanel" => {        size,        backgroundColor,        image{            _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }        },        mainPortableText{            portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }        },        centerText,        disabled      },      _type == "singleColumnContentBlock" => {        title,        backgroundColor,        removeBottomPadding,        skinny,        centerContent,        contentBlock{          portableTextBlock{              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          }        },        disabled      },      _type == "rowContainer" => {        title,        hideTitle,        centerTitle,        titleColor,        row,        removeBottomPadding,        condensedCopy,        centerCopy,        image{            _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }        },        overlay,        backgroundColor,        rowContent[]{          _key,          _type,          _type == "carousel" => {            carouselImages[]{                _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }            }          },          _type == "mainImage" => {              _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }          },          _type == "mainPortableText" => {              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          }        },        disabled      },      _type == "postsGridContainer" => {        backgroundColor,        "posts": posts[]{          _type == "reference" => @->{            _id,            _type,            title,            "slug": slug.current,            excerpt,            image{                _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }            },            _updatedAt          }        }[_type != "reference" || @->._id != null]      },      _type == "photoGridContainer" => {        title,        backgroundColor,        columns,        gap,        showCaptions,        images[]{          _key,          _type,          title,          location,          description{              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          },          dateCaptured,          cameraText,          lensText,          cameraRef->{              _id,  _type,  kind,  brand,  model,  nickname,  notes,  link          },          lensRef->{              _id,  _type,  kind,  brand,  model,  nickname,  notes,  link          },          "image": coalesce(image, @){              _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }          },        },        disabled      }    }  }
+// Query: *[_type in ["page","blogLandingPage"] && slug.current == $slug][0]{    _id,    _type,    slug,    title,    overview,    seo{      seoTitle,      seoDescription,      noindex,      canonicalUrl,      ogImage{          _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }      }    },    content[]{      _key,      _type,      _type == "heroBanner" => {        size,        subheading,        textTone,        textAlign,        tintBehindCopy,        copyTint,        ctaTone,        heading,        copy{            portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }        },        image{            _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }        },        cta{            _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }        },        disabled      },      _type == "heroTwoPanel" => {        size,        backgroundColor,        image{            _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }        },        mainPortableText{            portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }        },        centerText,        disabled      },      _type == "singleColumnContentBlock" => {        title,        backgroundColor,        removeBottomPadding,        skinny,        centerContent,        contentBlock{          portableTextBlock{              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          }        },        disabled      },      _type == "rowContainer" => {        title,        hideTitle,        centerTitle,        titleColor,        split,        leftPanel{          panelType,          image{              _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }          },          content{              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          },          backgroundColor,          centerText        },        rightPanel{          panelType,          image{              _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }          },          content{              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          },          backgroundColor,          centerText        },        disabled      },      _type == "postsGridContainer" => {        backgroundColor,        "posts": posts[]{          _type == "reference" => @->{            _id,            _type,            title,            "slug": slug.current,            excerpt,            image{                _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }            },            _updatedAt          }        }[_type != "reference" || @->._id != null]      },      _type == "photoGridContainer" => {        title,        backgroundColor,        columns,        gap,        showCaptions,        images[]{          _key,          _type,          title,          location,          description{              portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  }          },          dateCaptured,          cameraText,          lensText,          cameraRef->{              _id,  _type,  kind,  brand,  model,  nickname,  notes,  link          },          lensRef->{              _id,  _type,  kind,  brand,  model,  nickname,  notes,  link          },          "image": coalesce(image, @){              _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  }          },        },        disabled      }    }  }
 export type GetPageQueryResult =
   | {
       _id: string
@@ -3416,231 +3517,329 @@ export type GetPageQueryResult =
             hideTitle: boolean | null
             centerTitle: boolean | null
             titleColor: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5' | null
-            row: 'threeColumn' | 'twoColumn' | null
-            removeBottomPadding: boolean | null
-            condensedCopy: boolean | null
-            centerCopy: boolean | null
-            image: {
-              _type: 'mainImage'
-              alt: string | null
-              width: number | null
-              height: number | null
-              crop: SanityImageCrop | null
-              hotspot: SanityImageHotspot | null
-              asset: {
-                _id: string
-                _type: 'sanity.imageAsset'
-                url: string
-                metadata: {
-                  dimensions: {
-                    width: number
-                    height: number
-                    aspectRatio: number
-                  } | null
-                  lqip: string | null
-                  blurhash: null
-                  palette: {
-                    dominant: {
-                      background: string | null
+            split: '40-60' | '50-50' | '60-40' | null
+            leftPanel: {
+              panelType: 'image' | 'text'
+              image: {
+                _type: 'mainImage'
+                alt: string | null
+                width: number | null
+                height: number | null
+                crop: SanityImageCrop | null
+                hotspot: SanityImageHotspot | null
+                asset: {
+                  _id: string
+                  _type: 'sanity.imageAsset'
+                  url: string
+                  metadata: {
+                    dimensions: {
+                      width: number
+                      height: number
+                      aspectRatio: number
+                    } | null
+                    lqip: string | null
+                    blurhash: null
+                    palette: {
+                      dominant: {
+                        background: string | null
+                      } | null
                     } | null
                   } | null
                 } | null
               } | null
-            } | null
-            overlay: 'blueOverlay' | 'darkOverlay' | 'noOverlay' | null
-            backgroundColor: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5' | null
-            rowContent: Array<
-              | {
-                  _key: string
-                  _type: 'carousel'
-                  carouselImages: Array<{
-                    _type: 'mainImage'
-                    alt: string | null
-                    width: number | null
-                    height: number | null
-                    crop: SanityImageCrop | null
-                    hotspot: SanityImageHotspot | null
-                    asset: {
-                      _id: string
-                      _type: 'sanity.imageAsset'
-                      url: string
-                      metadata: {
-                        dimensions: {
-                          width: number
-                          height: number
-                          aspectRatio: number
+              content: {
+                portableTextBlock: Array<
+                  | {
+                      children?: Array<{
+                        marks?: Array<string>
+                        text?: string
+                        _type: 'span'
+                        _key: string
+                      }>
+                      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'normal'
+                      listItem?: 'bullet' | 'number'
+                      markDefs: Array<
+                        | {
+                            _key: string
+                            _type: 'internalLink'
+                            item:
+                              | {
+                                  _id: string
+                                  _type: 'blogLandingPage'
+                                  slug: string
+                                  title: string
+                                }
+                              | {
+                                  _id: string
+                                  _type: 'page'
+                                  slug: string
+                                  title: string
+                                }
+                              | {
+                                  _id: string
+                                  _type: 'post'
+                                  slug: string
+                                  title: string
+                                }
+                              | null
+                          }
+                        | {
+                            _key: string
+                            _type: 'link'
+                            href: string | null
+                            blank: boolean | null
+                          }
+                      > | null
+                      level?: number
+                      _type: 'block'
+                      _key: string
+                    }
+                  | {
+                      _key: string
+                      _type: 'contactInfo'
+                      headline?: string
+                      phoneNumber: string
+                      phoneLabel?: string
+                      email: string
+                      textColor?: 'blue' | 'white'
+                      size?: 'large' | 'normal'
+                      markDefs: null
+                    }
+                  | {
+                      _key: string
+                      _type: 'cta'
+                      title: string | null
+                      kind: 'button' | 'link' | null
+                      arrow: boolean | null
+                      landingPageRoute?: BlogLandingPageReference | PageReference | PostReference
+                      link: string | null
+                      anchor: string | null
+                      fileDownload: {
+                        _type: 'file'
+                        asset: {
+                          _id: string
+                          _type: 'sanity.fileAsset'
+                          url: string
                         } | null
-                        lqip: string | null
-                        blurhash: null
-                        palette: {
-                          dominant: {
-                            background: string | null
+                      } | null
+                      landingPage:
+                        | {
+                            _id: string
+                            _type: 'blogLandingPage'
+                            slug: string
+                            title: string
+                          }
+                        | {
+                            _id: string
+                            _type: 'page'
+                            slug: string
+                            title: string
+                          }
+                        | {
+                            _id: string
+                            _type: 'post'
+                            slug: string
+                            title: string
+                          }
+                        | null
+                      markDefs: null
+                    }
+                  | {
+                      hr?: string
+                      size?: string
+                      width?: string
+                      _type: 'hr'
+                      _key: string
+                      markDefs: null
+                    }
+                  | {
+                      asset: {
+                        _id: string
+                        _type: 'sanity.imageAsset'
+                        metadata: {
+                          dimensions: {
+                            width: number
+                            height: number
+                            aspectRatio: number
                           } | null
+                          lqip: string | null
+                          blurhash: null
                         } | null
                       } | null
+                      media?: unknown
+                      hotspot: SanityImageHotspot | null
+                      crop: SanityImageCrop | null
+                      alt: string | null
+                      _type: 'image'
+                      _key: string
+                      markDefs: null
+                    }
+                > | null
+              } | null
+              backgroundColor: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5' | null
+              centerText: boolean | null
+            } | null
+            rightPanel: {
+              panelType: 'image' | 'text'
+              image: {
+                _type: 'mainImage'
+                alt: string | null
+                width: number | null
+                height: number | null
+                crop: SanityImageCrop | null
+                hotspot: SanityImageHotspot | null
+                asset: {
+                  _id: string
+                  _type: 'sanity.imageAsset'
+                  url: string
+                  metadata: {
+                    dimensions: {
+                      width: number
+                      height: number
+                      aspectRatio: number
                     } | null
-                  }> | null
-                }
-              | {
-                  _key: string
-                  _type: 'mainImage'
-                  alt: string | null
-                  width: number | null
-                  height: number | null
-                  crop: SanityImageCrop | null
-                  hotspot: SanityImageHotspot | null
-                  asset: {
-                    _id: string
-                    _type: 'sanity.imageAsset'
-                    url: string
-                    metadata: {
-                      dimensions: {
-                        width: number
-                        height: number
-                        aspectRatio: number
-                      } | null
-                      lqip: string | null
-                      blurhash: null
-                      palette: {
-                        dominant: {
-                          background: string | null
-                        } | null
+                    lqip: string | null
+                    blurhash: null
+                    palette: {
+                      dominant: {
+                        background: string | null
                       } | null
                     } | null
                   } | null
-                }
-              | {
-                  _key: string
-                  _type: 'mainPortableText'
-                  portableTextBlock: Array<
-                    | {
-                        children?: Array<{
-                          marks?: Array<string>
-                          text?: string
-                          _type: 'span'
-                          _key: string
-                        }>
-                        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'normal'
-                        listItem?: 'bullet' | 'number'
-                        markDefs: Array<
-                          | {
-                              _key: string
-                              _type: 'internalLink'
-                              item:
-                                | {
-                                    _id: string
-                                    _type: 'blogLandingPage'
-                                    slug: string
-                                    title: string
-                                  }
-                                | {
-                                    _id: string
-                                    _type: 'page'
-                                    slug: string
-                                    title: string
-                                  }
-                                | {
-                                    _id: string
-                                    _type: 'post'
-                                    slug: string
-                                    title: string
-                                  }
-                                | null
-                            }
-                          | {
-                              _key: string
-                              _type: 'link'
-                              href: string | null
-                              blank: boolean | null
-                            }
-                        > | null
-                        level?: number
-                        _type: 'block'
+                } | null
+              } | null
+              content: {
+                portableTextBlock: Array<
+                  | {
+                      children?: Array<{
+                        marks?: Array<string>
+                        text?: string
+                        _type: 'span'
                         _key: string
-                      }
-                    | {
-                        _key: string
-                        _type: 'contactInfo'
-                        headline?: string
-                        phoneNumber: string
-                        phoneLabel?: string
-                        email: string
-                        textColor?: 'blue' | 'white'
-                        size?: 'large' | 'normal'
-                        markDefs: null
-                      }
-                    | {
-                        _key: string
-                        _type: 'cta'
-                        title: string | null
-                        kind: 'button' | 'link' | null
-                        arrow: boolean | null
-                        landingPageRoute?: BlogLandingPageReference | PageReference | PostReference
-                        link: string | null
-                        anchor: string | null
-                        fileDownload: {
-                          _type: 'file'
-                          asset: {
-                            _id: string
-                            _type: 'sanity.fileAsset'
-                            url: string
-                          } | null
-                        } | null
-                        landingPage:
-                          | {
-                              _id: string
-                              _type: 'blogLandingPage'
-                              slug: string
-                              title: string
-                            }
-                          | {
-                              _id: string
-                              _type: 'page'
-                              slug: string
-                              title: string
-                            }
-                          | {
-                              _id: string
-                              _type: 'post'
-                              slug: string
-                              title: string
-                            }
-                          | null
-                        markDefs: null
-                      }
-                    | {
-                        hr?: string
-                        size?: string
-                        width?: string
-                        _type: 'hr'
-                        _key: string
-                        markDefs: null
-                      }
-                    | {
+                      }>
+                      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'normal'
+                      listItem?: 'bullet' | 'number'
+                      markDefs: Array<
+                        | {
+                            _key: string
+                            _type: 'internalLink'
+                            item:
+                              | {
+                                  _id: string
+                                  _type: 'blogLandingPage'
+                                  slug: string
+                                  title: string
+                                }
+                              | {
+                                  _id: string
+                                  _type: 'page'
+                                  slug: string
+                                  title: string
+                                }
+                              | {
+                                  _id: string
+                                  _type: 'post'
+                                  slug: string
+                                  title: string
+                                }
+                              | null
+                          }
+                        | {
+                            _key: string
+                            _type: 'link'
+                            href: string | null
+                            blank: boolean | null
+                          }
+                      > | null
+                      level?: number
+                      _type: 'block'
+                      _key: string
+                    }
+                  | {
+                      _key: string
+                      _type: 'contactInfo'
+                      headline?: string
+                      phoneNumber: string
+                      phoneLabel?: string
+                      email: string
+                      textColor?: 'blue' | 'white'
+                      size?: 'large' | 'normal'
+                      markDefs: null
+                    }
+                  | {
+                      _key: string
+                      _type: 'cta'
+                      title: string | null
+                      kind: 'button' | 'link' | null
+                      arrow: boolean | null
+                      landingPageRoute?: BlogLandingPageReference | PageReference | PostReference
+                      link: string | null
+                      anchor: string | null
+                      fileDownload: {
+                        _type: 'file'
                         asset: {
                           _id: string
-                          _type: 'sanity.imageAsset'
-                          metadata: {
-                            dimensions: {
-                              width: number
-                              height: number
-                              aspectRatio: number
-                            } | null
-                            lqip: string | null
-                            blurhash: null
-                          } | null
+                          _type: 'sanity.fileAsset'
+                          url: string
                         } | null
-                        media?: unknown
-                        hotspot: SanityImageHotspot | null
-                        crop: SanityImageCrop | null
-                        alt: string | null
-                        _type: 'image'
-                        _key: string
-                        markDefs: null
-                      }
-                  > | null
-                }
-            > | null
+                      } | null
+                      landingPage:
+                        | {
+                            _id: string
+                            _type: 'blogLandingPage'
+                            slug: string
+                            title: string
+                          }
+                        | {
+                            _id: string
+                            _type: 'page'
+                            slug: string
+                            title: string
+                          }
+                        | {
+                            _id: string
+                            _type: 'post'
+                            slug: string
+                            title: string
+                          }
+                        | null
+                      markDefs: null
+                    }
+                  | {
+                      hr?: string
+                      size?: string
+                      width?: string
+                      _type: 'hr'
+                      _key: string
+                      markDefs: null
+                    }
+                  | {
+                      asset: {
+                        _id: string
+                        _type: 'sanity.imageAsset'
+                        metadata: {
+                          dimensions: {
+                            width: number
+                            height: number
+                            aspectRatio: number
+                          } | null
+                          lqip: string | null
+                          blurhash: null
+                        } | null
+                      } | null
+                      media?: unknown
+                      hotspot: SanityImageHotspot | null
+                      crop: SanityImageCrop | null
+                      alt: string | null
+                      _type: 'image'
+                      _key: string
+                      markDefs: null
+                    }
+                > | null
+              } | null
+              backgroundColor: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5' | null
+              centerText: boolean | null
+            } | null
             disabled: boolean | null
           }
         | {
@@ -3885,9 +4084,9 @@ declare module '@sanity/client' {
   interface SanityQueries {
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    siteLogo{\n      \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n    },\n    menuItems[]{\n      _key,\n      _type,\n      _type == "navCTA" => {\n        _key,\n        _type,\n        cta{\n          \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n        }\n      },\n      _type == "navDropdownCTA" => {\n        _key,\n        _type,\n        cta{\n          \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n        },\n        subnav[]{\n          _key,\n          \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n        }\n      },\n      // Defensive: in case this array contains references (or embedded documents)\n      _type == "reference" => @->{\n        _id,\n        _type,\n        title,\n        "slug": slug.current\n      },\n      _type == "blogLandingPage" => {\n        _id,\n        _type,\n        title,\n        "slug": slug.current\n      }\n    },\n    ogImage{\n      \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n,\n      metadataBase\n    }\n  }\n': SettingsQueryResult
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    siteLogo{\n      \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n    },\n    siteFavicon{\n      \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n    },\n    ogImage{\n      \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n,\n      metadataBase\n    }\n  }\n': SettingsMetaQueryResult
-    '\n  *[_type == "home" && _id == "home"][0]{\n    _id,\n    _type,\n    title,\n    overview,\n    seo{\n      seoTitle,\n      seoDescription,\n      noindex,\n      canonicalUrl,\n      ogImage{\n        \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n      }\n    },\n    content[]{\n      _key,\n      _type,\n      _type == "heroBanner" => {\n        size,\n        subheading,\n        textTone,\n        textAlign,\n        tintBehindCopy,\n        copyTint,\n        ctaTone,\n        heading,\n        copy{\n          \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n        },\n        image{\n          \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n        },\n        cta{\n          \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n        },\n        disabled\n      },\n      _type == "heroTwoPanel" => {\n        size,\n        backgroundColor,\n        image{\n          \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n        },\n        mainPortableText{\n          \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n        },\n        centerText,\n        disabled\n      },\n      _type == "singleColumnContentBlock" => {\n        title,\n        backgroundColor,\n        removeBottomPadding,\n        skinny,\n        centerContent,\n        contentBlock{\n          portableTextBlock{\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          }\n        },\n        disabled\n      },\n      _type == "rowContainer" => {\n        title,\n        hideTitle,\n        centerTitle,\n        titleColor,\n        row,\n        removeBottomPadding,\n        condensedCopy,\n        centerCopy,\n        image{\n          \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n        },\n        overlay,\n        backgroundColor,\n        rowContent[]{\n          _key,\n          _type,\n          _type == "carousel" => {\n            carouselImages[]{\n              \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n            }\n          },\n          _type == "mainImage" => {\n            \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n          },\n          _type == "mainPortableText" => {\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          }\n        },\n        disabled\n      },\n      _type == "postsGridContainer" => {\n        backgroundColor,\n        "posts": posts[]{\n          _type == "reference" => @->{\n            _id,\n            _type,\n            title,\n            "slug": slug.current,\n            excerpt,\n            image{\n              \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n            },\n            _updatedAt\n          }\n        }[_type != "reference" || @->._id != null]\n      },\n      _type == "photoGridContainer" => {\n        title,\n        backgroundColor,\n        columns,\n        gap,\n        showCaptions,\n        images[]{\n          _key,\n          _type,\n          title,\n          location,\n          description{\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          },\n          dateCaptured,\n          cameraText,\n          lensText,\n          cameraRef->{\n            \n  _id,\n  _type,\n  kind,\n  brand,\n  model,\n  nickname,\n  notes,\n  link\n\n          },\n          lensRef->{\n            \n  _id,\n  _type,\n  kind,\n  brand,\n  model,\n  nickname,\n  notes,\n  link\n\n          },\n          "image": coalesce(image, @){\n            \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n          },\n        },\n        disabled\n      }\n    }\n  }\n': HomeQueryResult
+    '\n  *[_type == "home" && _id == "home"][0]{\n    _id,\n    _type,\n    title,\n    overview,\n    seo{\n      seoTitle,\n      seoDescription,\n      noindex,\n      canonicalUrl,\n      ogImage{\n        \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n      }\n    },\n    content[]{\n      _key,\n      _type,\n      _type == "heroBanner" => {\n        size,\n        subheading,\n        textTone,\n        textAlign,\n        tintBehindCopy,\n        copyTint,\n        ctaTone,\n        heading,\n        copy{\n          \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n        },\n        image{\n          \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n        },\n        cta{\n          \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n        },\n        disabled\n      },\n      _type == "heroTwoPanel" => {\n        size,\n        backgroundColor,\n        image{\n          \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n        },\n        mainPortableText{\n          \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n        },\n        centerText,\n        disabled\n      },\n      _type == "singleColumnContentBlock" => {\n        title,\n        backgroundColor,\n        removeBottomPadding,\n        skinny,\n        centerContent,\n        contentBlock{\n          portableTextBlock{\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          }\n        },\n        disabled\n      },\n      _type == "rowContainer" => {\n        title,\n        hideTitle,\n        centerTitle,\n        titleColor,\n        split,\n        leftPanel{\n          panelType,\n          image{\n            \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n          },\n          content{\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          },\n          backgroundColor,\n          centerText\n        },\n        rightPanel{\n          panelType,\n          image{\n            \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n          },\n          content{\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          },\n          backgroundColor,\n          centerText\n        },\n        disabled\n      },\n      _type == "postsGridContainer" => {\n        backgroundColor,\n        "posts": posts[]{\n          _type == "reference" => @->{\n            _id,\n            _type,\n            title,\n            "slug": slug.current,\n            excerpt,\n            image{\n              \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n            },\n            _updatedAt\n          }\n        }[_type != "reference" || @->._id != null]\n      },\n      _type == "photoGridContainer" => {\n        title,\n        backgroundColor,\n        columns,\n        gap,\n        showCaptions,\n        images[]{\n          _key,\n          _type,\n          title,\n          location,\n          description{\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          },\n          dateCaptured,\n          cameraText,\n          lensText,\n          cameraRef->{\n            \n  _id,\n  _type,\n  kind,\n  brand,\n  model,\n  nickname,\n  notes,\n  link\n\n          },\n          lensRef->{\n            \n  _id,\n  _type,\n  kind,\n  brand,\n  model,\n  nickname,\n  notes,\n  link\n\n          },\n          "image": coalesce(image, @){\n            \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n          },\n        },\n        disabled\n      }\n    }\n  }\n': HomeQueryResult
     '\n  *[_type == "home" && _id == "home"][0]{\n    _id,\n    _type,\n    title,\n    overview,\n    seo{\n      seoTitle,\n      seoDescription,\n      noindex,\n      canonicalUrl\n    }\n  }\n': HomeMetaQueryResult
-    '\n  *[_type in ["page","blogLandingPage"] && slug.current == $slug][0]{\n    _id,\n    _type,\n    slug,\n    title,\n    overview,\n    seo{\n      seoTitle,\n      seoDescription,\n      noindex,\n      canonicalUrl,\n      ogImage{\n        \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n      }\n    },\n    content[]{\n      _key,\n      _type,\n      _type == "heroBanner" => {\n        size,\n        subheading,\n        textTone,\n        textAlign,\n        tintBehindCopy,\n        copyTint,\n        ctaTone,\n        heading,\n        copy{\n          \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n        },\n        image{\n          \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n        },\n        cta{\n          \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n        },\n        disabled\n      },\n      _type == "heroTwoPanel" => {\n        size,\n        backgroundColor,\n        image{\n          \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n        },\n        mainPortableText{\n          \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n        },\n        centerText,\n        disabled\n      },\n      _type == "singleColumnContentBlock" => {\n        title,\n        backgroundColor,\n        removeBottomPadding,\n        skinny,\n        centerContent,\n        contentBlock{\n          portableTextBlock{\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          }\n        },\n        disabled\n      },\n      _type == "rowContainer" => {\n        title,\n        hideTitle,\n        centerTitle,\n        titleColor,\n        row,\n        removeBottomPadding,\n        condensedCopy,\n        centerCopy,\n        image{\n          \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n        },\n        overlay,\n        backgroundColor,\n        rowContent[]{\n          _key,\n          _type,\n          _type == "carousel" => {\n            carouselImages[]{\n              \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n            }\n          },\n          _type == "mainImage" => {\n            \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n          },\n          _type == "mainPortableText" => {\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          }\n        },\n        disabled\n      },\n      _type == "postsGridContainer" => {\n        backgroundColor,\n        "posts": posts[]{\n          _type == "reference" => @->{\n            _id,\n            _type,\n            title,\n            "slug": slug.current,\n            excerpt,\n            image{\n              \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n            },\n            _updatedAt\n          }\n        }[_type != "reference" || @->._id != null]\n      },\n      _type == "photoGridContainer" => {\n        title,\n        backgroundColor,\n        columns,\n        gap,\n        showCaptions,\n        images[]{\n          _key,\n          _type,\n          title,\n          location,\n          description{\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          },\n          dateCaptured,\n          cameraText,\n          lensText,\n          cameraRef->{\n            \n  _id,\n  _type,\n  kind,\n  brand,\n  model,\n  nickname,\n  notes,\n  link\n\n          },\n          lensRef->{\n            \n  _id,\n  _type,\n  kind,\n  brand,\n  model,\n  nickname,\n  notes,\n  link\n\n          },\n          "image": coalesce(image, @){\n            \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n          },\n        },\n        disabled\n      }\n    }\n  }\n': GetPageQueryResult
+    '\n  *[_type in ["page","blogLandingPage"] && slug.current == $slug][0]{\n    _id,\n    _type,\n    slug,\n    title,\n    overview,\n    seo{\n      seoTitle,\n      seoDescription,\n      noindex,\n      canonicalUrl,\n      ogImage{\n        \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n      }\n    },\n    content[]{\n      _key,\n      _type,\n      _type == "heroBanner" => {\n        size,\n        subheading,\n        textTone,\n        textAlign,\n        tintBehindCopy,\n        copyTint,\n        ctaTone,\n        heading,\n        copy{\n          \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n        },\n        image{\n          \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n        },\n        cta{\n          \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n        },\n        disabled\n      },\n      _type == "heroTwoPanel" => {\n        size,\n        backgroundColor,\n        image{\n          \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n        },\n        mainPortableText{\n          \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n        },\n        centerText,\n        disabled\n      },\n      _type == "singleColumnContentBlock" => {\n        title,\n        backgroundColor,\n        removeBottomPadding,\n        skinny,\n        centerContent,\n        contentBlock{\n          portableTextBlock{\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          }\n        },\n        disabled\n      },\n      _type == "rowContainer" => {\n        title,\n        hideTitle,\n        centerTitle,\n        titleColor,\n        split,\n        leftPanel{\n          panelType,\n          image{\n            \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n          },\n          content{\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          },\n          backgroundColor,\n          centerText\n        },\n        rightPanel{\n          panelType,\n          image{\n            \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n          },\n          content{\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          },\n          backgroundColor,\n          centerText\n        },\n        disabled\n      },\n      _type == "postsGridContainer" => {\n        backgroundColor,\n        "posts": posts[]{\n          _type == "reference" => @->{\n            _id,\n            _type,\n            title,\n            "slug": slug.current,\n            excerpt,\n            image{\n              \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n            },\n            _updatedAt\n          }\n        }[_type != "reference" || @->._id != null]\n      },\n      _type == "photoGridContainer" => {\n        title,\n        backgroundColor,\n        columns,\n        gap,\n        showCaptions,\n        images[]{\n          _key,\n          _type,\n          title,\n          location,\n          description{\n            \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n          },\n          dateCaptured,\n          cameraText,\n          lensText,\n          cameraRef->{\n            \n  _id,\n  _type,\n  kind,\n  brand,\n  model,\n  nickname,\n  notes,\n  link\n\n          },\n          lensRef->{\n            \n  _id,\n  _type,\n  kind,\n  brand,\n  model,\n  nickname,\n  notes,\n  link\n\n          },\n          "image": coalesce(image, @){\n            \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n          },\n        },\n        disabled\n      }\n    }\n  }\n': GetPageQueryResult
     '\n  *[_type in ["page", "post", "blogLandingPage"] && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
     '\n  *[_type == "post" && defined(slug.current)] | order(_updatedAt desc) {\n    \n  _id,\n  _type,\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  image,\n  _updatedAt,\n\n  }\n': AllPostsQueryResult
     '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(_updatedAt desc) [0...$limit] {\n    \n  _id,\n  _type,\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  image,\n  _updatedAt,\n\n  }\n': MorePostsQueryResult

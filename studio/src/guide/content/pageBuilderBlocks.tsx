@@ -91,35 +91,37 @@ const blocks: PageBuilderBlock[] = [
   },
   {
     id: 'row-container',
-    title: 'Multi Column Row',
+    title: 'Two Column',
     whenToUse:
-      'Two- or three-column layouts with shared row settings. Put portable text, images, or carousels inside each column.',
+      'A side-by-side two-column section. Each column (panel) is either an image or text on a solid background colour. Stacks vertically on mobile.',
     fields: [
-      'Content Row — Two Column or Three Column',
-      'Row Content — per-column blocks (Portable Text, Image, Carousel)',
+      'Column Split — 40 / 60, 50 / 50 (default), or 60 / 40 width ratio on desktop',
+      'Left Panel & Right Panel — each set to Image or Text',
+      'Image panel — main image with alt text',
+      'Text panel — full Portable Text, a background colour from the site palette, and optional Center Text',
       'Title — optional section heading with colour, centre, or Hide Title (hidden on site, visible in Studio)',
-      'Optional background image or colour; overlay when a background image is set',
-      'Condensed Copy / Centered Copy / Remove Bottom Padding',
       'Disabled',
     ],
     gotchas: [
       'Hide Title keeps a label in the CMS but removes it from the live page — useful for organizing sections.',
-      'Column count is set once per row — pick Two Column or Three Column under Content Row.',
+      'On mobile the Left Panel always appears first (above the Right Panel).',
+      'Image panels stretch to match the height of the text panel beside them on desktop.',
     ],
     subsections: [
       {
-        title: 'Two Column',
+        title: 'Image + Text',
         whenToUse:
-          'Set Content Row to Two Column. Row content fills two side-by-side columns on desktop (stacked on mobile).',
+          'A common pattern: set one panel to Image and the other to Text. Use the Column Split to give the image or the copy more room.',
         fields: [
-          'Add two items to Row Content — typically Portable Text and/or Image in each column',
+          'Pick a Column Split (e.g. 60 / 40 to favour the image)',
+          'Set the text panel’s background colour from the site palette for contrast',
         ],
       },
       {
-        title: 'Three Column',
+        title: 'Text + Text',
         whenToUse:
-          'Set Content Row to Three Column. Row content fills three columns on desktop (stacked on mobile).',
-        fields: ['Add up to three column blocks in Row Content'],
+          'Set both panels to Text to place two blocks of copy side by side, each on its own background colour.',
+        fields: ['Choose a background colour per panel from the site palette'],
       },
     ],
   },

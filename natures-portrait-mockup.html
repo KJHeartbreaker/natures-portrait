@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nature's Portrait — Homepage Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --luxe-noir:     #060D0C;
+      --coastal-pine:  #3E5954;
+      --dusty-sage:    #758886;
+      --linen-clay:    #C6C2BB;
+      --soft-oat:      #F0EDE5;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      color: var(--luxe-noir);
+      background: var(--soft-oat);
+    }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, padding 0.3s ease;
+    }
+    nav.transparent { background: transparent; }
+    nav.solid {
+      background: rgba(6, 13, 12, 0.96);
+      backdrop-filter: blur(8px);
+      padding: 1rem 3rem;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--soft-oat);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--linen-clay);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--soft-oat); }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      background: var(--luxe-noir);
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      will-change: transform;
+      /* parallax applied via JS */
+    }
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(6,13,12,0.92) 0%,
+        rgba(6,13,12,0.2) 50%,
+        rgba(6,13,12,0.1) 100%
+      );
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 4rem 3rem;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--dusty-sage);
+      margin-bottom: 0.85rem;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(56px, 8vw, 96px);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--soft-oat);
+      letter-spacing: -0.01em;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--linen-clay);
+    }
+    .hero-sub {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--dusty-sage);
+      margin-top: 1.25rem;
+      text-transform: uppercase;
+    }
+
+    /* ─── SECTION LABEL ───────────────────────────────────── */
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--dusty-sage);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--linen-clay);
+    }
+
+    /* ─── EDITORIAL TWO-COLUMN ────────────────────────────── */
+    .editorial {
+      padding: 5rem 3rem;
+      background: var(--soft-oat);
+    }
+    .editorial-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .editorial-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+      background: var(--coastal-pine);
+    }
+    .editorial-caption {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--dusty-sage);
+      margin-top: 0.85rem;
+      text-transform: uppercase;
+    }
+    .editorial-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      color: var(--luxe-noir);
+    }
+    .editorial-title em {
+      font-style: italic;
+      color: var(--coastal-pine);
+    }
+    .editorial-body {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--coastal-pine);
+    }
+    .editorial-link {
+      display: inline-block;
+      margin-top: 2rem;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--luxe-noir);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--coastal-pine);
+      padding-bottom: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .editorial-link:hover { color: var(--coastal-pine); }
+
+    /* ─── TWO-COLUMN SPLIT BLOCK ──────────────────────────── */
+    .split-section {
+      padding: 0 3rem 5rem;
+      background: var(--soft-oat);
+    }
+    .split-controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .split-btn {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      padding: 6px 16px;
+      border: 0.5px solid var(--linen-clay);
+      background: transparent;
+      color: var(--dusty-sage);
+      cursor: pointer;
+      text-transform: uppercase;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.15s;
+    }
+    .split-btn.active {
+      background: var(--luxe-noir);
+      color: var(--soft-oat);
+      border-color: var(--luxe-noir);
+    }
+    .split-row {
+      display: grid;
+      gap: 3rem;
+      align-items: center;
+      transition: grid-template-columns 0.35s ease;
+    }
+    .split-img-block {
+      background: var(--coastal-pine);
+      aspect-ratio: 4/3;
+    }
+    .split-text-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: var(--luxe-noir);
+    }
+    .split-text-body {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--coastal-pine);
+    }
+
+    /* ─── PULL QUOTE ──────────────────────────────────────── */
+    .pullquote {
+      padding: 5rem 3rem;
+      background: var(--luxe-noir);
+      text-align: center;
+    }
+    .pullquote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 80px;
+      line-height: 0.5;
+      color: var(--coastal-pine);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .pullquote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--soft-oat);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .pullquote-attr {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dusty-sage);
+      margin-top: 1.75rem;
+    }
+
+    /* ─── SERIES GRID ─────────────────────────────────────── */
+    .series {
+      padding: 5rem 3rem;
+      background: var(--soft-oat);
+    }
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .series-card { cursor: pointer; }
+    .series-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      display: block;
+      margin-bottom: 0.85rem;
+      overflow: hidden;
+    }
+    .series-img-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease;
+    }
+    .series-card:hover .series-img-inner { transform: scale(1.04); }
+    .series-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--luxe-noir);
+    }
+    .series-count {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--dusty-sage);
+      margin-top: 4px;
+    }
+
+    /* ─── JOURNAL ─────────────────────────────────────────── */
+    .journal {
+      padding: 5rem 3rem;
+      background: var(--linen-clay);
+    }
+    .journal .section-label {
+      color: var(--coastal-pine);
+    }
+    .journal .section-label::after {
+      background: var(--coastal-pine);
+      opacity: 0.35;
+    }
+    .journal-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .journal-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      margin-bottom: 1.1rem;
+      overflow: hidden;
+    }
+    .journal-img-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease;
+    }
+    .journal-card:hover .journal-img-inner { transform: scale(1.03); }
+    .journal-date {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--coastal-pine);
+      margin-bottom: 0.5rem;
+    }
+    .journal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      line-height: 1.3;
+      color: var(--luxe-noir);
+      margin-bottom: 0.6rem;
+    }
+    .journal-excerpt {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--coastal-pine);
+    }
+
+    /* ─── NEWSLETTER ──────────────────────────────────────── */
+    .newsletter {
+      padding: 5rem 3rem;
+      background: var(--coastal-pine);
+      text-align: center;
+    }
+    .newsletter-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--soft-oat);
+      margin-bottom: 0.6rem;
+    }
+    .newsletter-sub {
+      font-size: 13px;
+      color: var(--dusty-sage);
+      margin-bottom: 2.25rem;
+      line-height: 1.75;
+    }
+    .newsletter-row {
+      display: flex;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .newsletter-input {
+      flex: 1;
+      padding: 11px 16px;
+      border: 0.5px solid var(--dusty-sage);
+      border-right: none;
+      background: transparent;
+      color: var(--soft-oat);
+      font-size: 13px;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+    }
+    .newsletter-input::placeholder { color: var(--dusty-sage); }
+    .newsletter-btn {
+      padding: 11px 24px;
+      background: var(--soft-oat);
+      color: var(--luxe-noir);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .newsletter-btn:hover { background: var(--linen-clay); }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      padding: 2rem 3rem;
+      background: var(--luxe-noir);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      color: var(--dusty-sage);
+    }
+    .footer-links { display: flex; gap: 2.5rem; }
+    .footer-links a {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dusty-sage);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--linen-clay); }
+
+    /* ─── ANNOTATION BADGE ────────────────────────────────── */
+    .annotation {
+      display: inline-block;
+      background: var(--dusty-sage);
+      color: var(--soft-oat);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      margin-bottom: 0.5rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="mainNav" class="transparent">
+    <div class="nav-logo">Elara Voss</div>
+    <div class="nav-links">
+      <a href="#">Work</a>
+      <a href="#">Series</a>
+      <a href="#">Journal</a>
+      <a href="#">Prints</a>
+      <a href="#">About</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" id="heroBg">
+      <svg style="position:absolute;inset:0;width:100%;height:130%;top:-15%" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="1440" height="900" fill="#060D0C"/>
+        <rect x="0" y="0" width="1440" height="500" fill="#0d1f1c" opacity="0.8"/>
+        <!-- treeline -->
+        <ellipse cx="120"  cy="340" rx="90"  ry="230" fill="#1a3530" opacity="0.95"/>
+        <ellipse cx="260"  cy="310" rx="75"  ry="260" fill="#142b27" opacity="0.95"/>
+        <ellipse cx="400"  cy="330" rx="85"  ry="220" fill="#1a3530" opacity="0.9"/>
+        <ellipse cx="540"  cy="300" rx="70"  ry="255" fill="#162e2a" opacity="0.95"/>
+        <ellipse cx="680"  cy="320" rx="80"  ry="235" fill="#1a3530" opacity="0.9"/>
+        <ellipse cx="820"  cy="295" rx="90"  ry="265" fill="#142b27" opacity="0.95"/>
+        <ellipse cx="960"  cy="315" rx="85"  ry="245" fill="#1a3530" opacity="0.9"/>
+        <ellipse cx="1100" cy="305" rx="75"  ry="255" fill="#162e2a" opacity="0.9"/>
+        <ellipse cx="1240" cy="325" rx="90"  ry="230" fill="#1a3530" opacity="0.9"/>
+        <ellipse cx="1380" cy="310" rx="80"  ry="248" fill="#142b27" opacity="0.9"/>
+        <!-- mist -->
+        <ellipse cx="720" cy="560" rx="760" ry="90" fill="#3E5954" opacity="0.1"/>
+        <ellipse cx="720" cy="600" rx="760" ry="80" fill="#060D0C" opacity="0.5"/>
+        <!-- vignette -->
+        <defs>
+          <linearGradient id="hv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0"   stop-color="#060D0C" stop-opacity="0"/>
+            <stop offset="0.55" stop-color="#060D0C" stop-opacity="0"/>
+            <stop offset="1"   stop-color="#060D0C" stop-opacity="0.95"/>
+          </linearGradient>
+        </defs>
+        <rect width="1440" height="900" fill="url(#hv)"/>
+        <!-- sun -->
+        <circle cx="680" cy="318" r="5"  fill="#C6C2BB" opacity="0.9"/>
+        <circle cx="680" cy="318" r="22" fill="#C6C2BB" opacity="0.07"/>
+        <circle cx="680" cy="318" r="50" fill="#C6C2BB" opacity="0.03"/>
+      </svg>
+    </div>
+    <div class="hero-vignette"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Landscape & nature photography</div>
+      <h1 class="hero-title">Light finds<br><em>its own way</em></h1>
+      <p class="hero-sub">Scottish Highlands · Iceland · Patagonia</p>
+    </div>
+  </section>
+
+  <!-- EDITORIAL TWO-COLUMN -->
+  <section class="editorial">
+    <div class="section-label">Featured work</div>
+    <div class="editorial-inner">
+      <div>
+        <div class="editorial-img">
+          <svg viewBox="0 0 600 750" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="600" height="750" fill="#3E5954"/>
+            <rect x="0" y="440" width="600" height="310" fill="#060D0C" opacity="0.75"/>
+            <ellipse cx="300" cy="340" rx="320" ry="260" fill="#2a4440" opacity="0.6"/>
+            <ellipse cx="120" cy="160" rx="70" ry="140" fill="#162e2a" opacity="0.8"/>
+            <ellipse cx="400" cy="130" rx="80" ry="160" fill="#162e2a" opacity="0.7"/>
+            <ellipse cx="300" cy="600" rx="280" ry="110" fill="#060D0C" opacity="0.5"/>
+            <circle cx="310" cy="200" r="5"  fill="#C6C2BB" opacity="0.9"/>
+            <circle cx="310" cy="200" r="28" fill="#C6C2BB" opacity="0.07"/>
+          </svg>
+        </div>
+        <p class="editorial-caption">Rannoch Moor, 05:42 — October 2024</p>
+      </div>
+      <div>
+        <h2 class="editorial-title">The moor before<br><em>the world wakes</em></h2>
+        <p class="editorial-body">Three nights camped on the edge of Rannoch, waiting for the fog to sit just right. There's a particular quality of light that appears in that hour before dawn — not quite dark, not quite anything else — where the water and the heather blur into the same grey breath.</p>
+        <br>
+        <p class="editorial-body">This image took a year of returning to get right. I don't believe in luck, but I believe in patience.</p>
+        <a href="#" class="editorial-link">View the full series →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO-COLUMN SPLIT DEMO -->
+  <section class="split-section">
+    <div class="section-label">Two-column block — split variants</div>
+    <div class="split-controls">
+      <button class="split-btn active" onclick="setSplit('40/60', this)">40 / 60</button>
+      <button class="split-btn" onclick="setSplit('50/50', this)">50 / 50</button>
+      <button class="split-btn" onclick="setSplit('60/40', this)">60 / 40</button>
+    </div>
+    <div class="split-row" id="splitRow" style="grid-template-columns: 2fr 3fr;">
+      <div class="split-img-block"></div>
+      <div>
+        <h3 class="split-text-title">About the work</h3>
+        <p class="split-text-body">Each series begins with a place I feel drawn to return to — not because I know what I'll find, but because I trust something is still waiting to be seen. The camera is a reason to look slowly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PULL QUOTE -->
+  <section class="pullquote">
+    <span class="pullquote-mark">"</span>
+    <blockquote class="pullquote-text">Photography is the art of observation. It has little to do with the things you see and everything to do with the way you see them.</blockquote>
+    <p class="pullquote-attr">— Elliott Erwitt</p>
+  </section>
+
+  <!-- SERIES GRID -->
+  <section class="series">
+    <div class="section-label">Series</div>
+    <div class="series-grid">
+      <div class="series-card">
+        <div class="series-img">
+          <div class="series-img-inner" style="background:#3E5954;">
+            <svg viewBox="0 0 360 480" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <rect width="360" height="480" fill="#3E5954"/>
+              <rect x="0" y="300" width="360" height="180" fill="#060D0C" opacity="0.7"/>
+              <ellipse cx="180" cy="200" rx="200" ry="220" fill="#2a4440" opacity="0.55"/>
+              <ellipse cx="80"  cy="100" rx="44" ry="96" fill="#162e2a" opacity="0.8"/>
+              <ellipse cx="270" cy="88"  rx="40" ry="84" fill="#162e2a" opacity="0.75"/>
+            </svg>
+          </div>
+        </div>
+        <p class="series-name">Forest & Fog</p>
+        <p class="series-count">24 photographs</p>
+      </div>
+      <div class="series-card">
+        <div class="series-img">
+          <div class="series-img-inner" style="background:#060D0C;">
+            <svg viewBox="0 0 360 480" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <rect width="360" height="480" fill="#060D0C"/>
+              <rect x="0" y="260" width="360" height="220" fill="#0d1f1c" opacity="0.9"/>
+              <ellipse cx="180" cy="260" rx="300" ry="90" fill="#3E5954" opacity="0.45"/>
+              <rect x="0" y="0" width="360" height="220" fill="#111f1d" opacity="0.7"/>
+              <circle cx="220" cy="96" r="16" fill="#C6C2BB" opacity="0.4"/>
+              <circle cx="220" cy="96" r="6"  fill="#F0EDE5" opacity="0.7"/>
+            </svg>
+          </div>
+        </div>
+        <p class="series-name">Shoreline</p>
+        <p class="series-count">18 photographs</p>
+      </div>
+      <div class="series-card">
+        <div class="series-img">
+          <div class="series-img-inner" style="background:#758886;">
+            <svg viewBox="0 0 360 480" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <rect width="360" height="480" fill="#758886"/>
+              <rect x="0" y="310" width="360" height="170" fill="#060D0C" opacity="0.65"/>
+              <polygon points="180,40 20,310 340,310" fill="#3E5954" opacity="0.8"/>
+              <polygon points="280,100 160,310 400,310" fill="#2a4440" opacity="0.5"/>
+              <circle cx="100" cy="124" r="3" fill="#F0EDE5" opacity="0.7"/>
+              <circle cx="190" cy="68"  r="3" fill="#F0EDE5" opacity="0.6"/>
+              <circle cx="250" cy="140" r="2" fill="#F0EDE5" opacity="0.5"/>
+            </svg>
+          </div>
+        </div>
+        <p class="series-name">High Passes</p>
+        <p class="series-count">31 photographs</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNAL -->
+  <section class="journal">
+    <div class="section-label">Journal</div>
+    <div class="journal-strip">
+      <div class="journal-card">
+        <div class="journal-img">
+          <div class="journal-img-inner" style="background:#3E5954;">
+            <svg viewBox="0 0 600 338" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <rect width="600" height="338" fill="#3E5954"/>
+              <rect x="0" y="190" width="600" height="148" fill="#060D0C" opacity="0.7"/>
+              <ellipse cx="300" cy="160" rx="360" ry="130" fill="#2a4440" opacity="0.5"/>
+            </svg>
+          </div>
+        </div>
+        <p class="journal-date">March 2025</p>
+        <h3 class="journal-title">On returning to the same place, year after year</h3>
+        <p class="journal-excerpt">There's a birch wood in Perthshire I've visited every autumn for six years. Each time I tell myself I know it. Each time it teaches me I don't.</p>
+      </div>
+      <div class="journal-card">
+        <div class="journal-img">
+          <div class="journal-img-inner" style="background:#060D0C;">
+            <svg viewBox="0 0 600 338" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <rect width="600" height="338" fill="#060D0C"/>
+              <rect x="0" y="0" width="600" height="170" fill="#0d1f1c" opacity="0.8"/>
+              <ellipse cx="300" cy="220" rx="400" ry="110" fill="#3E5954" opacity="0.4"/>
+            </svg>
+          </div>
+        </div>
+        <p class="journal-date">January 2025</p>
+        <h3 class="journal-title">What the long exposure gives back</h3>
+        <p class="journal-excerpt">Thirty seconds of open shutter turns a chaotic sea into something quiet and ancient. Time compression as a way of listening.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <h2 class="newsletter-title">Letters from the field</h2>
+    <p class="newsletter-sub">Occasional notes on light, place, and the practice of looking.<br>No schedule. No noise.</p>
+    <div class="newsletter-row">
+      <input class="newsletter-input" type="email" placeholder="your@email.com">
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Elara Voss Photography — © 2026</div>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">Prints</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // ── Sticky nav: transparent → solid ──────────────────────
+    const nav = document.getElementById('mainNav');
+    const heroHeight = document.querySelector('.hero').offsetHeight;
+
+    function updateNav() {
+      if (window.scrollY > heroHeight * 0.15) {
+        nav.classList.remove('transparent');
+        nav.classList.add('solid');
+      } else {
+        nav.classList.remove('solid');
+        nav.classList.add('transparent');
+      }
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+
+    // ── Hero parallax ─────────────────────────────────────────
+    const heroBg = document.getElementById('heroBg');
+
+    function updateParallax() {
+      const scrolled = window.scrollY;
+      const rate = 0.4;
+      heroBg.style.transform = `translateY(${scrolled * rate}px)`;
+    }
+    window.addEventListener('scroll', updateParallax, { passive: true });
+
+    // ── Two-column split toggle ───────────────────────────────
+    const splits = {
+      '40/60': '2fr 3fr',
+      '50/50': '1fr 1fr',
+      '60/40': '3fr 2fr',
+    };
+    function setSplit(key, btn) {
+      document.getElementById('splitRow').style.gridTemplateColumns = splits[key];
+      document.querySelectorAll('.split-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+</html>

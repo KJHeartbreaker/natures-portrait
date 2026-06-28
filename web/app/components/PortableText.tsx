@@ -17,7 +17,7 @@ const paletteMarkStyles: Record<string, React.CSSProperties> = {
   coastalPine: {color: '#3E5954'},
   dustySage: {color: '#758886'},
   linenClay: {color: '#C6C2bb'},
-  softOat: {color: '#F0EDE5', backgroundColor: '#060D0C'},
+  softOat: {color: '#F0EDE5'},
 }
 
 export default function CustomPortableText({
@@ -120,7 +120,7 @@ export default function CustomPortableText({
   }
 
   return (
-    <div className={`prose-a:text-brand prose dark:prose-invert ${className}`}>
+    <div className={`prose-a:text-brand prose ${className}`}>
       <PortableText components={components} value={value} />
     </div>
   )

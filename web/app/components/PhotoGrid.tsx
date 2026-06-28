@@ -215,8 +215,8 @@ export default function PhotoGrid({
                   width={900}
                   height={900}
                   mode="cover"
-                  crop={img?.crop}
-                  hotspot={img?.hotspot}
+                  crop={img?.crop as any}
+                  hotspot={img?.hotspot as any}
                   className="w-full h-full object-cover"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
@@ -267,8 +267,8 @@ export default function PhotoGrid({
                       width={1800}
                       height={1100}
                       mode="contain"
-                      crop={activeImage?.crop}
-                      hotspot={activeImage?.hotspot}
+                      crop={activeImage?.crop as any}
+                      hotspot={activeImage?.hotspot as any}
                       className="w-full h-full"
                       style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                     />
@@ -398,8 +398,8 @@ export default function PhotoGrid({
                               width={200}
                               height={200}
                               mode="cover"
-                              crop={im?.crop}
-                              hotspot={im?.hotspot}
+                              crop={im?.crop as any}
+                              hotspot={im?.hotspot as any}
                               className="w-full h-full object-cover"
                               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />

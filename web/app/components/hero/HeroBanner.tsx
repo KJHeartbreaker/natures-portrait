@@ -105,8 +105,8 @@ export default function HeroBanner({block}: Props) {
               width={imgW}
               height={imgH}
               mode="cover"
-              crop={block.image?.crop}
-              hotspot={block.image?.hotspot}
+              crop={block.image?.crop as any}
+              hotspot={block.image?.hotspot as any}
               sizes="100vw"
             />
           ) : (
@@ -147,7 +147,7 @@ export default function HeroBanner({block}: Props) {
             ) : null}
             {block.cta ? (
               <div className="pt-2">
-                <Cta cta={block.cta} variant={ctaTone} />
+                <Cta cta={block.cta as any} variant={ctaTone} />
               </div>
             ) : null}
           </div>

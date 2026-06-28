@@ -34,8 +34,8 @@ function PanelView({panel}: {panel: Panel | null}) {
             width={imgW}
             height={imgH}
             mode="cover"
-            crop={panel.image?.crop}
-            hotspot={panel.image?.hotspot}
+            crop={panel.image?.crop as any}
+            hotspot={panel.image?.hotspot as any}
             sizes="(min-width: 768px) 50vw, 100vw"
           />
         ) : (

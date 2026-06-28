@@ -4,6 +4,7 @@ import type {PortableTextBlock} from 'next-sanity'
 import Cta from '@/app/components/Cta'
 import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
+import ParallaxBg from '@/app/components/ParallaxBg'
 import {getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import type {ExtractPageSectionType} from '@/sanity/lib/types'
 
@@ -93,22 +94,25 @@ export default function HeroBanner({block}: Props) {
       className={`relative isolate flex w-full flex-col justify-end overflow-hidden ${sizeHeightClass[size]}`}
       aria-labelledby={block.heading ? `hero-banner-heading-${block._key}` : undefined}
     >
-      <div className="absolute inset-0 z-0">
-        {heroImageId ? (
-          <Image
-            id={heroImageId}
-            alt={block.image?.alt || ''}
-            className="h-full w-full object-cover object-center"
-            width={imgW}
-            height={imgH}
-            mode="cover"
-            crop={block.image?.crop}
-            hotspot={block.image?.hotspot}
-            sizes="100vw"
-          />
-        ) : (
-          <div className="h-full w-full bg-gray-800" aria-hidden />
-        )}
+      {/* overflow-hidden clips the oversized parallax element */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <ParallaxBg>
+          {heroImageId ? (
+            <Image
+              id={heroImageId}
+              alt={block.image?.alt || ''}
+              className="h-full w-full object-cover object-center"
+              width={imgW}
+              height={imgH}
+              mode="cover"
+              crop={block.image?.crop as any}
+              hotspot={block.image?.hotspot as any}
+              sizes="100vw"
+            />
+          ) : (
+            <div className="h-full w-full bg-coastal-pine" aria-hidden />
+          )}
+        </ParallaxBg>
       </div>
 
       <div className="relative z-1 w-full">
@@ -143,7 +147,7 @@ export default function HeroBanner({block}: Props) {
             ) : null}
             {block.cta ? (
               <div className="pt-2">
-                <Cta cta={block.cta} variant={ctaTone} />
+                <Cta cta={block.cta as any} variant={ctaTone} />
               </div>
             ) : null}
           </div>

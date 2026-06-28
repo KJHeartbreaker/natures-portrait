@@ -40,8 +40,8 @@ export default function HeroTwoPanel({block}: Props) {
             width={imgW}
             height={imgH}
             mode="cover"
-            crop={block.image?.crop}
-            hotspot={block.image?.hotspot}
+            crop={block.image?.crop as any}
+            hotspot={block.image?.hotspot as any}
             sizes="(min-width: 768px) 50vw, 100vw"
           />
         ) : (

@@ -5,6 +5,8 @@ import type {PortableTextBlock} from 'next-sanity'
 import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
 import PhotoGrid from '@/app/components/PhotoGrid'
+import PullQuote from '@/app/components/PullQuote'
+import RowContainer from '@/app/components/RowContainer'
 import UnderConstruction from '@/app/components/UnderConstruction'
 import {HeroBanner, HeroTwoPanel} from '@/app/components/hero'
 import {getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
@@ -20,110 +22,32 @@ type BlockProps = {
 function SingleColumnContentBlockSection({block}: {block: ExtractPageSectionType<'singleColumnContentBlock'>}) {
   if (block.disabled) return null
   const portableText = block.contentBlock?.portableTextBlock?.portableTextBlock
-  return (
-    <UnderConstruction
-      name="SingleColumnContentBlock"
-      style={
-        block.backgroundColor
-          ? {backgroundColor: block.backgroundColor, paddingTop: '1.5rem', paddingBottom: '1.5rem'}
-          : undefined
-      }
-    >
-      <div className="space-y-4">
-        {block.title ? <h2 className="text-xl font-semibold">{block.title}</h2> : null}
-        {portableText?.length ? (
-          <PortableText value={portableText as PortableTextBlock[]} />
-        ) : (
-          <div className="font-mono text-sm opacity-70">No content yet.</div>
-        )}
-      </div>
-    </UnderConstruction>
-  )
-}
+  const bg = block.backgroundColor ?? '#F0EDE5'
+  const isLight = bg === '#F0EDE5' || bg === '#C6C2bb'
+  // Drive prose colour via prose-invert on dark backgrounds
+  const proseTheme = isLight
+    ? 'prose-headings:text-luxe-noir prose-p:text-coastal-pine prose-a:text-coastal-pine'
+    : 'prose-invert prose-headings:text-soft-oat prose-p:text-soft-oat prose-a:text-soft-oat'
 
-function RowContainerSection({block}: {block: ExtractPageSectionType<'rowContainer'>}) {
-  if (block.disabled) return null
-  const bgImageId = getImageId(block.image)
-  const bgDims = getImageDims(block.image)
   return (
-    <UnderConstruction
-      name="RowContainer"
-      style={
-        block.backgroundColor
-          ? {backgroundColor: block.backgroundColor, paddingTop: '1.5rem', paddingBottom: '1.5rem'}
-          : undefined
-      }
+    <section
+      className="w-full px-6 py-20 md:py-28 xl:px-0"
+      style={{backgroundColor: bg}}
+      aria-label={block.title || undefined}
     >
-      <div className="space-y-2">
-        {bgImageId ? (
-          <div className="mb-4">
-            <Image
-              id={bgImageId}
-              alt={block.image?.alt || ''}
-              className="rounded-sm w-full"
-              width={1200}
-              height={bgDims ? Math.round((1200 / bgDims.width) * bgDims.height) : 450}
-              mode="cover"
-              crop={block.image?.crop}
-              hotspot={block.image?.hotspot}
-            />
-          </div>
-        ) : null}
-        {block.title ? (
-          <h2 className="text-xl font-semibold" style={block.titleColor ? {color: block.titleColor} : {}}>
-            {block.title}
-          </h2>
-        ) : null}
-        <div className="font-mono text-sm opacity-70">
-          Row: {block.row || 'unset'} · Items: {block.rowContent?.length || 0}
-        </div>
-        {block.rowContent?.length ? (
-          <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
-            {block.rowContent.map((item) => {
-              if (!item) return null
-              if (item._type === 'mainImage') {
-                const id = getImageId(item)
-                const dims = getImageDims(item)
-                if (!id) return null
-                return (
-                  <Image
-                    key={item._key}
-                    id={id}
-                    alt={item.alt || ''}
-                    className="rounded-sm w-full"
-                    width={420}
-                    height={dims ? Math.round((420 / dims.width) * dims.height) : 280}
-                    mode="cover"
-                    crop={item.crop}
-                    hotspot={item.hotspot}
-                  />
-                )
-              }
-              if (item._type === 'carousel') {
-                const first = item.carouselImages?.[0]
-                const id = getImageId(first)
-                const dims = getImageDims(first)
-                if (!id) return null
-                return (
-                  <Image
-                    key={item._key}
-                    id={id}
-                    alt={first?.alt || ''}
-                    className="rounded-sm w-full"
-                    width={420}
-                    height={dims ? Math.round((420 / dims.width) * dims.height) : 280}
-                    mode="cover"
-                    crop={first?.crop}
-                    hotspot={first?.hotspot}
-                  />
-                )
-              }
-              return null
-            })}
-          </div>
+      <div className="mx-auto max-w-3xl text-center">
+        {portableText?.length ? (
+          <PortableText
+            value={portableText as PortableTextBlock[]}
+            className={`max-w-none text-center
+              prose-headings:font-serif prose-headings:font-normal prose-headings:tracking-tight
+              prose-p:font-sans prose-p:font-light prose-p:text-[13px] prose-p:leading-[1.875]
+              prose-a:font-light prose-a:underline
+              ${proseTheme}`}
+          />
         ) : null}
       </div>
-    </UnderConstruction>
+    </section>
   )
 }
 
@@ -155,8 +79,8 @@ function PostsGridContainerSection({block}: {block: ExtractPageSectionType<'post
                 width={420}
                 height={dims ? Math.round((420 / dims.width) * dims.height) : 280}
                 mode="cover"
-                crop={p?.image?.crop}
-                hotspot={p?.image?.hotspot}
+                crop={p?.image?.crop as any}
+                hotspot={p?.image?.hotspot as any}
               />
             )
           })}
@@ -178,7 +102,7 @@ function PhotoGridContainerSection({block}: {block: ExtractPageSectionType<'phot
           : undefined
       }
     >
-      <PhotoGrid images={block.images || []} columns={block.columns} gap={block.gap} showCaptions={block.showCaptions} />
+      <PhotoGrid images={(block.images || []) as any} columns={block.columns} gap={block.gap} showCaptions={block.showCaptions} />
     </UnderConstruction>
   )
 }
@@ -191,10 +115,36 @@ function UnknownSection({block}: {block: PageSection}) {
   )
 }
 
+// These block types break out of the container and span the full viewport width.
+const FULL_BLEED_TYPES = new Set(['heroBanner', 'heroTwoPanel', 'pullQuote', 'singleColumnContentBlock'])
+
 /**
  * Used by the <PageBuilder>, this component renders a the component that matches the block type.
  */
 export default function BlockRenderer({block, pageId, pageType}: BlockProps) {
+  const isFullBleed = FULL_BLEED_TYPES.has(block._type)
+
+  const inner = (() => {
+    switch (block._type) {
+      case 'heroBanner':
+        return <HeroBanner block={block} />
+      case 'heroTwoPanel':
+        return <HeroTwoPanel block={block} />
+      case 'pullQuote':
+        return <PullQuote block={block} />
+      case 'singleColumnContentBlock':
+        return <SingleColumnContentBlockSection block={block} />
+      case 'rowContainer':
+        return <RowContainer block={block} />
+      case 'postsGridContainer':
+        return <PostsGridContainerSection block={block} />
+      case 'photoGridContainer':
+        return <PhotoGridContainerSection block={block} />
+      default:
+        return <UnknownSection block={block} />
+    }
+  })()
+
   return (
     <div
       key={block._key}
@@ -204,24 +154,7 @@ export default function BlockRenderer({block, pageId, pageType}: BlockProps) {
         path: `content[_key=="${block._key}"]`,
       }).toString()}
     >
-      {(() => {
-        switch (block._type) {
-          case 'heroBanner':
-            return <HeroBanner block={block} />
-          case 'heroTwoPanel':
-            return <HeroTwoPanel block={block} />
-          case 'singleColumnContentBlock':
-            return <SingleColumnContentBlockSection block={block} />
-          case 'rowContainer':
-            return <RowContainerSection block={block} />
-          case 'postsGridContainer':
-            return <PostsGridContainerSection block={block} />
-          case 'photoGridContainer':
-            return <PhotoGridContainerSection block={block} />
-          default:
-            return <UnknownSection block={block} />
-        }
-      })()}
+      {isFullBleed ? inner : <div className="container py-16 md:py-24">{inner}</div>}
     </div>
   )
 }

@@ -65,15 +65,15 @@ const openSans = Open_Sans({
   variable: '--font-open-sans',
   subsets: ['latin'],
   display: 'swap',
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400'],
 })
 
-/** Libre Baskerville — swap for a self-hosted font if you license classic Baskerville */
 const libreBaskerville = Libre_Baskerville({
   variable: '--font-libre-baskerville',
   subsets: ['latin'],
   display: 'swap',
-  weight: ['400', '700'],
+  weight: ['400'],
+  style: ['normal', 'italic'],
 })
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -89,10 +89,10 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   return (
     <html
       lang="en"
-      className={`${openSans.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable} bg-white text-black`}
+      className={`${openSans.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable} bg-soft-oat text-luxe-noir`}
     >
       <body className="font-sans antialiased" suppressHydrationWarning>
-        <section className="min-h-screen pt-24">
+        <section className="min-h-screen">
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
           <Toaster />
           {isDraftMode && (

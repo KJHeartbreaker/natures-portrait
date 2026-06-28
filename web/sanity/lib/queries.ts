@@ -125,6 +125,11 @@ export const homeQuery = defineQuery(`
         centerText,
         disabled
       },
+      _type == "pullQuote" => {
+        quote,
+        attribution,
+        disabled
+      },
       _type == "singleColumnContentBlock" => {
         title,
         backgroundColor,
@@ -143,29 +148,28 @@ export const homeQuery = defineQuery(`
         hideTitle,
         centerTitle,
         titleColor,
-        row,
-        removeBottomPadding,
-        condensedCopy,
-        centerCopy,
-        image{
-          ${imageProjection}
-        },
-        overlay,
-        backgroundColor,
-        rowContent[]{
-          _key,
-          _type,
-          _type == "carousel" => {
-            carouselImages[]{
-              ${imageProjection}
-            }
-          },
-          _type == "mainImage" => {
+        split,
+        leftPanel{
+          panelType,
+          image{
             ${imageProjection}
           },
-          _type == "mainPortableText" => {
+          content{
             ${portableTextProjection}
-          }
+          },
+          backgroundColor,
+          centerText
+        },
+        rightPanel{
+          panelType,
+          image{
+            ${imageProjection}
+          },
+          content{
+            ${portableTextProjection}
+          },
+          backgroundColor,
+          centerText
         },
         disabled
       },
@@ -287,6 +291,11 @@ export const getPageQuery = defineQuery(`
         centerText,
         disabled
       },
+      _type == "pullQuote" => {
+        quote,
+        attribution,
+        disabled
+      },
       _type == "singleColumnContentBlock" => {
         title,
         backgroundColor,
@@ -305,29 +314,28 @@ export const getPageQuery = defineQuery(`
         hideTitle,
         centerTitle,
         titleColor,
-        row,
-        removeBottomPadding,
-        condensedCopy,
-        centerCopy,
-        image{
-          ${imageProjection}
-        },
-        overlay,
-        backgroundColor,
-        rowContent[]{
-          _key,
-          _type,
-          _type == "carousel" => {
-            carouselImages[]{
-              ${imageProjection}
-            }
-          },
-          _type == "mainImage" => {
+        split,
+        leftPanel{
+          panelType,
+          image{
             ${imageProjection}
           },
-          _type == "mainPortableText" => {
+          content{
             ${portableTextProjection}
-          }
+          },
+          backgroundColor,
+          centerText
+        },
+        rightPanel{
+          panelType,
+          image{
+            ${imageProjection}
+          },
+          content{
+            ${portableTextProjection}
+          },
+          backgroundColor,
+          centerText
         },
         disabled
       },

@@ -7,6 +7,7 @@ import type { PortableTextBlock } from 'next-sanity'
 import Image from '@/app/components/SanityImage'
 import type { SanityImageCrop, SanityImageHotspot } from '@/sanity.types'
 import PortableText from '@/app/components/PortableText'
+import { adaptCrop, adaptHotspot } from '@/app/lib/sanityImageHelpers'
 
 type PhotoImageLike = {
   _key?: string
@@ -21,7 +22,7 @@ type PhotoImageLike = {
 
 type GearLike = {
   _id?: string
-  kind?: 'camera' | 'lens' | 'accessory'
+  kind?: 'camera' | 'lens' | 'accessory' | null
   brand?: string | null
   model?: string | null
   nickname?: string | null
@@ -36,8 +37,8 @@ type PhotoItemLike = {
   dateCaptured?: string | null
   cameraText?: string | null
   lensText?: string | null
-  cameraRef?: GearLike | undefined
-  lensRef?: GearLike | undefined
+  cameraRef?: GearLike | null
+  lensRef?: GearLike | null
   image?: PhotoImageLike
 } | null
 
@@ -215,8 +216,8 @@ export default function PhotoGrid({
                   width={900}
                   height={900}
                   mode="cover"
-                  crop={img?.crop as any}
-                  hotspot={img?.hotspot as any}
+                  crop={adaptCrop(img?.crop)}
+                  hotspot={adaptHotspot(img?.hotspot)}
                   className="w-full h-full object-cover"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
@@ -267,8 +268,8 @@ export default function PhotoGrid({
                       width={1800}
                       height={1100}
                       mode="contain"
-                      crop={activeImage?.crop as any}
-                      hotspot={activeImage?.hotspot as any}
+                      crop={adaptCrop(activeImage?.crop)}
+                      hotspot={adaptHotspot(activeImage?.hotspot)}
                       className="w-full h-full"
                       style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                     />
@@ -398,8 +399,8 @@ export default function PhotoGrid({
                               width={200}
                               height={200}
                               mode="cover"
-                              crop={im?.crop as any}
-                              hotspot={im?.hotspot as any}
+                              crop={adaptCrop(im?.crop)}
+                              hotspot={adaptHotspot(im?.hotspot)}
                               className="w-full h-full object-cover"
                               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />

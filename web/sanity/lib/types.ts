@@ -21,5 +21,5 @@ export type PortableTextMarkLink = PortableTextLink | PortableTextInternalLink
 
 export type ResolvedLandingPage = {
   _type?: 'page' | 'post' | 'blogLandingPage'
-  slug?: string
+  slug?: string | null
 } | null

@@ -2,7 +2,7 @@ import type {PortableTextBlock} from 'next-sanity'
 
 import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
-import {getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
+import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import type {ExtractPageSectionType} from '@/sanity/lib/types'
 
 const sizeHeightClass = {
@@ -40,8 +40,8 @@ export default function HeroTwoPanel({block}: Props) {
             width={imgW}
             height={imgH}
             mode="cover"
-            crop={block.image?.crop as any}
-            hotspot={block.image?.hotspot as any}
+            crop={adaptCrop(block.image?.crop)}
+            hotspot={adaptHotspot(block.image?.hotspot)}
             sizes="(min-width: 768px) 50vw, 100vw"
           />
         ) : (

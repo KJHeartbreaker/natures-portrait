@@ -4,6 +4,7 @@ import {home} from './singletons/home'
 import {settings} from './singletons/settings'
 
 // Documents
+import {collection} from './documents/collection'
 import {gear} from './documents/gear'
 import {photo} from './documents/photo'
 import {page} from './documents/page'
@@ -51,6 +52,7 @@ export const schemaTypes = [
   blogLandingPage,
   home,
   // Documents
+  collection,
   page,
   post,
   gear,

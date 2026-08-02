@@ -119,6 +119,19 @@ export const photo = defineType({
       type: 'number',
       fieldset: 'settings',
     }),
+
+    defineField({
+      name: 'collections',
+      title: 'Collections',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'collection'}],
+        },
+      ],
+      description: 'Add this photo to one or more collections.',
+    }),
   ],
   orderings: [
     {

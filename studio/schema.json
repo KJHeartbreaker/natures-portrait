@@ -44,7 +44,7 @@
               }
             ]
           },
-          "optional": false
+          "optional": true
         },
         "image": {
           "type": "objectAttribute",
@@ -317,7 +317,7 @@
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
         },
         "attribution": {
           "type": "objectAttribute",
@@ -361,7 +361,7 @@
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
         },
         "phoneLabel": {
           "type": "objectAttribute",
@@ -375,7 +375,7 @@
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
         },
         "textColor": {
           "type": "objectAttribute",
@@ -1221,7 +1221,7 @@
             "type": "inline",
             "name": "mainImage"
           },
-          "optional": false
+          "optional": true
         },
         "title": {
           "type": "objectAttribute",
@@ -1498,7 +1498,7 @@
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
         }
       }
     }
@@ -1521,28 +1521,28 @@
           "value": {
             "type": "number"
           },
-          "optional": false
+          "optional": true
         },
         "bottom": {
           "type": "objectAttribute",
           "value": {
             "type": "number"
           },
-          "optional": false
+          "optional": true
         },
         "left": {
           "type": "objectAttribute",
           "value": {
             "type": "number"
           },
-          "optional": false
+          "optional": true
         },
         "right": {
           "type": "objectAttribute",
           "value": {
             "type": "number"
           },
-          "optional": false
+          "optional": true
         }
       }
     }
@@ -1565,28 +1565,28 @@
           "value": {
             "type": "number"
           },
-          "optional": false
+          "optional": true
         },
         "y": {
           "type": "objectAttribute",
           "value": {
             "type": "number"
           },
-          "optional": false
+          "optional": true
         },
         "height": {
           "type": "objectAttribute",
           "value": {
             "type": "number"
           },
-          "optional": false
+          "optional": true
         },
         "width": {
           "type": "objectAttribute",
           "value": {
             "type": "number"
           },
-          "optional": false
+          "optional": true
         }
       }
     }
@@ -1770,7 +1770,7 @@
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
         },
         "copy": {
           "type": "objectAttribute",
@@ -2398,6 +2398,36 @@
     }
   },
   {
+    "type": "type",
+    "name": "collection.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "collection"
+    }
+  },
+  {
     "name": "photo",
     "type": "document",
     "attributes": {
@@ -2438,7 +2468,7 @@
           "type": "inline",
           "name": "albumMainImage"
         },
-        "optional": false
+        "optional": true
       },
       "title": {
         "type": "objectAttribute",
@@ -2526,6 +2556,28 @@
           "type": "number"
         },
         "optional": true
+      },
+      "collections": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "collection.reference"
+            }
+          }
+        },
+        "optional": true
       }
     }
   },
@@ -2583,21 +2635,21 @@
             }
           ]
         },
-        "optional": false
+        "optional": true
       },
       "brand": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "model": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "nickname": {
         "type": "objectAttribute",
@@ -2629,6 +2681,96 @@
           "type": "string"
         },
         "optional": true
+      }
+    }
+  },
+  {
+    "name": "collection",
+    "type": "document",
+    "attributes": {
+      "_id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string",
+          "value": "collection"
+        }
+      },
+      "_createdAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_updatedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_rev": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "slug": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "slug"
+        },
+        "optional": true
+      },
+      "description": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "simplePortableText"
+        },
+        "optional": true
+      }
+    }
+  },
+  {
+    "name": "slug",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "slug"
+          }
+        },
+        "current": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "source": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
       }
     }
   },
@@ -2672,7 +2814,7 @@
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "overview": {
         "type": "objectAttribute",
@@ -2814,7 +2956,7 @@
             }
           }
         },
-        "optional": false
+        "optional": true
       },
       "seo": {
         "type": "objectAttribute",
@@ -3131,7 +3273,7 @@
                     "value": {
                       "type": "string"
                     },
-                    "optional": false
+                    "optional": true
                   },
                   "slug": {
                     "type": "objectAttribute",
@@ -3139,7 +3281,7 @@
                       "type": "inline",
                       "name": "slug"
                     },
-                    "optional": false
+                    "optional": true
                   },
                   "seo": {
                     "type": "objectAttribute",
@@ -3289,7 +3431,7 @@
                         }
                       }
                     },
-                    "optional": false
+                    "optional": true
                   },
                   "content": {
                     "type": "objectAttribute",
@@ -3506,7 +3648,7 @@
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "slug": {
         "type": "objectAttribute",
@@ -3514,7 +3656,7 @@
           "type": "inline",
           "name": "slug"
         },
-        "optional": false
+        "optional": true
       },
       "seo": {
         "type": "objectAttribute",
@@ -3795,7 +3937,7 @@
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "slug": {
         "type": "objectAttribute",
@@ -3803,7 +3945,7 @@
           "type": "inline",
           "name": "slug"
         },
-        "optional": false
+        "optional": true
       },
       "seo": {
         "type": "objectAttribute",
@@ -3931,7 +4073,7 @@
           "type": "inline",
           "name": "simplePortableText"
         },
-        "optional": false
+        "optional": true
       },
       "image": {
         "type": "objectAttribute",
@@ -3954,7 +4096,7 @@
           "type": "inline",
           "name": "mainPortableText"
         },
-        "optional": false
+        "optional": true
       }
     }
   },
@@ -3998,7 +4140,7 @@
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "slug": {
         "type": "objectAttribute",
@@ -4006,7 +4148,7 @@
           "type": "inline",
           "name": "slug"
         },
-        "optional": false
+        "optional": true
       },
       "seo": {
         "type": "objectAttribute",
@@ -4156,7 +4298,7 @@
             }
           }
         },
-        "optional": false
+        "optional": true
       },
       "content": {
         "type": "objectAttribute",
@@ -4244,36 +4386,6 @@
           }
         },
         "optional": true
-      }
-    }
-  },
-  {
-    "name": "slug",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "slug"
-          }
-        },
-        "current": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": false
-        },
-        "source": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        }
       }
     }
   },
@@ -4506,7 +4618,7 @@
             "type": "inline",
             "name": "assist.instruction.context.reference"
           },
-          "optional": false
+          "optional": true
         }
       }
     }
@@ -4685,7 +4797,7 @@
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
         },
         "description": {
           "type": "objectAttribute",
@@ -5200,21 +5312,21 @@
           "value": {
             "type": "number"
           },
-          "optional": false
+          "optional": true
         },
         "width": {
           "type": "objectAttribute",
           "value": {
             "type": "number"
           },
-          "optional": false
+          "optional": true
         },
         "aspectRatio": {
           "type": "objectAttribute",
           "value": {
             "type": "number"
           },
-          "optional": false
+          "optional": true
         }
       }
     }
@@ -5369,35 +5481,35 @@
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "extension": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "mimeType": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "size": {
         "type": "objectAttribute",
         "value": {
           "type": "number"
         },
-        "optional": false
+        "optional": true
       },
       "assetId": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "uploadId": {
         "type": "objectAttribute",
@@ -5411,14 +5523,14 @@
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "url": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "source": {
         "type": "objectAttribute",
@@ -5542,35 +5654,35 @@
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "extension": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "mimeType": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "size": {
         "type": "objectAttribute",
         "value": {
           "type": "number"
         },
-        "optional": false
+        "optional": true
       },
       "assetId": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "uploadId": {
         "type": "objectAttribute",
@@ -5584,14 +5696,14 @@
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "url": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "metadata": {
         "type": "objectAttribute",

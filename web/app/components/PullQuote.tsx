@@ -15,7 +15,7 @@ export default function PullQuote({block}: Props) {
       <div className="mx-auto max-w-3xl text-center">
         {/* Decorative mark */}
         <span className="mb-8 block font-serif text-5xl italic leading-none text-coastal-pine select-none" aria-hidden>
-          "
+          &ldquo;
         </span>
 
         <blockquote className="font-serif text-[clamp(22px,3vw,32px)] italic leading-[1.55] text-soft-oat">

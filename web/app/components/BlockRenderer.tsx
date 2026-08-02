@@ -9,7 +9,7 @@ import PullQuote from '@/app/components/PullQuote'
 import RowContainer from '@/app/components/RowContainer'
 import UnderConstruction from '@/app/components/UnderConstruction'
 import {HeroBanner, HeroTwoPanel} from '@/app/components/hero'
-import {getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
+import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import {dataAttr} from '@/sanity/lib/utils'
 import type {ExtractPageSectionType, PageSection} from '@/sanity/lib/types'
 
@@ -79,8 +79,8 @@ function PostsGridContainerSection({block}: {block: ExtractPageSectionType<'post
                 width={420}
                 height={dims ? Math.round((420 / dims.width) * dims.height) : 280}
                 mode="cover"
-                crop={p?.image?.crop as any}
-                hotspot={p?.image?.hotspot as any}
+                crop={adaptCrop(p?.image?.crop)}
+                hotspot={adaptHotspot(p?.image?.hotspot)}
               />
             )
           })}
@@ -102,7 +102,7 @@ function PhotoGridContainerSection({block}: {block: ExtractPageSectionType<'phot
           : undefined
       }
     >
-      <PhotoGrid images={(block.images || []) as any} columns={block.columns} gap={block.gap} showCaptions={block.showCaptions} />
+      <PhotoGrid images={block.images || []} columns={block.columns} gap={block.gap} showCaptions={block.showCaptions} />
     </UnderConstruction>
   )
 }

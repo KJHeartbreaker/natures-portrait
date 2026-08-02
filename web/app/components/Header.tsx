@@ -3,7 +3,7 @@ import { homeMetaQuery, settingsQuery } from '@/sanity/lib/queries'
 import { sanityFetch } from '@/sanity/lib/live'
 import Cta from '@/app/components/Cta'
 import Image from '@/app/components/SanityImage'
-import { getImageId } from '@/app/lib/sanityImageHelpers'
+import { adaptCrop, adaptHotspot, getImageId } from '@/app/lib/sanityImageHelpers'
 import NavScrollWrapper from '@/app/components/NavScrollWrapper'
 
 export default async function Header() {
@@ -29,8 +29,8 @@ export default async function Header() {
                   width={280}
                   height={190}
                   mode="contain"
-                  crop={settings?.siteLogo?.crop as any}
-                  hotspot={settings?.siteLogo?.hotspot as any}
+                  crop={adaptCrop(settings?.siteLogo?.crop)}
+                  hotspot={adaptHotspot(settings?.siteLogo?.hotspot)}
                   className="h-full w-full object-contain object-left"
                 />
               </span>
@@ -50,7 +50,7 @@ export default async function Header() {
                 if (item._type === 'navCTA' && item.cta) {
                   return (
                     <li key={item._key}>
-                      <Cta cta={item.cta as any} className="text-linen-clay hover:text-soft-oat transition-colors duration-200" />
+                      <Cta cta={item.cta} className="text-linen-clay hover:text-soft-oat transition-colors duration-200" />
                     </li>
                   )
                 }
@@ -66,7 +66,7 @@ export default async function Header() {
                           <ul role="list" className="flex flex-col gap-1">
                             {(item.subnav || []).map((sub) => (
                               <li key={sub._key}>
-                                <Cta cta={sub as any} className="block px-3 py-2 text-linen-clay hover:text-soft-oat transition-colors duration-200" />
+                                <Cta cta={sub} className="block px-3 py-2 text-linen-clay hover:text-soft-oat transition-colors duration-200" />
                               </li>
                             ))}
                           </ul>

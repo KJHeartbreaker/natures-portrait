@@ -1,5 +1,7 @@
 /** Shared helpers for Sanity image references in page blocks. */
 
+import type {SanityImageCrop, SanityImageHotspot} from '@/sanity.types'
+
 type AssetRef = {_ref?: string; _id?: string} | null | undefined
 
 export function getImageId(image: {asset?: AssetRef} | null | undefined): string | null {
@@ -16,4 +18,28 @@ export function getImageDims(image: unknown): {width: number; height: number} | 
   const h = dims?.height
   if (typeof w === 'number' && typeof h === 'number' && w > 0 && h > 0) return {width: w, height: h}
   return null
+}
+
+/** Maps Sanity's nullable crop type (optional fields) to the required CropData shape. */
+export function adaptCrop(
+  crop: SanityImageCrop | null | undefined,
+): {top: number; bottom: number; left: number; right: number} | null {
+  if (!crop) return null
+  return {
+    top: crop.top ?? 0,
+    bottom: crop.bottom ?? 0,
+    left: crop.left ?? 0,
+    right: crop.right ?? 0,
+  }
+}
+
+/** Maps Sanity's nullable hotspot type (optional fields) to the required HotspotData shape. */
+export function adaptHotspot(
+  hotspot: SanityImageHotspot | null | undefined,
+): {x: number; y: number} | null {
+  if (!hotspot) return null
+  return {
+    x: hotspot.x ?? 0.5,
+    y: hotspot.y ?? 0.5,
+  }
 }

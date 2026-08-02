@@ -2,7 +2,7 @@ import type {PortableTextBlock} from 'next-sanity'
 
 import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
-import {getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
+import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import type {ExtractPageSectionType} from '@/sanity/lib/types'
 
 type Block = ExtractPageSectionType<'rowContainer'>
@@ -34,8 +34,8 @@ function PanelView({panel}: {panel: Panel | null}) {
             width={imgW}
             height={imgH}
             mode="cover"
-            crop={panel.image?.crop as any}
-            hotspot={panel.image?.hotspot as any}
+            crop={adaptCrop(panel.image?.crop)}
+            hotspot={adaptHotspot(panel.image?.hotspot)}
             sizes="(min-width: 768px) 50vw, 100vw"
           />
         ) : (

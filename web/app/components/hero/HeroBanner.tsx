@@ -5,7 +5,7 @@ import Cta from '@/app/components/Cta'
 import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
 import ParallaxBg from '@/app/components/ParallaxBg'
-import {getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
+import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import type {ExtractPageSectionType} from '@/sanity/lib/types'
 
 const sizeHeightClass = {
@@ -105,8 +105,8 @@ export default function HeroBanner({block}: Props) {
               width={imgW}
               height={imgH}
               mode="cover"
-              crop={block.image?.crop as any}
-              hotspot={block.image?.hotspot as any}
+              crop={adaptCrop(block.image?.crop)}
+              hotspot={adaptHotspot(block.image?.hotspot)}
               sizes="100vw"
             />
           ) : (
@@ -147,7 +147,7 @@ export default function HeroBanner({block}: Props) {
             ) : null}
             {block.cta ? (
               <div className="pt-2">
-                <Cta cta={block.cta as any} variant={ctaTone} />
+                <Cta cta={block.cta} variant={ctaTone} />
               </div>
             ) : null}
           </div>

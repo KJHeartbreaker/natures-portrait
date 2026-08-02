@@ -10,6 +10,7 @@ import Image from '@/app/components/SanityImage'
 import {sanityFetch} from '@/sanity/lib/live'
 import {postPagesSlugs, postQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
+import {adaptCrop, adaptHotspot} from '@/app/lib/sanityImageHelpers'
 
 type Props = {
   params: Promise<{slug: string}>
@@ -88,8 +89,8 @@ export default async function PostPage(props: Props) {
                     width={1024}
                     height={538}
                     mode="cover"
-                    hotspot={post.image.hotspot as any}
-                    crop={post.image.crop as any}
+                    hotspot={adaptHotspot(post.image.hotspot)}
+                    crop={adaptCrop(post.image.crop)}
                   />
                 ) : null}
               </div>

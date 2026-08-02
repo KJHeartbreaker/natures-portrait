@@ -2,7 +2,7 @@ import {BsSignpostSplit} from 'react-icons/bs'
 import {GiCobweb, GiSettingsKnobs} from 'react-icons/gi'
 import {GoHome, GoMegaphone} from 'react-icons/go'
 import {GiPhotoCamera} from 'react-icons/gi'
-import {MdPhotoAlbum} from 'react-icons/md'
+import {MdCollections, MdPhoto, MdPhotoAlbum} from 'react-icons/md'
 import type {StructureBuilder, StructureResolver} from 'sanity/structure'
 
 import {editorGuideListItem} from '../guide/structure/editorGuide'
@@ -47,9 +47,35 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
         .icon(GiPhotoCamera)
         .child(S.documentTypeList('gear').title('Gear')),
       S.listItem()
-        .title('Photo Album')
+        .title('Photo Library')
         .icon(MdPhotoAlbum)
-        .child(S.documentTypeList('photo').title('Photo Album')),
+        .child(
+          S.list()
+            .title('Photo Library')
+            .items([
+              S.listItem()
+                .title('All Photos')
+                .icon(MdPhoto)
+                .child(S.documentTypeList('photo').title('All Photos')),
+              S.divider(),
+              S.listItem()
+                .title('Collections')
+                .icon(MdCollections)
+                .child(
+                  S.documentTypeList('collection')
+                    .title('Collections')
+                    .child((collectionId) =>
+                      S.documentList()
+                        .title('Photos in Collection')
+                        .schemaType('photo')
+                        .filter(
+                          '_type == "photo" && $collectionId in collections[]._ref',
+                        )
+                        .params({collectionId})
+                    ),
+                ),
+            ]),
+        ),
       S.divider(),
       editorGuideListItem(S),
     ])

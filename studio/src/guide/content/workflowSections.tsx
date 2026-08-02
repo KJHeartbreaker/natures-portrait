@@ -53,7 +53,7 @@ const workflowSectionsBeforeSeo: GuideSection[] = [
                 <strong>Gear</strong> — cameras, lenses, and accessories (see <strong>Gear</strong>)
               </>,
               <>
-                <strong>Photo Album</strong> — canonical photo library (see <strong>Photo Album</strong>)
+                <strong>Photo Library</strong> — canonical photo library with collections (see <strong>Photo Library</strong>)
               </>,
               <>
                 <strong>Editor guide</strong> — this help document (read-only)

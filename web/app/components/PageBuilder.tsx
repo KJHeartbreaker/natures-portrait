@@ -1,15 +1,15 @@
 'use client'
 
 import {SanityDocument} from 'next-sanity'
+import {useLayoutEffect} from 'react'
 import {useOptimistic} from 'next-sanity/hooks'
 
 import BlockRenderer from '@/app/components/BlockRenderer'
-import {GetPageQueryResult} from '@/sanity.types'
 import {cleanStegaData, dataAttr} from '@/sanity/lib/utils'
-import {PageSection} from '@/sanity/lib/types'
+import {PageBuilderInput, PageSection} from '@/sanity/lib/types'
 
 type PageBuilderPageProps = {
-  page: GetPageQueryResult
+  page: PageBuilderInput
 }
 
 type PageData = {
@@ -22,20 +22,13 @@ function mergeSection(existing: PageSection, incoming: PageSection): PageSection
   return {...existing, ...incoming}
 }
 
-/**
- * The PageBuilder component is used to render the blocks from the `content` field in the Page type in your Sanity Studio.
- */
-
 function RenderSections({
   sections,
   page,
 }: {
   sections: PageSection[]
-  page: GetPageQueryResult
+  page: NonNullable<PageBuilderInput>
 }) {
-  if (!page) {
-    return null
-  }
   return (
     <div
       data-sanity={dataAttr({
@@ -56,11 +49,7 @@ function RenderSections({
   )
 }
 
-function RenderEmptyState({page}: {page: GetPageQueryResult}) {
-  if (!page) {
-    return null
-  }
-
+function RenderEmptyState({page}: {page: NonNullable<PageBuilderInput>}) {
   return (
     <div
       className="container mt-10"
@@ -78,6 +67,11 @@ function RenderEmptyState({page}: {page: GetPageQueryResult}) {
   )
 }
 
+/**
+ * Renders the page builder blocks from the `content` field.
+ * Accepts any document shape that satisfies PageBuilderInput — including both
+ * the home singleton and regular page/blogLandingPage documents.
+ */
 export default function PageBuilder({page}: PageBuilderPageProps) {
   const cleanedPage = page ? cleanStegaData(page) : page
 
@@ -94,13 +88,23 @@ export default function PageBuilder({page}: PageBuilderPageProps) {
       return cleanedContent.map((incoming) => {
         const existing = currentSections?.find((s) => s._key === incoming?._key)
         if (!existing) return incoming
-        // Merge so layout fields (textTone, textAlign, tintBehindCopy) update live in Presentation
         return mergeSection(existing, incoming)
       })
     }
 
     return currentSections
   })
+
+  const firstType = sections?.[0]?._type
+  useLayoutEffect(() => {
+    const hasHero = firstType === 'heroBanner' || firstType === 'heroTwoPanel'
+    document.body.dataset.hasHero = hasHero ? 'true' : 'false'
+    return () => {
+      delete document.body.dataset.hasHero
+    }
+  }, [firstType])
+
+  if (!cleanedPage) return null
 
   return sections && sections.length > 0 ? (
     <RenderSections sections={sections} page={cleanedPage} />

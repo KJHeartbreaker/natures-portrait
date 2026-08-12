@@ -11,15 +11,24 @@ export default function NavScrollWrapper({children}: {children: ReactNode}) {
 
     const THRESHOLD = window.innerHeight * 0.15
 
-    function onScroll() {
+    function update() {
       if (!el) return
-      const scrolled = window.scrollY > THRESHOLD
+      const hasHero = document.body.dataset.hasHero === 'true'
+      const scrolled = !hasHero || window.scrollY > THRESHOLD
       el.dataset.scrolled = scrolled ? 'true' : 'false'
     }
 
-    onScroll()
-    window.addEventListener('scroll', onScroll, {passive: true})
-    return () => window.removeEventListener('scroll', onScroll)
+    update()
+    window.addEventListener('scroll', update, {passive: true})
+
+    // React to PageBuilder setting body[data-has-hero] after mount
+    const observer = new MutationObserver(update)
+    observer.observe(document.body, {attributes: true, attributeFilter: ['data-has-hero']})
+
+    return () => {
+      window.removeEventListener('scroll', update)
+      observer.disconnect()
+    }
   }, [])
 
   return (

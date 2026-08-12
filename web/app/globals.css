@@ -60,3 +60,15 @@
 
   --default-transition-duration: 250ms;
 }
+
+/* When the first page block is not a hero, the fixed nav overlaps content.
+   Offset main by the nav's solid height: py-4 (32px) + logo height. */
+body[data-has-hero='false'] main {
+  padding-top: 6.5rem; /* mobile: 32px padding + h-18 logo (72px) */
+}
+
+@media (min-width: 640px) {
+  body[data-has-hero='false'] main {
+    padding-top: 5.5rem; /* sm+: 32px padding + sm:h-14 logo (56px) */
+  }
+}

@@ -131,7 +131,7 @@ export function PhotoAlbumImageInput(props: ImageInputProps) {
   }
 
   return (
-    <Stack space={3}>
+    <Stack gap={3}>
       {renderDefault(props)}
       {assetRef ? (
         <Flex align="center" gap={2} wrap="wrap">

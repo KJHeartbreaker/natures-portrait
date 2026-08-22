@@ -8,7 +8,7 @@ type GuideScreenshotProps = {
 
 export function GuideScreenshot({src, alt, caption}: GuideScreenshotProps) {
   return (
-    <Stack space={2}>
+    <Stack gap={2}>
       <Box
         style={{
           borderRadius: '6px',

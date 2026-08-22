@@ -8,14 +8,14 @@ export const blogLandingSection: GuideSection = {
   id: 'blog-landing',
   title: 'Blog landing page',
   content: (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>
         The <strong>Blog</strong> document in the sidebar is not a list of articles — it is the{' '}
         <strong>landing page</strong> for your blog (URL follows its slug, often <code>/blog</code>).
         Individual articles live under <strong>Posts</strong>.
       </GuideParagraph>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Blog vs Posts</GuideSubheading>
         <GuideList
           items={[
@@ -31,7 +31,7 @@ export const blogLandingSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Editing the blog landing</GuideSubheading>
         <GuideSteps
           steps={[

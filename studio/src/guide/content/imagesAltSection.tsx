@@ -8,7 +8,7 @@ export const imagesAltSection: GuideSection = {
   id: 'images-and-alt-text',
   title: 'Images & alt text',
   content: (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>
         Images need short, accurate <strong>alternative text (alt text)</strong> so the site is
         accessible and search engines understand what the image shows. Studio will prompt you when alt
@@ -21,7 +21,7 @@ export const imagesAltSection: GuideSection = {
         site).
       </GuideCallout>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Where you add alt text</GuideSubheading>
         <GuideList
           items={[
@@ -47,7 +47,7 @@ export const imagesAltSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Writing good alt text</GuideSubheading>
         <GuideList
           items={[

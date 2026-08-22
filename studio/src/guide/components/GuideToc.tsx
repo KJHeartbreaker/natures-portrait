@@ -57,7 +57,7 @@ export function GuideToc({items, activeId, onNavigate, scrollRoot}: GuideTocProp
         overscrollBehavior: 'contain',
       }}
     >
-      <Stack space={4}>
+      <Stack gap={4}>
         <Text size={0} weight="semibold" muted>
           On this page
         </Text>

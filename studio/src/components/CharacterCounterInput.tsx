@@ -40,7 +40,7 @@ export function CharacterCounterInput(props: any) {
   const rows = schemaType.rows || schemaType.options?.rows || 3
 
   return (
-    <Stack space={2}>
+    <Stack gap={2}>
       {isTextarea ? (
         <TextArea
           value={value || ''}

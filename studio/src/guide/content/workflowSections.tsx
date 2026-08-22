@@ -20,13 +20,13 @@ const workflowSectionsBeforeSeo: GuideSection[] = [
     id: 'introduction',
     title: 'Getting started',
     content: (
-      <Stack space={5}>
+      <Stack gap={5}>
         <GuideParagraph>
           This site is managed in Sanity Studio. Most content changes follow the same workflow: edit a
           document, preview when helpful, then publish when you are ready.
         </GuideParagraph>
 
-        <Stack space={4}>
+        <Stack gap={4}>
           <GuideSubheading>Where to find things</GuideSubheading>
           <GuideParagraph>
             Use the <strong>Content</strong> sidebar to open the area you need:
@@ -79,7 +79,7 @@ const workflowSectionsBeforeSeo: GuideSection[] = [
     id: 'draft-vs-published',
     title: 'Draft vs published',
     content: (
-      <Stack space={5}>
+      <Stack gap={5}>
         <GuideParagraph>
           Sanity keeps two versions of your work: changes you are still editing (draft) and what visitors
           see on the live website (published).
@@ -116,7 +116,7 @@ const workflowSectionsBeforeSeo: GuideSection[] = [
     id: 'pages',
     title: 'Creating and editing pages',
     content: (
-      <Stack space={5}>
+      <Stack gap={5}>
         <GuideSubheading>Create a new page</GuideSubheading>
         <GuideSteps
           steps={[
@@ -155,7 +155,7 @@ const workflowSectionsAfterSeo: GuideSection[] = [
     id: 'posts',
     title: 'Blog posts',
     content: (
-      <Stack space={5}>
+      <Stack gap={5}>
         <GuideSteps
           steps={[
             <>Go to <strong>Posts</strong> and click <strong>Create new</strong>.</>,

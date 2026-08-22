@@ -26,7 +26,7 @@ export function guideVariantSectionId(parentId: string, variantTitle: string): s
 
 export function GuideVariantDoc({variant}: {variant: GuideBlockVariant}) {
   return (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>{variant.whenToUse}</GuideParagraph>
       {variantScreenshots(variant).map((screenshot) => (
         <GuideScreenshot
@@ -37,13 +37,13 @@ export function GuideVariantDoc({variant}: {variant: GuideBlockVariant}) {
         />
       ))}
       {variant.fields && variant.fields.length > 0 ? (
-        <Stack space={3}>
+        <Stack gap={3}>
           <GuideSubheading>Key fields</GuideSubheading>
           <GuideList items={variant.fields} />
         </Stack>
       ) : null}
       {variant.gotchas && variant.gotchas.length > 0 ? (
-        <Stack space={3}>
+        <Stack gap={3}>
           <GuideSubheading>Good to know</GuideSubheading>
           <GuideList items={variant.gotchas} />
         </Stack>
@@ -62,10 +62,10 @@ type GuideBlockDocProps = {
 
 export function GuideBlockDoc({whenToUse, fields, gotchas, images, callout}: GuideBlockDocProps) {
   return (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>{whenToUse}</GuideParagraph>
       {images && images.length > 0 ? (
-        <Stack space={4}>
+        <Stack gap={4}>
           {images.map((image) => (
             <GuideScreenshot
               key={image.src}
@@ -78,13 +78,13 @@ export function GuideBlockDoc({whenToUse, fields, gotchas, images, callout}: Gui
       ) : null}
       {callout}
       {fields && fields.length > 0 ? (
-        <Stack space={3}>
+        <Stack gap={3}>
           <GuideSubheading>Key fields</GuideSubheading>
           <GuideList items={fields} />
         </Stack>
       ) : null}
       {gotchas && gotchas.length > 0 ? (
-        <Stack space={3}>
+        <Stack gap={3}>
           <GuideSubheading>Good to know</GuideSubheading>
           <GuideList items={gotchas} />
         </Stack>

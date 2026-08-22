@@ -8,14 +8,14 @@ export const navigationSection: GuideSection = {
   id: 'navigation',
   title: 'Navigation & site settings',
   content: (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>
         <strong>Settings and Menus</strong> is a single document for site-wide chrome: header menu,
         logo, favicon, and the default social sharing image. Changes apply everywhere after you{' '}
         <strong>Publish</strong> this document.
       </GuideParagraph>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Add, reorder, or remove a menu link</GuideSubheading>
         <GuideSteps
           steps={[
@@ -38,7 +38,7 @@ export const navigationSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Navigation Item vs Navigation Dropdown</GuideSubheading>
         <GuideList
           items={[
@@ -58,7 +58,7 @@ export const navigationSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Site logo and favicon</GuideSubheading>
         <GuideParagraph>
           <strong>Site logo</strong> appears in the header next to the site title and links home.{' '}
@@ -68,7 +68,7 @@ export const navigationSection: GuideSection = {
         </GuideParagraph>
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Default social sharing image</GuideSubheading>
         <GuideParagraph>
           <strong>Open Graph Image</strong> is the fallback when a page or post does not set its own SEO

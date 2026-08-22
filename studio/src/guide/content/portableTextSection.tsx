@@ -8,14 +8,14 @@ export const portableTextSection: GuideSection = {
   id: 'portable-text',
   title: 'Portable Text',
   content: (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>
         <strong>Portable Text</strong> is the rich text editor used across the site for body copy,
         hero copy, and column content. You type in Studio; the website renders headings, lists, links,
         brand colours, and special blocks consistently.
       </GuideParagraph>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Two editor types on this site</GuideSubheading>
         <GuideList
           items={[
@@ -37,7 +37,7 @@ export const portableTextSection: GuideSection = {
         </GuideParagraph>
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Brand colours on text (full editor)</GuideSubheading>
         <GuideParagraph>
           Select the words you want to colour, then click one colour in the toolbar:
@@ -66,7 +66,7 @@ export const portableTextSection: GuideSection = {
         </GuideCallout>
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Links</GuideSubheading>
         <GuideList
           items={[
@@ -82,7 +82,7 @@ export const portableTextSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Blocks you can insert (full editor only)</GuideSubheading>
         <GuideList
           items={[
@@ -103,7 +103,7 @@ export const portableTextSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Where you will use Portable Text</GuideSubheading>
         <GuideList
           items={[

@@ -8,7 +8,7 @@ export const photoAlbumSection: GuideSection = {
   id: 'photo-album',
   title: 'Photo Library',
   content: (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>
         The <strong>Photo Library</strong> holds canonical photo records — one document per image with
         metadata, gear links, and camera settings. Photos can be organised into{' '}
@@ -16,7 +16,7 @@ export const photoAlbumSection: GuideSection = {
         pages through the <strong>Photo Grid</strong> or <strong>Collection Grid</strong> page sections.
       </GuideParagraph>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Uploading a photo</GuideSubheading>
         <GuideSteps
           steps={[
@@ -42,7 +42,7 @@ export const photoAlbumSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Collections</GuideSubheading>
         <GuideParagraph>
           Collections are a way to group photos by theme, subject, or style — for example "Black &amp;
@@ -71,7 +71,7 @@ export const photoAlbumSection: GuideSection = {
         </GuideCallout>
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Gear on photos</GuideSubheading>
         <GuideParagraph>
           Each photo can store camera and lens information two ways: quick text fields, or references to{' '}
@@ -81,7 +81,7 @@ export const photoAlbumSection: GuideSection = {
         </GuideParagraph>
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Displaying photos on pages</GuideSubheading>
         <GuideList
           items={[

@@ -5,6 +5,7 @@ import PageBuilderPage from '@/app/components/PageBuilder'
 import { sanityFetch } from '@/sanity/lib/live'
 import { getPageQuery, pagesSlugs } from '@/sanity/lib/queries'
 import { PageOnboarding } from '@/app/components/Onboarding'
+import type { PageBuilderInput } from '@/sanity/lib/types'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -57,7 +58,7 @@ export default async function Page(props: Props) {
 
   return (
     <div className="mb-12">
-      <PageBuilderPage page={page} />
+      <PageBuilderPage page={page as PageBuilderInput} />
     </div>
   )
 }

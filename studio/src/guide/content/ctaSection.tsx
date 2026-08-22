@@ -8,13 +8,13 @@ export const ctaSection: GuideSection = {
   id: 'cta',
   title: 'Call to action (CTA)',
   content: (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>
         CTAs are reusable button or text links used in heroes, portable text, and the header menu. Each
         CTA has a <strong>Title</strong> (label) and one destination type.
       </GuideParagraph>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Destination options</GuideSubheading>
         <GuideList
           items={[
@@ -36,7 +36,7 @@ export const ctaSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Display options</GuideSubheading>
         <GuideList
           items={[

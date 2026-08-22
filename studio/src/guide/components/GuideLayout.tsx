@@ -29,7 +29,7 @@ function renderSections(sections: GuideSection[], level: GuideHeadingLevel = 'h2
     <GuideSectionBlock key={section.id} id={section.id} title={section.title} level={level}>
       {section.content}
       {section.children && section.children.length > 0 ? (
-        <Stack space={level === 'h2' ? 4 : 3} paddingTop={1}>
+        <Stack gap={level === 'h2' ? 4 : 3} paddingTop={1}>
           {renderSections(section.children, nextHeadingLevel(level))}
         </Stack>
       ) : null}
@@ -88,8 +88,8 @@ export function GuideLayout({title, description, sections, tocItems}: GuideLayou
         }}
       >
         <Container width={5}>
-          <Stack space={5}>
-            <Stack space={3}>
+          <Stack gap={5}>
+            <Stack gap={3}>
               <Heading as="h1" size={4}>
                 {title}
               </Heading>
@@ -112,7 +112,7 @@ export function GuideLayout({title, description, sections, tocItems}: GuideLayou
                 scrollRoot={scrollRoot}
               />
 
-              <Stack space={5} style={{flex: 1, minWidth: 0, maxWidth: '42rem'}}>
+              <Stack gap={5} style={{flex: 1, minWidth: 0, maxWidth: '42rem'}}>
                 {renderSections(sections)}
                 <Box aria-hidden style={{minHeight: '70vh', flexShrink: 0}} />
               </Stack>

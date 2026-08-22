@@ -8,13 +8,13 @@ export const publishChecklistSection: GuideSection = {
   id: 'publish-checklist',
   title: 'Before you publish',
   content: (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>
         Use this quick checklist whenever you are about to <strong>Publish</strong> — not just save a
         draft. Saving keeps work in Studio; publishing makes it live on the website.
       </GuideParagraph>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Every page or post</GuideSubheading>
         <GuideList
           items={[
@@ -34,7 +34,7 @@ export const publishChecklistSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Pages with grids or photo content</GuideSubheading>
         <GuideList
           items={[

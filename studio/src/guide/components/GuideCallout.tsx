@@ -21,7 +21,7 @@ type GuideCalloutProps = {
 export function GuideCallout({tone = 'primary', title, children}: GuideCalloutProps) {
   return (
     <Card padding={4} radius={2} shadow={1} tone={tone} border>
-      <Stack space={3}>
+      <Stack gap={3}>
         <Text size={1} weight="semibold" muted>
           {title ?? toneLabels[tone]}
         </Text>

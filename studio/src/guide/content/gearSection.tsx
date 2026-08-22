@@ -8,13 +8,13 @@ export const gearSection: GuideSection = {
   id: 'gear',
   title: 'Gear',
   content: (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>
         <strong>Gear</strong> documents describe cameras, lenses, and accessories. They support Photo
         Album EXIF auto-linking and give you consistent labels for equipment shown with your work.
       </GuideParagraph>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Creating a gear entry</GuideSubheading>
         <GuideSteps
           steps={[
@@ -35,7 +35,7 @@ export const gearSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>EXIF match hints</GuideSubheading>
         <GuideParagraph>
           When you upload to Photo Album, the system tries to match camera and lens EXIF strings to gear

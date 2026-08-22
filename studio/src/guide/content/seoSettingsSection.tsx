@@ -8,7 +8,7 @@ export const seoSettingsSection: GuideSection = {
   id: 'seo-settings',
   title: 'SEO settings',
   content: (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>
         Strong SEO helps people discover your photography and writing when they search. Every important
         page and post should have thoughtful SEO filled in before you publish.
@@ -20,7 +20,7 @@ export const seoSettingsSection: GuideSection = {
         afterthought.
       </GuideCallout>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Where to find SEO settings</GuideSubheading>
         <GuideList
           items={[
@@ -39,7 +39,7 @@ export const seoSettingsSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>What each field does</GuideSubheading>
         <GuideList
           items={[
@@ -71,7 +71,7 @@ export const seoSettingsSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Character counters</GuideSubheading>
         <GuideParagraph>
           SEO Title and Meta Description show a live character count in Studio. Stay in the green —

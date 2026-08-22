@@ -8,7 +8,7 @@ export const referencedContentSection: GuideSection = {
   id: 'referenced-content',
   title: 'Referenced content',
   content: (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>
         Some sidebar areas are <strong>documents</strong> you maintain once — blog posts, photos in the
         album, and gear records. Page sections do not usually copy that content inline; they{' '}
@@ -16,7 +16,7 @@ export const referencedContentSection: GuideSection = {
         website.
       </GuideParagraph>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>What is a reference?</GuideSubheading>
         <GuideParagraph>
           In Studio, a reference field looks like a picker: you search for an existing document and attach
@@ -41,7 +41,7 @@ export const referencedContentSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Where each document type can appear</GuideSubheading>
         <GuideList
           items={[
@@ -62,7 +62,7 @@ export const referencedContentSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Your workflow</GuideSubheading>
         <GuideList
           items={[

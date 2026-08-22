@@ -8,14 +8,14 @@ export const presentationSection: GuideSection = {
   id: 'presentation',
   title: 'Presentation mode',
   content: (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>
         <strong>Presentation</strong> shows the live website inside Studio so you can preview layout
         before publishing. With <strong>Draft Mode</strong> on, you see unpublished changes in that
         preview — not what regular visitors see until you publish.
       </GuideParagraph>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Getting started</GuideSubheading>
         <GuideSteps
           steps={[
@@ -34,7 +34,7 @@ export const presentationSection: GuideSection = {
         />
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Structure pane (click to edit)</GuideSubheading>
         <GuideParagraph>
           Presentation usually shows a <strong>Structure</strong> (or document tree) pane alongside the
@@ -71,7 +71,7 @@ export const presentationSection: GuideSection = {
         browse to that address manually.
       </GuideCallout>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>If preview will not connect</GuideSubheading>
         <GuideList
           items={[

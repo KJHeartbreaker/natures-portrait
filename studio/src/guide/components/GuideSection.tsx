@@ -29,7 +29,7 @@ export function GuideSection({id, title, level = 'h2', children}: GuideSectionPr
               }
         }
       >
-        <Stack space={isMajor ? 5 : isNested ? 3 : 4}>
+        <Stack gap={isMajor ? 5 : isNested ? 3 : 4}>
           <Heading
             as={level}
             size={isMajor ? 2 : isNested ? 0 : 1}
@@ -40,7 +40,7 @@ export function GuideSection({id, title, level = 'h2', children}: GuideSectionPr
           >
             {title}
           </Heading>
-          <Stack space={isMajor ? 5 : isNested ? 3 : 4}>{children}</Stack>
+          <Stack gap={isMajor ? 5 : isNested ? 3 : 4}>{children}</Stack>
         </Stack>
       </Card>
     </Box>

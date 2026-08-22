@@ -57,7 +57,7 @@ export function resolveSiteIcons(image?: SanityImageSource | null) {
 export type CtaLike = {
   _type?: 'cta'
   title?: string | null
-  kind?: 'button' | 'link' | null
+  kind?: string | null
   arrow?: boolean | null
   anchor?: string | null
   link?: string | null

@@ -10,7 +10,7 @@ const pageBuilderParent: GuideSection = {
   id: 'page-builder',
   title: 'Page builder',
   content: (
-    <Stack space={5}>
+    <Stack gap={5}>
       <GuideParagraph>
         The page builder is the <strong>Page sections</strong> field on <strong>Home</strong>,{' '}
         <strong>Blog</strong>, and <strong>Pages</strong>. Each entry in the list is one section on the
@@ -18,7 +18,7 @@ const pageBuilderParent: GuideSection = {
         bottom in the order you arrange them in Studio.
       </GuideParagraph>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Choosing a section (insert menu)</GuideSubheading>
         <GuideSteps
           steps={[
@@ -45,7 +45,7 @@ const pageBuilderParent: GuideSection = {
         </GuideParagraph>
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Populating a section</GuideSubheading>
         <GuideParagraph>
           After you add a section, click it in the list to expand it. There are two common patterns:
@@ -69,7 +69,7 @@ const pageBuilderParent: GuideSection = {
         </GuideParagraph>
       </Stack>
 
-      <Stack space={4}>
+      <Stack gap={4}>
         <GuideSubheading>Arranging sections on the page</GuideSubheading>
         <GuideList
           items={[
@@ -98,7 +98,7 @@ const pageBuilderParent: GuideSection = {
         Section order in Studio matches scroll order on the page.
       </GuideCallout>
 
-      <Stack space={3}>
+      <Stack gap={3}>
         <GuideSubheading>Section types (detail)</GuideSubheading>
         <GuideParagraph>
           Each type below has its own guide entry with key fields and tips.

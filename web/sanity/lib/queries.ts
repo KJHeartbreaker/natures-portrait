@@ -252,7 +252,7 @@ export const homeQuery = defineQuery(`
               ${imageProjection}
             }
           },
-          "photoCount": count(*[_type == "photo" && ^._id in collections[]._ref])
+          "photoCount": count(photos)
         },
         disabled
       }
@@ -456,7 +456,7 @@ export const getPageQuery = defineQuery(`
               ${imageProjection}
             }
           },
-          "photoCount": count(*[_type == "photo" && ^._id in collections[]._ref])
+          "photoCount": count(photos)
         },
         disabled
       }
@@ -473,9 +473,9 @@ export const getCollectionQuery = defineQuery(`
     description{
       ${portableTextProjection}
     },
-    "photos": *[_type == "photo" && ^._id in collections[]._ref] | order(_updatedAt desc) {
+    "photos": photos[]->{
       _id,
-      _key,
+      "_key": _id,
       _type,
       title,
       location,

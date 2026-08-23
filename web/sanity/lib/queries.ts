@@ -470,9 +470,6 @@ export const getCollectionQuery = defineQuery(`
     _type,
     title,
     "slug": slug.current,
-    description{
-      ${portableTextProjection}
-    },
     "photos": photos[]->{
       _id,
       "_key": _id,

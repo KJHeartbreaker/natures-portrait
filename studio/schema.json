@@ -2620,14 +2620,6 @@
         },
         "optional": false
       },
-      "description": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "simplePortableText"
-        },
-        "optional": true
-      },
       "photos": {
         "type": "objectAttribute",
         "value": {

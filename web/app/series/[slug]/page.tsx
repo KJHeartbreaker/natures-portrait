@@ -1,8 +1,6 @@
 import {notFound} from 'next/navigation'
-import type {PortableTextBlock} from 'next-sanity'
 
 import PhotoGrid from '@/app/components/PhotoGrid'
-import PortableText from '@/app/components/PortableText'
 import {sanityFetch} from '@/sanity/lib/live'
 import {getCollectionQuery} from '@/sanity/lib/queries'
 
@@ -19,10 +17,6 @@ export default async function CollectionPage({params}: Props) {
 
   if (!collection) notFound()
 
-  const descriptionBlocks = collection.description?.portableTextBlock as
-    | PortableTextBlock[]
-    | undefined
-
   return (
     <main>
       <div className="container pt-24 pb-8">
@@ -38,14 +32,6 @@ export default async function CollectionPage({params}: Props) {
         >
           {collection.title}
         </h1>
-        {descriptionBlocks?.length ? (
-          <div className="mt-4 max-w-2xl">
-            <PortableText
-              value={descriptionBlocks}
-              className="prose-p:font-sans prose-p:font-light prose-p:text-[13px] prose-p:leading-[1.875] prose-p:text-coastal-pine"
-            />
-          </div>
-        ) : null}
       </div>
 
       <div className="pb-24">

@@ -39,6 +39,7 @@ function SingleColumnContentBlockSection({block}: {block: ExtractPageSectionType
         {portableText?.length ? (
           <PortableText
             value={portableText as PortableTextBlock[]}
+            centered
             className={`max-w-none text-center
               prose-headings:font-serif prose-headings:font-normal prose-headings:tracking-tight
               prose-p:font-sans prose-p:font-light prose-p:text-[13px] prose-p:leading-[1.875]

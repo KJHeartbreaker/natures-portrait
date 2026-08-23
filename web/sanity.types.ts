@@ -409,7 +409,6 @@ export type Collection = {
   _rev: string
   title: string
   slug: Slug
-  description?: SimplePortableText
   photos?: Array<
     {
       _key: string
@@ -4371,53 +4370,7 @@ export type GetCollectionQueryResult = {
   _type: 'collection'
   title: string
   slug: string
-  description: {
-    portableTextBlock: Array<{
-      children?: Array<{
-        marks?: Array<string>
-        text?: string
-        _type: 'span'
-        _key: string
-      }>
-      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
-      listItem?: 'bullet' | 'number'
-      markDefs: Array<
-        | {
-            _key: string
-            _type: 'internalLink'
-            item:
-              | {
-                  _id: string
-                  _type: 'blogLandingPage'
-                  slug: string
-                  title: string
-                }
-              | {
-                  _id: string
-                  _type: 'page'
-                  slug: string
-                  title: string
-                }
-              | {
-                  _id: string
-                  _type: 'post'
-                  slug: string
-                  title: string
-                }
-              | null
-          }
-        | {
-            _key: string
-            _type: 'link'
-            href: string | null
-            blank: boolean | null
-          }
-      > | null
-      level?: number
-      _type: 'block'
-      _key: string
-    }> | null
-  } | null
+  description: null
   photos: Array<{
     _id: string
     _key: string

@@ -2,6 +2,7 @@ import {defineField, defineType} from 'sanity'
 import {MdPhotoAlbum as icon} from 'react-icons/md'
 
 import {PhotoAlbumImageInput} from '../../components/PhotoAlbumImageInput'
+import {ReferencedBy} from '../../components/ReferencedBy'
 
 /**
  * Canonical photo records for reuse across the site.
@@ -16,6 +17,7 @@ export const photo = defineType({
     {name: 'details', title: 'Details', options: {collapsible: true, collapsed: false}},
     {name: 'gear', title: 'Gear', options: {collapsible: true, collapsed: true}},
     {name: 'settings', title: 'Camera Settings', options: {collapsible: true, collapsed: true}},
+    {name: 'usage', title: 'Referenced by', options: {collapsible: true, collapsed: false}},
   ],
   fields: [
     defineField({
@@ -118,6 +120,15 @@ export const photo = defineType({
       title: 'ISO',
       type: 'number',
       fieldset: 'settings',
+    }),
+
+    defineField({
+      name: 'referencedBy',
+      title: 'Referenced by',
+      type: 'string',
+      fieldset: 'usage',
+      readOnly: true,
+      components: {input: ReferencedBy},
     }),
 
   ],

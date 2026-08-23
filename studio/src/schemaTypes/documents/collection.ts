@@ -1,5 +1,6 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {MdCollections as icon} from 'react-icons/md'
+import {CollectionPhotosPicker} from '../../components/CollectionPhotosPicker'
 
 export const collection = defineType({
   name: 'collection',
@@ -21,16 +22,12 @@ export const collection = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'description',
-      title: 'Description (optional)',
-      type: 'simplePortableText',
-    }),
-    defineField({
       name: 'photos',
       title: 'Photos',
       type: 'array',
       description: 'Photos in this collection. A photo can appear in multiple collections.',
       of: [defineArrayMember({type: 'reference', to: [{type: 'photo'}]})],
+      components: {input: CollectionPhotosPicker},
     }),
     defineField({
       name: 'coverPhoto',

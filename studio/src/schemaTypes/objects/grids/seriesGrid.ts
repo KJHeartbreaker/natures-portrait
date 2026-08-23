@@ -25,10 +25,18 @@ export const seriesGrid = defineType({
   preview: {
     select: {
       disabled: 'disabled',
+      c0: 'collections.0.title',
+      c1: 'collections.1.title',
+      c2: 'collections.2.title',
+      c3: 'collections.3.title',
+      media: 'collections.0.coverPhoto.image',
     },
-    prepare({disabled}) {
+    prepare({disabled, c0, c1, c2, c3, media}) {
+      const names = [c0, c1, c2, c3].filter(Boolean).join(', ')
       return {
         title: disabled ? '*** DISABLED *** Series Grid' : 'Series Grid',
+        subtitle: names || undefined,
+        media,
       }
     },
   },

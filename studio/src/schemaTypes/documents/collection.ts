@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 import {MdCollections as icon} from 'react-icons/md'
 
 export const collection = defineType({
@@ -26,16 +26,25 @@ export const collection = defineType({
       type: 'simplePortableText',
     }),
     defineField({
+      name: 'photos',
+      title: 'Photos',
+      type: 'array',
+      description: 'Photos in this collection. A photo can appear in multiple collections.',
+      of: [defineArrayMember({type: 'reference', to: [{type: 'photo'}]})],
+    }),
+    defineField({
       name: 'coverPhoto',
       title: 'Cover Photo',
       type: 'reference',
       to: [{type: 'photo'}],
       description: 'The main photo shown in grid cards and previews',
       options: {
-        filter: ({document}) => ({
-          filter: '$collectionId in collections[]._ref',
-          params: {collectionId: (document._id as string).replace(/^drafts\./, '')},
-        }),
+        filter: ({document}) => {
+          const photos = (document.photos as Array<{_ref: string}> | undefined) ?? []
+          const refs = photos.map((p) => p._ref).filter(Boolean)
+          if (refs.length === 0) return {filter: 'false'}
+          return {filter: '_id in $refs', params: {refs}}
+        },
       },
     }),
   ],

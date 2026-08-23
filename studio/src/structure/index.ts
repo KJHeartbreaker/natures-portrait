@@ -65,13 +65,9 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
                   S.documentTypeList('collection')
                     .title('Collections')
                     .child((collectionId) =>
-                      S.documentList()
-                        .title('Photos in Collection')
-                        .schemaType('photo')
-                        .filter(
-                          '_type == "photo" && $collectionId in collections[]._ref',
-                        )
-                        .params({collectionId})
+                      S.document()
+                        .schemaType('collection')
+                        .documentId(collectionId)
                     ),
                 ),
             ]),

@@ -13,6 +13,7 @@ import {post} from './documents/post'
 // Objects - Grids
 import {postsGridContainer} from './objects/grids/postsGrid'
 import {photoGridContainer} from './objects/grids/photoGrid'
+import {seriesGrid} from './objects/grids/seriesGrid'
 
 // Objects - Helpers
 import {seo} from './objects/helpers/seo'
@@ -24,6 +25,7 @@ import {navDropdownCTA} from './objects/navigationComponents/navDropdownCTA'
 // Objects - Page Elements
 import {carousel} from './objects/pageElements/carousel'
 import {cta} from './objects/pageElements/cta'
+import {featuredCollection} from './objects/pageElements/featuredCollection'
 import {heroBanner} from './objects/pageElements/heroBanner'
 import {heroTwoPanel} from './objects/pageElements/heroTwoPanel'
 import {icon} from './objects/pageElements/icon'
@@ -60,6 +62,7 @@ export const schemaTypes = [
   // Objects - Grids
   postsGridContainer,
   photoGridContainer,
+  seriesGrid,
   // Objects - Helpers
   seo,
   // Objects - Navigation Components
@@ -68,6 +71,7 @@ export const schemaTypes = [
   // Objects - Page Elements
   carousel,
   cta,
+  featuredCollection,
   heroBanner,
   heroTwoPanel,
   icon,

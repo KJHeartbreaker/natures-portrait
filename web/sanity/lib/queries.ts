@@ -217,6 +217,44 @@ export const homeQuery = defineQuery(`
           },
         },
         disabled
+      },
+      _type == "featuredCollection" => {
+        heading,
+        subheading,
+        body{
+          ${portableTextProjection}
+        },
+        ctaLabel,
+        collection->{
+          _id,
+          title,
+          "slug": slug.current,
+        },
+        photo->{
+          _id,
+          "image": image{
+            ${imageProjection}
+          },
+          title,
+          location,
+          dateCaptured,
+        },
+        disabled
+      },
+      _type == "seriesGrid" => {
+        collections[]->{
+          _id,
+          title,
+          "slug": slug.current,
+          coverPhoto->{
+            _id,
+            "image": image{
+              ${imageProjection}
+            }
+          },
+          "photoCount": count(*[_type == "photo" && ^._id in collections[]._ref])
+        },
+        disabled
       }
     }
   }
@@ -383,6 +421,78 @@ export const getPageQuery = defineQuery(`
           },
         },
         disabled
+      },
+      _type == "featuredCollection" => {
+        heading,
+        subheading,
+        body{
+          ${portableTextProjection}
+        },
+        ctaLabel,
+        collection->{
+          _id,
+          title,
+          "slug": slug.current,
+        },
+        photo->{
+          _id,
+          "image": image{
+            ${imageProjection}
+          },
+          title,
+          location,
+          dateCaptured,
+        },
+        disabled
+      },
+      _type == "seriesGrid" => {
+        collections[]->{
+          _id,
+          title,
+          "slug": slug.current,
+          coverPhoto->{
+            _id,
+            "image": image{
+              ${imageProjection}
+            }
+          },
+          "photoCount": count(*[_type == "photo" && ^._id in collections[]._ref])
+        },
+        disabled
+      }
+    }
+  }
+`)
+
+export const getCollectionQuery = defineQuery(`
+  *[_type == "collection" && slug.current == $slug][0]{
+    _id,
+    _type,
+    title,
+    "slug": slug.current,
+    description{
+      ${portableTextProjection}
+    },
+    "photos": *[_type == "photo" && ^._id in collections[]._ref] | order(_updatedAt desc) {
+      _id,
+      _key,
+      _type,
+      title,
+      location,
+      dateCaptured,
+      cameraText,
+      lensText,
+      description{
+        ${portableTextProjection}
+      },
+      cameraRef->{
+        ${gearProjection}
+      },
+      lensRef->{
+        ${gearProjection}
+      },
+      "image": image{
+        ${imageProjection}
       }
     }
   }

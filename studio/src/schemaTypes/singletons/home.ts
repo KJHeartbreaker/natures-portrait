@@ -9,10 +9,14 @@ export const home = defineType({
   icon,
   groups: [
     {
+      name: 'content',
+      title: 'Content',
+      default: true,
+    },
+    {
       name: 'seo',
       title: 'SEO',
       icon: BsSearch,
-      default: true,
     },
   ],
   fields: [
@@ -21,10 +25,12 @@ export const home = defineType({
       description: 'Homepage title.',
       title: 'Title',
       type: 'string',
+      group: 'content',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'overview',
+      group: 'content',
       description: 'Used both for the <meta> description tag for SEO, and the homepage subheader.',
       title: 'Description',
       type: 'array',
@@ -68,6 +74,7 @@ export const home = defineType({
       name: 'content',
       type: 'array',
       title: 'Page sections',
+      group: 'content',
       description: 'Add, edit, and reorder sections',
       options: {
         insertMenu: {
@@ -89,6 +96,8 @@ export const home = defineType({
         defineArrayMember({type: 'rowContainer'}),
         defineArrayMember({type: 'postsGridContainer'}),
         defineArrayMember({type: 'photoGridContainer'}),
+        defineArrayMember({type: 'featuredCollection'}),
+        defineArrayMember({type: 'seriesGrid'}),
       ],
     }),
   ],

@@ -25,13 +25,27 @@ export const collection = defineType({
       title: 'Description (optional)',
       type: 'simplePortableText',
     }),
+    defineField({
+      name: 'coverPhoto',
+      title: 'Cover Photo',
+      type: 'reference',
+      to: [{type: 'photo'}],
+      description: 'The main photo shown in grid cards and previews',
+      options: {
+        filter: ({document}) => ({
+          filter: '$collectionId in collections[]._ref',
+          params: {collectionId: (document._id as string).replace(/^drafts\./, '')},
+        }),
+      },
+    }),
   ],
   preview: {
-    select: {title: 'title', slug: 'slug.current'},
-    prepare({title, slug}) {
+    select: {title: 'title', slug: 'slug.current', media: 'coverPhoto.image'},
+    prepare({title, slug, media}) {
       return {
         title: title || 'Untitled collection',
         subtitle: slug ? `/${slug}` : undefined,
+        media,
       }
     },
   },

@@ -99,6 +99,8 @@ export const page = defineType({
         defineArrayMember({type: 'rowContainer'}),
         defineArrayMember({type: 'postsGridContainer'}),
         defineArrayMember({type: 'photoGridContainer'}),
+        defineArrayMember({type: 'featuredCollection'}),
+        defineArrayMember({type: 'seriesGrid'}),
       ],
     }),
   ],

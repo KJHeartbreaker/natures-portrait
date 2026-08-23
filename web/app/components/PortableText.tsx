@@ -23,9 +23,11 @@ const paletteMarkStyles: Record<string, React.CSSProperties> = {
 export default function CustomPortableText({
   className,
   value,
+  centered = false,
 }: {
   className?: string
   value: PortableTextBlock[]
+  centered?: boolean
 }) {
   const components: PortableTextComponents = {
     types: {
@@ -36,7 +38,7 @@ export default function CustomPortableText({
         }
 
         return (
-          <figure className="my-8">
+          <figure className={`my-8${centered ? ' flex justify-center' : ''}`}>
             <Image
               id={id}
               alt={value.alt || ''}

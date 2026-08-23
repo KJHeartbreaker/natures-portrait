@@ -9,10 +9,14 @@ export const page = defineType({
   icon,
   groups: [
     {
+      name: 'content',
+      title: 'Content',
+      default: true,
+    },
+    {
       name: 'seo',
       title: 'SEO',
       icon: BsSearch,
-      default: true,
     },
   ],
   fields: [
@@ -20,12 +24,14 @@ export const page = defineType({
       type: 'string',
       name: 'title',
       title: 'Title',
+      group: 'content',
       validation: (rule) => rule.required(),
     }),
     defineField({
       type: 'slug',
       name: 'slug',
       title: 'Slug',
+      group: 'content',
       options: {
         source: 'title',
       },
@@ -43,6 +49,7 @@ export const page = defineType({
       description:
         'Used both for the <meta> description tag for SEO, and the personal website subheader.',
       title: 'Overview',
+      group: 'content',
       type: 'array',
       of: [
         // Paragraphs
@@ -70,6 +77,7 @@ export const page = defineType({
       name: 'content',
       type: 'array',
       title: 'Page sections',
+      group: 'content',
       description: 'Add, edit, and reorder sections',
       options: {
         insertMenu: {

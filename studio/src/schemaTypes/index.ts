@@ -14,6 +14,7 @@ import {post} from './documents/post'
 import {postsGridContainer} from './objects/grids/postsGrid'
 import {photoGridContainer} from './objects/grids/photoGrid'
 import {seriesGrid} from './objects/grids/seriesGrid'
+import {autoGallery} from './objects/grids/autoGallery'
 
 // Objects - Helpers
 import {seo} from './objects/helpers/seo'
@@ -32,6 +33,7 @@ import {icon} from './objects/pageElements/icon'
 import {albumMainImage} from './objects/pageElements/albumMainImage'
 import {mainImage} from './objects/pageElements/mainImage'
 import {photoItem} from './objects/pageElements/photoItem'
+import {photoGridRef} from './objects/pageElements/photoGridRef'
 
 // Objects - Portable Text
 import {mainPortableText} from './objects/portableText/mainPortableText'
@@ -63,6 +65,7 @@ export const schemaTypes = [
   postsGridContainer,
   photoGridContainer,
   seriesGrid,
+  autoGallery,
   // Objects - Helpers
   seo,
   // Objects - Navigation Components
@@ -78,6 +81,7 @@ export const schemaTypes = [
   mainImage,
   albumMainImage,
   photoItem,
+  photoGridRef,
   // Objects - Portable Text
   mainPortableText,
   simplePortableText,

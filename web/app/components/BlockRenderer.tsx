@@ -4,6 +4,7 @@ import type {PortableTextBlock} from 'next-sanity'
 
 import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
+import AutoGallerySection from '@/app/components/AutoGallerySection'
 import FeaturedCollection from '@/app/components/FeaturedCollection'
 import PhotoGrid from '@/app/components/PhotoGrid'
 import PullQuote from '@/app/components/PullQuote'
@@ -119,7 +120,7 @@ function UnknownSection({block}: {block: PageSection}) {
 }
 
 // These block types break out of the container and span the full viewport width.
-const FULL_BLEED_TYPES = new Set(['heroBanner', 'heroTwoPanel', 'pullQuote', 'singleColumnContentBlock', 'featuredCollection', 'seriesGrid'])
+const FULL_BLEED_TYPES = new Set(['heroBanner', 'heroTwoPanel', 'pullQuote', 'singleColumnContentBlock', 'featuredCollection', 'seriesGrid', 'autoGallery'])
 
 /**
  * Used by the <PageBuilder>, this component renders a the component that matches the block type.
@@ -143,6 +144,8 @@ export default function BlockRenderer({block, pageId, pageType}: BlockProps) {
         return <PostsGridContainerSection block={block} />
       case 'photoGridContainer':
         return <PhotoGridContainerSection block={block} />
+      case 'autoGallery':
+        return <AutoGallerySection block={block} />
       case 'featuredCollection':
         return <FeaturedCollection block={block} />
       case 'seriesGrid':

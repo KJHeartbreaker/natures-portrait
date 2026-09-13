@@ -1,6 +1,7 @@
 import {TfiLayoutGrid3Alt as icon} from 'react-icons/tfi'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {palette} from '../../palette'
+import {PhotoGridPicker} from '../../../components/PhotoGridPicker'
 
 export const photoGridContainer = defineType({
   name: 'photoGridContainer',
@@ -60,10 +61,8 @@ export const photoGridContainer = defineType({
       name: 'images',
       title: 'Photos',
       type: 'array',
-      // TODO(decision): decide whether this array should allow both `photoItem` and raw `mainImage`.
-      // Today it supports both, which is flexible, but it creates two possible data shapes for the frontend.
-      // If we standardize on `photoItem` only, remove `mainImage` here (and simplify the GROQ projection accordingly).
-      of: [defineArrayMember({type: 'photoItem'}), defineArrayMember({type: 'mainImage'})],
+      of: [defineArrayMember({type: 'photoGridRef'}), defineArrayMember({type: 'photoItem'})],
+      components: {input: PhotoGridPicker},
       validation: (Rule) => Rule.min(1),
     }),
     defineField({
@@ -77,12 +76,13 @@ export const photoGridContainer = defineType({
     select: {
       title: 'title',
       image0: 'images.0.image',
+      photoImage0: 'images.0.photo.image',
       t1: 'images.1.title',
       t2: 'images.2.title',
       t3: 'images.3.title',
       disabled: 'disabled',
     },
-    prepare({title, image0, t1, t2, t3, disabled}) {
+    prepare({title, image0, photoImage0, t1, t2, t3, disabled}) {
       const image1 = t1
       const image2 = t2
       const image3 = t3
@@ -93,7 +93,7 @@ export const photoGridContainer = defineType({
       return {
         title: disabled ? `*** DISABLED *** ${baseTitle}` : baseTitle,
         subtitle: hasMore ? `${subtitle}…` : subtitle,
-        media: image0 || icon,
+        media: photoImage0 || image0 || icon,
       }
     },
   },

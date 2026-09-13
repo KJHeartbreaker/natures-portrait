@@ -313,7 +313,6 @@ export default function PhotoGrid({
                             {activeTitle ? <div className="text-sm font-semibold truncate">{activeTitle}</div> : null}
                             {activeLocation ? <div className="text-xs text-white/75 truncate">{activeLocation}</div> : null}
                           </div>
-                          <div className="font-mono text-[11px] text-white/70 shrink-0">{active?.dateCaptured || ''}</div>
                         </div>
                         <div className="mt-2 flex items-center justify-center">
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">

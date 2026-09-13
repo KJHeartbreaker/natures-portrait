@@ -4,7 +4,7 @@ import type {PortableTextBlock} from 'next-sanity'
 
 import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
-import AutoGallerySection from '@/app/components/AutoGallerySection'
+import AutoGallery from '@/app/components/AutoGallery'
 import FeaturedCollection from '@/app/components/FeaturedCollection'
 import PhotoGrid from '@/app/components/PhotoGrid'
 import PullQuote from '@/app/components/PullQuote'
@@ -15,11 +15,13 @@ import {HeroBanner, HeroTwoPanel} from '@/app/components/hero'
 import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import {dataAttr} from '@/sanity/lib/utils'
 import type {ExtractPageSectionType, PageSection} from '@/sanity/lib/types'
+import type {AutoGalleryQueryResult} from '@/sanity.types'
 
 type BlockProps = {
   block: PageSection
   pageId: string
   pageType: string
+  autoGalleryData?: AutoGalleryQueryResult | null
 }
 
 function SingleColumnContentBlockSection({block}: {block: ExtractPageSectionType<'singleColumnContentBlock'>}) {
@@ -125,7 +127,7 @@ const FULL_BLEED_TYPES = new Set(['heroBanner', 'heroTwoPanel', 'pullQuote', 'si
 /**
  * Used by the <PageBuilder>, this component renders a the component that matches the block type.
  */
-export default function BlockRenderer({block, pageId, pageType}: BlockProps) {
+export default function BlockRenderer({block, pageId, pageType, autoGalleryData}: BlockProps) {
   const isFullBleed = FULL_BLEED_TYPES.has(block._type)
 
   const inner = (() => {
@@ -145,7 +147,13 @@ export default function BlockRenderer({block, pageId, pageType}: BlockProps) {
       case 'photoGridContainer':
         return <PhotoGridContainerSection block={block} />
       case 'autoGallery':
-        return <AutoGallerySection block={block} />
+        if (block.disabled) return null
+        return (
+          <AutoGallery
+            photos={(autoGalleryData?.photos ?? []) as Parameters<typeof AutoGallery>[0]['photos']}
+            collections={(autoGalleryData?.collections ?? []) as Parameters<typeof AutoGallery>[0]['collections']}
+          />
+        )
       case 'featuredCollection':
         return <FeaturedCollection block={block} />
       case 'seriesGrid':

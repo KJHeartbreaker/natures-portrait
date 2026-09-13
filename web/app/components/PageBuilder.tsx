@@ -7,9 +7,11 @@ import {useOptimistic} from 'next-sanity/hooks'
 import BlockRenderer from '@/app/components/BlockRenderer'
 import {cleanStegaData, dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderInput, PageSection} from '@/sanity/lib/types'
+import type {AutoGalleryQueryResult} from '@/sanity.types'
 
 type PageBuilderPageProps = {
   page: PageBuilderInput
+  autoGalleryData?: AutoGalleryQueryResult | null
 }
 
 type PageData = {
@@ -25,9 +27,11 @@ function mergeSection(existing: PageSection, incoming: PageSection): PageSection
 function RenderSections({
   sections,
   page,
+  autoGalleryData,
 }: {
   sections: PageSection[]
   page: NonNullable<PageBuilderInput>
+  autoGalleryData?: AutoGalleryQueryResult | null
 }) {
   return (
     <div
@@ -43,6 +47,7 @@ function RenderSections({
           block={block}
           pageId={page._id}
           pageType={page._type}
+          autoGalleryData={autoGalleryData}
         />
       ))}
     </div>
@@ -72,7 +77,7 @@ function RenderEmptyState({page}: {page: NonNullable<PageBuilderInput>}) {
  * Accepts any document shape that satisfies PageBuilderInput — including both
  * the home singleton and regular page/blogLandingPage documents.
  */
-export default function PageBuilder({page}: PageBuilderPageProps) {
+export default function PageBuilder({page, autoGalleryData}: PageBuilderPageProps) {
   const cleanedPage = page ? cleanStegaData(page) : page
 
   const sections = useOptimistic<
@@ -107,7 +112,7 @@ export default function PageBuilder({page}: PageBuilderPageProps) {
   if (!cleanedPage) return null
 
   return sections && sections.length > 0 ? (
-    <RenderSections sections={sections} page={cleanedPage} />
+    <RenderSections sections={sections} page={cleanedPage} autoGalleryData={autoGalleryData} />
   ) : (
     <RenderEmptyState page={cleanedPage} />
   )

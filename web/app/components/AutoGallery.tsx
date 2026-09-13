@@ -38,12 +38,12 @@ export default function AutoGallery({photos, collections}: Props) {
   }, [photos, activeCollectionId])
 
   return (
-    <div>
+    <div className="pt-24 pb-24">
       {collections.length > 0 && (
-        <div className="container pb-8 flex flex-wrap gap-6 items-center">
+        <div className="container mb-10 flex flex-wrap gap-x-8 gap-y-3 items-center">
           <button
             onClick={() => setActiveCollectionId(null)}
-            className={`text-[10px] font-sans font-light uppercase tracking-[0.25em] transition-colors ${
+            className={`text-[10px] font-sans font-light uppercase tracking-[0.25em] transition-colors pb-px ${
               activeCollectionId === null
                 ? 'text-luxe-noir border-b border-luxe-noir'
                 : 'text-dusty-sage hover:text-coastal-pine'
@@ -55,7 +55,7 @@ export default function AutoGallery({photos, collections}: Props) {
             <button
               key={c._id}
               onClick={() => setActiveCollectionId(c._id)}
-              className={`text-[10px] font-sans font-light uppercase tracking-[0.25em] transition-colors ${
+              className={`text-[10px] font-sans font-light uppercase tracking-[0.25em] transition-colors pb-px ${
                 activeCollectionId === c._id
                   ? 'text-luxe-noir border-b border-luxe-noir'
                   : 'text-dusty-sage hover:text-coastal-pine'

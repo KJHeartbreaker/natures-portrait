@@ -38,9 +38,9 @@ export default function AutoGallery({photos, collections}: Props) {
   }, [photos, activeCollectionId])
 
   return (
-    <div className="pt-24 pb-24">
+    <div>
       {collections.length > 0 && (
-        <div className="container mb-10 flex flex-wrap gap-x-8 gap-y-3 items-center">
+        <div className="mb-10 flex flex-wrap gap-x-8 gap-y-3 items-center">
           <button
             onClick={() => setActiveCollectionId(null)}
             className={`text-[10px] font-sans font-light uppercase tracking-[0.25em] transition-colors pb-px ${

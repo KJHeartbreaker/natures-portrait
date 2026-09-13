@@ -122,7 +122,7 @@ function UnknownSection({block}: {block: PageSection}) {
 }
 
 // These block types break out of the container and span the full viewport width.
-const FULL_BLEED_TYPES = new Set(['heroBanner', 'heroTwoPanel', 'pullQuote', 'singleColumnContentBlock', 'featuredCollection', 'seriesGrid', 'autoGallery'])
+const FULL_BLEED_TYPES = new Set(['heroBanner', 'heroTwoPanel', 'pullQuote', 'singleColumnContentBlock', 'featuredCollection', 'seriesGrid'])
 
 /**
  * Used by the <PageBuilder>, this component renders a the component that matches the block type.

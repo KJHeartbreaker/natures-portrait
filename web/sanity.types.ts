@@ -21,7 +21,7 @@ export type ContentBlock = {
 
 export type TwoColumnPanel = {
   _type: 'twoColumnPanel'
-  panelType?: 'image' | 'text'
+  panelType: 'image' | 'text'
   image?: MainImage
   content?: MainPortableText
   backgroundColor?: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5'
@@ -53,7 +53,7 @@ export type RowContainer = {
 
 export type PullQuote = {
   _type: 'pullQuote'
-  quote?: string
+  quote: string
   attribution?: string
   disabled?: boolean
 }
@@ -61,9 +61,9 @@ export type PullQuote = {
 export type ContactInfo = {
   _type: 'contactInfo'
   headline?: string
-  phoneNumber?: string
+  phoneNumber: string
   phoneLabel?: string
-  email?: string
+  email: string
   textColor?: 'white' | 'blue'
   size?: 'normal' | 'large'
 }
@@ -189,7 +189,7 @@ export type PhotoReference = {
 
 export type PhotoGridRef = {
   _type: 'photoGridRef'
-  photo?: PhotoReference
+  photo: PhotoReference
   titleOverride?: string
   descriptionOverride?: SimplePortableText
 }
@@ -203,7 +203,7 @@ export type GearReference = {
 
 export type PhotoItem = {
   _type: 'photoItem'
-  image?: MainImage
+  image: MainImage
   title?: string
   location?: string
   description?: SimplePortableText
@@ -246,23 +246,23 @@ export type Icon = {
   media?: unknown
   hotspot?: SanityImageHotspot
   crop?: SanityImageCrop
-  alt?: string
+  alt: string
 }
 
 export type SanityImageCrop = {
   _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
+  top: number
+  bottom: number
+  left: number
+  right: number
 }
 
 export type SanityImageHotspot = {
   _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
+  x: number
+  y: number
+  height: number
+  width: number
 }
 
 export type HeroTwoPanel = {
@@ -282,7 +282,7 @@ export type HeroBanner = {
   textTone?: 'light' | 'dark'
   tintBehindCopy?: boolean
   textAlign?: 'left' | 'center' | 'right'
-  heading?: string
+  heading: string
   copy?: SimplePortableText
   image?: MainImage
   cta?: Cta
@@ -419,8 +419,8 @@ export type Collection = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title?: string
-  slug?: Slug
+  title: string
+  slug: Slug
   photos?: Array<
     {
       _key: string
@@ -435,7 +435,7 @@ export type Photo = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  image?: AlbumMainImage
+  image: AlbumMainImage
   title?: string
   location?: string
   description?: SimplePortableText
@@ -457,9 +457,9 @@ export type Gear = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  kind?: 'camera' | 'lens' | 'accessory'
-  brand?: string
-  model?: string
+  kind: 'camera' | 'lens' | 'accessory'
+  brand: string
+  model: string
   nickname?: string
   exifMatchHints?: Array<string>
   notes?: string
@@ -468,7 +468,7 @@ export type Gear = {
 
 export type Slug = {
   _type: 'slug'
-  current?: string
+  current: string
   source?: string
 }
 
@@ -478,8 +478,8 @@ export type Home = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title?: string
-  overview?: Array<{
+  title: string
+  overview: Array<{
     children?: Array<{
       marks?: Array<string>
       text?: string
@@ -562,10 +562,10 @@ export type Settings = {
         _key: string
       } & NavDropdownCTA)
     | {
-        title?: string
-        slug?: Slug
+        title: string
+        slug: Slug
         seo?: Seo
-        overview?: Array<{
+        overview: Array<{
           children?: Array<{
             marks?: Array<string>
             text?: string
@@ -621,8 +621,8 @@ export type Page = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title?: string
-  slug?: Slug
+  title: string
+  slug: Slug
   seo?: Seo
   overview?: Array<{
     children?: Array<{
@@ -678,8 +678,8 @@ export type Post = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title?: string
-  slug?: Slug
+  title: string
+  slug: Slug
   seo?: Seo
   overview?: Array<{
     children?: Array<{
@@ -695,10 +695,10 @@ export type Post = {
     _type: 'block'
     _key: string
   }>
-  excerpt?: SimplePortableText
+  excerpt: SimplePortableText
   image?: MainImage
   subheader?: string
-  body?: MainPortableText
+  body: MainPortableText
 }
 
 export type BlogLandingPage = {
@@ -707,10 +707,10 @@ export type BlogLandingPage = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title?: string
-  slug?: Slug
+  title: string
+  slug: Slug
   seo?: Seo
-  overview?: Array<{
+  overview: Array<{
     children?: Array<{
       marks?: Array<string>
       text?: string
@@ -794,7 +794,7 @@ export type AssistInstructionContextReference = {
 
 export type SanityAssistInstructionContext = {
   _type: 'sanity.assist.instruction.context'
-  reference?: AssistInstructionContextReference
+  reference: AssistInstructionContextReference
 }
 
 export type AssistInstructionContext = {
@@ -822,7 +822,7 @@ export type AssistInstructionContext = {
 
 export type SanityAssistInstructionUserInput = {
   _type: 'sanity.assist.instruction.userInput'
-  message?: string
+  message: string
   description?: string
 }
 
@@ -931,9 +931,9 @@ export type SanityImagePalette = {
 
 export type SanityImageDimensions = {
   _type: 'sanity.imageDimensions'
-  height?: number
-  width?: number
-  aspectRatio?: number
+  height: number
+  width: number
+  aspectRatio: number
 }
 
 export type SanityImageMetadata = {
@@ -959,14 +959,14 @@ export type SanityFileAsset = {
   title?: string
   description?: string
   altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
+  sha1hash: string
+  extension: string
+  mimeType: string
+  size: number
+  assetId: string
   uploadId?: string
-  path?: string
-  url?: string
+  path: string
+  url: string
   source?: SanityAssetSourceData
 }
 
@@ -988,14 +988,14 @@ export type SanityImageAsset = {
   title?: string
   description?: string
   altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
+  sha1hash: string
+  extension: string
+  mimeType: string
+  size: number
+  assetId: string
   uploadId?: string
-  path?: string
-  url?: string
+  path: string
+  url: string
   metadata?: SanityImageMetadata
   source?: SanityAssetSourceData
 }
@@ -1093,12 +1093,12 @@ export type SettingsQueryResult = {
     asset: {
       _id: string
       _type: 'sanity.imageAsset'
-      url: string | null
+      url: string
       metadata: {
         dimensions: {
-          width: number | null
-          height: number | null
-          aspectRatio: number | null
+          width: number
+          height: number
+          aspectRatio: number
         } | null
         lqip: string | null
         blurhash: null
@@ -1115,8 +1115,8 @@ export type SettingsQueryResult = {
         _key: string
         _type: 'blogLandingPage'
         _id: null
-        title: string | null
-        slug: string | null
+        title: string
+        slug: string
       }
     | {
         _key: string
@@ -1133,27 +1133,27 @@ export type SettingsQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.fileAsset'
-              url: string | null
+              url: string
             } | null
           } | null
           landingPage:
             | {
                 _id: string
                 _type: 'blogLandingPage'
-                slug: string | null
-                title: string | null
+                slug: string
+                title: string
               }
             | {
                 _id: string
                 _type: 'page'
-                slug: string | null
-                title: string | null
+                slug: string
+                title: string
               }
             | {
                 _id: string
                 _type: 'post'
-                slug: string | null
-                title: string | null
+                slug: string
+                title: string
               }
             | null
         } | null
@@ -1173,27 +1173,27 @@ export type SettingsQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.fileAsset'
-              url: string | null
+              url: string
             } | null
           } | null
           landingPage:
             | {
                 _id: string
                 _type: 'blogLandingPage'
-                slug: string | null
-                title: string | null
+                slug: string
+                title: string
               }
             | {
                 _id: string
                 _type: 'page'
-                slug: string | null
-                title: string | null
+                slug: string
+                title: string
               }
             | {
                 _id: string
                 _type: 'post'
-                slug: string | null
-                title: string | null
+                slug: string
+                title: string
               }
             | null
         } | null
@@ -1210,27 +1210,27 @@ export type SettingsQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.fileAsset'
-              url: string | null
+              url: string
             } | null
           } | null
           landingPage:
             | {
                 _id: string
                 _type: 'blogLandingPage'
-                slug: string | null
-                title: string | null
+                slug: string
+                title: string
               }
             | {
                 _id: string
                 _type: 'page'
-                slug: string | null
-                title: string | null
+                slug: string
+                title: string
               }
             | {
                 _id: string
                 _type: 'post'
-                slug: string | null
-                title: string | null
+                slug: string
+                title: string
               }
             | null
         }> | null
@@ -1246,12 +1246,12 @@ export type SettingsQueryResult = {
     asset: {
       _id: string
       _type: 'sanity.imageAsset'
-      url: string | null
+      url: string
       metadata: {
         dimensions: {
-          width: number | null
-          height: number | null
-          aspectRatio: number | null
+          width: number
+          height: number
+          aspectRatio: number
         } | null
         lqip: string | null
         blurhash: null
@@ -1282,12 +1282,12 @@ export type SettingsMetaQueryResult = {
     asset: {
       _id: string
       _type: 'sanity.imageAsset'
-      url: string | null
+      url: string
       metadata: {
         dimensions: {
-          width: number | null
-          height: number | null
-          aspectRatio: number | null
+          width: number
+          height: number
+          aspectRatio: number
         } | null
         lqip: string | null
         blurhash: null
@@ -1309,12 +1309,12 @@ export type SettingsMetaQueryResult = {
     asset: {
       _id: string
       _type: 'sanity.imageAsset'
-      url: string | null
+      url: string
       metadata: {
         dimensions: {
-          width: number | null
-          height: number | null
-          aspectRatio: number | null
+          width: number
+          height: number
+          aspectRatio: number
         } | null
         lqip: string | null
         blurhash: null
@@ -1336,12 +1336,12 @@ export type SettingsMetaQueryResult = {
     asset: {
       _id: string
       _type: 'sanity.imageAsset'
-      url: string | null
+      url: string
       metadata: {
         dimensions: {
-          width: number | null
-          height: number | null
-          aspectRatio: number | null
+          width: number
+          height: number
+          aspectRatio: number
         } | null
         lqip: string | null
         blurhash: null
@@ -1362,7 +1362,7 @@ export type SettingsMetaQueryResult = {
 export type HomeQueryResult = {
   _id: 'home'
   _type: 'home'
-  title: string | null
+  title: string
   overview: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -1380,7 +1380,7 @@ export type HomeQueryResult = {
     level?: number
     _type: 'block'
     _key: string
-  }> | null
+  }>
   seo: {
     seoTitle: string | null
     seoDescription: string | null
@@ -1396,12 +1396,12 @@ export type HomeQueryResult = {
       asset: {
         _id: string
         _type: 'sanity.imageAsset'
-        url: string | null
+        url: string
         metadata: {
           dimensions: {
-            width: number | null
-            height: number | null
-            aspectRatio: number | null
+            width: number
+            height: number
+            aspectRatio: number
           } | null
           lqip: string | null
           blurhash: null
@@ -1443,20 +1443,20 @@ export type HomeQueryResult = {
                     | {
                         _id: string
                         _type: 'blogLandingPage'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | {
                         _id: string
                         _type: 'page'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | {
                         _id: string
                         _type: 'post'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | null
                 }
@@ -1475,8 +1475,8 @@ export type HomeQueryResult = {
         ctaLabel: string | null
         collection: {
           _id: string
-          title: string | null
-          slug: string | null
+          title: string
+          slug: string
         } | null
         photo: {
           _id: string
@@ -1490,12 +1490,12 @@ export type HomeQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.imageAsset'
-              url: string | null
+              url: string
               metadata: {
                 dimensions: {
-                  width: number | null
-                  height: number | null
-                  aspectRatio: number | null
+                  width: number
+                  height: number
+                  aspectRatio: number
                 } | null
                 lqip: string | null
                 blurhash: null
@@ -1506,7 +1506,7 @@ export type HomeQueryResult = {
                 } | null
               } | null
             } | null
-          } | null
+          }
           title: string | null
           location: string | null
           dateCaptured: string | null
@@ -1523,7 +1523,7 @@ export type HomeQueryResult = {
         tintBehindCopy: boolean | null
         copyTint: null
         ctaTone: 'dark' | 'light' | null
-        heading: string | null
+        heading: string
         copy: {
           portableTextBlock: Array<{
             children?: Array<{
@@ -1542,20 +1542,20 @@ export type HomeQueryResult = {
                     | {
                         _id: string
                         _type: 'blogLandingPage'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | {
                         _id: string
                         _type: 'page'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | {
                         _id: string
                         _type: 'post'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | null
                 }
@@ -1581,12 +1581,12 @@ export type HomeQueryResult = {
           asset: {
             _id: string
             _type: 'sanity.imageAsset'
-            url: string | null
+            url: string
             metadata: {
               dimensions: {
-                width: number | null
-                height: number | null
-                aspectRatio: number | null
+                width: number
+                height: number
+                aspectRatio: number
               } | null
               lqip: string | null
               blurhash: null
@@ -1610,27 +1610,27 @@ export type HomeQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.fileAsset'
-              url: string | null
+              url: string
             } | null
           } | null
           landingPage:
             | {
                 _id: string
                 _type: 'blogLandingPage'
-                slug: string | null
-                title: string | null
+                slug: string
+                title: string
               }
             | {
                 _id: string
                 _type: 'page'
-                slug: string | null
-                title: string | null
+                slug: string
+                title: string
               }
             | {
                 _id: string
                 _type: 'post'
-                slug: string | null
-                title: string | null
+                slug: string
+                title: string
               }
             | null
         } | null
@@ -1651,12 +1651,12 @@ export type HomeQueryResult = {
           asset: {
             _id: string
             _type: 'sanity.imageAsset'
-            url: string | null
+            url: string
             metadata: {
               dimensions: {
-                width: number | null
-                height: number | null
-                aspectRatio: number | null
+                width: number
+                height: number
+                aspectRatio: number
               } | null
               lqip: string | null
               blurhash: null
@@ -1687,20 +1687,20 @@ export type HomeQueryResult = {
                         | {
                             _id: string
                             _type: 'blogLandingPage'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'page'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'post'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | null
                     }
@@ -1719,9 +1719,9 @@ export type HomeQueryResult = {
                 _key: string
                 _type: 'contactInfo'
                 headline?: string
-                phoneNumber?: string
+                phoneNumber: string
                 phoneLabel?: string
-                email?: string
+                email: string
                 textColor?: 'blue' | 'white'
                 size?: 'large' | 'normal'
                 markDefs: null
@@ -1740,27 +1740,27 @@ export type HomeQueryResult = {
                   asset: {
                     _id: string
                     _type: 'sanity.fileAsset'
-                    url: string | null
+                    url: string
                   } | null
                 } | null
                 landingPage:
                   | {
                       _id: string
                       _type: 'blogLandingPage'
-                      slug: string | null
-                      title: string | null
+                      slug: string
+                      title: string
                     }
                   | {
                       _id: string
                       _type: 'page'
-                      slug: string | null
-                      title: string | null
+                      slug: string
+                      title: string
                     }
                   | {
                       _id: string
                       _type: 'post'
-                      slug: string | null
-                      title: string | null
+                      slug: string
+                      title: string
                     }
                   | null
                 markDefs: null
@@ -1779,9 +1779,9 @@ export type HomeQueryResult = {
                   _type: 'sanity.imageAsset'
                   metadata: {
                     dimensions: {
-                      width: number | null
-                      height: number | null
-                      aspectRatio: number | null
+                      width: number
+                      height: number
+                      aspectRatio: number
                     } | null
                     lqip: string | null
                     blurhash: null
@@ -1833,20 +1833,20 @@ export type HomeQueryResult = {
                           | {
                               _id: string
                               _type: 'blogLandingPage'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | {
                               _id: string
                               _type: 'page'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | {
                               _id: string
                               _type: 'post'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | null
                       }
@@ -1867,9 +1867,9 @@ export type HomeQueryResult = {
               cameraRef: {
                 _id: string
                 _type: 'gear'
-                kind: 'accessory' | 'camera' | 'lens' | null
-                brand: string | null
-                model: string | null
+                kind: 'accessory' | 'camera' | 'lens'
+                brand: string
+                model: string
                 nickname: string | null
                 notes: string | null
                 link: string | null
@@ -1877,9 +1877,9 @@ export type HomeQueryResult = {
               lensRef: {
                 _id: string
                 _type: 'gear'
-                kind: 'accessory' | 'camera' | 'lens' | null
-                brand: string | null
-                model: string | null
+                kind: 'accessory' | 'camera' | 'lens'
+                brand: string
+                model: string
                 nickname: string | null
                 notes: string | null
                 link: string | null
@@ -1894,12 +1894,12 @@ export type HomeQueryResult = {
                 asset: {
                   _id: string
                   _type: 'sanity.imageAsset'
-                  url: string | null
+                  url: string
                   metadata: {
                     dimensions: {
-                      width: number | null
-                      height: number | null
-                      aspectRatio: number | null
+                      width: number
+                      height: number
+                      aspectRatio: number
                     } | null
                     lqip: string | null
                     blurhash: null
@@ -1910,7 +1910,7 @@ export type HomeQueryResult = {
                     } | null
                   } | null
                 } | null
-              } | null
+              }
             }
           | {
               _key: string
@@ -1936,20 +1936,20 @@ export type HomeQueryResult = {
                           | {
                               _id: string
                               _type: 'blogLandingPage'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | {
                               _id: string
                               _type: 'page'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | {
                               _id: string
                               _type: 'post'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | null
                       }
@@ -1970,9 +1970,9 @@ export type HomeQueryResult = {
               cameraRef: {
                 _id: string
                 _type: 'gear'
-                kind: 'accessory' | 'camera' | 'lens' | null
-                brand: string | null
-                model: string | null
+                kind: 'accessory' | 'camera' | 'lens'
+                brand: string
+                model: string
                 nickname: string | null
                 notes: string | null
                 link: string | null
@@ -1980,50 +1980,40 @@ export type HomeQueryResult = {
               lensRef: {
                 _id: string
                 _type: 'gear'
-                kind: 'accessory' | 'camera' | 'lens' | null
-                brand: string | null
-                model: string | null
+                kind: 'accessory' | 'camera' | 'lens'
+                brand: string
+                model: string
                 nickname: string | null
                 notes: string | null
                 link: string | null
               } | null
-              image:
-                | {
-                    _type: 'mainImage'
-                    alt: string | null
-                    width: number | null
-                    height: number | null
-                    crop: SanityImageCrop | null
-                    hotspot: SanityImageHotspot | null
-                    asset: {
-                      _id: string
-                      _type: 'sanity.imageAsset'
-                      url: string | null
-                      metadata: {
-                        dimensions: {
-                          width: number | null
-                          height: number | null
-                          aspectRatio: number | null
-                        } | null
-                        lqip: string | null
-                        blurhash: null
-                        palette: {
-                          dominant: {
-                            background: string | null
-                          } | null
-                        } | null
+              image: {
+                _type: 'mainImage'
+                alt: string | null
+                width: number | null
+                height: number | null
+                crop: SanityImageCrop | null
+                hotspot: SanityImageHotspot | null
+                asset: {
+                  _id: string
+                  _type: 'sanity.imageAsset'
+                  url: string
+                  metadata: {
+                    dimensions: {
+                      width: number
+                      height: number
+                      aspectRatio: number
+                    } | null
+                    lqip: string | null
+                    blurhash: null
+                    palette: {
+                      dominant: {
+                        background: string | null
                       } | null
                     } | null
-                  }
-                | {
-                    _type: 'photoItem'
-                    alt: null
-                    width: null
-                    height: null
-                    crop: null
-                    hotspot: null
-                    asset: null
-                  }
+                  } | null
+                } | null
+              }
             }
         > | null
         disabled: boolean | null
@@ -2035,9 +2025,9 @@ export type HomeQueryResult = {
         posts: Array<{
           _id: string
           _type: 'post'
-          title: string | null
-          slug: string | null
-          excerpt: SimplePortableText | null
+          title: string
+          slug: string
+          excerpt: SimplePortableText
           image: {
             _type: 'mainImage'
             alt: string | null
@@ -2048,12 +2038,12 @@ export type HomeQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.imageAsset'
-              url: string | null
+              url: string
               metadata: {
                 dimensions: {
-                  width: number | null
-                  height: number | null
-                  aspectRatio: number | null
+                  width: number
+                  height: number
+                  aspectRatio: number
                 } | null
                 lqip: string | null
                 blurhash: null
@@ -2071,7 +2061,7 @@ export type HomeQueryResult = {
     | {
         _key: string
         _type: 'pullQuote'
-        quote: string | null
+        quote: string
         attribution: string | null
         disabled: boolean | null
       }
@@ -2084,7 +2074,7 @@ export type HomeQueryResult = {
         titleColor: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5' | null
         split: '40-60' | '50-50' | '60-40' | null
         leftPanel: {
-          panelType: 'image' | 'text' | null
+          panelType: 'image' | 'text'
           image: {
             _type: 'mainImage'
             alt: string | null
@@ -2095,12 +2085,12 @@ export type HomeQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.imageAsset'
-              url: string | null
+              url: string
               metadata: {
                 dimensions: {
-                  width: number | null
-                  height: number | null
-                  aspectRatio: number | null
+                  width: number
+                  height: number
+                  aspectRatio: number
                 } | null
                 lqip: string | null
                 blurhash: null
@@ -2131,20 +2121,20 @@ export type HomeQueryResult = {
                           | {
                               _id: string
                               _type: 'blogLandingPage'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | {
                               _id: string
                               _type: 'page'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | {
                               _id: string
                               _type: 'post'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | null
                       }
@@ -2163,9 +2153,9 @@ export type HomeQueryResult = {
                   _key: string
                   _type: 'contactInfo'
                   headline?: string
-                  phoneNumber?: string
+                  phoneNumber: string
                   phoneLabel?: string
-                  email?: string
+                  email: string
                   textColor?: 'blue' | 'white'
                   size?: 'large' | 'normal'
                   markDefs: null
@@ -2184,27 +2174,27 @@ export type HomeQueryResult = {
                     asset: {
                       _id: string
                       _type: 'sanity.fileAsset'
-                      url: string | null
+                      url: string
                     } | null
                   } | null
                   landingPage:
                     | {
                         _id: string
                         _type: 'blogLandingPage'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | {
                         _id: string
                         _type: 'page'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | {
                         _id: string
                         _type: 'post'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | null
                   markDefs: null
@@ -2223,9 +2213,9 @@ export type HomeQueryResult = {
                     _type: 'sanity.imageAsset'
                     metadata: {
                       dimensions: {
-                        width: number | null
-                        height: number | null
-                        aspectRatio: number | null
+                        width: number
+                        height: number
+                        aspectRatio: number
                       } | null
                       lqip: string | null
                       blurhash: null
@@ -2245,7 +2235,7 @@ export type HomeQueryResult = {
           centerText: boolean | null
         } | null
         rightPanel: {
-          panelType: 'image' | 'text' | null
+          panelType: 'image' | 'text'
           image: {
             _type: 'mainImage'
             alt: string | null
@@ -2256,12 +2246,12 @@ export type HomeQueryResult = {
             asset: {
               _id: string
               _type: 'sanity.imageAsset'
-              url: string | null
+              url: string
               metadata: {
                 dimensions: {
-                  width: number | null
-                  height: number | null
-                  aspectRatio: number | null
+                  width: number
+                  height: number
+                  aspectRatio: number
                 } | null
                 lqip: string | null
                 blurhash: null
@@ -2292,20 +2282,20 @@ export type HomeQueryResult = {
                           | {
                               _id: string
                               _type: 'blogLandingPage'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | {
                               _id: string
                               _type: 'page'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | {
                               _id: string
                               _type: 'post'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | null
                       }
@@ -2324,9 +2314,9 @@ export type HomeQueryResult = {
                   _key: string
                   _type: 'contactInfo'
                   headline?: string
-                  phoneNumber?: string
+                  phoneNumber: string
                   phoneLabel?: string
-                  email?: string
+                  email: string
                   textColor?: 'blue' | 'white'
                   size?: 'large' | 'normal'
                   markDefs: null
@@ -2345,27 +2335,27 @@ export type HomeQueryResult = {
                     asset: {
                       _id: string
                       _type: 'sanity.fileAsset'
-                      url: string | null
+                      url: string
                     } | null
                   } | null
                   landingPage:
                     | {
                         _id: string
                         _type: 'blogLandingPage'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | {
                         _id: string
                         _type: 'page'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | {
                         _id: string
                         _type: 'post'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | null
                   markDefs: null
@@ -2384,9 +2374,9 @@ export type HomeQueryResult = {
                     _type: 'sanity.imageAsset'
                     metadata: {
                       dimensions: {
-                        width: number | null
-                        height: number | null
-                        aspectRatio: number | null
+                        width: number
+                        height: number
+                        aspectRatio: number
                       } | null
                       lqip: string | null
                       blurhash: null
@@ -2412,8 +2402,8 @@ export type HomeQueryResult = {
         _type: 'seriesGrid'
         collections: Array<{
           _id: string
-          title: string | null
-          slug: string | null
+          title: string
+          slug: string
           coverPhoto: {
             _id: string
             image: {
@@ -2426,12 +2416,12 @@ export type HomeQueryResult = {
               asset: {
                 _id: string
                 _type: 'sanity.imageAsset'
-                url: string | null
+                url: string
                 metadata: {
                   dimensions: {
-                    width: number | null
-                    height: number | null
-                    aspectRatio: number | null
+                    width: number
+                    height: number
+                    aspectRatio: number
                   } | null
                   lqip: string | null
                   blurhash: null
@@ -2442,7 +2432,7 @@ export type HomeQueryResult = {
                   } | null
                 } | null
               } | null
-            } | null
+            }
           } | null
           photoCount: number | null
         }> | null
@@ -2476,20 +2466,20 @@ export type HomeQueryResult = {
                           | {
                               _id: string
                               _type: 'blogLandingPage'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | {
                               _id: string
                               _type: 'page'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | {
                               _id: string
                               _type: 'post'
-                              slug: string | null
-                              title: string | null
+                              slug: string
+                              title: string
                             }
                           | null
                       }
@@ -2508,9 +2498,9 @@ export type HomeQueryResult = {
                   _key: string
                   _type: 'contactInfo'
                   headline?: string
-                  phoneNumber?: string
+                  phoneNumber: string
                   phoneLabel?: string
-                  email?: string
+                  email: string
                   textColor?: 'blue' | 'white'
                   size?: 'large' | 'normal'
                   markDefs: null
@@ -2529,27 +2519,27 @@ export type HomeQueryResult = {
                     asset: {
                       _id: string
                       _type: 'sanity.fileAsset'
-                      url: string | null
+                      url: string
                     } | null
                   } | null
                   landingPage:
                     | {
                         _id: string
                         _type: 'blogLandingPage'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | {
                         _id: string
                         _type: 'page'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | {
                         _id: string
                         _type: 'post'
-                        slug: string | null
-                        title: string | null
+                        slug: string
+                        title: string
                       }
                     | null
                   markDefs: null
@@ -2568,9 +2558,9 @@ export type HomeQueryResult = {
                     _type: 'sanity.imageAsset'
                     metadata: {
                       dimensions: {
-                        width: number | null
-                        height: number | null
-                        aspectRatio: number | null
+                        width: number
+                        height: number
+                        aspectRatio: number
                       } | null
                       lqip: string | null
                       blurhash: null
@@ -2598,7 +2588,7 @@ export type HomeQueryResult = {
 export type HomeMetaQueryResult = {
   _id: 'home'
   _type: 'home'
-  title: string | null
+  title: string
   overview: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -2616,7 +2606,7 @@ export type HomeMetaQueryResult = {
     level?: number
     _type: 'block'
     _key: string
-  }> | null
+  }>
   seo: {
     seoTitle: string | null
     seoDescription: string | null
@@ -2632,8 +2622,8 @@ export type GetPageQueryResult =
   | {
       _id: string
       _type: 'blogLandingPage'
-      slug: Slug | null
-      title: string | null
+      slug: Slug
+      title: string
       overview: Array<{
         children?: Array<{
           marks?: Array<string>
@@ -2651,7 +2641,7 @@ export type GetPageQueryResult =
         level?: number
         _type: 'block'
         _key: string
-      }> | null
+      }>
       seo: {
         seoTitle: string | null
         seoDescription: string | null
@@ -2667,12 +2657,12 @@ export type GetPageQueryResult =
           asset: {
             _id: string
             _type: 'sanity.imageAsset'
-            url: string | null
+            url: string
             metadata: {
               dimensions: {
-                width: number | null
-                height: number | null
-                aspectRatio: number | null
+                width: number
+                height: number
+                aspectRatio: number
               } | null
               lqip: string | null
               blurhash: null
@@ -2696,7 +2686,7 @@ export type GetPageQueryResult =
             tintBehindCopy: boolean | null
             copyTint: null
             ctaTone: 'dark' | 'light' | null
-            heading: string | null
+            heading: string
             copy: {
               portableTextBlock: Array<{
                 children?: Array<{
@@ -2715,20 +2705,20 @@ export type GetPageQueryResult =
                         | {
                             _id: string
                             _type: 'blogLandingPage'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'page'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'post'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | null
                     }
@@ -2754,12 +2744,12 @@ export type GetPageQueryResult =
               asset: {
                 _id: string
                 _type: 'sanity.imageAsset'
-                url: string | null
+                url: string
                 metadata: {
                   dimensions: {
-                    width: number | null
-                    height: number | null
-                    aspectRatio: number | null
+                    width: number
+                    height: number
+                    aspectRatio: number
                   } | null
                   lqip: string | null
                   blurhash: null
@@ -2783,27 +2773,27 @@ export type GetPageQueryResult =
                 asset: {
                   _id: string
                   _type: 'sanity.fileAsset'
-                  url: string | null
+                  url: string
                 } | null
               } | null
               landingPage:
                 | {
                     _id: string
                     _type: 'blogLandingPage'
-                    slug: string | null
-                    title: string | null
+                    slug: string
+                    title: string
                   }
                 | {
                     _id: string
                     _type: 'page'
-                    slug: string | null
-                    title: string | null
+                    slug: string
+                    title: string
                   }
                 | {
                     _id: string
                     _type: 'post'
-                    slug: string | null
-                    title: string | null
+                    slug: string
+                    title: string
                   }
                 | null
             } | null
@@ -2824,12 +2814,12 @@ export type GetPageQueryResult =
               asset: {
                 _id: string
                 _type: 'sanity.imageAsset'
-                url: string | null
+                url: string
                 metadata: {
                   dimensions: {
-                    width: number | null
-                    height: number | null
-                    aspectRatio: number | null
+                    width: number
+                    height: number
+                    aspectRatio: number
                   } | null
                   lqip: string | null
                   blurhash: null
@@ -2860,20 +2850,20 @@ export type GetPageQueryResult =
                             | {
                                 _id: string
                                 _type: 'blogLandingPage'
-                                slug: string | null
-                                title: string | null
+                                slug: string
+                                title: string
                               }
                             | {
                                 _id: string
                                 _type: 'page'
-                                slug: string | null
-                                title: string | null
+                                slug: string
+                                title: string
                               }
                             | {
                                 _id: string
                                 _type: 'post'
-                                slug: string | null
-                                title: string | null
+                                slug: string
+                                title: string
                               }
                             | null
                         }
@@ -2892,9 +2882,9 @@ export type GetPageQueryResult =
                     _key: string
                     _type: 'contactInfo'
                     headline?: string
-                    phoneNumber?: string
+                    phoneNumber: string
                     phoneLabel?: string
-                    email?: string
+                    email: string
                     textColor?: 'blue' | 'white'
                     size?: 'large' | 'normal'
                     markDefs: null
@@ -2913,27 +2903,27 @@ export type GetPageQueryResult =
                       asset: {
                         _id: string
                         _type: 'sanity.fileAsset'
-                        url: string | null
+                        url: string
                       } | null
                     } | null
                     landingPage:
                       | {
                           _id: string
                           _type: 'blogLandingPage'
-                          slug: string | null
-                          title: string | null
+                          slug: string
+                          title: string
                         }
                       | {
                           _id: string
                           _type: 'page'
-                          slug: string | null
-                          title: string | null
+                          slug: string
+                          title: string
                         }
                       | {
                           _id: string
                           _type: 'post'
-                          slug: string | null
-                          title: string | null
+                          slug: string
+                          title: string
                         }
                       | null
                     markDefs: null
@@ -2952,9 +2942,9 @@ export type GetPageQueryResult =
                       _type: 'sanity.imageAsset'
                       metadata: {
                         dimensions: {
-                          width: number | null
-                          height: number | null
-                          aspectRatio: number | null
+                          width: number
+                          height: number
+                          aspectRatio: number
                         } | null
                         lqip: string | null
                         blurhash: null
@@ -3006,20 +2996,20 @@ export type GetPageQueryResult =
                               | {
                                   _id: string
                                   _type: 'blogLandingPage'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'page'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'post'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | null
                           }
@@ -3040,9 +3030,9 @@ export type GetPageQueryResult =
                   cameraRef: {
                     _id: string
                     _type: 'gear'
-                    kind: 'accessory' | 'camera' | 'lens' | null
-                    brand: string | null
-                    model: string | null
+                    kind: 'accessory' | 'camera' | 'lens'
+                    brand: string
+                    model: string
                     nickname: string | null
                     notes: string | null
                     link: string | null
@@ -3050,9 +3040,9 @@ export type GetPageQueryResult =
                   lensRef: {
                     _id: string
                     _type: 'gear'
-                    kind: 'accessory' | 'camera' | 'lens' | null
-                    brand: string | null
-                    model: string | null
+                    kind: 'accessory' | 'camera' | 'lens'
+                    brand: string
+                    model: string
                     nickname: string | null
                     notes: string | null
                     link: string | null
@@ -3067,12 +3057,12 @@ export type GetPageQueryResult =
                     asset: {
                       _id: string
                       _type: 'sanity.imageAsset'
-                      url: string | null
+                      url: string
                       metadata: {
                         dimensions: {
-                          width: number | null
-                          height: number | null
-                          aspectRatio: number | null
+                          width: number
+                          height: number
+                          aspectRatio: number
                         } | null
                         lqip: string | null
                         blurhash: null
@@ -3083,7 +3073,7 @@ export type GetPageQueryResult =
                         } | null
                       } | null
                     } | null
-                  } | null
+                  }
                 }
               | {
                   _key: string
@@ -3109,20 +3099,20 @@ export type GetPageQueryResult =
                               | {
                                   _id: string
                                   _type: 'blogLandingPage'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'page'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'post'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | null
                           }
@@ -3143,9 +3133,9 @@ export type GetPageQueryResult =
                   cameraRef: {
                     _id: string
                     _type: 'gear'
-                    kind: 'accessory' | 'camera' | 'lens' | null
-                    brand: string | null
-                    model: string | null
+                    kind: 'accessory' | 'camera' | 'lens'
+                    brand: string
+                    model: string
                     nickname: string | null
                     notes: string | null
                     link: string | null
@@ -3153,50 +3143,40 @@ export type GetPageQueryResult =
                   lensRef: {
                     _id: string
                     _type: 'gear'
-                    kind: 'accessory' | 'camera' | 'lens' | null
-                    brand: string | null
-                    model: string | null
+                    kind: 'accessory' | 'camera' | 'lens'
+                    brand: string
+                    model: string
                     nickname: string | null
                     notes: string | null
                     link: string | null
                   } | null
-                  image:
-                    | {
-                        _type: 'mainImage'
-                        alt: string | null
-                        width: number | null
-                        height: number | null
-                        crop: SanityImageCrop | null
-                        hotspot: SanityImageHotspot | null
-                        asset: {
-                          _id: string
-                          _type: 'sanity.imageAsset'
-                          url: string | null
-                          metadata: {
-                            dimensions: {
-                              width: number | null
-                              height: number | null
-                              aspectRatio: number | null
-                            } | null
-                            lqip: string | null
-                            blurhash: null
-                            palette: {
-                              dominant: {
-                                background: string | null
-                              } | null
-                            } | null
+                  image: {
+                    _type: 'mainImage'
+                    alt: string | null
+                    width: number | null
+                    height: number | null
+                    crop: SanityImageCrop | null
+                    hotspot: SanityImageHotspot | null
+                    asset: {
+                      _id: string
+                      _type: 'sanity.imageAsset'
+                      url: string
+                      metadata: {
+                        dimensions: {
+                          width: number
+                          height: number
+                          aspectRatio: number
+                        } | null
+                        lqip: string | null
+                        blurhash: null
+                        palette: {
+                          dominant: {
+                            background: string | null
                           } | null
                         } | null
-                      }
-                    | {
-                        _type: 'photoItem'
-                        alt: null
-                        width: null
-                        height: null
-                        crop: null
-                        hotspot: null
-                        asset: null
-                      }
+                      } | null
+                    } | null
+                  }
                 }
             > | null
             disabled: boolean | null
@@ -3208,9 +3188,9 @@ export type GetPageQueryResult =
             posts: Array<{
               _id: string
               _type: 'post'
-              title: string | null
-              slug: string | null
-              excerpt: SimplePortableText | null
+              title: string
+              slug: string
+              excerpt: SimplePortableText
               image: {
                 _type: 'mainImage'
                 alt: string | null
@@ -3221,12 +3201,12 @@ export type GetPageQueryResult =
                 asset: {
                   _id: string
                   _type: 'sanity.imageAsset'
-                  url: string | null
+                  url: string
                   metadata: {
                     dimensions: {
-                      width: number | null
-                      height: number | null
-                      aspectRatio: number | null
+                      width: number
+                      height: number
+                      aspectRatio: number
                     } | null
                     lqip: string | null
                     blurhash: null
@@ -3269,20 +3249,20 @@ export type GetPageQueryResult =
                               | {
                                   _id: string
                                   _type: 'blogLandingPage'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'page'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'post'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | null
                           }
@@ -3301,9 +3281,9 @@ export type GetPageQueryResult =
                       _key: string
                       _type: 'contactInfo'
                       headline?: string
-                      phoneNumber?: string
+                      phoneNumber: string
                       phoneLabel?: string
-                      email?: string
+                      email: string
                       textColor?: 'blue' | 'white'
                       size?: 'large' | 'normal'
                       markDefs: null
@@ -3322,27 +3302,27 @@ export type GetPageQueryResult =
                         asset: {
                           _id: string
                           _type: 'sanity.fileAsset'
-                          url: string | null
+                          url: string
                         } | null
                       } | null
                       landingPage:
                         | {
                             _id: string
                             _type: 'blogLandingPage'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'page'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'post'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | null
                       markDefs: null
@@ -3361,9 +3341,9 @@ export type GetPageQueryResult =
                         _type: 'sanity.imageAsset'
                         metadata: {
                           dimensions: {
-                            width: number | null
-                            height: number | null
-                            aspectRatio: number | null
+                            width: number
+                            height: number
+                            aspectRatio: number
                           } | null
                           lqip: string | null
                           blurhash: null
@@ -3387,8 +3367,8 @@ export type GetPageQueryResult =
   | {
       _id: string
       _type: 'page'
-      slug: Slug | null
-      title: string | null
+      slug: Slug
+      title: string
       overview: Array<{
         children?: Array<{
           marks?: Array<string>
@@ -3418,12 +3398,12 @@ export type GetPageQueryResult =
           asset: {
             _id: string
             _type: 'sanity.imageAsset'
-            url: string | null
+            url: string
             metadata: {
               dimensions: {
-                width: number | null
-                height: number | null
-                aspectRatio: number | null
+                width: number
+                height: number
+                aspectRatio: number
               } | null
               lqip: string | null
               blurhash: null
@@ -3465,20 +3445,20 @@ export type GetPageQueryResult =
                         | {
                             _id: string
                             _type: 'blogLandingPage'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'page'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'post'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | null
                     }
@@ -3497,8 +3477,8 @@ export type GetPageQueryResult =
             ctaLabel: string | null
             collection: {
               _id: string
-              title: string | null
-              slug: string | null
+              title: string
+              slug: string
             } | null
             photo: {
               _id: string
@@ -3512,12 +3492,12 @@ export type GetPageQueryResult =
                 asset: {
                   _id: string
                   _type: 'sanity.imageAsset'
-                  url: string | null
+                  url: string
                   metadata: {
                     dimensions: {
-                      width: number | null
-                      height: number | null
-                      aspectRatio: number | null
+                      width: number
+                      height: number
+                      aspectRatio: number
                     } | null
                     lqip: string | null
                     blurhash: null
@@ -3528,7 +3508,7 @@ export type GetPageQueryResult =
                     } | null
                   } | null
                 } | null
-              } | null
+              }
               title: string | null
               location: string | null
               dateCaptured: string | null
@@ -3545,7 +3525,7 @@ export type GetPageQueryResult =
             tintBehindCopy: boolean | null
             copyTint: null
             ctaTone: 'dark' | 'light' | null
-            heading: string | null
+            heading: string
             copy: {
               portableTextBlock: Array<{
                 children?: Array<{
@@ -3564,20 +3544,20 @@ export type GetPageQueryResult =
                         | {
                             _id: string
                             _type: 'blogLandingPage'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'page'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'post'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | null
                     }
@@ -3603,12 +3583,12 @@ export type GetPageQueryResult =
               asset: {
                 _id: string
                 _type: 'sanity.imageAsset'
-                url: string | null
+                url: string
                 metadata: {
                   dimensions: {
-                    width: number | null
-                    height: number | null
-                    aspectRatio: number | null
+                    width: number
+                    height: number
+                    aspectRatio: number
                   } | null
                   lqip: string | null
                   blurhash: null
@@ -3632,27 +3612,27 @@ export type GetPageQueryResult =
                 asset: {
                   _id: string
                   _type: 'sanity.fileAsset'
-                  url: string | null
+                  url: string
                 } | null
               } | null
               landingPage:
                 | {
                     _id: string
                     _type: 'blogLandingPage'
-                    slug: string | null
-                    title: string | null
+                    slug: string
+                    title: string
                   }
                 | {
                     _id: string
                     _type: 'page'
-                    slug: string | null
-                    title: string | null
+                    slug: string
+                    title: string
                   }
                 | {
                     _id: string
                     _type: 'post'
-                    slug: string | null
-                    title: string | null
+                    slug: string
+                    title: string
                   }
                 | null
             } | null
@@ -3673,12 +3653,12 @@ export type GetPageQueryResult =
               asset: {
                 _id: string
                 _type: 'sanity.imageAsset'
-                url: string | null
+                url: string
                 metadata: {
                   dimensions: {
-                    width: number | null
-                    height: number | null
-                    aspectRatio: number | null
+                    width: number
+                    height: number
+                    aspectRatio: number
                   } | null
                   lqip: string | null
                   blurhash: null
@@ -3709,20 +3689,20 @@ export type GetPageQueryResult =
                             | {
                                 _id: string
                                 _type: 'blogLandingPage'
-                                slug: string | null
-                                title: string | null
+                                slug: string
+                                title: string
                               }
                             | {
                                 _id: string
                                 _type: 'page'
-                                slug: string | null
-                                title: string | null
+                                slug: string
+                                title: string
                               }
                             | {
                                 _id: string
                                 _type: 'post'
-                                slug: string | null
-                                title: string | null
+                                slug: string
+                                title: string
                               }
                             | null
                         }
@@ -3741,9 +3721,9 @@ export type GetPageQueryResult =
                     _key: string
                     _type: 'contactInfo'
                     headline?: string
-                    phoneNumber?: string
+                    phoneNumber: string
                     phoneLabel?: string
-                    email?: string
+                    email: string
                     textColor?: 'blue' | 'white'
                     size?: 'large' | 'normal'
                     markDefs: null
@@ -3762,27 +3742,27 @@ export type GetPageQueryResult =
                       asset: {
                         _id: string
                         _type: 'sanity.fileAsset'
-                        url: string | null
+                        url: string
                       } | null
                     } | null
                     landingPage:
                       | {
                           _id: string
                           _type: 'blogLandingPage'
-                          slug: string | null
-                          title: string | null
+                          slug: string
+                          title: string
                         }
                       | {
                           _id: string
                           _type: 'page'
-                          slug: string | null
-                          title: string | null
+                          slug: string
+                          title: string
                         }
                       | {
                           _id: string
                           _type: 'post'
-                          slug: string | null
-                          title: string | null
+                          slug: string
+                          title: string
                         }
                       | null
                     markDefs: null
@@ -3801,9 +3781,9 @@ export type GetPageQueryResult =
                       _type: 'sanity.imageAsset'
                       metadata: {
                         dimensions: {
-                          width: number | null
-                          height: number | null
-                          aspectRatio: number | null
+                          width: number
+                          height: number
+                          aspectRatio: number
                         } | null
                         lqip: string | null
                         blurhash: null
@@ -3855,20 +3835,20 @@ export type GetPageQueryResult =
                               | {
                                   _id: string
                                   _type: 'blogLandingPage'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'page'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'post'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | null
                           }
@@ -3889,9 +3869,9 @@ export type GetPageQueryResult =
                   cameraRef: {
                     _id: string
                     _type: 'gear'
-                    kind: 'accessory' | 'camera' | 'lens' | null
-                    brand: string | null
-                    model: string | null
+                    kind: 'accessory' | 'camera' | 'lens'
+                    brand: string
+                    model: string
                     nickname: string | null
                     notes: string | null
                     link: string | null
@@ -3899,9 +3879,9 @@ export type GetPageQueryResult =
                   lensRef: {
                     _id: string
                     _type: 'gear'
-                    kind: 'accessory' | 'camera' | 'lens' | null
-                    brand: string | null
-                    model: string | null
+                    kind: 'accessory' | 'camera' | 'lens'
+                    brand: string
+                    model: string
                     nickname: string | null
                     notes: string | null
                     link: string | null
@@ -3916,12 +3896,12 @@ export type GetPageQueryResult =
                     asset: {
                       _id: string
                       _type: 'sanity.imageAsset'
-                      url: string | null
+                      url: string
                       metadata: {
                         dimensions: {
-                          width: number | null
-                          height: number | null
-                          aspectRatio: number | null
+                          width: number
+                          height: number
+                          aspectRatio: number
                         } | null
                         lqip: string | null
                         blurhash: null
@@ -3932,7 +3912,7 @@ export type GetPageQueryResult =
                         } | null
                       } | null
                     } | null
-                  } | null
+                  }
                 }
               | {
                   _key: string
@@ -3958,20 +3938,20 @@ export type GetPageQueryResult =
                               | {
                                   _id: string
                                   _type: 'blogLandingPage'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'page'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'post'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | null
                           }
@@ -3992,9 +3972,9 @@ export type GetPageQueryResult =
                   cameraRef: {
                     _id: string
                     _type: 'gear'
-                    kind: 'accessory' | 'camera' | 'lens' | null
-                    brand: string | null
-                    model: string | null
+                    kind: 'accessory' | 'camera' | 'lens'
+                    brand: string
+                    model: string
                     nickname: string | null
                     notes: string | null
                     link: string | null
@@ -4002,50 +3982,40 @@ export type GetPageQueryResult =
                   lensRef: {
                     _id: string
                     _type: 'gear'
-                    kind: 'accessory' | 'camera' | 'lens' | null
-                    brand: string | null
-                    model: string | null
+                    kind: 'accessory' | 'camera' | 'lens'
+                    brand: string
+                    model: string
                     nickname: string | null
                     notes: string | null
                     link: string | null
                   } | null
-                  image:
-                    | {
-                        _type: 'mainImage'
-                        alt: string | null
-                        width: number | null
-                        height: number | null
-                        crop: SanityImageCrop | null
-                        hotspot: SanityImageHotspot | null
-                        asset: {
-                          _id: string
-                          _type: 'sanity.imageAsset'
-                          url: string | null
-                          metadata: {
-                            dimensions: {
-                              width: number | null
-                              height: number | null
-                              aspectRatio: number | null
-                            } | null
-                            lqip: string | null
-                            blurhash: null
-                            palette: {
-                              dominant: {
-                                background: string | null
-                              } | null
-                            } | null
+                  image: {
+                    _type: 'mainImage'
+                    alt: string | null
+                    width: number | null
+                    height: number | null
+                    crop: SanityImageCrop | null
+                    hotspot: SanityImageHotspot | null
+                    asset: {
+                      _id: string
+                      _type: 'sanity.imageAsset'
+                      url: string
+                      metadata: {
+                        dimensions: {
+                          width: number
+                          height: number
+                          aspectRatio: number
+                        } | null
+                        lqip: string | null
+                        blurhash: null
+                        palette: {
+                          dominant: {
+                            background: string | null
                           } | null
                         } | null
-                      }
-                    | {
-                        _type: 'photoItem'
-                        alt: null
-                        width: null
-                        height: null
-                        crop: null
-                        hotspot: null
-                        asset: null
-                      }
+                      } | null
+                    } | null
+                  }
                 }
             > | null
             disabled: boolean | null
@@ -4057,9 +4027,9 @@ export type GetPageQueryResult =
             posts: Array<{
               _id: string
               _type: 'post'
-              title: string | null
-              slug: string | null
-              excerpt: SimplePortableText | null
+              title: string
+              slug: string
+              excerpt: SimplePortableText
               image: {
                 _type: 'mainImage'
                 alt: string | null
@@ -4070,12 +4040,12 @@ export type GetPageQueryResult =
                 asset: {
                   _id: string
                   _type: 'sanity.imageAsset'
-                  url: string | null
+                  url: string
                   metadata: {
                     dimensions: {
-                      width: number | null
-                      height: number | null
-                      aspectRatio: number | null
+                      width: number
+                      height: number
+                      aspectRatio: number
                     } | null
                     lqip: string | null
                     blurhash: null
@@ -4093,7 +4063,7 @@ export type GetPageQueryResult =
         | {
             _key: string
             _type: 'pullQuote'
-            quote: string | null
+            quote: string
             attribution: string | null
             disabled: boolean | null
           }
@@ -4106,7 +4076,7 @@ export type GetPageQueryResult =
             titleColor: '#060D0C' | '#3E5954' | '#758886' | '#C6C2bb' | '#F0EDE5' | null
             split: '40-60' | '50-50' | '60-40' | null
             leftPanel: {
-              panelType: 'image' | 'text' | null
+              panelType: 'image' | 'text'
               image: {
                 _type: 'mainImage'
                 alt: string | null
@@ -4117,12 +4087,12 @@ export type GetPageQueryResult =
                 asset: {
                   _id: string
                   _type: 'sanity.imageAsset'
-                  url: string | null
+                  url: string
                   metadata: {
                     dimensions: {
-                      width: number | null
-                      height: number | null
-                      aspectRatio: number | null
+                      width: number
+                      height: number
+                      aspectRatio: number
                     } | null
                     lqip: string | null
                     blurhash: null
@@ -4153,20 +4123,20 @@ export type GetPageQueryResult =
                               | {
                                   _id: string
                                   _type: 'blogLandingPage'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'page'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'post'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | null
                           }
@@ -4185,9 +4155,9 @@ export type GetPageQueryResult =
                       _key: string
                       _type: 'contactInfo'
                       headline?: string
-                      phoneNumber?: string
+                      phoneNumber: string
                       phoneLabel?: string
-                      email?: string
+                      email: string
                       textColor?: 'blue' | 'white'
                       size?: 'large' | 'normal'
                       markDefs: null
@@ -4206,27 +4176,27 @@ export type GetPageQueryResult =
                         asset: {
                           _id: string
                           _type: 'sanity.fileAsset'
-                          url: string | null
+                          url: string
                         } | null
                       } | null
                       landingPage:
                         | {
                             _id: string
                             _type: 'blogLandingPage'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'page'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'post'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | null
                       markDefs: null
@@ -4245,9 +4215,9 @@ export type GetPageQueryResult =
                         _type: 'sanity.imageAsset'
                         metadata: {
                           dimensions: {
-                            width: number | null
-                            height: number | null
-                            aspectRatio: number | null
+                            width: number
+                            height: number
+                            aspectRatio: number
                           } | null
                           lqip: string | null
                           blurhash: null
@@ -4267,7 +4237,7 @@ export type GetPageQueryResult =
               centerText: boolean | null
             } | null
             rightPanel: {
-              panelType: 'image' | 'text' | null
+              panelType: 'image' | 'text'
               image: {
                 _type: 'mainImage'
                 alt: string | null
@@ -4278,12 +4248,12 @@ export type GetPageQueryResult =
                 asset: {
                   _id: string
                   _type: 'sanity.imageAsset'
-                  url: string | null
+                  url: string
                   metadata: {
                     dimensions: {
-                      width: number | null
-                      height: number | null
-                      aspectRatio: number | null
+                      width: number
+                      height: number
+                      aspectRatio: number
                     } | null
                     lqip: string | null
                     blurhash: null
@@ -4314,20 +4284,20 @@ export type GetPageQueryResult =
                               | {
                                   _id: string
                                   _type: 'blogLandingPage'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'page'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'post'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | null
                           }
@@ -4346,9 +4316,9 @@ export type GetPageQueryResult =
                       _key: string
                       _type: 'contactInfo'
                       headline?: string
-                      phoneNumber?: string
+                      phoneNumber: string
                       phoneLabel?: string
-                      email?: string
+                      email: string
                       textColor?: 'blue' | 'white'
                       size?: 'large' | 'normal'
                       markDefs: null
@@ -4367,27 +4337,27 @@ export type GetPageQueryResult =
                         asset: {
                           _id: string
                           _type: 'sanity.fileAsset'
-                          url: string | null
+                          url: string
                         } | null
                       } | null
                       landingPage:
                         | {
                             _id: string
                             _type: 'blogLandingPage'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'page'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'post'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | null
                       markDefs: null
@@ -4406,9 +4376,9 @@ export type GetPageQueryResult =
                         _type: 'sanity.imageAsset'
                         metadata: {
                           dimensions: {
-                            width: number | null
-                            height: number | null
-                            aspectRatio: number | null
+                            width: number
+                            height: number
+                            aspectRatio: number
                           } | null
                           lqip: string | null
                           blurhash: null
@@ -4434,8 +4404,8 @@ export type GetPageQueryResult =
             _type: 'seriesGrid'
             collections: Array<{
               _id: string
-              title: string | null
-              slug: string | null
+              title: string
+              slug: string
               coverPhoto: {
                 _id: string
                 image: {
@@ -4448,12 +4418,12 @@ export type GetPageQueryResult =
                   asset: {
                     _id: string
                     _type: 'sanity.imageAsset'
-                    url: string | null
+                    url: string
                     metadata: {
                       dimensions: {
-                        width: number | null
-                        height: number | null
-                        aspectRatio: number | null
+                        width: number
+                        height: number
+                        aspectRatio: number
                       } | null
                       lqip: string | null
                       blurhash: null
@@ -4464,7 +4434,7 @@ export type GetPageQueryResult =
                       } | null
                     } | null
                   } | null
-                } | null
+                }
               } | null
               photoCount: number | null
             }> | null
@@ -4498,20 +4468,20 @@ export type GetPageQueryResult =
                               | {
                                   _id: string
                                   _type: 'blogLandingPage'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'page'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | {
                                   _id: string
                                   _type: 'post'
-                                  slug: string | null
-                                  title: string | null
+                                  slug: string
+                                  title: string
                                 }
                               | null
                           }
@@ -4530,9 +4500,9 @@ export type GetPageQueryResult =
                       _key: string
                       _type: 'contactInfo'
                       headline?: string
-                      phoneNumber?: string
+                      phoneNumber: string
                       phoneLabel?: string
-                      email?: string
+                      email: string
                       textColor?: 'blue' | 'white'
                       size?: 'large' | 'normal'
                       markDefs: null
@@ -4551,27 +4521,27 @@ export type GetPageQueryResult =
                         asset: {
                           _id: string
                           _type: 'sanity.fileAsset'
-                          url: string | null
+                          url: string
                         } | null
                       } | null
                       landingPage:
                         | {
                             _id: string
                             _type: 'blogLandingPage'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'page'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | {
                             _id: string
                             _type: 'post'
-                            slug: string | null
-                            title: string | null
+                            slug: string
+                            title: string
                           }
                         | null
                       markDefs: null
@@ -4590,9 +4560,9 @@ export type GetPageQueryResult =
                         _type: 'sanity.imageAsset'
                         metadata: {
                           dimensions: {
-                            width: number | null
-                            height: number | null
-                            aspectRatio: number | null
+                            width: number
+                            height: number
+                            aspectRatio: number
                           } | null
                           lqip: string | null
                           blurhash: null
@@ -4621,8 +4591,8 @@ export type GetPageQueryResult =
 export type GetCollectionQueryResult = {
   _id: string
   _type: 'collection'
-  title: string | null
-  slug: string | null
+  title: string
+  slug: string
   photos: Array<{
     _id: string
     _key: string
@@ -4650,20 +4620,20 @@ export type GetCollectionQueryResult = {
                 | {
                     _id: string
                     _type: 'blogLandingPage'
-                    slug: string | null
-                    title: string | null
+                    slug: string
+                    title: string
                   }
                 | {
                     _id: string
                     _type: 'page'
-                    slug: string | null
-                    title: string | null
+                    slug: string
+                    title: string
                   }
                 | {
                     _id: string
                     _type: 'post'
-                    slug: string | null
-                    title: string | null
+                    slug: string
+                    title: string
                   }
                 | null
             }
@@ -4682,9 +4652,9 @@ export type GetCollectionQueryResult = {
     cameraRef: {
       _id: string
       _type: 'gear'
-      kind: 'accessory' | 'camera' | 'lens' | null
-      brand: string | null
-      model: string | null
+      kind: 'accessory' | 'camera' | 'lens'
+      brand: string
+      model: string
       nickname: string | null
       notes: string | null
       link: string | null
@@ -4692,9 +4662,9 @@ export type GetCollectionQueryResult = {
     lensRef: {
       _id: string
       _type: 'gear'
-      kind: 'accessory' | 'camera' | 'lens' | null
-      brand: string | null
-      model: string | null
+      kind: 'accessory' | 'camera' | 'lens'
+      brand: string
+      model: string
       nickname: string | null
       notes: string | null
       link: string | null
@@ -4709,12 +4679,12 @@ export type GetCollectionQueryResult = {
       asset: {
         _id: string
         _type: 'sanity.imageAsset'
-        url: string | null
+        url: string
         metadata: {
           dimensions: {
-            width: number | null
-            height: number | null
-            aspectRatio: number | null
+            width: number
+            height: number
+            aspectRatio: number
           } | null
           lqip: string | null
           blurhash: null
@@ -4725,7 +4695,7 @@ export type GetCollectionQueryResult = {
           } | null
         } | null
       } | null
-    } | null
+    }
   }> | null
 } | null
 
@@ -4734,17 +4704,17 @@ export type GetCollectionQueryResult = {
 // Query: *[_type in ["page", "post", "blogLandingPage"] && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
 export type SitemapDataResult = Array<
   | {
-      slug: string | null
+      slug: string
       _type: 'blogLandingPage'
       _updatedAt: string
     }
   | {
-      slug: string | null
+      slug: string
       _type: 'page'
       _updatedAt: string
     }
   | {
-      slug: string | null
+      slug: string
       _type: 'post'
       _updatedAt: string
     }
@@ -4756,9 +4726,9 @@ export type SitemapDataResult = Array<
 export type AllPostsQueryResult = Array<{
   _id: string
   _type: 'post'
-  title: string | 'Untitled'
-  slug: string | null
-  excerpt: SimplePortableText | null
+  title: string
+  slug: string
+  excerpt: SimplePortableText
   image: MainImage | null
   _updatedAt: string
 }>
@@ -4769,9 +4739,9 @@ export type AllPostsQueryResult = Array<{
 export type MorePostsQueryResult = Array<{
   _id: string
   _type: 'post'
-  title: string | 'Untitled'
-  slug: string | null
-  excerpt: SimplePortableText | null
+  title: string
+  slug: string
+  excerpt: SimplePortableText
   image: MainImage | null
   _updatedAt: string
 }>
@@ -4782,8 +4752,8 @@ export type MorePostsQueryResult = Array<{
 export type PostQueryResult = {
   _id: string
   _type: 'post'
-  title: string | null
-  slug: Slug | null
+  title: string
+  slug: Slug
   seo: Seo | null
   overview: Array<{
     children?: Array<{
@@ -4799,10 +4769,10 @@ export type PostQueryResult = {
     _type: 'block'
     _key: string
   }> | null
-  excerpt: SimplePortableText | null
+  excerpt: SimplePortableText
   image: MainImage | null
   subheader: string | null
-  body: MainPortableText | null
+  body: MainPortableText
   _updatedAt: string
 } | null
 
@@ -4810,14 +4780,14 @@ export type PostQueryResult = {
 // Variable: postPagesSlugs
 // Query: *[_type == "post" && defined(slug.current)]  {"slug": slug.current}
 export type PostPagesSlugsResult = Array<{
-  slug: string | null
+  slug: string
 }>
 
 // Source: sanity/lib/queries.ts
 // Variable: pagesSlugs
 // Query: *[_type in ["page","blogLandingPage"] && defined(slug.current)]  {"slug": slug.current}
 export type PagesSlugsResult = Array<{
-  slug: string | null
+  slug: string
 }>
 
 // Source: sanity/lib/queries.ts
@@ -4850,20 +4820,20 @@ export type AutoGalleryQueryResult = {
                 | {
                     _id: string
                     _type: 'blogLandingPage'
-                    slug: string | null
-                    title: string | null
+                    slug: string
+                    title: string
                   }
                 | {
                     _id: string
                     _type: 'page'
-                    slug: string | null
-                    title: string | null
+                    slug: string
+                    title: string
                   }
                 | {
                     _id: string
                     _type: 'post'
-                    slug: string | null
-                    title: string | null
+                    slug: string
+                    title: string
                   }
                 | null
             }
@@ -4882,9 +4852,9 @@ export type AutoGalleryQueryResult = {
     cameraRef: {
       _id: string
       _type: 'gear'
-      kind: 'accessory' | 'camera' | 'lens' | null
-      brand: string | null
-      model: string | null
+      kind: 'accessory' | 'camera' | 'lens'
+      brand: string
+      model: string
       nickname: string | null
       notes: string | null
       link: string | null
@@ -4892,9 +4862,9 @@ export type AutoGalleryQueryResult = {
     lensRef: {
       _id: string
       _type: 'gear'
-      kind: 'accessory' | 'camera' | 'lens' | null
-      brand: string | null
-      model: string | null
+      kind: 'accessory' | 'camera' | 'lens'
+      brand: string
+      model: string
       nickname: string | null
       notes: string | null
       link: string | null
@@ -4909,12 +4879,12 @@ export type AutoGalleryQueryResult = {
       asset: {
         _id: string
         _type: 'sanity.imageAsset'
-        url: string | null
+        url: string
         metadata: {
           dimensions: {
-            width: number | null
-            height: number | null
-            aspectRatio: number | null
+            width: number
+            height: number
+            aspectRatio: number
           } | null
           lqip: string | null
           blurhash: null
@@ -4925,13 +4895,13 @@ export type AutoGalleryQueryResult = {
           } | null
         } | null
       } | null
-    } | null
+    }
     collectionIds: Array<string>
   }>
   collections: Array<{
     _id: string
-    title: string | null
-    slug: string | null
+    title: string
+    slug: string
   }>
 }
 

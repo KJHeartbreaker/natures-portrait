@@ -195,27 +195,41 @@ export const homeQuery = defineQuery(`
         columns,
         gap,
         showCaptions,
-        images[]{
+        "images": images[]{
           _key,
           _type,
-          title,
-          location,
-          description{
-            ${portableTextProjection}
+          _type == "photoGridRef" => {
+            "_key": _key,
+            "_type": _type,
+            "title": coalesce(titleOverride, photo->.title),
+            "location": photo->.location,
+            "dateCaptured": photo->.dateCaptured,
+            "description": coalesce(descriptionOverride, photo->.description){
+              ${portableTextProjection}
+            },
+            "cameraText": photo->.cameraText,
+            "lensText": photo->.lensText,
+            "cameraRef": photo->.cameraRef->{ ${gearProjection} },
+            "lensRef": photo->.lensRef->{ ${gearProjection} },
+            "image": photo->.image{ ${imageProjection} },
           },
-          dateCaptured,
-          cameraText,
-          lensText,
-          cameraRef->{
-            ${gearProjection}
-          },
-          lensRef->{
-            ${gearProjection}
-          },
-          "image": coalesce(image, @){
-            ${imageProjection}
+          _type == "photoItem" => {
+            "_key": _key,
+            "_type": _type,
+            title,
+            location,
+            dateCaptured,
+            description{ ${portableTextProjection} },
+            cameraText,
+            lensText,
+            cameraRef->{ ${gearProjection} },
+            lensRef->{ ${gearProjection} },
+            "image": coalesce(image, @){ ${imageProjection} },
           },
         },
+        disabled
+      },
+      _type == "autoGallery" => {
         disabled
       },
       _type == "featuredCollection" => {
@@ -399,27 +413,41 @@ export const getPageQuery = defineQuery(`
         columns,
         gap,
         showCaptions,
-        images[]{
+        "images": images[]{
           _key,
           _type,
-          title,
-          location,
-          description{
-            ${portableTextProjection}
+          _type == "photoGridRef" => {
+            "_key": _key,
+            "_type": _type,
+            "title": coalesce(titleOverride, photo->.title),
+            "location": photo->.location,
+            "dateCaptured": photo->.dateCaptured,
+            "description": coalesce(descriptionOverride, photo->.description){
+              ${portableTextProjection}
+            },
+            "cameraText": photo->.cameraText,
+            "lensText": photo->.lensText,
+            "cameraRef": photo->.cameraRef->{ ${gearProjection} },
+            "lensRef": photo->.lensRef->{ ${gearProjection} },
+            "image": photo->.image{ ${imageProjection} },
           },
-          dateCaptured,
-          cameraText,
-          lensText,
-          cameraRef->{
-            ${gearProjection}
-          },
-          lensRef->{
-            ${gearProjection}
-          },
-          "image": coalesce(image, @){
-            ${imageProjection}
+          _type == "photoItem" => {
+            "_key": _key,
+            "_type": _type,
+            title,
+            location,
+            dateCaptured,
+            description{ ${portableTextProjection} },
+            cameraText,
+            lensText,
+            cameraRef->{ ${gearProjection} },
+            lensRef->{ ${gearProjection} },
+            "image": coalesce(image, @){ ${imageProjection} },
           },
         },
+        disabled
+      },
+      _type == "autoGallery" => {
         disabled
       },
       _type == "featuredCollection" => {
@@ -549,4 +577,36 @@ export const postPagesSlugs = defineQuery(`
 export const pagesSlugs = defineQuery(`
   *[_type in ["page","blogLandingPage"] && defined(slug.current)]
   {"slug": slug.current}
+`)
+
+export const autoGalleryQuery = defineQuery(`
+  {
+    "photos": *[_type == "photo"] | order(_createdAt asc) {
+      _id,
+      "_key": _id,
+      title,
+      location,
+      dateCaptured,
+      cameraText,
+      lensText,
+      description{
+        ${portableTextProjection}
+      },
+      cameraRef->{
+        ${gearProjection}
+      },
+      lensRef->{
+        ${gearProjection}
+      },
+      "image": image{
+        ${imageProjection}
+      },
+      "collectionIds": *[_type == "collection" && references(^._id)]._id
+    },
+    "collections": *[_type == "collection"] | order(title asc) {
+      _id,
+      title,
+      "slug": slug.current
+    }
+  }
 `)

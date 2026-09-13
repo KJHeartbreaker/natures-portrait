@@ -98,6 +98,7 @@ export const home = defineType({
         defineArrayMember({type: 'photoGridContainer'}),
         defineArrayMember({type: 'featuredCollection'}),
         defineArrayMember({type: 'seriesGrid'}),
+        defineArrayMember({type: 'autoGallery'}),
       ],
     }),
   ],

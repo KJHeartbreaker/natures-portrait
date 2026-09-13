@@ -3,7 +3,7 @@ import { toPlainText } from 'next-sanity'
 
 import PageBuilderPage from '@/app/components/PageBuilder'
 import { sanityFetch } from '@/sanity/lib/live'
-import { getPageQuery, pagesSlugs } from '@/sanity/lib/queries'
+import { autoGalleryQuery, getPageQuery, pagesSlugs } from '@/sanity/lib/queries'
 import { PageOnboarding } from '@/app/components/Onboarding'
 import type { PageBuilderInput } from '@/sanity/lib/types'
 
@@ -46,7 +46,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function Page(props: Props) {
   const params = await props.params
-  const [{ data: page }] = await Promise.all([sanityFetch({ query: getPageQuery, params })])
+  const { data: page } = await sanityFetch({ query: getPageQuery, params })
 
   if (!page?._id) {
     return (
@@ -56,9 +56,14 @@ export default async function Page(props: Props) {
     )
   }
 
+  const hasAutoGallery = page.content?.some((b) => b._type === 'autoGallery' && !b.disabled)
+  const autoGalleryData = hasAutoGallery
+    ? (await sanityFetch({ query: autoGalleryQuery, stega: false })).data
+    : null
+
   return (
     <div className="mb-12">
-      <PageBuilderPage page={page as PageBuilderInput} />
+      <PageBuilderPage page={page as PageBuilderInput} autoGalleryData={autoGalleryData} />
     </div>
   )
 }

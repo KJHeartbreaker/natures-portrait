@@ -99,17 +99,7 @@ function PostsGridContainerSection({block}: {block: ExtractPageSectionType<'post
 function PhotoGridContainerSection({block}: {block: ExtractPageSectionType<'photoGridContainer'>}) {
   if (block.disabled) return null
   return (
-    <UnderConstruction
-      name="PhotoGridContainer"
-      note={block.title ? `“${block.title}”` : undefined}
-      style={
-        block.backgroundColor
-          ? {backgroundColor: block.backgroundColor, paddingTop: '1.5rem', paddingBottom: '1.5rem'}
-          : undefined
-      }
-    >
-      <PhotoGrid images={block.images || []} columns={block.columns} gap={block.gap} showCaptions={block.showCaptions} />
-    </UnderConstruction>
+    <PhotoGrid images={block.images || []} columns={block.columns} gap={block.gap} showCaptions={block.showCaptions} />
   )
 }
 

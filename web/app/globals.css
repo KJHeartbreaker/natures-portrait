@@ -61,6 +61,22 @@
   --default-transition-duration: 250ms;
 }
 
+/* Subtle text shadow on nav when transparent — vignette does the heavy lifting */
+header[data-scrolled='false'] a,
+header[data-scrolled='false'] summary,
+header[data-scrolled='false'] button {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Nav background: gradient in both states so CSS can interpolate between them */
+header[data-scrolled='false'] {
+  background-image: linear-gradient(to bottom, rgba(6, 13, 12, 0.62) 0%, rgba(6, 13, 12, 0) 100%);
+}
+header[data-scrolled='true'] {
+  background-image: linear-gradient(to bottom, rgb(62, 89, 84) 0%, rgb(62, 89, 84) 100%);
+}
+
+
 /* When the first page block is not a hero, the fixed nav overlaps content.
    Offset main by the nav's solid height: py-4 (32px) + logo height. */
 body[data-has-hero='false'] main {

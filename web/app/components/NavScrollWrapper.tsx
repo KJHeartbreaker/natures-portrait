@@ -38,9 +38,9 @@ export default function NavScrollWrapper({children}: {children: ReactNode}) {
       className="
         fixed inset-x-0 top-0 z-50 flex items-center
         text-soft-oat
-        transition-[background-color,backdrop-filter,padding] duration-400 ease-in-out
-        [&[data-scrolled=false]]:bg-transparent [&[data-scrolled=false]]:backdrop-blur-none [&[data-scrolled=false]]:py-6
-        [&[data-scrolled=true]]:bg-coastal-pine [&[data-scrolled=true]]:backdrop-blur-sm [&[data-scrolled=true]]:py-4
+        transition-[background-image,backdrop-filter,padding] duration-400 ease-in-out
+        [&[data-scrolled=false]]:backdrop-blur-none [&[data-scrolled=false]]:py-4
+        [&[data-scrolled=true]]:backdrop-blur-sm [&[data-scrolled=true]]:py-4
       "
     >
       {children}

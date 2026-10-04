@@ -1,6 +1,7 @@
 import Image from '@/app/components/SanityImage'
 import {adaptCrop, adaptHotspot, getImageId} from '@/app/lib/sanityImageHelpers'
 import type {ExtractPageSectionType} from '@/sanity/lib/types'
+import SectionEyebrow from '@/app/components/SectionEyebrow'
 
 type Props = {
   block: ExtractPageSectionType<'seriesGrid'>
@@ -16,17 +17,12 @@ export default function SeriesGrid({block}: Props) {
     <section className="w-full py-20 md:py-28">
       <div className="container">
         {/* Eyebrow */}
-        <div className="mb-10 flex items-center gap-4">
-          <span className="text-[10px] font-sans font-light uppercase tracking-[0.25em] text-dusty-sage whitespace-nowrap">
-            Series
-          </span>
-          <span className="flex-1 h-px bg-linen-clay" aria-hidden="true" />
-        </div>
+        {block.eyebrow ? <SectionEyebrow label={block.eyebrow} /> : null}
 
         {/* Grid */}
         <ul
           role="list"
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:gap-8"
+          className="grid grid-cols-2 md:grid-cols-3 gap-6 lg:gap-8"
         >
           {collections.map((col) => {
             const imgId = col.coverPhoto?.image ? getImageId(col.coverPhoto.image) : null
@@ -52,7 +48,7 @@ export default function SeriesGrid({block}: Props) {
                 </div>
                 {/* Meta */}
                 <div className="mt-4 flex flex-col gap-1">
-                  <h3 className="font-serif font-light text-luxe-noir text-[18px] leading-snug">
+                  <h3 className="font-serif font-light text-luxe-noir text-[18px] leading-snug break-words">
                     {col.title}
                   </h3>
                   {typeof col.photoCount === 'number' && (
@@ -65,7 +61,7 @@ export default function SeriesGrid({block}: Props) {
             )
 
             return (
-              <li key={col._id} className="group">
+              <li key={col._id} className="group min-w-0">
                 {href ? (
                   <a href={href} className="block">
                     {cardContent}

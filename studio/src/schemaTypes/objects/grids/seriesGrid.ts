@@ -6,7 +6,16 @@ export const seriesGrid = defineType({
   title: 'Series Grid',
   type: 'object',
   icon,
+  initialValue: {
+    eyebrow: 'Series',
+  },
   fields: [
+    defineField({
+      name: 'eyebrow',
+      title: 'Eyebrow Label',
+      type: 'string',
+      description: 'Short label displayed above the grid (e.g. "Series")',
+    }),
     defineField({
       name: 'collections',
       title: 'Series',

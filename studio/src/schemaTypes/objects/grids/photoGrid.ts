@@ -17,6 +17,12 @@ export const photoGridContainer = defineType({
   },
   fields: [
     defineField({
+      name: 'eyebrow',
+      title: 'Eyebrow Label',
+      type: 'string',
+      description: 'Short label displayed above the grid. Leave blank to hide the eyebrow.',
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',

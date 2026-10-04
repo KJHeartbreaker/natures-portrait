@@ -94,7 +94,6 @@ export const page = defineType({
       of: [
         defineArrayMember({type: 'heroBanner'}),
         defineArrayMember({type: 'heroTwoPanel'}),
-        defineArrayMember({type: 'pullQuote'}),
         defineArrayMember({type: 'singleColumnContentBlock'}),
         defineArrayMember({type: 'rowContainer'}),
         defineArrayMember({type: 'postsGridContainer'}),

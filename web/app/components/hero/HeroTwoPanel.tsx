@@ -53,7 +53,7 @@ export default function HeroTwoPanel({block}: Props) {
 
       {/* Copy panel */}
       <div
-        className={`flex flex-col justify-center px-6 py-12 md:px-10 md:py-16 xl:px-14 ${center ? 'text-center' : 'text-left'}`}
+        className={`flex flex-col justify-center px-6 py-12 md:px-12 md:py-16 xl:px-20 ${center ? 'text-center' : 'text-left'}`}
         style={block.backgroundColor ? {backgroundColor: block.backgroundColor} : undefined}
       >
         {block.mainPortableText?.portableTextBlock?.length ? (

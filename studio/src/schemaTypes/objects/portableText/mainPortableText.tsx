@@ -1,25 +1,8 @@
 /* eslint-disable react/destructuring-assignment */
-import {BsCardText, BsCircle, BsCircleFill} from 'react-icons/bs'
+import {BsCardText} from 'react-icons/bs'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {LiaExternalLinkSquareAltSolid as internalLinkIcon} from 'react-icons/lia'
 import {palette} from '../../palette'
-
-const luxeNoirIcon = () => <BsCircleFill color={palette.luxeNoir.value} />
-const luxeNoirDecorator = (props: any) => <span style={{color: palette.luxeNoir.value}}>{props.children}</span>
-
-const coastalPineIcon = () => <BsCircleFill color={palette.coastalPine.value} />
-const coastalPineDecorator = (props: any) => <span style={{color: palette.coastalPine.value}}>{props.children}</span>
-
-const dustySageIcon = () => <BsCircleFill color={palette.dustySage.value} />
-const dustySageDecorator = (props: any) => <span style={{color: palette.dustySage.value}}>{props.children}</span>
-
-const linenClayIcon = () => <BsCircleFill color={palette.linenClay.value} />
-const linenClayDecorator = (props: any) => <span style={{color: palette.linenClay.value}}>{props.children}</span>
-
-const softOatIcon = () => <BsCircle color={palette.softOat.value} />
-const softOatDecorator = (props: any) => (
-  <span style={{color: palette.softOat.value, backgroundColor: palette.luxeNoir.value}}>{props.children}</span>
-)
 
 const HighlightIcon = () => <span style={{fontWeight: 'bold', color: palette.softOat.value}}> H </span>
 const HighlightDecorator = (props: any) => (
@@ -54,36 +37,6 @@ export const mainPortableText = defineType({
           ],
           marks: {
             decorators: [
-              {
-                title: palette.luxeNoir.title,
-                value: 'luxeNoir',
-                icon: luxeNoirIcon,
-                component: luxeNoirDecorator,
-              },
-              {
-                title: palette.coastalPine.title,
-                value: 'coastalPine',
-                icon: coastalPineIcon,
-                component: coastalPineDecorator,
-              },
-              {
-                title: palette.dustySage.title,
-                value: 'dustySage',
-                icon: dustySageIcon,
-                component: dustySageDecorator,
-              },
-              {
-                title: palette.linenClay.title,
-                value: 'linenClay',
-                icon: linenClayIcon,
-                component: linenClayDecorator,
-              },
-              {
-                title: palette.softOat.title,
-                value: 'softOat',
-                icon: softOatIcon,
-                component: softOatDecorator,
-              },
               {title: 'Strong', value: 'strong'},
               {title: 'Emphasis', value: 'em'},
               {title: 'Underline', value: 'underline'},

@@ -1,4 +1,3 @@
-import type {CSSProperties} from 'react'
 import type {PortableTextBlock} from 'next-sanity'
 
 import Cta from '@/app/components/Cta'
@@ -17,19 +16,7 @@ type TextAlign = 'left' | 'center' | 'right'
 type TextTone = 'light' | 'dark'
 type CtaTone = 'light' | 'dark'
 
-/** Inline text-shadow so tint always shows (Tailwind may not detect classes built from string constants). */
-function tintTextShadowStyle(tone: TextTone): CSSProperties {
-  if (tone === 'light') {
-    return {
-      textShadow:
-        '0 1px 3px rgba(0,0,0,0.65), 0 4px 28px rgba(0,0,0,0.45), 0 12px 48px rgba(0,0,0,0.25)',
-    }
-  }
-  return {
-    textShadow:
-      '0 1px 2px rgba(255,255,255,0.45), 0 0 20px rgba(255,255,255,0.3), 0 4px 32px rgba(255,255,255,0.2)',
-  }
-}
+
 
 const lightOnImage = {
   subheading: 'text-white/85',
@@ -57,19 +44,6 @@ type Props = {
   block: ExtractPageSectionType<'heroBanner'>
 }
 
-/** Legacy blocks used `copyTint` as "yes" | "no" strings before the boolean field was renamed. */
-function tintBehindCopyEnabled(
-  block: ExtractPageSectionType<'heroBanner'> & {copyTint?: boolean | string | null},
-): boolean {
-  if (block.tintBehindCopy === true) {
-    return true
-  }
-  if (block.tintBehindCopy === false) {
-    return false
-  }
-  const legacy = block.copyTint
-  return legacy === true || legacy === 'yes'
-}
 
 export default function HeroBanner({block}: Props) {
   if (block.disabled) return null
@@ -83,8 +57,6 @@ export default function HeroBanner({block}: Props) {
   const textAlign: TextAlign =
     block.textAlign === 'center' || block.textAlign === 'right' ? block.textAlign : 'left'
   const ctaTone: CtaTone = block.ctaTone === 'light' ? 'light' : 'dark'
-  const tintOn = tintBehindCopyEnabled(block)
-  const tintStyle = heroImageId && tintOn ? tintTextShadowStyle(textTone) : undefined
 
   const imgW = 1920
   const imgH = heroDims ? Math.round((imgW / heroDims.width) * heroDims.height) : Math.round(imgW * (9 / 16))
@@ -115,15 +87,20 @@ export default function HeroBanner({block}: Props) {
         </ParallaxBg>
       </div>
 
-      <div className="relative z-1 w-full">
+      {/* Gradient vignette behind copy — dark tone: luxe-noir wash; light tone: soft-oat wash */}
+      <div
+        className={`absolute inset-x-0 bottom-0 z-1 h-2/3 pointer-events-none bg-gradient-to-t to-transparent ${textTone === 'dark' ? 'from-soft-oat/80' : 'from-luxe-noir/75'}`}
+        aria-hidden
+      />
+
+      <div className="relative z-[2] w-full">
         <div className="container">
           <div
-            className={`flex w-full flex-col gap-4 pb-12 pt-16 md:pb-16 md:pt-24 ${alignFlexClass[textAlign]}`}
+            className={`flex w-full max-w-3xl flex-col gap-4 pb-12 pt-16 md:pb-16 md:pt-24 ${alignFlexClass[textAlign]}`}
           >
             {block.subheading ? (
               <p
                 className={`font-mono text-xs uppercase tracking-[0.2em] md:text-sm ${tc.subheading}`}
-                style={tintStyle}
               >
                 {block.subheading}
               </p>
@@ -131,14 +108,13 @@ export default function HeroBanner({block}: Props) {
             {block.heading ? (
               <h1
                 id={`hero-banner-heading-${block._key}`}
-                className={`max-w-3xl text-4xl font-medium leading-[1.08] tracking-tight md:text-5xl xl:text-6xl ${tc.heading}`}
-                style={tintStyle}
+                className={`text-4xl font-light leading-[1.08] tracking-tight md:text-5xl xl:text-6xl ${tc.heading}`}
               >
                 {block.heading}
               </h1>
             ) : null}
             {block.copy?.portableTextBlock?.length ? (
-              <div className={tc.copyWrap} style={tintStyle}>
+              <div className={tc.copyWrap}>
                 <PortableText
                   className={tc.portableText}
                   value={block.copy.portableTextBlock as PortableTextBlock[]}

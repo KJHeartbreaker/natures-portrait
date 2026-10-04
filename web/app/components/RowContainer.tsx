@@ -16,8 +16,10 @@ const splitColsClass: Record<string, string> = {
   '60-40': 'md:grid-cols-[3fr_2fr]',
 }
 
-function PanelView({panel}: {panel: Panel | null}) {
+function PanelView({panel, mobileOrder}: {panel: Panel | null; mobileOrder?: 'first' | 'last'}) {
   if (!panel) return null
+
+  const orderClass = mobileOrder === 'first' ? 'order-first md:order-none' : 'order-last md:order-none'
 
   if (panel.panelType === 'image') {
     const imageId = getImageId(panel.image)
@@ -26,7 +28,7 @@ function PanelView({panel}: {panel: Panel | null}) {
     const imgH = dims ? Math.round((imgW / dims.width) * dims.height) : Math.round(imgW * (3 / 4))
 
     return (
-      <div className="relative min-h-[42svh] md:min-h-[420px]">
+      <div className={`relative min-h-[42svh] md:min-h-[420px] ${orderClass}`}>
         {imageId ? (
           <Image
             id={imageId}
@@ -52,7 +54,7 @@ function PanelView({panel}: {panel: Panel | null}) {
 
   return (
     <div
-      className={`flex flex-col justify-center px-6 py-12 md:px-10 md:py-16 xl:px-14 ${center ? 'text-center' : 'text-left'}`}
+      className={`flex flex-col justify-center px-6 py-12 md:px-12 md:py-16 xl:px-20 ${orderClass} ${center ? 'text-center' : 'text-left'}`}
       style={panel.backgroundColor ? {backgroundColor: panel.backgroundColor} : undefined}
     >
       {blocks?.length ? (
@@ -84,8 +86,12 @@ export default function RowContainer({block}: Props) {
   const split = block.split ?? '50-50'
   const showTitle = Boolean(block.title) && !block.hideTitle
 
+  const panelBgs = [block.leftPanel?.backgroundColor, block.rightPanel?.backgroundColor]
+  const anyPageBg = panelBgs.some((bg) => !bg || bg.toLowerCase() === '#f0ede5')
+  const dividerClass = anyPageBg ? 'border-linen-clay' : 'border-soft-oat'
+
   return (
-    <section className="w-full" aria-label={block.title || 'Two column section'}>
+    <section className={`w-full border-b ${dividerClass}`} aria-label={block.title || 'Two column section'}>
       {showTitle ? (
         <div className="px-6 pt-12 md:px-10 xl:px-14">
           <h2
@@ -98,8 +104,14 @@ export default function RowContainer({block}: Props) {
       ) : null}
 
       <div className={`grid grid-cols-1 ${splitColsClass[split] ?? splitColsClass['50-50']}`}>
-        <PanelView panel={block.leftPanel ?? null} />
-        <PanelView panel={block.rightPanel ?? null} />
+        <PanelView
+          panel={block.leftPanel ?? null}
+          mobileOrder={block.leftPanel?.panelType === 'image' ? 'first' : 'last'}
+        />
+        <PanelView
+          panel={block.rightPanel ?? null}
+          mobileOrder={block.rightPanel?.panelType === 'image' ? 'first' : 'last'}
+        />
       </div>
     </section>
   )

@@ -6,7 +6,16 @@ export const featuredCollection = defineType({
   title: 'Featured Collection',
   type: 'object',
   icon,
+  initialValue: {
+    eyebrow: 'Featured Work',
+  },
   fields: [
+    defineField({
+      name: 'eyebrow',
+      title: 'Eyebrow Label',
+      type: 'string',
+      description: 'Short label displayed above the section (e.g. "Featured Work")',
+    }),
     defineField({
       name: 'heading',
       title: 'Heading',

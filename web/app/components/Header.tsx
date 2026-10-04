@@ -20,7 +20,7 @@ export default async function Header() {
 
   return (
     <NavScrollWrapper>
-      <div className="container px-2 sm:px-6">
+      <div className="container">
         <div className="flex items-center justify-between gap-5">
           <Link className="flex items-center gap-2.5 sm:gap-3 pl-2" href="/">
             {logoId ? (

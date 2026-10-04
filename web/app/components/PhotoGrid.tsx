@@ -71,6 +71,12 @@ export default function PhotoGrid({
     return 3
   }, [columns])
 
+  const colsClass: Record<number, string> = {
+    2: 'grid-cols-2',
+    3: 'grid-cols-2 md:grid-cols-3',
+    4: 'grid-cols-2 md:grid-cols-4',
+  }
+
   const cellGap = typeof gap === 'number' ? gap : 12
 
   const safeItems = useMemo(() => (Array.isArray(images) ? images.filter(Boolean) : []), [images])
@@ -191,11 +197,8 @@ export default function PhotoGrid({
   return (
     <>
       <div
-        className="grid"
-        style={{
-          gap: cellGap,
-          gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-        }}
+        className={`grid ${colsClass[cols] ?? colsClass[3]}`}
+        style={{gap: cellGap}}
       >
         {safeItems.map((item, i) => {
           const img = item?.image ?? null

@@ -190,6 +190,7 @@ export const homeQuery = defineQuery(`
         }[_type != "reference" || @->._id != null]
       },
       _type == "photoGridContainer" => {
+        eyebrow,
         title,
         backgroundColor,
         columns,
@@ -233,6 +234,7 @@ export const homeQuery = defineQuery(`
         disabled
       },
       _type == "featuredCollection" => {
+        eyebrow,
         heading,
         subheading,
         body{
@@ -256,6 +258,7 @@ export const homeQuery = defineQuery(`
         disabled
       },
       _type == "seriesGrid" => {
+        eyebrow,
         collections[]->{
           _id,
           title,
@@ -408,6 +411,7 @@ export const getPageQuery = defineQuery(`
         }[_type != "reference" || @->._id != null]
       },
       _type == "photoGridContainer" => {
+        eyebrow,
         title,
         backgroundColor,
         columns,
@@ -451,6 +455,7 @@ export const getPageQuery = defineQuery(`
         disabled
       },
       _type == "featuredCollection" => {
+        eyebrow,
         heading,
         subheading,
         body{
@@ -474,6 +479,7 @@ export const getPageQuery = defineQuery(`
         disabled
       },
       _type == "seriesGrid" => {
+        eyebrow,
         collections[]->{
           _id,
           title,

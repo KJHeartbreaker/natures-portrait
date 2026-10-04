@@ -4,6 +4,7 @@ import Image from '@/app/components/SanityImage'
 import PortableText from '@/app/components/PortableText'
 import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import type {ExtractPageSectionType} from '@/sanity/lib/types'
+import SectionEyebrow from '@/app/components/SectionEyebrow'
 
 type Props = {
   block: ExtractPageSectionType<'featuredCollection'>
@@ -25,12 +26,7 @@ export default function FeaturedCollection({block}: Props) {
     <section className="w-full py-20 md:py-28">
       <div className="container">
         {/* Eyebrow */}
-        <div className="mb-10 flex items-center gap-4">
-          <span className="text-[10px] font-sans font-light uppercase tracking-[0.25em] text-dusty-sage whitespace-nowrap">
-            Featured Work
-          </span>
-          <span className="flex-1 h-px bg-linen-clay" aria-hidden="true" />
-        </div>
+        {block.eyebrow ? <SectionEyebrow label={block.eyebrow} /> : null}
 
         {/* Two-column layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-start">

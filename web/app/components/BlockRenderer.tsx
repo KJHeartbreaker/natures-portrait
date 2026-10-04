@@ -5,9 +5,9 @@ import type {PortableTextBlock} from 'next-sanity'
 import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
 import AutoGallery from '@/app/components/AutoGallery'
+import SectionEyebrow from '@/app/components/SectionEyebrow'
 import FeaturedCollection from '@/app/components/FeaturedCollection'
 import PhotoGrid from '@/app/components/PhotoGrid'
-import PullQuote from '@/app/components/PullQuote'
 import SeriesGrid from '@/app/components/SeriesGrid'
 import RowContainer from '@/app/components/RowContainer'
 import UnderConstruction from '@/app/components/UnderConstruction'
@@ -94,8 +94,14 @@ function PostsGridContainerSection({block}: {block: ExtractPageSectionType<'post
 
 function PhotoGridContainerSection({block}: {block: ExtractPageSectionType<'photoGridContainer'>}) {
   if (block.disabled) return null
+  const bg = block.backgroundColor ?? '#F0EDE5'
   return (
-    <PhotoGrid images={block.images || []} columns={block.columns} gap={block.gap} showCaptions={block.showCaptions} />
+    <section className="w-full py-20 md:py-28" style={{backgroundColor: bg}}>
+      <div className="container">
+        {block.eyebrow ? <SectionEyebrow label={block.eyebrow} bg={bg} /> : null}
+        <PhotoGrid images={block.images || []} columns={block.columns} gap={block.gap} showCaptions={block.showCaptions} />
+      </div>
+    </section>
   )
 }
 
@@ -108,7 +114,7 @@ function UnknownSection({block}: {block: PageSection}) {
 }
 
 // These block types break out of the container and span the full viewport width.
-const FULL_BLEED_TYPES = new Set(['heroBanner', 'heroTwoPanel', 'pullQuote', 'singleColumnContentBlock', 'featuredCollection', 'seriesGrid'])
+const FULL_BLEED_TYPES = new Set(['heroBanner', 'heroTwoPanel', 'rowContainer', 'singleColumnContentBlock', 'featuredCollection', 'seriesGrid', 'photoGridContainer'])
 
 /**
  * Used by the <PageBuilder>, this component renders a the component that matches the block type.
@@ -122,8 +128,6 @@ export default function BlockRenderer({block, pageId, pageType, autoGalleryData}
         return <HeroBanner block={block} />
       case 'heroTwoPanel':
         return <HeroTwoPanel block={block} />
-      case 'pullQuote':
-        return <PullQuote block={block} />
       case 'singleColumnContentBlock':
         return <SingleColumnContentBlockSection block={block} />
       case 'rowContainer':

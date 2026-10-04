@@ -77,7 +77,7 @@ export default function FeaturedCollection({block}: Props) {
             {bodyBlocks?.length ? (
               <PortableText
                 value={bodyBlocks}
-                className="prose-p:font-sans prose-p:font-light prose-p:text-[13px] prose-p:leading-[1.875] prose-p:text-coastal-pine"
+                className="prose-p:text-coastal-pine"
               />
             ) : null}
             {ctaHref && (

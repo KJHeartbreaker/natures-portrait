@@ -3,6 +3,7 @@ import type {PortableTextBlock} from 'next-sanity'
 import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
 import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
+import {proseThemeForBg} from '@/app/lib/proseTheme'
 import type {ExtractPageSectionType} from '@/sanity/lib/types'
 
 const sizeHeightClass = {
@@ -24,6 +25,7 @@ export default function HeroTwoPanel({block}: Props) {
 
   const imgW = 1600
   const imgH = dims ? Math.round((imgW / dims.width) * dims.height) : Math.round(imgW * (3 / 4))
+  const proseTheme = proseThemeForBg(block.backgroundColor ?? null)
 
   return (
     <section
@@ -45,7 +47,7 @@ export default function HeroTwoPanel({block}: Props) {
             sizes="(min-width: 768px) 50vw, 100vw"
           />
         ) : (
-          <div className="absolute inset-0 bg-gray-800" aria-hidden />
+          <div className="absolute inset-0 bg-coastal-pine" aria-hidden />
         )}
       </div>
 
@@ -56,12 +58,12 @@ export default function HeroTwoPanel({block}: Props) {
       >
         {block.mainPortableText?.portableTextBlock?.length ? (
           <div
-            className={`prose prose-lg max-w-none prose-headings:tracking-tight ${center ? 'mx-auto' : ''}`}
+            className={`prose max-w-none prose-headings:tracking-tight ${proseTheme} ${center ? 'mx-auto' : ''}`}
           >
             <PortableText value={block.mainPortableText.portableTextBlock as PortableTextBlock[]} />
           </div>
         ) : (
-          <p className="font-mono text-sm text-dustySage">No content yet.</p>
+          <p className="font-mono text-sm text-dusty-sage">No content yet.</p>
         )}
       </div>
     </section>

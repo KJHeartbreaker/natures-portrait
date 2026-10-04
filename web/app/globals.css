@@ -77,6 +77,35 @@ header[data-scrolled='true'] {
 }
 
 
+/* ─── Prose baseline ─────────────────────────────────────────────────────────
+   Tailwind Typography defaults to 16px body — we keep that size but wire in
+   the project's typefaces, weights, and a heading scale that matches the design.
+   Components only need to supply colours; size/family overrides live here.
+──────────────────────────────────────────────────────────────────────────── */
+.prose {
+  line-height: 1.875;
+}
+
+.prose :where(p, li, ol, ul):not(:where([class~="not-prose"] *)) {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.875;
+}
+
+.prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"] *)) {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+/* Heading scale — matches CLAUDE.md type spec (px → rem at 16px base) */
+.prose :where(h1):not(:where([class~="not-prose"] *)) { font-size: clamp(1.75rem, 3vw, 2.5rem); }   /* 28–40px */
+.prose :where(h2):not(:where([class~="not-prose"] *)) { font-size: clamp(1.375rem, 2.5vw, 1.875rem); } /* 22–30px */
+.prose :where(h3):not(:where([class~="not-prose"] *)) { font-size: clamp(1.125rem, 1.5vw, 1.375rem); } /* 18–22px */
+.prose :where(h4):not(:where([class~="not-prose"] *)) { font-size: 1.125rem; }                         /* 18px */
+.prose :where(h5):not(:where([class~="not-prose"] *)) { font-size: 1rem; }                             /* 16px */
+
 /* When the first page block is not a hero, the fixed nav overlaps content.
    Offset main by the nav's solid height: py-4 (32px) + logo height. */
 body[data-has-hero='false'] main {

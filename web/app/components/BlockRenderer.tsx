@@ -14,6 +14,7 @@ import UnderConstruction from '@/app/components/UnderConstruction'
 import {HeroBanner, HeroTwoPanel} from '@/app/components/hero'
 import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import {dataAttr} from '@/sanity/lib/utils'
+import {proseThemeForBg} from '@/app/lib/proseTheme'
 import type {ExtractPageSectionType, PageSection} from '@/sanity/lib/types'
 import type {AutoGalleryQueryResult} from '@/sanity.types'
 
@@ -28,11 +29,7 @@ function SingleColumnContentBlockSection({block}: {block: ExtractPageSectionType
   if (block.disabled) return null
   const portableText = block.contentBlock?.portableTextBlock?.portableTextBlock
   const bg = block.backgroundColor ?? '#F0EDE5'
-  const isLight = bg === '#F0EDE5' || bg === '#C6C2bb'
-  // Drive prose colour via prose-invert on dark backgrounds
-  const proseTheme = isLight
-    ? 'prose-headings:text-luxe-noir prose-p:text-coastal-pine prose-a:text-coastal-pine'
-    : 'prose-invert prose-headings:text-soft-oat prose-p:text-soft-oat prose-a:text-soft-oat'
+  const proseTheme = proseThemeForBg(bg)
 
   return (
     <section
@@ -46,8 +43,7 @@ function SingleColumnContentBlockSection({block}: {block: ExtractPageSectionType
             value={portableText as PortableTextBlock[]}
             centered
             className={`max-w-none text-center
-              prose-headings:font-serif prose-headings:font-normal prose-headings:tracking-tight
-              prose-p:font-sans prose-p:font-light prose-p:text-[13px] prose-p:leading-[1.875]
+              prose-headings:tracking-tight
               prose-a:font-light prose-a:underline
               ${proseTheme}`}
           />

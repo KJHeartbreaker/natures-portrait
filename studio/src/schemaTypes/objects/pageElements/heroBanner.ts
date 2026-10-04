@@ -10,7 +10,7 @@ export const heroBanner = defineType({
     size: 'standard',
     textTone: 'light',
     textAlign: 'left',
-    tintBehindCopy: false,
+
     ctaTone: 'light',
   },
   fieldsets: [
@@ -63,7 +63,7 @@ export const heroBanner = defineType({
       title: 'Text',
       type: 'string',
       description:
-        'Light: white type on the photo. Dark: rich charcoal type. With tint on, a soft shape sits behind the headline and copy only—a dark splash for light text, a light splash for dark text.',
+        'Light: white type on the photo. Dark: rich charcoal type.',
       options: {
         layout: 'radio',
         list: [
@@ -72,14 +72,6 @@ export const heroBanner = defineType({
         ],
         direction: 'horizontal',
       },
-      fieldset: 'heroCopy',
-    }),
-    defineField({
-      name: 'tintBehindCopy',
-      title: 'Tint behind copy',
-      type: 'boolean',
-      description:
-        'Adds a very subtle glow on the type so it separates from the photo (faint halo—no box or overlay on the image). Off: clean type with no halo.',
       fieldset: 'heroCopy',
     }),
     defineField({

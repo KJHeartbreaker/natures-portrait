@@ -1,6 +1,7 @@
 import type {PortableTextBlock} from 'next-sanity'
 
 import PortableText from '@/app/components/PortableText'
+import {proseThemeForBg} from '@/app/lib/proseTheme'
 import Image from '@/app/components/SanityImage'
 import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import type {ExtractPageSectionType} from '@/sanity/lib/types'
@@ -47,6 +48,7 @@ function PanelView({panel}: {panel: Panel | null}) {
 
   const center = Boolean(panel.centerText)
   const blocks = panel.content?.portableTextBlock
+  const proseTheme = proseThemeForBg(panel.backgroundColor ?? null)
 
   return (
     <div
@@ -57,9 +59,9 @@ function PanelView({panel}: {panel: Panel | null}) {
         <div
           className={`
             prose max-w-none
-            prose-headings:font-serif prose-headings:font-light prose-headings:tracking-tight
-            prose-p:font-sans prose-p:font-light prose-p:text-[13px] prose-p:leading-[1.875] prose-p:text-coastal-pine
-            prose-a:text-coastal-pine prose-a:font-light prose-a:underline
+            prose-headings:tracking-tight
+            prose-a:font-light prose-a:underline
+            ${proseTheme}
             ${center ? 'mx-auto text-center' : ''}
           `}
         >

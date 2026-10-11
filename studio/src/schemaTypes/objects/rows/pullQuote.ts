@@ -1,12 +1,26 @@
 import {TbQuote as icon} from 'react-icons/tb'
 import {defineField, defineType} from 'sanity'
+import {palette} from '../../palette'
 
 export const pullQuote = defineType({
   name: 'pullQuote',
   type: 'object',
   title: 'Pull Quote',
   icon,
+  initialValue: {
+    backgroundColor: palette.luxeNoir.value,
+  },
   fields: [
+    defineField({
+      name: 'backgroundColor',
+      title: 'Background Colour',
+      type: 'string',
+      options: {
+        list: [palette.luxeNoir, palette.dustySage, palette.coastalPine],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+    }),
     defineField({
       name: 'quote',
       title: 'Quote',

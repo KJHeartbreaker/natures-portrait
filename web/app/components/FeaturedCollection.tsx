@@ -49,9 +49,9 @@ export default function FeaturedCollection({block}: Props) {
               <div className="aspect-[3/4] bg-linen-clay" />
             )}
             {/* Caption */}
-            {(photo?.location || photo?.dateCaptured) && (
+            {photo?.location && (
               <p className="text-[10px] font-sans font-light uppercase tracking-[0.25em] text-dusty-sage">
-                {[photo.location, photo.dateCaptured].filter(Boolean).join(' — ')}
+                {photo.location}
               </p>
             )}
           </div>

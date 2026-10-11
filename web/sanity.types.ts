@@ -51,6 +51,13 @@ export type RowContainer = {
   disabled?: boolean
 }
 
+export type PullQuote = {
+  _type: 'pullQuote'
+  quote?: string
+  attribution?: string
+  disabled?: boolean
+}
+
 export type ContactInfo = {
   _type: 'contactInfo'
   headline?: string
@@ -505,6 +512,9 @@ export type Home = {
       } & SingleColumnContentBlock)
     | ({
         _key: string
+      } & PullQuote)
+    | ({
+        _key: string
       } & RowContainer)
     | ({
         _key: string
@@ -640,6 +650,9 @@ export type Page = {
     | ({
         _key: string
       } & SingleColumnContentBlock)
+    | ({
+        _key: string
+      } & PullQuote)
     | ({
         _key: string
       } & RowContainer)
@@ -1001,6 +1014,7 @@ export type AllSanitySchemaTypes =
   | TwoColumnPanel
   | SingleColumnContentBlock
   | RowContainer
+  | PullQuote
   | ContactInfo
   | PageReference
   | PostReference
@@ -2057,6 +2071,13 @@ export type HomeQueryResult = {
           } | null
           _updatedAt: string
         }> | null
+      }
+    | {
+        _key: string
+        _type: 'pullQuote'
+        quote: string | null
+        attribution: string | null
+        disabled: boolean | null
       }
     | {
         _key: string
@@ -4076,6 +4097,13 @@ export type GetPageQueryResult =
               } | null
               _updatedAt: string
             }> | null
+          }
+        | {
+            _key: string
+            _type: 'pullQuote'
+            quote: string | null
+            attribution: string | null
+            disabled: boolean | null
           }
         | {
             _key: string

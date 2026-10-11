@@ -92,6 +92,7 @@ export const home = defineType({
         defineArrayMember({type: 'heroBanner'}),
         defineArrayMember({type: 'heroTwoPanel'}),
         defineArrayMember({type: 'singleColumnContentBlock'}),
+        defineArrayMember({type: 'pullQuote'}),
         defineArrayMember({type: 'rowContainer'}),
         defineArrayMember({type: 'postsGridContainer'}),
         defineArrayMember({type: 'photoGridContainer'}),

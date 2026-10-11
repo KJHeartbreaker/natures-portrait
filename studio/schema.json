@@ -312,6 +312,27 @@
             "value": "pullQuote"
           }
         },
+        "backgroundColor": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "#060D0C"
+              },
+              {
+                "type": "string",
+                "value": "#758886"
+              },
+              {
+                "type": "string",
+                "value": "#3E5954"
+              }
+            ]
+          },
+          "optional": true
+        },
         "quote": {
           "type": "objectAttribute",
           "value": {

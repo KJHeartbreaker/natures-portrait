@@ -4,17 +4,28 @@ type Props = {
   block: ExtractPageSectionType<'pullQuote'>
 }
 
+// Decorative mark colour per background — a complementary mid-tone from the palette
+const markColour: Record<string, string> = {
+  '#060d0c': 'text-coastal-pine',   // luxe-noir bg
+  '#3e5954': 'text-dusty-sage',     // coastal-pine bg
+  '#758886': 'text-linen-clay',     // dusty-sage bg
+}
+
 export default function PullQuote({block}: Props) {
   if (block.disabled) return null
 
+  const bg = block.backgroundColor ?? '#060D0C'
+  const mark = markColour[bg.toLowerCase()] ?? 'text-coastal-pine'
+
   return (
     <section
-      className="w-full bg-luxe-noir px-6 py-20 md:py-28 xl:px-0"
+      className="w-full px-6 py-20 md:py-28 xl:px-0"
+      style={{backgroundColor: bg}}
       aria-label="Pull quote"
     >
       <div className="mx-auto max-w-3xl text-center">
         {/* Decorative mark */}
-        <span className="mb-8 block font-serif text-5xl italic leading-none text-coastal-pine select-none" aria-hidden>
+        <span className={`mb-8 block font-serif text-5xl italic leading-none select-none ${mark}`} aria-hidden>
           &ldquo;
         </span>
 

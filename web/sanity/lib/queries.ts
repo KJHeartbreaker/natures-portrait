@@ -126,6 +126,7 @@ export const homeQuery = defineQuery(`
         disabled
       },
       _type == "pullQuote" => {
+        backgroundColor,
         quote,
         attribution,
         disabled
@@ -347,6 +348,7 @@ export const getPageQuery = defineQuery(`
         disabled
       },
       _type == "pullQuote" => {
+        backgroundColor,
         quote,
         attribution,
         disabled

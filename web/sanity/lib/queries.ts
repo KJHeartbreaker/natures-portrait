@@ -273,6 +273,19 @@ export const homeQuery = defineQuery(`
           "photoCount": count(photos)
         },
         disabled
+      },
+      _type == "accordion" => {
+        eyebrow,
+        backgroundColor,
+        image{
+          ${imageProjection}
+        },
+        items[]{
+          _key,
+          question,
+          answer[]{ ... }
+        },
+        disabled
       }
     }
   }
@@ -493,6 +506,19 @@ export const getPageQuery = defineQuery(`
             }
           },
           "photoCount": count(photos)
+        },
+        disabled
+      },
+      _type == "accordion" => {
+        eyebrow,
+        backgroundColor,
+        image{
+          ${imageProjection}
+        },
+        items[]{
+          _key,
+          question,
+          answer[]{ ... }
         },
         disabled
       }

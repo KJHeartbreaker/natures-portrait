@@ -43,6 +43,7 @@ import {simplePortableText} from './objects/portableText/simplePortableText'
 import {contactInfo} from './objects/customComponents/contactInfo'
 
 // Objects - Rows
+import {accordion} from './objects/rows/accordion'
 import {pullQuote} from './objects/rows/pullQuote'
 import {rowContainer} from './objects/rows/rowContainer'
 import {singleColumnContentBlock} from './objects/rows/singleColumnContentBlock'
@@ -88,6 +89,7 @@ export const schemaTypes = [
   // Objects - Custom Components
   contactInfo,
   // Objects - Rows
+  accordion,
   pullQuote,
   rowContainer,
   singleColumnContentBlock,

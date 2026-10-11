@@ -34,10 +34,25 @@ const darkOnImage = {
   portableText: 'prose-a:text-coastalPine hover:prose-a:text-coastalPine/90',
 } as const
 
+// Controls how the copy block sits within the container
+const containerJustifyClass: Record<TextAlign, string> = {
+  left: 'flex justify-start',
+  center: 'flex justify-center',
+  right: 'flex justify-end',
+}
+
+// Controls alignment of children within the copy block itself
 const alignFlexClass: Record<TextAlign, string> = {
   left: 'items-start text-left',
   center: 'items-center text-center',
   right: 'items-end text-right',
+}
+
+// Right uses a narrower column — wide enough for a heading but signals intentional asymmetry
+const copyMaxWidthClass: Record<TextAlign, string> = {
+  left: 'max-w-3xl',
+  center: 'max-w-3xl',
+  right: 'max-w-xl',
 }
 
 type Props = {
@@ -94,9 +109,9 @@ export default function HeroBanner({block}: Props) {
       />
 
       <div className="relative z-[2] w-full">
-        <div className="container">
+        <div className={`container ${containerJustifyClass[textAlign]}`}>
           <div
-            className={`flex w-full max-w-3xl flex-col gap-4 pb-12 pt-16 md:pb-16 md:pt-24 ${alignFlexClass[textAlign]}`}
+            className={`flex w-full flex-col gap-4 pb-12 pt-16 md:pb-16 md:pt-24 ${copyMaxWidthClass[textAlign]} ${alignFlexClass[textAlign]}`}
           >
             {block.subheading ? (
               <p

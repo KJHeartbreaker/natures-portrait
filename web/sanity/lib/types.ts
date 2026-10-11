@@ -1,39 +1,6 @@
-import type {PortableTextBlock} from 'next-sanity'
-import {GetPageQueryResult, SanityImageCrop, SanityImageHotspot} from '@/sanity.types'
+import {GetPageQueryResult} from '@/sanity.types'
 
-export type AccordionBlock = {
-  _key: string
-  _type: 'accordion'
-  eyebrow?: string | null
-  backgroundColor?: string | null
-  image?: {
-    _type: string
-    alt?: string | null
-    width?: number | null
-    height?: number | null
-    crop?: SanityImageCrop | null
-    hotspot?: SanityImageHotspot | null
-    asset?: {
-      _id: string
-      _type: string
-      url: string | null
-      metadata?: {
-        dimensions?: {width: number | null; height: number | null; aspectRatio: number | null} | null
-        lqip?: string | null
-        blurhash?: string | null
-        palette?: {dominant?: {background?: string | null} | null} | null
-      } | null
-    } | null
-  } | null
-  items?: Array<{
-    _key: string
-    question?: string | null
-    answer?: PortableTextBlock[] | null
-  }> | null
-  disabled?: boolean | null
-}
-
-export type PageSection = NonNullable<NonNullable<GetPageQueryResult>['content']>[number] | AccordionBlock
+export type PageSection = NonNullable<NonNullable<GetPageQueryResult>['content']>[number]
 export type ExtractPageSectionType<T extends PageSection['_type']> = Extract<PageSection, {_type: T}>
 
 /**

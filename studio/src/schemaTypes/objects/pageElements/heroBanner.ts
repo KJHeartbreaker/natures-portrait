@@ -78,7 +78,7 @@ export const heroBanner = defineType({
       name: 'textAlign',
       title: 'Text alignment',
       type: 'string',
-      description: 'Horizontal position of the headline, copy, and CTA.',
+      description: 'Horizontal position of the headline, copy, and CTA. Right works best with a heading and CTA only — avoid body copy as right-aligned paragraphs are hard to read.',
       options: {
         layout: 'radio',
         list: [

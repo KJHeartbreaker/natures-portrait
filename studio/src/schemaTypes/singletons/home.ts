@@ -100,6 +100,7 @@ export const home = defineType({
         defineArrayMember({type: 'seriesGrid'}),
         defineArrayMember({type: 'autoGallery'}),
         defineArrayMember({type: 'accordion'}),
+        defineArrayMember({type: 'contactForm'}),
       ],
     }),
   ],

@@ -103,6 +103,7 @@ export const page = defineType({
         defineArrayMember({type: 'seriesGrid'}),
         defineArrayMember({type: 'autoGallery'}),
         defineArrayMember({type: 'accordion'}),
+        defineArrayMember({type: 'contactForm'}),
       ],
     }),
   ],

@@ -286,6 +286,20 @@ export const homeQuery = defineQuery(`
           answer[]{ ... }
         },
         disabled
+      },
+      _type == "contactForm" => {
+        eyebrow,
+        heading,
+        intro[]{...},
+        contactLinks[]{...},
+        backgroundColor,
+        emailSubject,
+        submitLabel,
+        successMessage,
+        disabled,
+        image{
+          ${imageProjection}
+        }
       }
     }
   }
@@ -521,6 +535,20 @@ export const getPageQuery = defineQuery(`
           answer[]{ ... }
         },
         disabled
+      },
+      _type == "contactForm" => {
+        eyebrow,
+        heading,
+        intro[]{...},
+        contactLinks[]{...},
+        backgroundColor,
+        emailSubject,
+        submitLabel,
+        successMessage,
+        disabled,
+        image{
+          ${imageProjection}
+        }
       }
     }
   }

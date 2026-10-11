@@ -39,11 +39,9 @@ import {photoGridRef} from './objects/pageElements/photoGridRef'
 import {mainPortableText} from './objects/portableText/mainPortableText'
 import {simplePortableText} from './objects/portableText/simplePortableText'
 
-// Objects - Custom Components
-import {contactInfo} from './objects/customComponents/contactInfo'
-
 // Objects - Rows
 import {accordion} from './objects/rows/accordion'
+import {contactForm} from './objects/rows/contactForm'
 import {pullQuote} from './objects/rows/pullQuote'
 import {rowContainer} from './objects/rows/rowContainer'
 import {singleColumnContentBlock} from './objects/rows/singleColumnContentBlock'
@@ -86,10 +84,9 @@ export const schemaTypes = [
   // Objects - Portable Text
   mainPortableText,
   simplePortableText,
-  // Objects - Custom Components
-  contactInfo,
   // Objects - Rows
   accordion,
+  contactForm,
   pullQuote,
   rowContainer,
   singleColumnContentBlock,

@@ -6,6 +6,7 @@ import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
 import AutoGallery from '@/app/components/AutoGallery'
 import Accordion from '@/app/components/Accordion'
+import ContactForm from '@/app/components/ContactForm'
 import PullQuote from '@/app/components/PullQuote'
 import SectionEyebrow from '@/app/components/SectionEyebrow'
 import FeaturedCollection from '@/app/components/FeaturedCollection'
@@ -116,7 +117,7 @@ function UnknownSection({block}: {block: PageSection}) {
 }
 
 // These block types break out of the container and span the full viewport width.
-const FULL_BLEED_TYPES = new Set(['heroBanner', 'heroTwoPanel', 'pullQuote', 'rowContainer', 'singleColumnContentBlock', 'featuredCollection', 'seriesGrid', 'photoGridContainer', 'accordion'])
+const FULL_BLEED_TYPES = new Set(['heroBanner', 'heroTwoPanel', 'pullQuote', 'rowContainer', 'singleColumnContentBlock', 'featuredCollection', 'seriesGrid', 'photoGridContainer', 'accordion', 'contactForm'])
 
 /**
  * Used by the <PageBuilder>, this component renders a the component that matches the block type.
@@ -136,6 +137,8 @@ export default function BlockRenderer({block, pageId, pageType, autoGalleryData}
         return <PullQuote block={block} />
       case 'accordion':
         return <Accordion block={block} />
+      case 'contactForm':
+        return <ContactForm block={block} />
       case 'rowContainer':
         return <RowContainer block={block} />
       case 'postsGridContainer':

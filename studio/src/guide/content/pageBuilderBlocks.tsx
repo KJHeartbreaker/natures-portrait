@@ -7,12 +7,14 @@ import {
   type GuideBlockVariant,
 } from '../components/GuideBlockDoc'
 import {GuideCallout} from '../components/GuideCallout'
+import type {GuideScreenshotItem} from '../components/GuideScreenshot'
 import type {GuideSection} from '../types'
 
 type PageBuilderBlock = {
   id: string
   title: string
   whenToUse: string
+  images?: GuideScreenshotItem[]
   fields?: string[]
   gotchas?: string[]
   subsections?: GuideBlockVariant[]
@@ -32,6 +34,7 @@ function blockToGuideSection(block: PageBuilderBlock): GuideSection {
     content: (
       <GuideBlockDoc
         whenToUse={block.whenToUse}
+        images={block.images}
         fields={block.fields}
         gotchas={block.gotchas}
         callout={block.callout}
@@ -46,17 +49,31 @@ const blocks: PageBuilderBlock[] = [
     id: 'hero-banner',
     title: 'Hero Banner',
     whenToUse:
-      'A full-width hero with optional background image, heading, subheading, body copy, and an optional call-to-action. Best for the top of a page.',
+      'A full-width hero with an optional background image, heading, subheading, body copy, and an optional call-to-action. Best as the very first section on a page.',
+    images: [
+      {
+        src: '/static/page-builder-thumbnails/heroBanner.png',
+        alt: 'Hero Banner example — full-width landscape photo with a heading in the lower left',
+      },
+    ],
     fields: [
-      'Hero Size — Standard (600px) or X-large (800px) on XL screens',
-      'Subheading, Heading, Copy — text tone (Light/Dark), alignment, optional tint behind copy',
-      'Background Image — optional; dark grey fallback when empty',
-      'Hero CTA — optional button with Light or Dark pill style',
-      'Disabled — hide on the live site without deleting',
+      'Hero Size — Standard (min 600px tall) or X-large (min 800px tall) on desktop',
+      'Text — Light (white type on photo) or Dark (charcoal type on bright areas)',
+      'Text alignment — Left, Center, or Right; positions the copy block within the hero',
+      'Subheading — small uppercase label above the main heading',
+      'Heading — the main title (required)',
+      'Copy — optional body text in Simple Portable Text (italic supported)',
+      'Background Image — optional; a solid dark grey fills the hero when no image is set',
+      'Hero CTA — optional call-to-action link; Light or Dark pill style',
+      'Disabled — hides the block on the live site without deleting it',
     ],
     gotchas: [
-      'Light text works on darker photos; Dark text on brighter areas. Use tint behind copy for busy backgrounds.',
-      'Hero copy uses Simple Portable Text — no headings or CTAs inside the copy field itself (use the separate CTA field).',
+      'The hero background image scrolls at a slower speed than the page (parallax), giving the photo depth as visitors scroll down.',
+      'When a Hero Banner is the first section on a page, the site navigation starts fully transparent so the photo shows through. It transitions to a solid dark bar as the visitor scrolls past the hero.',
+      'Text alignment positions the entire copy block (heading + copy + CTA) within the hero — left anchors it to the left edge, center centres it, right pushes it to the right.',
+      'Right alignment works best with a heading and CTA only — avoid body copy, as long right-aligned paragraphs are hard to read.',
+      'Light text works on darker photos; Dark text on bright or pale areas. When the photo is busy behind the text, switch to Light tone and rely on the built-in gradient vignette.',
+      'Hero copy uses Simple Portable Text — no headings or CTAs inside the copy field itself; use the separate Hero CTA field for the button.',
     ],
   },
   {
@@ -169,6 +186,24 @@ const blocks: PageBuilderBlock[] = [
         continues.
       </GuideCallout>
     ),
+  },
+  {
+    id: 'accordion',
+    title: 'Accordion',
+    whenToUse:
+      'A collapsible FAQ-style list of questions and answers. Works well for FAQs, process explanations, or any content where visitors scan headings and expand only what interests them.',
+    fields: [
+      'Eyebrow Label — optional small uppercase label above the accordion (e.g. "FAQ")',
+      'Background Colour — Soft Oat (warm off-white) or Linen Clay (warm mid-tone)',
+      'Image — optional; adds a two-column layout with the accordion on the left (60%) and the image fixed on the right (40%)',
+      'Items — the list of questions; each item has a Question (required) and an Answer in Simple Portable Text',
+      'Disabled',
+    ],
+    gotchas: [
+      'Adding an image creates a side-by-side layout on desktop — the image stays in view as visitors open and close items.',
+      'Without an image the accordion is constrained to a comfortable reading width in the centre of the page.',
+      'Answers support italic text only — no headings, lists, or inline CTAs.',
+    ],
   },
 ]
 

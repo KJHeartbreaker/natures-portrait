@@ -23,7 +23,7 @@ export default function PullQuote({block}: Props) {
         </blockquote>
 
         {block.attribution ? (
-          <p className="mt-8 font-sans text-[10px] font-light uppercase tracking-[0.26em] text-dusty-sage">
+          <p className="mt-8 font-sans text-[12px] font-light uppercase tracking-[0.26em] text-linen-clay">
             — {block.attribution}
           </p>
         ) : null}

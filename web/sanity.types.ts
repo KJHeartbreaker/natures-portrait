@@ -783,6 +783,7 @@ export type Post = {
   }>
   excerpt: SimplePortableText
   image?: MainImage
+  publishedAt?: string
   subheader?: string
   body: MainPortableText
 }
@@ -5028,6 +5029,220 @@ export type PostPagesSlugsResult = Array<{
 }>
 
 // Source: sanity/lib/queries.ts
+// Variable: journalIndexQuery
+// Query: *[_type == "post" && defined(slug.current)] | order(coalesce(publishedAt, _createdAt) desc) {    _id,    "title": coalesce(title, "Untitled"),    "slug": slug.current,    publishedAt,    _createdAt,    featured,    subheader,    excerpt,    image{   _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  } }  }
+export type JournalIndexQueryResult = Array<{
+  _id: string
+  title: string
+  slug: string
+  publishedAt: string | null
+  _createdAt: string
+  featured: null
+  subheader: string | null
+  excerpt: SimplePortableText
+  image: {
+    _type: 'mainImage'
+    alt: string | null
+    width: number | null
+    height: number | null
+    crop: SanityImageCrop | null
+    hotspot: SanityImageHotspot | null
+    asset: {
+      _id: string
+      _type: 'sanity.imageAsset'
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+          aspectRatio: number
+        } | null
+        lqip: string | null
+        blurhash: null
+        palette: {
+          dominant: {
+            background: string | null
+          } | null
+        } | null
+      } | null
+    } | null
+  } | null
+}>
+
+// Source: sanity/lib/queries.ts
+// Variable: journalPostQuery
+// Query: *[_type == "post" && slug.current == $slug][0]{    _id,    _type,    title,    "slug": slug.current,    publishedAt,    _createdAt,    subheader,    seo,    overview,    image{   _type,  alt,  width,  height,  crop,  hotspot,  asset->{    _id,    _type,    url,    metadata{      dimensions{        width,        height,        aspectRatio      },      lqip,      blurhash,      palette{        dominant{          background        }      }    }  } },    body{   portableTextBlock[]{    ...,    _type == "cta" => {        _type,  title,  kind,  arrow,  anchor,  link,  fileDownload{      _type,  asset->{    _id,    _type,    url  }  },  "landingPage": landingPageRoute->{    _id,    _type,    "slug": slug.current,    title  }    },    _type == "image" => {      ...,      alt,      crop,      hotspot,      asset->{        _id,        _type,        metadata{          dimensions{            width,            height,            aspectRatio          },          lqip,          blurhash        }      }    },      markDefs[]{    _key,    _type,    _type == "internalLink" => {      item->{        _id,        _type,        "slug": slug.current,        title      }    },    _type == "link" => {      href,      blank    },    _type != "internalLink" && _type != "link" => @  }  } }  }
+export type JournalPostQueryResult = {
+  _id: string
+  _type: 'post'
+  title: string
+  slug: string
+  publishedAt: string | null
+  _createdAt: string
+  subheader: string | null
+  seo: Seo | null
+  overview: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }> | null
+  image: {
+    _type: 'mainImage'
+    alt: string | null
+    width: number | null
+    height: number | null
+    crop: SanityImageCrop | null
+    hotspot: SanityImageHotspot | null
+    asset: {
+      _id: string
+      _type: 'sanity.imageAsset'
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+          aspectRatio: number
+        } | null
+        lqip: string | null
+        blurhash: null
+        palette: {
+          dominant: {
+            background: string | null
+          } | null
+        } | null
+      } | null
+    } | null
+  } | null
+  body: {
+    portableTextBlock: Array<
+      | {
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'normal'
+          listItem?: 'bullet' | 'number'
+          markDefs: Array<
+            | {
+                _key: string
+                _type: 'internalLink'
+                item:
+                  | {
+                      _id: string
+                      _type: 'blogLandingPage'
+                      slug: string
+                      title: string
+                    }
+                  | {
+                      _id: string
+                      _type: 'page'
+                      slug: string
+                      title: string
+                    }
+                  | {
+                      _id: string
+                      _type: 'post'
+                      slug: string
+                      title: string
+                    }
+                  | null
+              }
+            | {
+                _key: string
+                _type: 'link'
+                href: string | null
+                blank: boolean | null
+              }
+          > | null
+          level?: number
+          _type: 'block'
+          _key: string
+        }
+      | {
+          _key: string
+          _type: 'cta'
+          title: string | null
+          kind: 'button' | 'link' | null
+          arrow: boolean | null
+          landingPageRoute?: BlogLandingPageReference | PageReference | PostReference
+          link: string | null
+          anchor: string | null
+          fileDownload: {
+            _type: 'file'
+            asset: {
+              _id: string
+              _type: 'sanity.fileAsset'
+              url: string
+            } | null
+          } | null
+          landingPage:
+            | {
+                _id: string
+                _type: 'blogLandingPage'
+                slug: string
+                title: string
+              }
+            | {
+                _id: string
+                _type: 'page'
+                slug: string
+                title: string
+              }
+            | {
+                _id: string
+                _type: 'post'
+                slug: string
+                title: string
+              }
+            | null
+          markDefs: null
+        }
+      | {
+          hr?: string
+          size?: string
+          width?: string
+          _type: 'hr'
+          _key: string
+          markDefs: null
+        }
+      | {
+          asset: {
+            _id: string
+            _type: 'sanity.imageAsset'
+            metadata: {
+              dimensions: {
+                width: number
+                height: number
+                aspectRatio: number
+              } | null
+              lqip: string | null
+              blurhash: null
+            } | null
+          } | null
+          media?: unknown
+          hotspot: SanityImageHotspot | null
+          crop: SanityImageCrop | null
+          alt: string | null
+          _type: 'image'
+          _key: string
+          markDefs: null
+        }
+    > | null
+  }
+} | null
+
+// Source: sanity/lib/queries.ts
 // Variable: pagesSlugs
 // Query: *[_type in ["page","blogLandingPage"] && defined(slug.current)]  {"slug": slug.current}
 export type PagesSlugsResult = Array<{
@@ -5164,6 +5379,8 @@ declare module '@sanity/client' {
     '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(_updatedAt desc) [0...$limit] {\n    \n  _id,\n  _type,\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  image,\n  _updatedAt,\n\n  }\n': MorePostsQueryResult
     '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    _type,\n    title,\n    slug,\n    seo,\n    overview,\n    excerpt,\n    image,\n    subheader,\n    body,\n    _updatedAt\n  }\n': PostQueryResult
     '\n  *[_type == "post" && defined(slug.current)]\n  {"slug": slug.current}\n': PostPagesSlugsResult
+    '\n  *[_type == "post" && defined(slug.current)] | order(coalesce(publishedAt, _createdAt) desc) {\n    _id,\n    "title": coalesce(title, "Untitled"),\n    "slug": slug.current,\n    publishedAt,\n    _createdAt,\n    featured,\n    subheader,\n    excerpt,\n    image{ \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n }\n  }\n': JournalIndexQueryResult
+    '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    _type,\n    title,\n    "slug": slug.current,\n    publishedAt,\n    _createdAt,\n    subheader,\n    seo,\n    overview,\n    image{ \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n },\n    body{ \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n }\n  }\n': JournalPostQueryResult
     '\n  *[_type in ["page","blogLandingPage"] && defined(slug.current)]\n  {"slug": slug.current}\n': PagesSlugsResult
     '\n  {\n    "photos": *[_type == "photo"] | order(_createdAt asc) {\n      _id,\n      "_key": _id,\n      title,\n      location,\n      dateCaptured,\n      cameraText,\n      lensText,\n      description{\n        \n  portableTextBlock[]{\n    ...,\n    _type == "cta" => {\n      \n  _type,\n  title,\n  kind,\n  arrow,\n  anchor,\n  link,\n  fileDownload{\n    \n  _type,\n  asset->{\n    _id,\n    _type,\n    url\n  }\n\n  },\n  "landingPage": landingPageRoute->{\n    _id,\n    _type,\n    "slug": slug.current,\n    title\n  }\n\n    },\n    _type == "image" => {\n      ...,\n      alt,\n      crop,\n      hotspot,\n      asset->{\n        _id,\n        _type,\n        metadata{\n          dimensions{\n            width,\n            height,\n            aspectRatio\n          },\n          lqip,\n          blurhash\n        }\n      }\n    },\n    \n  markDefs[]{\n    _key,\n    _type,\n    _type == "internalLink" => {\n      item->{\n        _id,\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    _type == "link" => {\n      href,\n      blank\n    },\n    _type != "internalLink" && _type != "link" => @\n  }\n\n  }\n\n      },\n      cameraRef->{\n        \n  _id,\n  _type,\n  kind,\n  brand,\n  model,\n  nickname,\n  notes,\n  link\n\n      },\n      lensRef->{\n        \n  _id,\n  _type,\n  kind,\n  brand,\n  model,\n  nickname,\n  notes,\n  link\n\n      },\n      "image": image{\n        \n  _type,\n  alt,\n  width,\n  height,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata{\n      dimensions{\n        width,\n        height,\n        aspectRatio\n      },\n      lqip,\n      blurhash,\n      palette{\n        dominant{\n          background\n        }\n      }\n    }\n  }\n\n      },\n      "collectionIds": *[_type == "collection" && references(^._id)]._id\n    },\n    "collections": *[_type == "collection"] | order(title asc) {\n      _id,\n      title,\n      "slug": slug.current\n    }\n  }\n': AutoGalleryQueryResult
   }

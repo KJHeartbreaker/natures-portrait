@@ -636,6 +636,38 @@ export const postPagesSlugs = defineQuery(`
   {"slug": slug.current}
 `)
 
+// ── Journal queries ───────────────────────────────────────────────────────────
+
+export const journalIndexQuery = defineQuery(`
+  *[_type == "post" && defined(slug.current)] | order(coalesce(publishedAt, _createdAt) desc) {
+    _id,
+    "title": coalesce(title, "Untitled"),
+    "slug": slug.current,
+    publishedAt,
+    _createdAt,
+    featured,
+    subheader,
+    excerpt,
+    image{ ${imageProjection} }
+  }
+`)
+
+export const journalPostQuery = defineQuery(`
+  *[_type == "post" && slug.current == $slug][0]{
+    _id,
+    _type,
+    title,
+    "slug": slug.current,
+    publishedAt,
+    _createdAt,
+    subheader,
+    seo,
+    overview,
+    image{ ${imageProjection} },
+    body{ ${portableTextProjection} }
+  }
+`)
+
 export const pagesSlugs = defineQuery(`
   *[_type in ["page","blogLandingPage"] && defined(slug.current)]
   {"slug": slug.current}

@@ -5032,6 +5032,13 @@
         },
         "optional": true
       },
+      "publishedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "subheader": {
         "type": "objectAttribute",
         "value": {

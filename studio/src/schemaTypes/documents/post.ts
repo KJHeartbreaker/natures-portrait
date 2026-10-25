@@ -2,11 +2,11 @@ import {defineArrayMember, defineField, defineType} from 'sanity'
 import {BsSearch} from 'react-icons/bs'
 import {VscSettings} from 'react-icons/vsc'
 import {TbMeat} from 'react-icons/tb'
-import {FaBullhorn as icon} from 'react-icons/fa'
+import {TbNotebook as icon} from 'react-icons/tb'
 
 export const post = defineType({
   name: 'post',
-  title: 'Post',
+  title: 'Journal Entry',
   type: 'document',
   icon,
   groups: [
@@ -101,8 +101,23 @@ export const post = defineType({
       group: 'postContent',
     }),
     defineField({
+      name: 'publishedAt',
+      title: 'Published Date',
+      type: 'date',
+      group: 'postSettings',
+    }),
+    defineField({
+      name: 'featured',
+      title: 'Featured',
+      description: 'Featured entries appear as full-width rows on the journal index.',
+      type: 'boolean',
+      initialValue: false,
+      group: 'postSettings',
+    }),
+    defineField({
       name: 'subheader',
-      title: 'Subheader',
+      title: 'Lede',
+      description: 'Opening sentence shown beneath the title. Keep it to one or two lines.',
       type: 'string',
       group: 'postContent',
     }),
@@ -118,9 +133,15 @@ export const post = defineType({
     select: {
       title: 'title',
       media: 'image',
+      publishedAt: 'publishedAt',
+      featured: 'featured',
     },
-    prepare(selection) {
-      return selection
+    prepare({title, media, publishedAt, featured}) {
+      const date = publishedAt
+        ? new Date(publishedAt).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})
+        : 'No date set'
+      const subtitle = featured ? `★ Featured · ${date}` : date
+      return {title, media, subtitle}
     },
   },
 })

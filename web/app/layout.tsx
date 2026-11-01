@@ -16,6 +16,8 @@ import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {homeMetaQuery, settingsMetaQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage, resolveSiteIcons} from '@/sanity/lib/utils'
 import {handleError} from '@/app/client-utils'
+import StructuredData from '@/app/components/StructuredData'
+import {ARTIST_NAME, SITE_TAGLINE} from '@/app/lib/site'
 
 /**
  * Generate metadata for the page.
@@ -51,10 +53,13 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase,
     title: {
       template: `%s | ${title}`,
-      default: title,
+      default: `${title} | ${SITE_TAGLINE}`,
     },
     description: toPlainText(description),
+    authors: [{name: ARTIST_NAME}],
+    creator: ARTIST_NAME,
     openGraph: {
+      siteName: title,
       images: ogImage ? [ogImage] : [],
     },
     ...(siteIcons ? {icons: siteIcons} : {}),
@@ -92,6 +97,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
       className={`${openSans.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable} bg-soft-oat text-luxe-noir`}
     >
       <body className="font-sans antialiased" suppressHydrationWarning>
+        <StructuredData />
         <section className="min-h-screen">
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
           <Toaster />

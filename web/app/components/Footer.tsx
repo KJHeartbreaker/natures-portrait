@@ -1,5 +1,7 @@
+import Link from 'next/link'
 import { sanityFetch } from '@/sanity/lib/live'
 import { homeMetaQuery } from '@/sanity/lib/queries'
+import { ARTIST_NAME, INSTAGRAM_URL } from '@/app/lib/site'
 
 export default async function Footer() {
   const { data: home } = await sanityFetch({ query: homeMetaQuery })
@@ -8,10 +10,15 @@ export default async function Footer() {
 
   return (
     <footer className="bg-luxe-noir text-soft-oat">
-      <div className="container flex items-center justify-between gap-8 py-8">
-        <p className="font-serif font-light text-sm tracking-wide">
-          {siteTitle} &copy; {year}
-        </p>
+      <div className="container flex flex-col items-center gap-6 py-10 text-center md:flex-row md:justify-between md:gap-8 md:py-8 md:text-left">
+        <div className="flex flex-col gap-2 md:gap-1">
+          <p className="font-serif font-light text-sm tracking-wide">
+            {siteTitle} &copy; {year}
+          </p>
+          <p className="text-[10px] tracking-[0.25em] uppercase font-sans font-light text-dusty-sage">
+            Fine Art Photography by {ARTIST_NAME}
+          </p>
+        </div>
         <nav>
           <ul
             role="list"
@@ -19,7 +26,7 @@ export default async function Footer() {
           >
             <li>
               <a
-                href="https://instagram.com"
+                href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-soft-oat transition-colors duration-200"
@@ -28,14 +35,14 @@ export default async function Footer() {
               </a>
             </li>
             <li>
-              <a href="/prints" className="hover:text-soft-oat transition-colors duration-200">
+              <Link href="/prints" className="hover:text-soft-oat transition-colors duration-200">
                 Prints
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/contact" className="hover:text-soft-oat transition-colors duration-200">
+              <Link href="/contact" className="hover:text-soft-oat transition-colors duration-200">
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

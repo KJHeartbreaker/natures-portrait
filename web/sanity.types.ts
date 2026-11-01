@@ -784,6 +784,7 @@ export type Post = {
   excerpt: SimplePortableText
   image?: MainImage
   publishedAt?: string
+  featured?: boolean
   subheader?: string
   body: MainPortableText
 }
@@ -5037,7 +5038,7 @@ export type JournalIndexQueryResult = Array<{
   slug: string
   publishedAt: string | null
   _createdAt: string
-  featured: null
+  featured: boolean | null
   subheader: string | null
   excerpt: SimplePortableText
   image: {

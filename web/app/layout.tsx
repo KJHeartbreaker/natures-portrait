@@ -16,6 +16,7 @@ import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {homeMetaQuery, settingsMetaQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage, resolveSiteIcons} from '@/sanity/lib/utils'
 import {handleError} from '@/app/client-utils'
+import {ARTIST_NAME, INSTAGRAM_URL, SITE_TAGLINE} from '@/app/lib/site'
 
 /**
  * Generate metadata for the page.
@@ -51,10 +52,13 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase,
     title: {
       template: `%s | ${title}`,
-      default: title,
+      default: `${title} | ${SITE_TAGLINE}`,
     },
     description: toPlainText(description),
+    authors: [{name: ARTIST_NAME}],
+    creator: ARTIST_NAME,
     openGraph: {
+      siteName: title,
       images: ogImage ? [ogImage] : [],
     },
     ...(siteIcons ? {icons: siteIcons} : {}),
@@ -85,6 +89,33 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   const {isEnabled: isDraftMode} = await draftMode()
+  const [{data: home}, {data: settings}] = await Promise.all([
+    sanityFetch({query: homeMetaQuery, stega: false}),
+    sanityFetch({query: settingsMetaQuery, stega: false}),
+  ])
+  const siteName = home?.title || demo.title
+  const siteUrl = settings?.ogImage?.metadataBase || undefined
+  const person = {
+    '@type': 'Person',
+    '@id': '#artist',
+    name: ARTIST_NAME,
+    jobTitle: 'Fine Art Photographer',
+    sameAs: [INSTAGRAM_URL],
+  }
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      person,
+      {
+        '@type': 'WebSite',
+        name: siteName,
+        alternateName: SITE_TAGLINE,
+        ...(siteUrl ? {url: siteUrl} : {}),
+        author: {'@id': '#artist'},
+        publisher: {'@id': '#artist'},
+      },
+    ],
+  }
 
   return (
     <html
@@ -92,6 +123,10 @@ export default async function RootLayout({children}: {children: React.ReactNode}
       className={`${openSans.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable} bg-soft-oat text-luxe-noir`}
     >
       <body className="font-sans antialiased" suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd).replace(/</g, '\\u003c')}}
+        />
         <section className="min-h-screen">
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
           <Toaster />

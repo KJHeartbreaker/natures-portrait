@@ -75,8 +75,6 @@ type Props = {
 }
 
 export default function ContactForm({block}: Props) {
-  if (block.disabled) return null
-
   const bg = block.backgroundColor ?? '#F0EDE5'
   const [state, setState] = useState<ContactFormState>({status: 'idle'})
   const [pending, startTransition] = useTransition()
@@ -121,6 +119,8 @@ export default function ContactForm({block}: Props) {
     'w-full border-b border-coastal-pine bg-transparent py-3 text-sm text-luxe-noir placeholder:text-dusty-sage focus:border-luxe-noir focus:outline-none transition-colors duration-200'
 
   const labelClass = 'block text-[10px] uppercase tracking-[0.25em] text-dusty-sage mb-1'
+
+  if (block.disabled) return null
 
   return (
     <section className="w-full py-20 md:py-28" style={{backgroundColor: bg}}>

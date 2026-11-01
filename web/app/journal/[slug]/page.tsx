@@ -50,7 +50,7 @@ export default async function JournalPostPage(props: Props) {
   const imageId = getImageId(post.image)
   const date = post.publishedAt ?? post._createdAt
   const formattedDate = date ? format(new Date(date), 'MMMM d, yyyy') : null
-  const bodyBlocks = (post.body as any)?.portableTextBlock as PortableTextBlock[] | undefined
+  const bodyBlocks = post.body?.portableTextBlock as PortableTextBlock[] | undefined
 
   return (
     <div className="w-full pt-16 md:pt-[72px]">

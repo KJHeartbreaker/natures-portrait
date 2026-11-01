@@ -85,7 +85,6 @@ export default function MobileNav({ menuItems, siteTitle, logoId, logoAlt, logoC
       prevPathname.current = pathname
       close()
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
   // Lock body scroll while mounted (overlay visible or fading out)
@@ -108,7 +107,6 @@ export default function MobileNav({ menuItems, siteTitle, logoId, logoAlt, logoC
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted])
 
   function handleNavClick(e: React.MouseEvent) {

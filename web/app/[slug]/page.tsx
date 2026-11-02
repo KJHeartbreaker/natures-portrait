@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { toPlainText } from 'next-sanity'
 
 import PageBuilderPage from '@/app/components/PageBuilder'
 import { sanityFetch } from '@/sanity/lib/live'
 import { autoGalleryQuery, getPageQuery, pagesSlugs } from '@/sanity/lib/queries'
 import { PageOnboarding } from '@/app/components/Onboarding'
 import type { PageBuilderInput } from '@/sanity/lib/types'
+import { seoMetadata } from '@/app/lib/seo'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -38,10 +38,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     stega: false,
   })
 
-  return {
-    title: page?.seo?.seoTitle || page?.title,
-    description: page?.seo?.seoDescription || (page?.overview ? toPlainText(page.overview) : undefined),
-  } satisfies Metadata
+  return seoMetadata(page?.seo, {title: page?.title})
 }
 
 export default async function Page(props: Props) {

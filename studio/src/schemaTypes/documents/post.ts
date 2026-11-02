@@ -1,4 +1,4 @@
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 import {BsSearch} from 'react-icons/bs'
 import {VscSettings} from 'react-icons/vsc'
 import {TbMeat} from 'react-icons/tb'
@@ -52,35 +52,6 @@ export const post = defineType({
       title: 'SEO Settings',
       description: 'Configure how this post appears in search engines',
       group: 'seo',
-    }),
-    defineField({
-      name: 'overview',
-      description:
-        'Used both for the <meta> description tag for SEO, and the personal website subheader. Should be fewer than 160 characters.',
-      title: 'Overview',
-      type: 'array',
-      of: [
-        // Paragraphs
-        defineArrayMember({
-          lists: [],
-          marks: {
-            annotations: [],
-            decorators: [
-              {
-                title: 'Italic',
-                value: 'em',
-              },
-              {
-                title: 'Strong',
-                value: 'strong',
-              },
-            ],
-          },
-          styles: [],
-          type: 'block',
-        }),
-      ],
-      group: 'postSettings',
     }),
     defineField({
       name: 'excerpt',

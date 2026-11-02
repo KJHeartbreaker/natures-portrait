@@ -1,7 +1,16 @@
+import type {Metadata} from 'next'
+
 import PageBuilder from '@/app/components/PageBuilder'
+import {seoMetadata} from '@/app/lib/seo'
 import {sanityFetch} from '@/sanity/lib/live'
-import {autoGalleryQuery, homeQuery} from '@/sanity/lib/queries'
+import {autoGalleryQuery, homeMetaQuery, homeQuery} from '@/sanity/lib/queries'
 import type {PageBuilderInput} from '@/sanity/lib/types'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const {data: home} = await sanityFetch({query: homeMetaQuery, stega: false})
+  const meta = seoMetadata(home?.seo)
+  return home?.seo?.seoTitle ? {...meta, title: {absolute: home.seo.seoTitle}} : meta
+}
 
 export default async function Page() {
   const {data: home} = await sanityFetch({query: homeQuery})

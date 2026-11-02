@@ -74,7 +74,7 @@ function resolveLandingPageHref(landingPage: ResolvedLandingPage): string | null
   if (!landingPage?.slug) return null
   switch (landingPage._type) {
     case 'post':
-      return `/posts/${landingPage.slug}`
+      return `/journal/${landingPage.slug}`
     case 'page':
     case 'blogLandingPage':
       return `/${landingPage.slug}`
@@ -94,7 +94,7 @@ export function linkResolver(link: PortableTextMarkLink | CtaLike | undefined) {
   if ('item' in link) {
     const item = (link as PortableTextInternalLink).item
     if (item?.slug) {
-      if (item._type === 'post') return `/posts/${item.slug}`
+      if (item._type === 'post') return `/journal/${item.slug}`
       if (item._type === 'page' || item._type === 'blogLandingPage') return `/${item.slug}`
       return `/${item.slug}`
     }

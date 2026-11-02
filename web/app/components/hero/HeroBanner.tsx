@@ -14,12 +14,10 @@ const sizeHeightClass = {
 
 type TextAlign = 'left' | 'center' | 'right'
 type TextTone = 'light' | 'dark'
-type CtaTone = 'light' | 'dark'
 
 
 
 const lightOnImage = {
-  subheading: 'text-white/85',
   heading: 'text-white',
   copyWrap:
     'prose prose-lg max-w-2xl prose-p:leading-relaxed text-white/95 prose-headings:text-white prose-strong:text-white prose-p:text-white/90',
@@ -27,7 +25,6 @@ const lightOnImage = {
 } as const
 
 const darkOnImage = {
-  subheading: 'text-dustySage',
   heading: 'text-luxeNoir',
   copyWrap:
     'prose prose-lg max-w-2xl prose-p:leading-relaxed text-luxeNoir prose-headings:text-luxeNoir prose-strong:text-luxeNoir prose-p:text-luxeNoir/90',
@@ -71,7 +68,6 @@ export default function HeroBanner({block}: Props) {
 
   const textAlign: TextAlign =
     block.textAlign === 'center' || block.textAlign === 'right' ? block.textAlign : 'left'
-  const ctaTone: CtaTone = block.ctaTone === 'light' ? 'light' : 'dark'
 
   const imgW = 1920
   const imgH = heroDims ? Math.round((imgW / heroDims.width) * heroDims.height) : Math.round(imgW * (9 / 16))
@@ -113,13 +109,6 @@ export default function HeroBanner({block}: Props) {
           <div
             className={`flex w-full flex-col gap-4 pb-12 pt-16 md:pb-16 md:pt-24 ${copyMaxWidthClass[textAlign]} ${alignFlexClass[textAlign]}`}
           >
-            {block.subheading ? (
-              <p
-                className={`font-mono text-xs uppercase tracking-[0.2em] md:text-sm ${tc.subheading}`}
-              >
-                {block.subheading}
-              </p>
-            ) : null}
             {block.heading ? (
               <h1
                 id={`hero-banner-heading-${block._key}`}
@@ -138,7 +127,7 @@ export default function HeroBanner({block}: Props) {
             ) : null}
             {block.cta ? (
               <div className="pt-2">
-                <Cta cta={block.cta} variant={ctaTone} />
+                <Cta cta={block.cta} variant={textTone} arrow />
               </div>
             ) : null}
           </div>

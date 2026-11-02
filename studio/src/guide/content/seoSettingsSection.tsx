@@ -25,7 +25,7 @@ export const seoSettingsSection: GuideSection = {
         <GuideList
           items={[
             <>
-              <strong>Pages</strong>, <strong>Home</strong>, and <strong>Blog</strong> — SEO tab on
+              <strong>Pages</strong> and <strong>Home</strong> — SEO tab on
               the document
             </>,
             <>

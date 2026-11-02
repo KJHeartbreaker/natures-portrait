@@ -81,7 +81,8 @@ export default function FeaturedCollection({block}: Props) {
             ) : null}
             {ctaHref && (
               <Link href={ctaHref} className={`${textLinkClass} self-start`}>
-                {ctaLabel} →
+                {ctaLabel}
+                <span className="ml-2">→</span>
               </Link>
             )}
           </div>

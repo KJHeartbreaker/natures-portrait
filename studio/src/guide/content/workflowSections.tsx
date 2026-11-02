@@ -3,7 +3,6 @@ import {Stack} from '@sanity/ui'
 import {GuideCallout} from '../components/GuideCallout'
 import {GuideList, GuideParagraph, GuideSteps, GuideSubheading} from '../components/GuideProse'
 import type {GuideSection} from '../types'
-import {blogLandingSection} from './blogLandingSection'
 import {ctaSection} from './ctaSection'
 import {gearSection} from './gearSection'
 import {imagesAltSection} from './imagesAltSection'
@@ -41,13 +40,10 @@ const workflowSectionsBeforeSeo: GuideSection[] = [
                 image (see <strong>Navigation &amp; site settings</strong>)
               </>,
               <>
-                <strong>Blog</strong> — blog landing page sections and SEO
-              </>,
-              <>
                 <strong>Pages</strong> — site pages (About, Galleries, Contact, etc.)
               </>,
               <>
-                <strong>Posts</strong> — blog articles at <code>/posts/slug</code>
+                <strong>Journal Entries</strong> — journal posts, listed at <code>/journal</code>
               </>,
               <>
                 <strong>Gear</strong> — cameras, lenses, and accessories (see <strong>Gear</strong>)
@@ -136,10 +132,10 @@ const workflowSectionsBeforeSeo: GuideSection[] = [
           ]}
         />
 
-        <GuideSubheading>Edit Home or Blog</GuideSubheading>
+        <GuideSubheading>Edit Home</GuideSubheading>
         <GuideParagraph>
-          <strong>Home</strong> and <strong>Blog</strong> are single documents at the top of the sidebar
-          — they use the same page sections and SEO tabs as regular pages.
+          <strong>Home</strong> is a single document at the top of the sidebar
+          — it uses the same page sections and SEO tabs as regular pages.
         </GuideParagraph>
 
         <GuideCallout tone="positive" title="Tip">
@@ -152,20 +148,23 @@ const workflowSectionsBeforeSeo: GuideSection[] = [
 
 const workflowSectionsAfterSeo: GuideSection[] = [
   {
-    id: 'posts',
-    title: 'Blog posts',
+    id: 'journal',
+    title: 'Journal entries',
     content: (
       <Stack gap={5}>
         <GuideSteps
           steps={[
-            <>Go to <strong>Posts</strong> and click <strong>Create new</strong>.</>,
+            <>Go to <strong>Journal Entries</strong> and click <strong>Create new</strong>.</>,
             <>
-              In <strong>Post Settings</strong>: Title, Slug (becomes <code>/posts/your-slug</code>
-              ), Overview, and Excerpt (required — used in cards and grids).
+              In <strong>Post Settings</strong>: Title, Slug (becomes <code>/journal/your-slug</code>),
+              Published Date, and Excerpt (required). Entries are listed newest first by Published Date.
             </>,
             <>
-              In <strong>Post Content</strong>: Header Image (recommended), optional Subheader, and Body
-              (required).
+              Turn on <strong>Featured</strong> to give an entry a full-width row on the journal page.
+              Any number of entries can be featured.
+            </>,
+            <>
+              In <strong>Post Content</strong>: Header Image (recommended), Lede, and Body (required).
             </>,
             <>
               Complete the <strong>SEO</strong> tab (see <strong>SEO settings</strong>).
@@ -176,7 +175,6 @@ const workflowSectionsAfterSeo: GuideSection[] = [
       </Stack>
     ),
   },
-  blogLandingSection,
   photoAlbumSection,
   gearSection,
   referencedContentSection,

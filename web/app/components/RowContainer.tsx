@@ -70,7 +70,7 @@ function PanelView({panel, mobileOrder}: {panel: Panel | null; mobileOrder?: 'fi
           <PortableText value={blocks as PortableTextBlock[]} />
         </div>
       ) : (
-        <p className="font-mono text-sm text-dusty-sage">No content yet.</p>
+        <p className="font-sans text-sm text-dusty-sage">No content yet.</p>
       )}
     </div>
   )

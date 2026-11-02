@@ -75,8 +75,8 @@ export const portableTextSection: GuideSection = {
               window” for external sites.
             </>,
             <>
-              <strong>Internal Link</strong> — pick a <strong>Page</strong>, <strong>Post</strong>, or{' '}
-              <strong>Blog</strong> document; the site builds the correct path.
+              <strong>Internal Link</strong> — pick a <strong>Page</strong> or <strong>Journal Entry</strong>; the
+              site builds the correct path.
             </>,
           ]}
         />
@@ -108,7 +108,7 @@ export const portableTextSection: GuideSection = {
         <GuideList
           items={[
             <>Page sections: Single Column Content Block, Multi Column Row, Hero Two Panel copy panel</>,
-            <>Blog: post <strong>Body</strong> (full); <strong>Excerpt</strong> (simple)</>,
+            <>Journal Entry: <strong>Body</strong> (full); <strong>Excerpt</strong> (simple)</>,
             <>Hero Banner: <strong>Copy</strong> field (simple)</>,
             <>Photo Album: optional <strong>Description</strong> (simple)</>,
           ]}

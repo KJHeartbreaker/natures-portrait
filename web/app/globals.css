@@ -37,7 +37,6 @@
    */
   --font-sans: var(--font-open-sans);
   --font-serif: var(--font-libre-baskerville);
-  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
 
   --shadow-layer: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
 

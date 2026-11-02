@@ -1,5 +1,4 @@
 // Singletons
-import {blogLandingPage} from './singletons/blog'
 import {home} from './singletons/home'
 import {settings} from './singletons/settings'
 
@@ -11,7 +10,6 @@ import {page} from './documents/page'
 import {post} from './documents/post'
 
 // Objects - Grids
-import {postsGridContainer} from './objects/grids/postsGrid'
 import {photoGridContainer} from './objects/grids/photoGrid'
 import {seriesGrid} from './objects/grids/seriesGrid'
 import {autoGallery} from './objects/grids/autoGallery'
@@ -24,12 +22,10 @@ import {navCTA} from './objects/navigationComponents/navCTA'
 import {navDropdownCTA} from './objects/navigationComponents/navDropdownCTA'
 
 // Objects - Page Elements
-import {carousel} from './objects/pageElements/carousel'
 import {cta} from './objects/pageElements/cta'
 import {featuredCollection} from './objects/pageElements/featuredCollection'
 import {heroBanner} from './objects/pageElements/heroBanner'
 import {heroTwoPanel} from './objects/pageElements/heroTwoPanel'
-import {icon} from './objects/pageElements/icon'
 import {albumMainImage} from './objects/pageElements/albumMainImage'
 import {mainImage} from './objects/pageElements/mainImage'
 import {photoItem} from './objects/pageElements/photoItem'
@@ -52,7 +48,6 @@ import {twoColumnPanel} from './objects/rows/twoColumnPanel'
 export const schemaTypes = [
   // Singletons
   settings,
-  blogLandingPage,
   home,
   // Documents
   collection,
@@ -61,7 +56,6 @@ export const schemaTypes = [
   gear,
   photo,
   // Objects - Grids
-  postsGridContainer,
   photoGridContainer,
   seriesGrid,
   autoGallery,
@@ -71,12 +65,10 @@ export const schemaTypes = [
   navCTA,
   navDropdownCTA,
   // Objects - Page Elements
-  carousel,
   cta,
   featuredCollection,
   heroBanner,
   heroTwoPanel,
-  icon,
   mainImage,
   albumMainImage,
   photoItem,

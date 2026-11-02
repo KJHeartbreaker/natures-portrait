@@ -95,9 +95,8 @@ const homeLocation = {
 function resolveHref(documentType?: string, slug?: string): string | undefined {
   switch (documentType) {
     case 'post':
-      return slug ? `/posts/${slug}` : undefined
+      return slug ? `/journal/${slug}` : undefined
     case 'page':
-    case 'blogLandingPage':
       return slug ? `/${slug}` : undefined
     default:
       console.warn('Invalid document type:', documentType)
@@ -132,10 +131,10 @@ export default defineConfig({
           },
           {
             route: '/:slug',
-            filter: `(_type in ["page","blogLandingPage"] && slug.current == $slug) || _id == $slug`,
+            filter: `(_type == "page" && slug.current == $slug) || _id == $slug`,
           },
           {
-            route: '/posts/:slug',
+            route: '/journal/:slug',
             filter: `(_type == "post" && slug.current == $slug) || _id == $slug`,
           },
         ]),
@@ -161,20 +160,6 @@ export default defineConfig({
                 {
                   title: doc?.title || 'Untitled',
                   href: resolveHref('page', doc?.slug)!,
-                },
-              ],
-            }),
-          }),
-          blogLandingPage: defineLocations({
-            select: {
-              title: 'title',
-              slug: 'slug.current',
-            },
-            resolve: (doc) => ({
-              locations: [
-                {
-                  title: doc?.title || 'Untitled',
-                  href: resolveHref('blogLandingPage', doc?.slug)!,
                 },
               ],
             }),

@@ -1,6 +1,6 @@
 import {BsSignpostSplit} from 'react-icons/bs'
 import {GiCobweb, GiSettingsKnobs} from 'react-icons/gi'
-import {GoHome, GoMegaphone} from 'react-icons/go'
+import {GoHome} from 'react-icons/go'
 import {GiPhotoCamera} from 'react-icons/gi'
 import {MdCollections, MdPhoto, MdPhotoAlbum} from 'react-icons/md'
 import type {StructureBuilder, StructureResolver} from 'sanity/structure'
@@ -16,7 +16,6 @@ import {editorGuideListItem} from '../guide/structure/editorGuide'
 const SINGLETONS = [
   {name: 'home', title: 'Home', icon: GoHome, documentId: 'home'},
   {name: 'settings', title: 'Settings and Menus', icon: GiSettingsKnobs, documentId: 'siteSettings'},
-  {name: 'blogLandingPage', title: 'Blog', icon: GoMegaphone, documentId: 'blogLandingPage'},
 ]
 
 export const structure: StructureResolver = (S: StructureBuilder) =>

@@ -2,7 +2,7 @@ import './globals.css'
 
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
-import {IBM_Plex_Mono, Libre_Baskerville, Open_Sans} from 'next/font/google'
+import {Libre_Baskerville, Open_Sans} from 'next/font/google'
 import {draftMode} from 'next/headers'
 import {toPlainText} from 'next-sanity'
 import {VisualEditing} from 'next-sanity/visual-editing'
@@ -81,20 +81,13 @@ const libreBaskerville = Libre_Baskerville({
   style: ['normal', 'italic'],
 })
 
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: '--font-ibm-plex-mono',
-  weight: ['400'],
-  subsets: ['latin'],
-  display: 'swap',
-})
-
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   const {isEnabled: isDraftMode} = await draftMode()
 
   return (
     <html
       lang="en"
-      className={`${openSans.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable} bg-soft-oat text-luxe-noir`}
+      className={`${openSans.variable} ${libreBaskerville.variable} bg-soft-oat text-luxe-noir`}
     >
       <body className="font-sans antialiased" suppressHydrationWarning>
         <StructuredData />

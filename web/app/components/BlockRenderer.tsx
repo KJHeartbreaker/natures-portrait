@@ -3,7 +3,6 @@ import React from 'react'
 import type {PortableTextBlock} from 'next-sanity'
 
 import PortableText from '@/app/components/PortableText'
-import Image from '@/app/components/SanityImage'
 import AutoGallery from '@/app/components/AutoGallery'
 import Accordion from '@/app/components/Accordion'
 import ContactForm from '@/app/components/ContactForm'
@@ -15,7 +14,6 @@ import SeriesGrid from '@/app/components/SeriesGrid'
 import RowContainer from '@/app/components/RowContainer'
 import UnderConstruction from '@/app/components/UnderConstruction'
 import {HeroBanner, HeroTwoPanel} from '@/app/components/hero'
-import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import {dataAttr} from '@/sanity/lib/utils'
 import {proseThemeForBg} from '@/app/lib/proseTheme'
 import type {ExtractPageSectionType, PageSection} from '@/sanity/lib/types'
@@ -56,45 +54,6 @@ function SingleColumnContentBlockSection({block}: {block: ExtractPageSectionType
   )
 }
 
-function PostsGridContainerSection({block}: {block: ExtractPageSectionType<'postsGridContainer'>}) {
-  return (
-    <UnderConstruction
-      name="PostsGridContainer"
-      style={
-        block.backgroundColor
-          ? {backgroundColor: block.backgroundColor, paddingTop: '1.5rem', paddingBottom: '1.5rem'}
-          : undefined
-      }
-    >
-      <div className="font-mono text-sm opacity-70">
-        Posts grid{block.posts?.length ? ` (${block.posts.length})` : ''}
-      </div>
-      {block.posts?.length ? (
-        <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
-          {block.posts.slice(0, 6).map((p) => {
-            const id = getImageId(p?.image)
-            const dims = getImageDims(p?.image)
-            if (!id) return null
-            return (
-              <Image
-                key={p._id}
-                id={id}
-                alt={p?.image?.alt || ''}
-                className="rounded-sm w-full"
-                width={420}
-                height={dims ? Math.round((420 / dims.width) * dims.height) : 280}
-                mode="cover"
-                crop={adaptCrop(p?.image?.crop)}
-                hotspot={adaptHotspot(p?.image?.hotspot)}
-              />
-            )
-          })}
-        </div>
-      ) : null}
-    </UnderConstruction>
-  )
-}
-
 function PhotoGridContainerSection({block}: {block: ExtractPageSectionType<'photoGridContainer'>}) {
   if (block.disabled) return null
   const bg = block.backgroundColor ?? '#F0EDE5'
@@ -111,7 +70,7 @@ function PhotoGridContainerSection({block}: {block: ExtractPageSectionType<'phot
 function UnknownSection({block}: {block: PageSection}) {
   return (
     <UnderConstruction name={block._type} note="No renderer yet">
-      <div className="font-mono text-sm opacity-70">This block type hasn’t been implemented yet.</div>
+      <div className="font-sans text-sm opacity-70">This block type hasn’t been implemented yet.</div>
     </UnderConstruction>
   )
 }
@@ -141,8 +100,6 @@ export default function BlockRenderer({block, pageId, pageType, autoGalleryData}
         return <ContactForm block={block} />
       case 'rowContainer':
         return <RowContainer block={block} />
-      case 'postsGridContainer':
-        return <PostsGridContainerSection block={block} />
       case 'photoGridContainer':
         return <PhotoGridContainerSection block={block} />
       case 'autoGallery':

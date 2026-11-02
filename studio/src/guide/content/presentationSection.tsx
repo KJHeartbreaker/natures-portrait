@@ -21,8 +21,8 @@ export const presentationSection: GuideSection = {
           steps={[
             <>Open the <strong>Presentation</strong> tool in the Studio toolbar (top of the screen).</>,
             <>
-              Use the route picker or URL bar to choose the page you want (Home, a Page slug, the Blog
-              landing page, a post at <code>/posts/your-slug</code>, etc.).
+              Use the route picker or URL bar to choose the page you want (Home, a Page slug, a journal entry at
+              <code>/journal/your-slug</code>, etc.).
             </>,
             <>Click <strong>Enable Draft Mode</strong> if prompted — required to preview unpublished work.</>,
             <>

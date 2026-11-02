@@ -10,60 +10,50 @@ export const heroBanner = defineType({
     size: 'standard',
     textTone: 'light',
     textAlign: 'left',
-
-    ctaTone: 'light',
   },
-  fieldsets: [
-    {
-      title: 'Hero Copy',
-      name: 'heroCopy',
-      options: {
-        collapsible: true,
-        collapsed: true,
-      },
-    },
-    {
-      title: 'Hero Image',
-      name: 'heroImage',
-      options: {
-        collapsible: true,
-        collapsed: true,
-      },
-    },
-    {
-      title: 'Hero CTA',
-      name: 'heroCTA',
-      options: {
-        collapsible: true,
-        collapsed: true,
-      },
-    },
-  ],
   fields: [
     defineField({
-      title: 'Hero Size',
+      name: 'heading',
+      type: 'string',
+      title: 'Heading',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'image',
+      type: 'mainImage',
+      title: 'Background image',
+      description: 'Without an image, the background is dark grey.',
+    }),
+    defineField({
+      title: 'Size',
       name: 'size',
       type: 'string',
-      description:
-        'This establishes the height of the hero banner. Standard is 600px on XL screens, and X-large is 800px on XL screens.',
+      description: 'Height of the hero on large screens: Standard is 600px, X-large is 800px.',
       options: {
         layout: 'radio',
-        list: ['standard', 'x-large'],
+        list: [
+          {title: 'Standard', value: 'standard'},
+          {title: 'X-large', value: 'x-large'},
+        ],
         direction: 'horizontal',
       },
     }),
     defineField({
-      title: 'Subheading',
-      name: 'subheading',
-      type: 'string',
-      fieldset: 'heroCopy',
+      title: 'Copy',
+      name: 'copy',
+      type: 'simplePortableText',
+    }),
+    defineField({
+      name: 'cta',
+      title: 'CTA',
+      type: 'cta',
+      description: 'Optional link shown below the copy, in the same colour as the hero text.',
     }),
     defineField({
       name: 'textTone',
-      title: 'Text',
+      title: 'Text colour',
       type: 'string',
-      description:
-        'Light: white type on the photo. Dark: rich charcoal type.',
+      description: 'Light: white type, for darker photos. Dark: charcoal type, for brighter photos.',
       options: {
         layout: 'radio',
         list: [
@@ -72,13 +62,13 @@ export const heroBanner = defineType({
         ],
         direction: 'horizontal',
       },
-      fieldset: 'heroCopy',
     }),
     defineField({
       name: 'textAlign',
       title: 'Text alignment',
       type: 'string',
-      description: 'Horizontal position of the headline, copy, and CTA. Right works best with a heading and CTA only — avoid body copy as right-aligned paragraphs are hard to read.',
+      description:
+        'Right works best with only a heading and CTA — right-aligned paragraphs are hard to read.',
       options: {
         layout: 'radio',
         list: [
@@ -88,70 +78,23 @@ export const heroBanner = defineType({
         ],
         direction: 'horizontal',
       },
-      fieldset: 'heroCopy',
-    }),
-    defineField({
-      name: 'heading',
-      type: 'string',
-      title: 'Heading',
-      validation: (Rule) => Rule.required(),
-      fieldset: 'heroCopy',
-    }),
-    defineField({
-      title: 'Copy',
-      name: 'copy',
-      type: 'simplePortableText',
-      fieldset: 'heroCopy',
-    }),
-    defineField({
-      name: 'image',
-      type: 'mainImage',
-      title: 'Background Image',
-      description:
-        'If no background image is uploaded, the background colour will be dark grey. For the hero images, a height is not required.',
-      fieldset: 'heroImage',
-    }),
-    defineField({
-      name: 'cta',
-      title: 'CTA',
-      type: 'cta',
-      fieldset: 'heroCTA',
-    }),
-    defineField({
-      name: 'ctaTone',
-      title: 'CTA style',
-      type: 'string',
-      description:
-        'Light: pale pill with dark text—stands out on bright areas of the photo. Dark: black pill with white text—stands out on darker areas.',
-      options: {
-        layout: 'radio',
-        list: [
-          {title: 'Light', value: 'light'},
-          {title: 'Dark', value: 'dark'},
-        ],
-        direction: 'horizontal',
-      },
-      fieldset: 'heroCTA',
     }),
     defineField({
       name: 'disabled',
       title: 'Disabled',
-      description: 'Setting this to true will disable the component, but not delete it.',
+      description: 'Hides this section on the site without deleting it.',
       type: 'boolean',
     }),
   ],
   preview: {
     select: {
       title: 'heading',
-      subtitle: 'subheading',
       photo: 'image',
-      content: 'content.0.children',
       disabled: 'disabled',
     },
-    prepare({title, photo, content, disabled}) {
+    prepare({title, photo, disabled}) {
       return {
         title: disabled ? `*** DISABLED *** Hero Banner: ${title}` : `Hero Banner: ${title}`,
-        subtitle: content && content[0]?.text,
         media: photo,
       }
     },

@@ -63,7 +63,7 @@ export default function HeroTwoPanel({block}: Props) {
             <PortableText value={block.mainPortableText.portableTextBlock as PortableTextBlock[]} />
           </div>
         ) : (
-          <p className="font-mono text-sm text-dusty-sage">No content yet.</p>
+          <p className="font-sans text-sm text-dusty-sage">No content yet.</p>
         )}
       </div>
     </section>

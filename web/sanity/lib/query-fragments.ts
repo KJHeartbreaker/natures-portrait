@@ -43,8 +43,6 @@ export const fileDownloadProjection = `
 export const ctaProjection = `
   _type,
   title,
-  kind,
-  arrow,
   anchor,
   link,
   fileDownload{

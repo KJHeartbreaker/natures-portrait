@@ -19,8 +19,8 @@ export const ctaSection: GuideSection = {
         <GuideList
           items={[
             <>
-              <strong>Landing page</strong> — reference a <strong>Page</strong>, <strong>Post</strong>, or{' '}
-              <strong>Blog</strong> document; the site builds the correct URL.
+              <strong>Page</strong> — reference a <strong>Page</strong> or <strong>Journal Entry</strong>;
+              the site builds the correct URL.
             </>,
             <>
               <strong>External link</strong> — full URL (for example a gallery on another platform).
@@ -36,24 +36,9 @@ export const ctaSection: GuideSection = {
         />
       </Stack>
 
-      <Stack gap={4}>
-        <GuideSubheading>Display options</GuideSubheading>
-        <GuideList
-          items={[
-            <>
-              <strong>Kind</strong> — <strong>Button</strong> (pill) or <strong>Link</strong> (inline text
-              style).
-            </>,
-            <>
-              <strong>Arrow Icon</strong> — optional arrow on button CTAs.
-            </>,
-          ]}
-        />
-      </Stack>
-
       <GuideCallout tone="primary" title="One destination per CTA">
-        Fill in only one link type. If multiple are set, preview behaviour may be unpredictable — pick
-        the single destination you intend.
+        Fill in only one link option — Studio shows a warning if none or more than one is set. CTAs in
+        page content appear as an underlined text link with an arrow; menu links don’t get the arrow.
       </GuideCallout>
     </Stack>
   ),

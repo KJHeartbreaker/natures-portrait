@@ -53,7 +53,7 @@ export const simplePortableText = defineType({
                   {
                     name: 'item',
                     type: 'reference',
-                    to: [{type: 'page'}, {type: 'post'}, {type: 'blogLandingPage'}],
+                    to: [{type: 'page'}, {type: 'post'}],
                   },
                 ],
               },

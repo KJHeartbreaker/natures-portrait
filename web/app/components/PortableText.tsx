@@ -9,6 +9,7 @@
  */
 
 import {PortableText, type PortableTextComponents, type PortableTextBlock} from 'next-sanity'
+import Cta, {textLinkClass} from '@/app/components/Cta'
 import ResolvedLink from '@/app/components/ResolvedLink'
 import Image from '@/app/components/SanityImage'
 
@@ -23,6 +24,11 @@ export default function CustomPortableText({
 }) {
   const components: PortableTextComponents = {
     types: {
+      cta: ({value}) => (
+        <p className="not-prose mt-8">
+          <Cta cta={value} className={textLinkClass} />
+        </p>
+      ),
       image: ({value}) => {
         const id = value?.asset?._ref || value?.asset?._id
         if (!id) {

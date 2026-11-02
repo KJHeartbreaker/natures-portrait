@@ -4,6 +4,9 @@ import {linkResolver, type CtaLike} from '@/sanity/lib/utils'
 
 export type CtaVariant = 'light' | 'dark'
 
+export const textLinkClass =
+  'inline-block text-xs font-sans font-normal uppercase tracking-[0.22em] text-luxe-noir border-b border-current pb-1 hover:text-coastal-pine transition-colors duration-200'
+
 const ctaVariantClass: Record<CtaVariant, string> = {
   dark: 'inline-flex items-center rounded-full bg-black px-5 py-2.5 text-sm font-mono text-white hover:bg-blue transition-colors',
   light:

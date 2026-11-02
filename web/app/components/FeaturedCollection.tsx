@@ -1,4 +1,7 @@
+import Link from 'next/link'
 import type {PortableTextBlock} from 'next-sanity'
+
+import {textLinkClass} from '@/app/components/Cta'
 
 import Image from '@/app/components/SanityImage'
 import PortableText from '@/app/components/PortableText'
@@ -77,12 +80,9 @@ export default function FeaturedCollection({block}: Props) {
               />
             ) : null}
             {ctaHref && (
-              <a
-                href={ctaHref}
-                className="inline-block text-[10px] font-sans font-light uppercase tracking-[0.25em] text-luxe-noir border-b border-current pb-0.5 hover:text-coastal-pine transition-colors duration-200 self-start"
-              >
+              <Link href={ctaHref} className={`${textLinkClass} self-start`}>
                 {ctaLabel} →
-              </a>
+              </Link>
             )}
           </div>
         </div>

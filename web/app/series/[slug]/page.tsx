@@ -1,6 +1,7 @@
 import {notFound} from 'next/navigation'
 
 import PhotoGrid from '@/app/components/PhotoGrid'
+import SectionEyebrow from '@/app/components/SectionEyebrow'
 import {sanityFetch} from '@/sanity/lib/live'
 import {getCollectionQuery} from '@/sanity/lib/queries'
 
@@ -18,26 +19,17 @@ export default async function CollectionPage({params}: Props) {
   if (!collection) notFound()
 
   return (
-    <main>
-      <div className="container pt-24 pb-8">
-        <div className="mb-2 flex items-center gap-4">
-          <span className="text-[10px] font-sans font-light uppercase tracking-[0.25em] text-dusty-sage whitespace-nowrap">
-            Series
-          </span>
-          <span className="flex-1 h-px bg-linen-clay" aria-hidden="true" />
-        </div>
-        <h1
-          className="font-serif font-light text-luxe-noir mt-4"
-          style={{fontSize: 'clamp(36px, 5vw, 64px)'}}
-        >
-          {collection.title}
-        </h1>
-      </div>
+    <div className="container pt-32 pb-24 md:pt-40">
+      <SectionEyebrow label="Series" />
+      <h1
+        className="font-serif font-light text-luxe-noir mb-12"
+        style={{fontSize: 'clamp(36px, 5vw, 64px)', lineHeight: 1.08}}
+      >
+        {collection.title}
+      </h1>
 
-      <div className="pb-24">
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <PhotoGrid images={(collection.photos ?? []) as any[]} columns={3} gap={12} showCaptions />
-      </div>
-    </main>
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      <PhotoGrid images={(collection.photos ?? []) as any[]} columns={3} gap={12} showCaptions />
+    </div>
   )
 }

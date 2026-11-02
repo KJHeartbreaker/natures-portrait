@@ -209,7 +209,7 @@ export default function PhotoGrid({
               <button
                 type="button"
                 onClick={() => open(i)}
-                className="group relative block w-full overflow-hidden rounded-sm"
+                className="group relative block w-full overflow-hidden"
                 style={{ aspectRatio: '1 / 1' }}
                 aria-label={img?.alt ? `Open image: ${img.alt}` : 'Open image'}
               >
@@ -227,7 +227,9 @@ export default function PhotoGrid({
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-black/10" />
               </button>
               {showCaptions ? (
-                <figcaption className="font-mono text-xs opacity-70">{item?.title || img?.alt}</figcaption>
+                <figcaption className="mt-3 text-[10px] font-sans font-light uppercase tracking-[0.25em] text-dusty-sage">
+                  {item?.title || img?.alt}
+                </figcaption>
               ) : null}
             </figure>
           )
@@ -243,19 +245,19 @@ export default function PhotoGrid({
         >
           <div className="w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
             <div className="mb-2 flex items-center justify-between gap-3">
-              <div className="font-mono text-xs text-white/80">
+              <div className="font-sans font-light text-xs text-white/80">
                 {safeItems.length ? `${index + 1} / ${safeItems.length}` : ''}
               </div>
               <button
                 type="button"
                 onClick={close}
-                className="font-mono text-xs text-white/90 hover:text-white underline underline-offset-4"
+                className="font-sans font-light text-xs text-white/90 hover:text-white underline underline-offset-4"
               >
                 Close
               </button>
             </div>
 
-            <div className="relative rounded-sm overflow-hidden bg-black/30">
+            <div className="relative overflow-hidden bg-black/30">
               {/* Stage: image + bottom sheet (peek/open) + separate thumb nav. */}
               <div className="relative" style={{ height: '80vh' }}>
                 <div
@@ -277,7 +279,7 @@ export default function PhotoGrid({
                       style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                     />
                   ) : (
-                    <div className="h-full flex items-center justify-center text-white/70 font-mono text-sm">
+                    <div className="h-full flex items-center justify-center text-white/70 font-sans font-light text-sm">
                       Image unavailable
                     </div>
                   )}
@@ -356,13 +358,13 @@ export default function PhotoGrid({
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                               {activeCamera ? (
                                 <div>
-                                  <div className="font-mono text-xs text-white/70">Camera</div>
+                                  <div className="font-sans font-light text-xs text-white/70">Camera</div>
                                   <div className="text-white/90">{activeCamera}</div>
                                 </div>
                               ) : null}
                               {activeLens ? (
                                 <div>
-                                  <div className="font-mono text-xs text-white/70">Lens</div>
+                                  <div className="font-sans font-light text-xs text-white/70">Lens</div>
                                   <div className="text-white/90">{activeLens}</div>
                                 </div>
                               ) : null}
@@ -391,7 +393,7 @@ export default function PhotoGrid({
                             key={it?._key || id}
                             type="button"
                             onClick={() => setIndex(i)}
-                            className={`shrink-0 overflow-hidden rounded-sm border ${isActive ? 'border-white' : 'border-white/30'}`}
+                            className={`shrink-0 overflow-hidden border ${isActive ? 'border-white' : 'border-white/30'}`}
                             style={{ width: 64, height: 64 }}
                             aria-label={`Go to image ${i + 1}`}
                           >
@@ -419,7 +421,7 @@ export default function PhotoGrid({
                   <button
                     type="button"
                     onClick={prev}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/55 text-white px-3 py-2 rounded"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/55 text-white px-3 py-2"
                     aria-label="Previous image"
                   >
                     ‹
@@ -427,7 +429,7 @@ export default function PhotoGrid({
                   <button
                     type="button"
                     onClick={next}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/55 text-white px-3 py-2 rounded"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/55 text-white px-3 py-2"
                     aria-label="Next image"
                   >
                     ›

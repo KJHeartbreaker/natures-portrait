@@ -46,8 +46,8 @@ export const referencedContentSection: GuideSection = {
         <GuideList
           items={[
             <>
-              <strong>Posts</strong> — their own URL at <code>/posts/slug</code>; also selectable in a{' '}
-              <strong>Posts Grid</strong> page section.
+              <strong>Journal Entries</strong> — their own URL at <code>/journal/slug</code>, and listed
+              on the <code>/journal</code> page.
             </>,
             <>
               <strong>Photo Album</strong> (<code>photo</code> documents) — canonical photo records with
@@ -69,10 +69,10 @@ export const referencedContentSection: GuideSection = {
             <>Create or edit the document in the sidebar (for example <strong>Posts</strong> or <strong>Photo Album</strong>).</>,
             <>Fill in the fields and <strong>Publish</strong> the document.</>,
             <>
-              On a page, open the relevant section (Posts Grid, Photo Grid, etc.) and use the reference
+              On a page, open the relevant section (Photo Grid, Series Grid, etc.) and use the reference
               picker to add it.
             </>,
-            <><strong>Publish</strong> the page (or Home/Blog document) so the live site picks up the link.</>,
+            <><strong>Publish</strong> the page (or Home) so the live site picks up the link.</>,
           ]}
         />
         <GuideParagraph>

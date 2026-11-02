@@ -15,32 +15,32 @@ export default async function Footer() {
           <p className="font-serif font-light text-sm tracking-wide">
             {siteTitle} &copy; {year}
           </p>
-          <p className="text-[10px] tracking-[0.25em] uppercase font-sans font-light text-dusty-sage">
+          <p className="text-[13px] tracking-[0.25em] uppercase font-sans font-light">
             Fine Art Photography by {ARTIST_NAME}
           </p>
         </div>
         <nav>
           <ul
             role="list"
-            className="flex items-center gap-6 text-[10px] tracking-[0.25em] uppercase font-sans font-light text-linen-clay"
+            className="flex items-center gap-6 text-[12px] tracking-[0.25em] uppercase font-sans font-light text-white"
           >
             <li>
               <a
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-soft-oat transition-colors duration-200"
+                className="hover:text-dusty-sage transition-colors duration-200"
               >
                 Instagram
               </a>
             </li>
             <li>
-              <Link href="/prints" className="hover:text-soft-oat transition-colors duration-200">
+              <Link href="/prints" className="hover:text-dusty-sage transition-colors duration-200">
                 Prints
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="hover:text-soft-oat transition-colors duration-200">
+              <Link href="/contact" className="hover:text-dusty-sage transition-colors duration-200">
                 Contact
               </Link>
             </li>

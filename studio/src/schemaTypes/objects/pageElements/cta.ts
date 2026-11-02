@@ -1,25 +1,31 @@
 import {defineField, defineType} from 'sanity'
 
+const DESTINATIONS = ['landingPageRoute', 'link', 'anchor', 'fileDownload'] as const
+
 export const cta = defineType({
   title: 'Call to action',
   name: 'cta',
   type: 'object',
   fieldsets: [
     {
-      title: 'Link',
-      name: 'link',
-      options: {collapsible: true, collapsed: true},
-    },
-    {
-      title: 'CTA Options',
-      name: 'options',
-      options: {collapsible: true, collapsed: true},
+      title: 'Link to',
+      name: 'destination',
+      description:
+        'Fill in one of these. If more than one is set, the anchor link wins, then the external link, the page, and the file.',
     },
   ],
-  initialValue: {
-    kind: 'button',
-    arrow: false,
-  },
+  validation: (Rule) =>
+    Rule.custom((value: Record<string, unknown> | undefined) => {
+      if (!value) return true
+      const set = DESTINATIONS.filter((key) => {
+        const v = value[key]
+        if (key === 'fileDownload') return Boolean((v as {asset?: unknown} | undefined)?.asset)
+        return Boolean(v)
+      })
+      if (set.length === 0) return 'Choose where this link goes, or it won’t appear on the site.'
+      if (set.length > 1) return 'Use only one link option.'
+      return true
+    }).warning(),
   fields: [
     defineField({
       title: 'Title',
@@ -27,36 +33,19 @@ export const cta = defineType({
       type: 'string',
     }),
     defineField({
-      title: 'Kind',
-      name: 'kind',
-      type: 'string',
-      options: {
-        layout: 'radio',
-        list: ['button', 'link'],
-        direction: 'horizontal',
-      },
-      fieldset: 'options',
-    }),
-    defineField({
-      title: 'Arrow Icon',
-      name: 'arrow',
-      type: 'boolean',
-      fieldset: 'options',
-    }),
-    defineField({
-      title: 'Landing page',
+      title: 'Page',
       name: 'landingPageRoute',
       type: 'reference',
-      description: 'This links to another page within the site',
-      fieldset: 'link',
-      to: [{type: 'page'}, {type: 'post'}, {type: 'blogLandingPage'}],
+      description: 'A page or journal entry on this site',
+      fieldset: 'destination',
+      to: [{type: 'page'}, {type: 'post'}],
     }),
     defineField({
       title: 'External link',
       name: 'link',
       type: 'string',
-      description: 'Example: https://www.sanity.io',
-      fieldset: 'link',
+      description: 'Example: https://www.instagram.com/natures.portrait.photography/',
+      fieldset: 'destination',
     }),
     defineField({
       title: 'Anchor link',
@@ -64,42 +53,30 @@ export const cta = defineType({
       type: 'string',
       description:
         'Example: #my-link for same page linking, or https://www.mywebsite.com/#my-link for linking to anchors on other pages',
-      fieldset: 'link',
+      fieldset: 'destination',
     }),
     defineField({
       title: 'Downloadable file',
       name: 'fileDownload',
       type: 'file',
-      fieldset: 'link',
+      fieldset: 'destination',
     }),
   ],
   preview: {
     select: {
       title: 'title',
       landingPage: 'landingPageRoute.slug.current',
-      file: 'file',
+      file: 'fileDownload.asset.originalFilename',
       link: 'link',
       anchor: 'anchor',
     },
     prepare({title, landingPage, file, link, anchor}) {
       let subtitle = 'Not set'
-      if (landingPage) {
-        subtitle = `Route: /${landingPage}`
-      }
-      if (file) {
-        subtitle = `File: ${file}`
-      }
-      if (link) {
-        subtitle = `External: ${link}`
-      }
-      if (anchor) {
-        subtitle = `Anchor: ${anchor}`
-      }
-      return {
-        title,
-        subtitle,
-      }
+      if (file) subtitle = `File: ${file}`
+      if (landingPage) subtitle = `Page: /${landingPage}`
+      if (link) subtitle = `External: ${link}`
+      if (anchor) subtitle = `Anchor: ${anchor}`
+      return {title, subtitle}
     },
   },
 })
-

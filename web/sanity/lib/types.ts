@@ -1,4 +1,3 @@
-import type {PortableTextBlock} from 'next-sanity'
 import {GetPageQueryResult} from '@/sanity.types'
 import type {SanityImageCrop, SanityImageHotspot} from '@/sanity.types'
 
@@ -61,7 +60,7 @@ export type PortableTextLink = {
 export type PortableTextInternalLink = {
   _type: 'internalLink'
   item?: {
-    _type?: 'page' | 'post' | 'blogLandingPage'
+    _type?: 'page' | 'post'
     slug?: string
   } | null
 }
@@ -69,6 +68,6 @@ export type PortableTextInternalLink = {
 export type PortableTextMarkLink = PortableTextLink | PortableTextInternalLink
 
 export type ResolvedLandingPage = {
-  _type?: 'page' | 'post' | 'blogLandingPage'
+  _type?: 'page' | 'post'
   slug?: string | null
 } | null

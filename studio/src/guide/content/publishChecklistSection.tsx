@@ -43,7 +43,7 @@ export const publishChecklistSection: GuideSection = {
               <strong>published</strong> themselves — see <strong>Referenced content</strong>
             </>,
             <>
-              <strong>Posts Grid</strong> and <strong>Photo Grid</strong> sections only show content
+              <strong>Photo Grid</strong> sections only show content
               you pick in the section — publish both the section&apos;s parent page and each referenced
               document
             </>,

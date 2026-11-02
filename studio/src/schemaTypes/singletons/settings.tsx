@@ -55,7 +55,6 @@ export const settings = defineType({
       of: [
         defineArrayMember({type: 'navCTA'}),
         defineArrayMember({type: 'navDropdownCTA'}),
-        defineArrayMember({type: 'blogLandingPage'}),
       ],
     }),
     defineField({

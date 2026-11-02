@@ -26,7 +26,7 @@ export default function CustomPortableText({
     types: {
       cta: ({value}) => (
         <p className="not-prose mt-8">
-          <Cta cta={value} className={textLinkClass} />
+          <Cta cta={value} className={textLinkClass} arrow />
         </p>
       ),
       image: ({value}) => {

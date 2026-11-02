@@ -25,8 +25,7 @@ export const navigationSection: GuideSection = {
             </>,
             <>
               Choose <strong>Navigation Item</strong> for a single top-level link, or{' '}
-              <strong>Navigation Dropdown</strong> for a link with a flyout submenu. You can also add
-              the <strong>Blog</strong> landing page as a menu entry.
+              <strong>Navigation Dropdown</strong> for a link with a flyout submenu.
             </>,
             <>
               Fill in the <strong>CTA</strong> fields (label and destination) — see{' '}
@@ -44,15 +43,11 @@ export const navigationSection: GuideSection = {
           items={[
             <>
               <strong>Navigation Item</strong> — one label in the header that goes to one destination
-              (a page, post, external URL, etc.).
+              (a page, journal entry, external URL, etc.).
             </>,
             <>
               <strong>Navigation Dropdown</strong> — a parent label plus <strong>Dropdown Items</strong>:
               a list of additional CTAs shown when visitors hover or tap the menu.
-            </>,
-            <>
-              <strong>Blog</strong> — adds a link to the Blog landing page document (slug configured on
-              that document).
             </>,
           ]}
         />

@@ -35,14 +35,7 @@ type NavDropdownCTA = {
   }> | null
 }
 
-type BlogLandingPage = {
-  _key: string
-  _type: 'blogLandingPage'
-  title?: string | null
-  slug?: string | null
-}
-
-type MenuItem = NavCTA | NavDropdownCTA | BlogLandingPage
+type MenuItem = NavCTA | NavDropdownCTA
 
 type Props = {
   menuItems: MenuItem[]
@@ -236,22 +229,6 @@ export default function MobileNav({ menuItems, siteTitle, logoId, logoAlt, logoC
                           ))}
                         </ul>
                       )}
-                    </li>
-                  )
-                }
-
-                if (item._type === 'blogLandingPage' && item.slug) {
-                  const href = `/${item.slug}`
-                  return (
-                    <li key={item._key} className="border-t border-white/[0.06]">
-                      <div className="py-4">
-                        <Link
-                          href={href}
-                          className="font-serif font-light text-[40px] leading-none tracking-[-0.01em] text-soft-oat hover:text-linen-clay transition-colors"
-                        >
-                          {item.title || 'Untitled'}
-                        </Link>
-                      </div>
                     </li>
                   )
                 }

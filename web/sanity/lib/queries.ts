@@ -40,12 +40,6 @@ export const settingsQuery = defineQuery(`
         _type,
         title,
         "slug": slug.current
-      },
-      _type == "blogLandingPage" => {
-        _id,
-        _type,
-        title,
-        "slug": slug.current
       }
     },
     ogImage{
@@ -95,12 +89,8 @@ export const homeQuery = defineQuery(`
       _type,
       _type == "heroBanner" => {
         size,
-        subheading,
         textTone,
         textAlign,
-        tintBehindCopy,
-        copyTint,
-        ctaTone,
         heading,
         copy{
           ${portableTextProjection}
@@ -173,22 +163,6 @@ export const homeQuery = defineQuery(`
           centerText
         },
         disabled
-      },
-      _type == "postsGridContainer" => {
-        backgroundColor,
-        "posts": posts[]{
-          _type == "reference" => @->{
-            _id,
-            _type,
-            title,
-            "slug": slug.current,
-            excerpt,
-            image{
-              ${imageProjection}
-            },
-            _updatedAt
-          }
-        }[_type != "reference" || @->._id != null]
       },
       _type == "photoGridContainer" => {
         eyebrow,
@@ -324,7 +298,7 @@ export const homeMetaQuery = defineQuery(`
 `)
 
 export const getPageQuery = defineQuery(`
-  *[_type in ["page","blogLandingPage"] && slug.current == $slug][0]{
+  *[_type == "page" && slug.current == $slug][0]{
     _id,
     _type,
     slug,
@@ -344,12 +318,8 @@ export const getPageQuery = defineQuery(`
       _type,
       _type == "heroBanner" => {
         size,
-        subheading,
         textTone,
         textAlign,
-        tintBehindCopy,
-        copyTint,
-        ctaTone,
         heading,
         copy{
           ${portableTextProjection}
@@ -422,22 +392,6 @@ export const getPageQuery = defineQuery(`
           centerText
         },
         disabled
-      },
-      _type == "postsGridContainer" => {
-        backgroundColor,
-        "posts": posts[]{
-          _type == "reference" => @->{
-            _id,
-            _type,
-            title,
-            "slug": slug.current,
-            excerpt,
-            image{
-              ${imageProjection}
-            },
-            _updatedAt
-          }
-        }[_type != "reference" || @->._id != null]
       },
       _type == "photoGridContainer" => {
         eyebrow,
@@ -586,48 +540,10 @@ export const getCollectionQuery = defineQuery(`
 `)
 
 export const sitemapData = defineQuery(`
-  *[_type in ["page", "post", "blogLandingPage"] && defined(slug.current)] | order(_type asc) {
+  *[_type in ["page", "post"] && defined(slug.current)] | order(_type asc) {
     "slug": slug.current,
     _type,
     _updatedAt,
-  }
-`)
-
-const postFields = /* groq */ `
-  _id,
-  _type,
-  "title": coalesce(title, "Untitled"),
-  "slug": slug.current,
-  excerpt,
-  image,
-  _updatedAt,
-`
-
-export const allPostsQuery = defineQuery(`
-  *[_type == "post" && defined(slug.current)] | order(_updatedAt desc) {
-    ${postFields}
-  }
-`)
-
-export const morePostsQuery = defineQuery(`
-  *[_type == "post" && _id != $skip && defined(slug.current)] | order(_updatedAt desc) [0...$limit] {
-    ${postFields}
-  }
-`)
-
-export const postQuery = defineQuery(`
-  *[_type == "post" && slug.current == $slug][0]{
-    _id,
-    _type,
-    title,
-    slug,
-    seo,
-    overview,
-    excerpt,
-    image,
-    subheader,
-    body,
-    _updatedAt
   }
 `)
 
@@ -669,7 +585,7 @@ export const journalPostQuery = defineQuery(`
 `)
 
 export const pagesSlugs = defineQuery(`
-  *[_type in ["page","blogLandingPage"] && defined(slug.current)]
+  *[_type == "page" && defined(slug.current)]
   {"slug": slug.current}
 `)
 

@@ -75,7 +75,7 @@ function RenderEmptyState({page}: {page: NonNullable<PageBuilderInput>}) {
 /**
  * Renders the page builder blocks from the `content` field.
  * Accepts any document shape that satisfies PageBuilderInput — including both
- * the home singleton and regular page/blogLandingPage documents.
+ * the home singleton and regular page documents.
  */
 export default function PageBuilder({page, autoGalleryData}: PageBuilderPageProps) {
   const cleanedPage = page ? cleanStegaData(page) : page

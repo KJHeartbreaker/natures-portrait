@@ -57,8 +57,6 @@ export function resolveSiteIcons(image?: SanityImageSource | null) {
 export type CtaLike = {
   _type?: 'cta'
   title?: string | null
-  kind?: string | null
-  arrow?: boolean | null
   anchor?: string | null
   link?: string | null
   fileDownload?: {
@@ -76,7 +74,6 @@ function resolveLandingPageHref(landingPage: ResolvedLandingPage): string | null
     case 'post':
       return `/journal/${landingPage.slug}`
     case 'page':
-    case 'blogLandingPage':
       return `/${landingPage.slug}`
     default:
       return null
@@ -95,18 +92,19 @@ export function linkResolver(link: PortableTextMarkLink | CtaLike | undefined) {
     const item = (link as PortableTextInternalLink).item
     if (item?.slug) {
       if (item._type === 'post') return `/journal/${item.slug}`
-      if (item._type === 'page' || item._type === 'blogLandingPage') return `/${item.slug}`
+      if (item._type === 'page') return `/${item.slug}`
       return `/${item.slug}`
     }
   }
 
   // CTA object (or CTA-like, after GROQ projection)
-  if ('anchor' in link || 'link' in link || 'landingPage' in link) {
+  if ('anchor' in link || 'link' in link || 'landingPage' in link || 'fileDownload' in link) {
     const cta = link as CtaLike
 
     if (cta.anchor) return cta.anchor
     if (cta.link) return cta.link
     if (cta.landingPage) return resolveLandingPageHref(cta.landingPage)
+    if (cta.fileDownload?.asset?.url) return cta.fileDownload.asset.url
   }
 
   return null

@@ -76,16 +76,6 @@ export default async function Header() {
                   )
                 }
 
-                if (item._type === 'blogLandingPage' && item.slug) {
-                  return (
-                    <li key={item._key}>
-                      <Link href={`/${item.slug}`} className="text-soft-oat/80 hover:text-soft-oat transition-colors duration-200">
-                        {item.title || 'Untitled'}
-                      </Link>
-                    </li>
-                  )
-                }
-
                 return null
               })}
             </ul>

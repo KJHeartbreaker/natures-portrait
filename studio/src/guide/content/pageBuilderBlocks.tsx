@@ -49,7 +49,7 @@ const blocks: PageBuilderBlock[] = [
     id: 'hero-banner',
     title: 'Hero Banner',
     whenToUse:
-      'A full-width hero with an optional background image, heading, subheading, body copy, and an optional call-to-action. Best as the very first section on a page.',
+      'A full-width hero with an optional background image, heading, body copy, and an optional call-to-action. Best as the very first section on a page.',
     images: [
       {
         src: '/static/page-builder-thumbnails/heroBanner.png',
@@ -57,14 +57,13 @@ const blocks: PageBuilderBlock[] = [
       },
     ],
     fields: [
-      'Hero Size — Standard (min 600px tall) or X-large (min 800px tall) on desktop',
-      'Text — Light (white type on photo) or Dark (charcoal type on bright areas)',
-      'Text alignment — Left, Center, or Right; positions the copy block within the hero',
-      'Subheading — small uppercase label above the main heading',
+      'Background image — optional; a solid dark grey fills the hero when no image is set',
       'Heading — the main title (required)',
       'Copy — optional body text in Simple Portable Text (italic supported)',
-      'Background Image — optional; a solid dark grey fills the hero when no image is set',
-      'Hero CTA — optional call-to-action link; Light or Dark pill style',
+      'CTA — optional link below the copy, in the same colour as the hero text',
+      'Text colour — Light (white type for darker photos) or Dark (charcoal type for brighter photos)',
+      'Text alignment — Left, Center, or Right; positions the copy block within the hero',
+      'Size — Standard (600px tall) or X-large (800px tall) on large screens',
       'Disabled — hides the block on the live site without deleting it',
     ],
     gotchas: [
@@ -73,7 +72,7 @@ const blocks: PageBuilderBlock[] = [
       'Text alignment positions the entire copy block (heading + copy + CTA) within the hero — left anchors it to the left edge, center centres it, right pushes it to the right.',
       'Right alignment works best with a heading and CTA only — avoid body copy, as long right-aligned paragraphs are hard to read.',
       'Light text works on darker photos; Dark text on bright or pale areas. When the photo is busy behind the text, switch to Light tone and rely on the built-in gradient vignette.',
-      'Hero copy uses Simple Portable Text — no headings or CTAs inside the copy field itself; use the separate Hero CTA field for the button.',
+      'Hero copy uses Simple Portable Text — no headings or CTAs inside the copy field itself; use the CTA field below Copy for a link.',
     ],
   },
   {
@@ -143,30 +142,10 @@ const blocks: PageBuilderBlock[] = [
     ],
   },
   {
-    id: 'posts-grid-container',
-    title: 'Posts Grid',
-    whenToUse:
-      'Displays a curated set of blog posts you pick from the Posts library. Good for “latest writing” or featured articles on Home, Blog, or any page.',
-    fields: [
-      'Posts — reference picker; add published Post documents',
-      'Optional Background Colour — site palette',
-    ],
-    gotchas: [
-      'Each post must be published to appear on the live site.',
-      'The grid shows data from the Post document (title, excerpt, header image) — edit the post itself to change what appears.',
-    ],
-    callout: (
-      <GuideCallout tone="caution" title="Frontend note">
-        Posts Grid layout on the live site may still show placeholder styling while design work
-        continues. Content and references still save correctly in Studio.
-      </GuideCallout>
-    ),
-  },
-  {
     id: 'photo-grid-container',
     title: 'Photo Grid',
     whenToUse:
-      'A responsive grid of photos — ideal for portfolios and gallery sections on Home, Blog, or Pages.',
+      'A responsive grid of photos — ideal for portfolios and gallery sections on Home or Pages.',
     fields: [
       'Title — Studio-only label (optional)',
       'Photos — add Photo items (inline metadata) or standalone images',

@@ -12,9 +12,9 @@ const pageBuilderParent: GuideSection = {
   content: (
     <Stack gap={5}>
       <GuideParagraph>
-        The page builder is the <strong>Page sections</strong> field on <strong>Home</strong>,{' '}
-        <strong>Blog</strong>, and <strong>Pages</strong>. Each entry in the list is one section on the
-        live page — hero, multi-column row, posts grid, photo grid, and so on. Sections stack top to
+        The page builder is the <strong>Page sections</strong> field on <strong>Home</strong>{' '}
+        and <strong>Pages</strong>. Each entry in the list is one section on the
+        live page — hero, multi-column row, photo grid, and so on. Sections stack top to
         bottom in the order you arrange them in Studio.
       </GuideParagraph>
 
@@ -39,8 +39,7 @@ const pageBuilderParent: GuideSection = {
           ]}
         />
         <GuideParagraph>
-          Not every document has every section type. For example, regular <strong>Pages</strong> include{' '}
-          <strong>Multi Column Row</strong> but the <strong>Blog</strong> landing page does not. Check the
+          Not every document has every section type. Check the
           insert menu for what is available on the document you are editing.
         </GuideParagraph>
       </Stack>
@@ -58,7 +57,7 @@ const pageBuilderParent: GuideSection = {
             </>,
             <>
               <strong>Content is referenced from elsewhere</strong> — you pick existing{' '}
-              <strong>Posts</strong> or photos and the site pulls in their published data (Posts Grid).
+              photos or series and the site pulls in their published data.
               See <strong>Referenced content</strong>.
             </>,
           ]}

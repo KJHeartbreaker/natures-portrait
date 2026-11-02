@@ -14,12 +14,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
   const headersList = await headers()
   const sitemap: MetadataRoute.Sitemap = []
-  const domain: string = headersList.get('host') as string
+  const domain = `https://${headersList.get('host')}`
   sitemap.push({
-    url: domain as string,
+    url: domain,
     lastModified: new Date(),
     priority: 1,
     changeFrequency: 'monthly',
+  })
+  sitemap.push({
+    url: `${domain}/journal`,
+    lastModified: new Date(),
+    priority: 0.7,
+    changeFrequency: 'weekly',
   })
 
   if (allPostsAndPages != null && allPostsAndPages.data.length != 0) {
@@ -38,11 +44,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           priority = 0.5
           changeFrequency = 'never'
           url = `${domain}/journal/${p.slug}`
-          break
-        case 'blogLandingPage':
-          priority = 0.7
-          changeFrequency = 'weekly'
-          url = `${domain}/${p.slug}`
           break
         default:
           url = null

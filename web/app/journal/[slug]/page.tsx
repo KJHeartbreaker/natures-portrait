@@ -1,6 +1,5 @@
 import type {Metadata, ResolvingMetadata} from 'next'
 import {notFound} from 'next/navigation'
-import {toPlainText} from 'next-sanity'
 import {type PortableTextBlock} from 'next-sanity'
 import {format} from 'date-fns'
 import Link from 'next/link'
@@ -9,6 +8,7 @@ import CustomPortableText from '@/app/components/PortableText'
 import SanityImage from '@/app/components/SanityImage'
 import {sanityFetch} from '@/sanity/lib/live'
 import {journalPostQuery, postPagesSlugs} from '@/sanity/lib/queries'
+import {seoMetadata} from '@/app/lib/seo'
 import {adaptCrop, adaptHotspot, getImageId} from '@/app/lib/sanityImageHelpers'
 
 type Props = {
@@ -29,15 +29,10 @@ export async function generateMetadata(props: Props, parent: ResolvingMetadata):
   const {data: post} = await sanityFetch({query: journalPostQuery, params, stega: false})
   const previousImages = (await parent).openGraph?.images || []
 
+  const meta = seoMetadata(post?.seo, {title: post?.title, description: post?.subheader})
   return {
-    title: post?.seo?.seoTitle || post?.title,
-    description:
-      post?.seo?.seoDescription ||
-      (post?.overview ? toPlainText(post.overview as PortableTextBlock[]) : post?.subheader) ||
-      undefined,
-    openGraph: {
-      images: previousImages,
-    },
+    ...meta,
+    openGraph: meta.openGraph ?? {images: previousImages},
   } satisfies Metadata
 }
 

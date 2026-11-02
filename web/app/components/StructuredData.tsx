@@ -1,7 +1,6 @@
-import * as demo from '@/sanity/lib/demo'
 import {sanityFetch} from '@/sanity/lib/live'
 import {homeMetaQuery, settingsMetaQuery} from '@/sanity/lib/queries'
-import {ARTIST_NAME, INSTAGRAM_URL, SITE_TAGLINE} from '@/app/lib/site'
+import {ARTIST_NAME, INSTAGRAM_URL, SITE_NAME, SITE_TAGLINE} from '@/app/lib/site'
 
 export default async function StructuredData() {
   const [{data: home}, {data: settings}] = await Promise.all([
@@ -22,7 +21,7 @@ export default async function StructuredData() {
       },
       {
         '@type': 'WebSite',
-        name: home?.title || demo.title,
+        name: home?.title || SITE_NAME,
         alternateName: SITE_TAGLINE,
         ...(siteUrl ? {url: siteUrl} : {}),
         author: {'@id': '#artist'},

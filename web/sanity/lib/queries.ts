@@ -74,7 +74,6 @@ export const homeQuery = defineQuery(`
     _id,
     _type,
     title,
-    overview,
     seo{
       seoTitle,
       seoDescription,
@@ -275,12 +274,14 @@ export const homeMetaQuery = defineQuery(`
     _id,
     _type,
     title,
-    overview,
     seo{
       seoTitle,
       seoDescription,
       noindex,
-      canonicalUrl
+      canonicalUrl,
+      ogImage{
+        ${imageProjection}
+      }
     }
   }
 `)
@@ -291,7 +292,6 @@ export const getPageQuery = defineQuery(`
     _type,
     slug,
     title,
-    overview,
     seo{
       seoTitle,
       seoDescription,
@@ -553,8 +553,15 @@ export const journalPostQuery = defineQuery(`
     publishedAt,
     _createdAt,
     subheader,
-    seo,
-    overview,
+    seo{
+      seoTitle,
+      seoDescription,
+      noindex,
+      canonicalUrl,
+      ogImage{
+        ${imageProjection}
+      }
+    },
     image{ ${imageProjection} },
     body{ ${portableTextProjection} }
   }

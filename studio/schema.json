@@ -2054,7 +2054,7 @@
     }
   },
   {
-    "name": "heroTwoPanel",
+    "name": "heroBanner",
     "type": "type",
     "value": {
       "type": "object",
@@ -2063,8 +2063,23 @@
           "type": "objectAttribute",
           "value": {
             "type": "string",
-            "value": "heroTwoPanel"
+            "value": "heroBanner"
           }
+        },
+        "heading": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
+        "image": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "mainImage"
+          },
+          "optional": true
         },
         "size": {
           "type": "objectAttribute",
@@ -2082,96 +2097,6 @@
             ]
           },
           "optional": true
-        },
-        "image": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "mainImage"
-          },
-          "optional": true
-        },
-        "backgroundColor": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "#060D0C"
-              },
-              {
-                "type": "string",
-                "value": "#3E5954"
-              },
-              {
-                "type": "string",
-                "value": "#758886"
-              },
-              {
-                "type": "string",
-                "value": "#C6C2bb"
-              },
-              {
-                "type": "string",
-                "value": "#F0EDE5"
-              }
-            ]
-          },
-          "optional": true
-        },
-        "mainPortableText": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "mainPortableText"
-          },
-          "optional": true
-        },
-        "centerText": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        },
-        "disabled": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
-    "name": "heroBanner",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "heroBanner"
-          }
-        },
-        "image": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "mainImage"
-          },
-          "optional": true
-        },
-        "heading": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": false
         },
         "copy": {
           "type": "objectAttribute",
@@ -2222,23 +2147,6 @@
               {
                 "type": "string",
                 "value": "right"
-              }
-            ]
-          },
-          "optional": true
-        },
-        "size": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "standard"
-              },
-              {
-                "type": "string",
-                "value": "x-large"
               }
             ]
           },
@@ -3550,21 +3458,6 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "heroTwoPanel"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
                   "name": "singleColumnContentBlock"
                 }
               },
@@ -3885,21 +3778,6 @@
                 "rest": {
                   "type": "inline",
                   "name": "heroBanner"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "heroTwoPanel"
                 }
               },
               {

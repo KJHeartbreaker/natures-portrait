@@ -85,7 +85,7 @@ export const page = defineType({
             {
               name: 'grid',
               previewImageUrl: (schemaTypeName: string) =>
-                `/static/page-builder-thumbnails/${schemaTypeName}.png`,
+                `/static/page-builder-thumbnails/${schemaTypeName}.webp`,
             },
             {name: 'list'},
           ],
@@ -93,7 +93,6 @@ export const page = defineType({
       },
       of: [
         defineArrayMember({type: 'heroBanner'}),
-        defineArrayMember({type: 'heroTwoPanel'}),
         defineArrayMember({type: 'singleColumnContentBlock'}),
         defineArrayMember({type: 'pullQuote'}),
         defineArrayMember({type: 'rowContainer'}),

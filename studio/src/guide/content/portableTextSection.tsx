@@ -107,7 +107,7 @@ export const portableTextSection: GuideSection = {
         <GuideSubheading>Where you will use Portable Text</GuideSubheading>
         <GuideList
           items={[
-            <>Page sections: Single Column Content Block, Multi Column Row, Hero Two Panel copy panel</>,
+            <>Page sections: Single Column Content Block, Multi Column Row</>,
             <>Journal Entry: <strong>Body</strong> (full); <strong>Excerpt</strong> (simple)</>,
             <>Hero Banner: <strong>Copy</strong> field (simple)</>,
             <>Photo Album: optional <strong>Description</strong> (simple)</>,

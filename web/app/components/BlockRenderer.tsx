@@ -13,7 +13,7 @@ import PhotoGrid from '@/app/components/PhotoGrid'
 import SeriesGrid from '@/app/components/SeriesGrid'
 import RowContainer from '@/app/components/RowContainer'
 import UnderConstruction from '@/app/components/UnderConstruction'
-import {HeroBanner, HeroTwoPanel} from '@/app/components/hero'
+import {HeroBanner} from '@/app/components/hero'
 import {dataAttr} from '@/sanity/lib/utils'
 import {proseThemeForBg} from '@/app/lib/proseTheme'
 import type {ExtractPageSectionType, PageSection} from '@/sanity/lib/types'
@@ -76,7 +76,7 @@ function UnknownSection({block}: {block: PageSection}) {
 }
 
 // These block types break out of the container and span the full viewport width.
-const FULL_BLEED_TYPES = new Set(['heroBanner', 'heroTwoPanel', 'pullQuote', 'rowContainer', 'singleColumnContentBlock', 'featuredCollection', 'seriesGrid', 'photoGridContainer', 'accordion', 'contactForm'])
+const FULL_BLEED_TYPES = new Set(['heroBanner', 'pullQuote', 'rowContainer', 'singleColumnContentBlock', 'featuredCollection', 'seriesGrid', 'photoGridContainer', 'accordion', 'contactForm'])
 
 /**
  * Used by the <PageBuilder>, this component renders a the component that matches the block type.
@@ -88,8 +88,6 @@ export default function BlockRenderer({block, pageId, pageType, autoGalleryData}
     switch (block._type) {
       case 'heroBanner':
         return <HeroBanner block={block} />
-      case 'heroTwoPanel':
-        return <HeroTwoPanel block={block} />
       case 'singleColumnContentBlock':
         return <SingleColumnContentBlockSection block={block} />
       case 'pullQuote':

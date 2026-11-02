@@ -52,7 +52,7 @@ const blocks: PageBuilderBlock[] = [
       'A full-width hero with an optional background image, heading, body copy, and an optional call-to-action. Best as the very first section on a page.',
     images: [
       {
-        src: '/static/page-builder-thumbnails/heroBanner.png',
+        src: '/static/page-builder-thumbnails/heroBanner.webp',
         alt: 'Hero Banner example — full-width landscape photo with a heading in the lower left',
       },
     ],
@@ -73,20 +73,6 @@ const blocks: PageBuilderBlock[] = [
       'Right alignment works best with a heading and CTA only — avoid body copy, as long right-aligned paragraphs are hard to read.',
       'Light text works on darker photos; Dark text on bright or pale areas. When the photo is busy behind the text, switch to Light tone and rely on the built-in gradient vignette.',
       'Hero copy uses Simple Portable Text — no headings or CTAs inside the copy field itself; use the CTA field below Copy for a link.',
-    ],
-  },
-  {
-    id: 'hero-two-panel',
-    title: 'Hero Two Panel',
-    whenToUse:
-      'A split hero: image on one side and a coloured copy panel on the other. Good for feature pages with strong visuals.',
-    fields: [
-      'Hero Size — Standard or X-large',
-      'Image panel — main image with alt text',
-      'Copy panel — background colour from the site palette (Luxe Noir, Coastal Pine, Dusty Sage, Linen Clay, Soft Oat)',
-      'Content — full Portable Text (headings, lists, colours, CTAs)',
-      'Center Text — vertically centre copy in the panel',
-      'Disabled',
     ],
   },
   {

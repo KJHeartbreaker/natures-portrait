@@ -56,3 +56,6 @@ sanity.schema.json
 
 # VS Code
 .vscode
+
+# Temporary schema extraction output
+.tmpSchemaOut/

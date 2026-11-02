@@ -103,18 +103,6 @@ export const homeQuery = defineQuery(`
         },
         disabled
       },
-      _type == "heroTwoPanel" => {
-        size,
-        backgroundColor,
-        image{
-          ${imageProjection}
-        },
-        mainPortableText{
-          ${portableTextProjection}
-        },
-        centerText,
-        disabled
-      },
       _type == "pullQuote" => {
         backgroundColor,
         quote,
@@ -330,18 +318,6 @@ export const getPageQuery = defineQuery(`
         cta{
           ${ctaProjection}
         },
-        disabled
-      },
-      _type == "heroTwoPanel" => {
-        size,
-        backgroundColor,
-        image{
-          ${imageProjection}
-        },
-        mainPortableText{
-          ${portableTextProjection}
-        },
-        centerText,
         disabled
       },
       _type == "pullQuote" => {

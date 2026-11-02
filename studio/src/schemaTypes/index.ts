@@ -25,7 +25,6 @@ import {navDropdownCTA} from './objects/navigationComponents/navDropdownCTA'
 import {cta} from './objects/pageElements/cta'
 import {featuredCollection} from './objects/pageElements/featuredCollection'
 import {heroBanner} from './objects/pageElements/heroBanner'
-import {heroTwoPanel} from './objects/pageElements/heroTwoPanel'
 import {albumMainImage} from './objects/pageElements/albumMainImage'
 import {mainImage} from './objects/pageElements/mainImage'
 import {photoItem} from './objects/pageElements/photoItem'
@@ -68,7 +67,6 @@ export const schemaTypes = [
   cta,
   featuredCollection,
   heroBanner,
-  heroTwoPanel,
   mainImage,
   albumMainImage,
   photoItem,

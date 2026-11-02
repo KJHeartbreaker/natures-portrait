@@ -102,7 +102,7 @@ export default function PageBuilder({page, autoGalleryData}: PageBuilderPageProp
 
   const firstType = sections?.[0]?._type
   useLayoutEffect(() => {
-    const hasHero = firstType === 'heroBanner' || firstType === 'heroTwoPanel'
+    const hasHero = firstType === 'heroBanner'
     document.body.dataset.hasHero = hasHero ? 'true' : 'false'
     return () => {
       delete document.body.dataset.hasHero

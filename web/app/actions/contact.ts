@@ -4,6 +4,16 @@ import {Resend} from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const TO = process.env.CONTACT_FORM_TO ?? ''
+const FROM = process.env.CONTACT_FORM_FROM || "Nature's Portrait <contact@naturesportrait.ca>"
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
 
 export type ContactFormState =
   | {status: 'idle'}
@@ -46,15 +56,15 @@ export async function submitContactForm(
 
   try {
     const {error} = await resend.emails.send({
-      from: 'Nature\'s Portrait <onboarding@resend.dev>',
+      from: FROM,
       to: TO,
       replyTo: email,
       subject: `${subject} — ${name}`,
       html: `
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
         <p><strong>Message:</strong></p>
-        <p style="white-space:pre-wrap">${message}</p>
+        <p style="white-space:pre-wrap">${escapeHtml(message)}</p>
       `,
     })
 

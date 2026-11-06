@@ -29,3 +29,12 @@ export function proseThemeForBg(bg: string | null | undefined): string {
   // soft-oat (#F0EDE5), linen-clay (#C6C2BB), or no bg — light surface defaults
   return 'prose-headings:text-luxe-noir prose-p:text-coastal-pine prose-a:text-coastal-pine'
 }
+
+/**
+ * Heading colour class for a section title sitting directly on a given background.
+ * Dark/mid bgs → soft-oat; light bgs → luxe-noir.
+ */
+export function headingColorForBg(bg: string | null | undefined): string {
+  const normalized = bg?.toLowerCase()
+  return normalized && DARK_BGS.includes(normalized) ? 'text-soft-oat' : 'text-luxe-noir'
+}

@@ -133,7 +133,7 @@ const blocks: PageBuilderBlock[] = [
     ],
     fields: [
       'Title: optional heading shown above the two columns',
-      'Title Options: Hide Title (kept in Studio, hidden on the site), Center Title, and Title Colour',
+      'Title Options: Hide Title (kept in Studio, hidden on the site) and Center Title. The title sits on the row’s background and its colour adjusts to it automatically',
       'Column Split: 40 / 60, 50 / 50 (default), or 60 / 40 width ratio on desktop',
       'Left Panel and Right Panel: each set to Image or Text',
       'Image panel: an image with alt text (required when the panel type is Image)',

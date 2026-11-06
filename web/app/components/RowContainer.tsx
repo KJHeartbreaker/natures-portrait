@@ -1,7 +1,7 @@
 import type {PortableTextBlock} from 'next-sanity'
 
 import PortableText from '@/app/components/PortableText'
-import {proseThemeForBg} from '@/app/lib/proseTheme'
+import {headingColorForBg, proseThemeForBg} from '@/app/lib/proseTheme'
 import Image from '@/app/components/SanityImage'
 import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import type {ExtractPageSectionType} from '@/sanity/lib/types'
@@ -110,35 +110,37 @@ export default function RowContainer({block}: Props) {
 
   const [leftBand, rightBand] = bandColors(block.leftPanel ?? null, block.rightPanel ?? null)
 
+  // The title belongs to the row: it sits on the same band as the panels, and its colour
+  // follows the band under it (the left band, where a left-aligned title starts).
+  const titleColorClass = headingColorForBg(leftBand)
+
   return (
     <section
       className={`w-full border-b ${dividerClass}`}
       aria-label={block.title || 'Two column section'}
+      style={{background: `linear-gradient(to right, ${leftBand} 50%, ${rightBand} 50%)`}}
     >
       {showTitle ? (
-        <div className="mx-auto max-w-[1440px] px-6 pt-12 md:px-12 xl:px-20">
+        <div className="mx-auto max-w-[1440px] px-6 pt-12 pb-8 md:px-12 md:pt-16 md:pb-10 xl:px-20">
           <h2
-            className={`font-serif font-light tracking-tight text-[clamp(28px,3vw,40px)] ${block.centerTitle ? 'text-center' : 'text-left'}`}
-            style={block.titleColor ? {color: block.titleColor} : undefined}
+            className={`font-serif font-light tracking-tight text-[clamp(28px,3vw,40px)] ${titleColorClass} ${block.centerTitle ? 'text-center' : 'text-left'}`}
           >
             {block.title}
           </h2>
         </div>
       ) : null}
 
-      <div style={{background: `linear-gradient(to right, ${leftBand} 50%, ${rightBand} 50%)`}}>
-        <div
-          className={`mx-auto grid max-w-[1440px] grid-cols-1 ${splitColsClass[split] ?? splitColsClass['50-50']}`}
-        >
-          <PanelView
-            panel={block.leftPanel ?? null}
-            mobileOrder={block.leftPanel?.panelType === 'image' ? 'first' : 'last'}
-          />
-          <PanelView
-            panel={block.rightPanel ?? null}
-            mobileOrder={block.rightPanel?.panelType === 'image' ? 'first' : 'last'}
-          />
-        </div>
+      <div
+        className={`mx-auto grid max-w-[1440px] grid-cols-1 ${splitColsClass[split] ?? splitColsClass['50-50']}`}
+      >
+        <PanelView
+          panel={block.leftPanel ?? null}
+          mobileOrder={block.leftPanel?.panelType === 'image' ? 'first' : 'last'}
+        />
+        <PanelView
+          panel={block.rightPanel ?? null}
+          mobileOrder={block.rightPanel?.panelType === 'image' ? 'first' : 'last'}
+        />
       </div>
     </section>
   )

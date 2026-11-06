@@ -21,8 +21,6 @@ export const rowContainer = defineType({
     split: '50-50',
     centerTitle: false,
     hideTitle: false,
-    // Must match the allowed `options.list` values (hex codes).
-    titleColor: palette.luxeNoir.value,
   },
   fields: [
     defineField({
@@ -50,7 +48,8 @@ export const rowContainer = defineType({
       name: 'titleColor',
       title: 'Title Colour',
       type: 'string',
-      description: 'Default is Luxe Noir.',
+      description: 'No longer used: the title colour now follows the row background automatically.',
+      hidden: true,
       options: {
         list: [
           palette.luxeNoir,

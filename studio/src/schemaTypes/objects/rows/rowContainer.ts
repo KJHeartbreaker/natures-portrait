@@ -27,13 +27,14 @@ export const rowContainer = defineType({
       title: 'Title',
       name: 'title',
       type: 'string',
-      description: 'Optional heading shown above the two columns.',
+      description:
+        'Optional heading shown above the two columns. Adding a title turns the row into a framed section: the title sits on the row’s background colour, with space above it and below the panels, and the image lines up with the title instead of running to the edge. Leave it empty (or hide it) for edge-to-edge panels.',
     }),
     defineField({
       name: 'hideTitle',
       title: 'Hide Title',
       description:
-        'If selected, the title will appear in the CMS, but not on the website. This is useful for identifying page sections.',
+        'If selected, the title stays in the CMS to label the section, but isn’t shown on the website, and the row keeps its edge-to-edge layout.',
       type: 'boolean',
       fieldset: 'titleOptions',
     }),

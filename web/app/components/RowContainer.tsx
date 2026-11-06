@@ -131,6 +131,10 @@ export default function RowContainer({block}: Props) {
   // The title belongs to the row: it sits on the same band as the panels, and its colour
   // follows the band under it (the left band, where a left-aligned title starts).
   const titleColorClass = headingColorForBg(leftBand)
+  // When the two sides differ (two text panels in different colours), a long or centred title
+  // would cross onto the other colour, so give the title strip one solid colour: the left band's.
+  const titleStripStyle =
+    leftBand.toLowerCase() !== rightBand.toLowerCase() ? {backgroundColor: leftBand} : undefined
 
   return (
     <section
@@ -139,12 +143,14 @@ export default function RowContainer({block}: Props) {
       style={{background: `linear-gradient(to right, ${leftBand} 50%, ${rightBand} 50%)`}}
     >
       {showTitle ? (
-        <div className="mx-auto max-w-[1440px] px-6 pt-12 pb-8 md:px-12 md:pt-16 md:pb-10 xl:px-20">
-          <h2
-            className={`font-serif font-light tracking-tight text-[clamp(28px,3vw,40px)] ${titleColorClass} ${block.centerTitle ? 'text-center' : 'text-left'}`}
-          >
-            {block.title}
-          </h2>
+        <div style={titleStripStyle}>
+          <div className="mx-auto max-w-[1440px] px-6 pt-12 pb-8 md:px-12 md:pt-16 md:pb-10 xl:px-20">
+            <h2
+              className={`font-serif font-light tracking-tight text-[clamp(28px,3vw,40px)] ${titleColorClass} ${block.centerTitle ? 'text-center' : 'text-left'}`}
+            >
+              {block.title}
+            </h2>
+          </div>
         </div>
       ) : null}
 

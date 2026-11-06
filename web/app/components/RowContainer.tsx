@@ -131,7 +131,9 @@ export default function RowContainer({block}: Props) {
       ) : null}
 
       <div
-        className={`mx-auto grid max-w-[1440px] grid-cols-1 ${splitColsClass[split] ?? splitColsClass['50-50']}`}
+        // With a title the row reads as a framed section, so mirror the title's top padding
+        // below the panels (md+ only: on mobile the stacked text panel already pads the bottom).
+        className={`mx-auto grid max-w-[1440px] grid-cols-1 ${showTitle ? 'md:pb-16' : ''} ${splitColsClass[split] ?? splitColsClass['50-50']}`}
       >
         <PanelView
           panel={block.leftPanel ?? null}

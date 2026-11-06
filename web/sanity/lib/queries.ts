@@ -511,6 +511,9 @@ export const getCollectionQuery = defineQuery(`
       "image": image{
         ${imageProjection}
       }
+    },
+    "coverImage": coverPhoto->image{
+      ${imageProjection}
     }
   }
 `)

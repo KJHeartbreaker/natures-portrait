@@ -22,7 +22,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   if (!collection) return {}
 
   const count = collection.photos?.length ?? 0
-  const ogImage = resolveOpenGraphImage(collection.photos?.[0]?.image)
+  const ogImage = resolveOpenGraphImage(collection.coverImage ?? collection.photos?.[0]?.image)
   return {
     title: collection.title,
     description: `${collection.title}: a series of ${count} photograph${count === 1 ? '' : 's'} by ${ARTIST_NAME}.`,

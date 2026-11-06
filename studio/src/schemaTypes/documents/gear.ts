@@ -47,7 +47,7 @@ export const gear = defineType({
       type: 'array',
       of: [{type: 'string'}],
       description:
-        'Phrases that appear in camera or lens EXIF (e.g. ILCE-7M4, 100-400mm). Photo Album uploads auto-link to this gear when a hint matches (case-insensitive). Use for marketing names vs internal codes.',
+        'Phrases that appear in camera or lens EXIF (e.g. ILCE-7M4, 100-400mm). Photo Library uploads auto-link to this gear when a hint matches (case-insensitive). Use for marketing names vs internal codes.',
       options: {layout: 'tags'},
     }),
     defineField({

@@ -1,6 +1,7 @@
 import {Stack} from '@sanity/ui'
 
 import {GuideCallout} from '../components/GuideCallout'
+import {GuideShot} from '../components/GuideScreenshot'
 import {GuideList, GuideParagraph, GuideSteps, GuideSubheading} from '../components/GuideProse'
 import type {GuideSection} from '../types'
 
@@ -10,89 +11,94 @@ export const presentationSection: GuideSection = {
   content: (
     <Stack gap={5}>
       <GuideParagraph>
-        <strong>Presentation</strong> shows the live website inside Studio so you can preview layout
-        before publishing. With <strong>Draft Mode</strong> on, you see unpublished changes in that
-        preview — not what regular visitors see until you publish.
+        <strong>Presentation</strong> shows your website inside Studio, including changes you have not
+        published yet. It is the easiest way to edit: look at the page, click the thing you want to
+        change, and edit it on the right. Visitors still see the published site until you press{' '}
+        <strong>Publish</strong>.
       </GuideParagraph>
 
+      <GuideShot
+        file="presentation.webp"
+        alt="Presentation mode: the homepage preview on the left and the Home document on the right"
+        caption="The website on the left, the page you are editing on the right. Top left: the Edit switch. Top right of the preview: the phone-size button."
+      />
+
       <Stack gap={4}>
-        <GuideSubheading>Getting started</GuideSubheading>
+        <GuideSubheading>Edit by clicking the page</GuideSubheading>
         <GuideSteps
           steps={[
-            <>Open the <strong>Presentation</strong> tool in the Studio toolbar (top of the screen).</>,
             <>
-              Use the route picker or URL bar to choose the page you want (Home, a Page slug, a journal entry at
-              <code>/journal/your-slug</code>, etc.).
+              Click <strong>Presentation</strong> in the bar at the top of Studio. The homepage opens.
             </>,
-            <>Click <strong>Enable Draft Mode</strong> if prompted — required to preview unpublished work.</>,
             <>
-              Scroll and interact with the preview like a normal webpage (links may respect draft
-              content when Draft Mode is on).
+              Go to the page you want by clicking links in the preview, as you would on the real site.
             </>,
-            <><strong>Publish</strong> documents when you are satisfied. Draft Mode alone does not make changes live.</>,
+            <>
+              Make sure the <strong>Edit</strong> switch at the top left is on. Hovering over the page
+              then outlines anything you can edit.
+            </>,
+            <>
+              Click a heading, paragraph, or photo. The matching fields open on the right.
+            </>,
+            <>
+              Make your change. The preview updates within a second or two.
+            </>,
+            <>
+              When it looks right, click <strong>Publish</strong> at the bottom right.
+            </>,
           ]}
+        />
+        <GuideShot
+          file="presentation-hover.webp"
+          alt="The hero section outlined in blue with a small Nature's Portrait label in its lower left corner"
+          caption="Hovering outlines the section under the pointer and labels which document it belongs to."
+        />
+        <GuideShot
+          file="presentation-click.webp"
+          alt="After clicking the hero heading, its Hero Banner fields are open in the right-hand panel"
+          caption="Clicking the hero heading opened that Hero Banner's fields on the right."
         />
       </Stack>
 
       <Stack gap={4}>
-        <GuideSubheading>Structure pane (click to edit)</GuideSubheading>
+        <GuideSubheading>Check how it looks on a phone</GuideSubheading>
         <GuideParagraph>
-          Presentation usually shows a <strong>Structure</strong> (or document tree) pane alongside the
-          preview. When you <strong>click an element on the preview</strong>, Studio opens the matching
-          document or section in a separate editing pane.
+          Click the phone icon at the top right of the preview to see the page at phone width. Click it
+          again to go back. Most visitors will see the site on a phone, so it is worth a quick look
+          before you publish.
         </GuideParagraph>
-        <GuideList
-          items={[
-            <>
-              Clicking a region tied to a <strong>page section</strong> jumps you to that block inside
-              the page&apos;s <strong>Page sections</strong> list.
-            </>,
-            <>
-              Clicking content from a <strong>referenced document</strong> (for example a post or photo)
-              may open that document instead — edit there, then return to Presentation.
-            </>,
-            <>
-              The preview and editor stay linked: saves in the edit pane update the preview after a short
-              refresh.
-            </>,
-          ]}
+        <GuideShot
+          file="presentation-mobile.webp"
+          alt="The homepage previewed at phone width in the middle of the Presentation tool"
         />
       </Stack>
-
-      <GuideCallout tone="caution" title="Frontend still in progress">
-        Some page sections may show placeholder styling on the live site while design work continues.
-        Presentation still helps you confirm content order, copy, and image placement even when a block
-        is marked as under construction.
-      </GuideCallout>
-
-      <GuideCallout tone="primary" title="Draft Mode">
-        Draft Mode is for preview only. Turn it off to see published-only content in the iframe. The
-        preview bar may briefly show a <code>draft-mode/enable</code> URL — that is normal; you do not
-        browse to that address manually.
-      </GuideCallout>
 
       <Stack gap={4}>
-        <GuideSubheading>If preview will not connect</GuideSubheading>
+        <GuideSubheading>Good to know</GuideSubheading>
         <GuideList
           items={[
             <>
-              <strong>Wrong site in the preview bar</strong> — hosted Studio may remember an old URL
-              (for example a Vercel staging link). Clear <code>?preview=</code> from the Studio browser
-              address bar or set the preview origin to your real site (or <code>http://localhost:3000</code>{' '}
-              when developing locally).
+              Turn the <strong>Edit</strong> switch off when you want to click links in the preview
+              without opening fields.
             </>,
             <>
-              <strong>“Unable to connect” or “Invalid Secret”</strong> — usually preview URL, API token,
-              or permissions on the hosting side. Editors cannot fix this in content; contact your
-              developer.
+              Some things on a page come from somewhere else. Clicking a photo in a gallery, for
+              example, may open that photo&apos;s own record in the Photo Library rather than the page.
+              That is expected: edit and publish it there.
             </>,
             <>
-              <strong>Unpublished page 404</strong> in a normal browser tab is expected — use
-              Presentation with Draft Mode instead of opening the URL directly.
+              The menu at the top right of Studio says <strong>Drafts</strong>. That means the preview
+              includes unpublished changes. Leave it on Drafts.
             </>,
           ]}
         />
       </Stack>
+
+      <GuideCallout tone="caution" title="If the preview will not load">
+        Click the refresh arrow next to the address bar first. If it still shows an error such as
+        “Unable to connect”, the problem is on the hosting side, not in your content. Let your
+        developer know.
+      </GuideCallout>
     </Stack>
   ),
 }

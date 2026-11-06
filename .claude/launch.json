@@ -4,9 +4,23 @@
     {
       "name": "next-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3000,
       "url": "http://localhost:3000"
+    },
+    {
+      "name": "studio-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "studio",
+        "run",
+        "dev"
+      ],
+      "port": 3333
     }
   ]
 }

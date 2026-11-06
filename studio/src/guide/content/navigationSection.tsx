@@ -1,6 +1,7 @@
 import {Stack} from '@sanity/ui'
 
 import {GuideCallout} from '../components/GuideCallout'
+import {GuideShot} from '../components/GuideScreenshot'
 import {GuideList, GuideParagraph, GuideSteps, GuideSubheading} from '../components/GuideProse'
 import type {GuideSection} from '../types'
 
@@ -37,6 +38,12 @@ export const navigationSection: GuideSection = {
         />
       </Stack>
 
+      <GuideShot
+        file="menu-list.webp"
+        alt="The Menu Item list in Settings and Menus, showing About, Gallery, FAQ, and Contact, with Add item below"
+        caption="The header menu, top to bottom in the same order as left to right on the site. About is a dropdown; the subtitle lists its items."
+      />
+
       <Stack gap={4}>
         <GuideSubheading>Navigation Item vs Navigation Dropdown</GuideSubheading>
         <GuideList
@@ -68,6 +75,21 @@ export const navigationSection: GuideSection = {
         <GuideParagraph>
           <strong>Open Graph Image</strong> is the fallback when a page or post does not set its own SEO
           social image. Page-level SEO images override this default; see <strong>SEO settings</strong>.
+          Use a 1200×630 px image and add alt text.
+        </GuideParagraph>
+        <GuideParagraph>
+          Inside the Open Graph Image there is also a <strong>metadataBase</strong> field. It holds
+          the site&apos;s address (<code>https://naturesportrait.ca</code>) so search engines and social
+          sites get full links. Set it once when the site goes live and leave it alone after that.
+        </GuideParagraph>
+      </Stack>
+
+      <Stack gap={4}>
+        <GuideSubheading>Footer</GuideSubheading>
+        <GuideParagraph>
+          The footer (artist name, year, and links to Instagram, Prints, and Contact) is built into the
+          site and is not edited in Studio. It needs published pages with the slugs{' '}
+          <code>prints</code> and <code>contact</code>.
         </GuideParagraph>
       </Stack>
 

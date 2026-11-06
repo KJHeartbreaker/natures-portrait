@@ -1,6 +1,7 @@
 import {Stack} from '@sanity/ui'
 
 import {GuideCallout} from '../components/GuideCallout'
+import {GuideShot} from '../components/GuideScreenshot'
 import {GuideList, GuideParagraph, GuideSteps, GuideSubheading} from '../components/GuideProse'
 import type {GuideSection} from '../types'
 
@@ -12,7 +13,7 @@ export const portableTextSection: GuideSection = {
       <GuideParagraph>
         <strong>Portable Text</strong> is the rich text editor used across the site for body copy,
         hero copy, and column content. You type in Studio; the website renders headings, lists, links,
-        brand colours, and special blocks consistently.
+        and inserted images consistently.
       </GuideParagraph>
 
       <Stack gap={4}>
@@ -20,63 +21,76 @@ export const portableTextSection: GuideSection = {
         <GuideList
           items={[
             <>
-              <strong>Full Portable Text</strong> (<em>Portable Text Block</em>) — headings H1–H5,
-              brand palette colours, images, CTAs, horizontal rules, and contact info blocks. Used in
-              page sections, posts, and multi-column rows.
+              <strong>Full Portable Text</strong>: paragraphs, headings H1–H5, quotes, lists, links,
+              and inserted blocks (images, CTAs, dividers). Used in Single Column Content Blocks, Two
+              Column text panels, and the Body of Journal Entries.
             </>,
             <>
-              <strong>Simple Portable Text</strong> — paragraphs with <strong>bold</strong>,{' '}
-              <em>italic</em>, bullet/numbered lists, and links only. Used for hero copy, excerpts,
-              and shorter fields.
+              <strong>Simple Portable Text</strong>: paragraphs with <strong>bold</strong>,{' '}
+              <em>italic</em>, bullet and numbered lists, and links only. Used for Hero copy, Featured
+              Collection body, journal Excerpts, and photo Descriptions.
             </>,
           ]}
         />
         <GuideParagraph>
-          If you do not see colour buttons or the option to insert a CTA, you are in a Simple field —
-          that is expected for that location.
+          If you do not see the style menu or the option to insert an image or CTA, you are in a Simple
+          field. That is expected there.
         </GuideParagraph>
+        <GuideShot
+          file="pt-toolbar.webp"
+          alt="The full text editor with its toolbar highlighted: style menu, formatting buttons, ⋯, CTA, HR, and another ⋯"
+          caption="The full editor's toolbar. Click into the text first; the buttons are greyed out until you do."
+        />
       </Stack>
 
       <Stack gap={4}>
-        <GuideSubheading>Brand colours on text (full editor)</GuideSubheading>
-        <GuideParagraph>
-          Select the words you want to colour, then click one colour in the toolbar:
-        </GuideParagraph>
+        <GuideSubheading>Text styles and formatting (full editor)</GuideSubheading>
         <GuideList
           items={[
-            <><strong>Luxe Noir</strong> — deep charcoal</>,
-            <><strong>Coastal Pine</strong> — forest green</>,
-            <><strong>Dusty Sage</strong> — muted sage</>,
-            <><strong>Linen Clay</strong> — warm neutral</>,
-            <><strong>Soft Oat</strong> — light cream (best on dark backgrounds)</>,
-          ]}
-        />
-        <GuideSteps
-          steps={[
-            <>Highlight the text (do not colour entire paragraphs unless intentional).</>,
-            <>Click a single colour button — the text preview updates in the editor.</>,
             <>
-              Use <strong>Soft Oat</strong> only on dark section backgrounds so it stays readable.
+              <strong>Style menu</strong>: Paragraph, H1–H5, and Quote. Use one H1 at most per page
+              (the page title usually covers it) and H2/H3 for sections within it.
+            </>,
+            <>
+              <strong>Bold</strong>, <em>Italic</em>, <strong>Underline</strong>, and{' '}
+              <strong>Strike</strong>.
+            </>,
+            <>
+              <strong>Highlight</strong> (the <strong>H</strong> button): light text on a Coastal Pine
+              band. Use it for a word or short phrase, not whole paragraphs.
+            </>,
+            <>
+              <strong>Bullet</strong> and <strong>Numbered</strong> lists.
             </>,
           ]}
         />
-        <GuideCallout tone="caution" title="One colour at a time">
-          Apply <strong>only one brand colour</strong> to the same span of text. To change colour,
-          select the text and apply the new colour once.
-        </GuideCallout>
+        <GuideParagraph>
+          Text colour is set by the section, not by the editor: on a dark background the text turns
+          light automatically.
+        </GuideParagraph>
       </Stack>
 
       <Stack gap={4}>
         <GuideSubheading>Links</GuideSubheading>
+        <GuideParagraph>
+          Select the text, then choose a link type from the toolbar. In a narrow panel the list and
+          link buttons are tucked into the <strong>⋯</strong> next to the formatting buttons.
+        </GuideParagraph>
+        <GuideShot
+          file="pt-overflow.webp"
+          alt="The ⋯ menu in the text toolbar open, showing Bullet, Number, URL, and Internal Link"
+          caption="With a word selected, the ⋯ menu holds the list buttons and both link types."
+        />
         <GuideList
           items={[
             <>
-              <strong>URL</strong> — external link (https, http, mailto, tel). Optional “open in new
-              window” for external sites.
+              <strong>URL</strong>: a web address (https), email (<code>mailto:</code>), or phone
+              number (<code>tel:</code>). Turn on “Open in new window” for other websites.
             </>,
             <>
-              <strong>Internal Link</strong> — pick a <strong>Page</strong> or <strong>Journal Entry</strong>; the
-              site builds the correct path.
+              <strong>Internal Link</strong>: pick a <strong>Page</strong> or{' '}
+              <strong>Journal Entry</strong> and the site builds the correct address. Use this rather
+              than pasting a naturesportrait.ca URL, so links survive slug changes.
             </>,
           ]}
         />
@@ -84,33 +98,46 @@ export const portableTextSection: GuideSection = {
 
       <Stack gap={4}>
         <GuideSubheading>Blocks you can insert (full editor only)</GuideSubheading>
+        <GuideParagraph>
+          Put the cursor where you want the block, then use the buttons at the right of the toolbar.{' '}
+          <strong>CTA</strong> and <strong>HR</strong> are shown directly; <strong>Image</strong> is in
+          the <strong>⋯</strong> after them.
+        </GuideParagraph>
+        <GuideShot
+          file="pt-insert.webp"
+          alt="The right-hand ⋯ in the text toolbar open, showing Image, next to the CTA and HR buttons"
+        />
         <GuideList
           items={[
             <>
-              <strong>Image</strong> — upload or choose from the library; add <strong>alt text</strong>
+              <strong>Image</strong>: upload or choose from the media library, and add{' '}
+              <strong>alt text</strong>.
             </>,
             <>
-              <strong>CTA</strong> — button or text link (see <strong>Call to action (CTA)</strong>)
+              <strong>CTA</strong>: an underlined text link with an arrow (see{' '}
+              <strong>Call to action (CTA)</strong>).
             </>,
             <>
-              <strong>HR</strong> (horizontal rule) — decorative divider; optional width and spacing
-            </>,
-            <>
-              <strong>Contact Information</strong> — phone and email block (frontend styling may still
-              be in progress)
+              <strong>HR</strong>: a hairline divider between parts of the text.
             </>,
           ]}
         />
       </Stack>
 
       <Stack gap={4}>
-        <GuideSubheading>Where you will use Portable Text</GuideSubheading>
+        <GuideSubheading>Other text fields</GuideSubheading>
         <GuideList
           items={[
-            <>Page sections: Single Column Content Block, Multi Column Row</>,
-            <>Journal Entry: <strong>Body</strong> (full); <strong>Excerpt</strong> (simple)</>,
-            <>Hero Banner: <strong>Copy</strong> field (simple)</>,
-            <>Photo Album: optional <strong>Description</strong> (simple)</>,
+            <>
+              <strong>Accordion</strong> answers: italic only.
+            </>,
+            <>
+              <strong>Contact Form</strong> intro and contact links: bold, italic, and links. Contact
+              links also have an icon option (see <strong>Contact Form</strong>).
+            </>,
+            <>
+              <strong>Pull Quote</strong>: plain text, with no formatting.
+            </>,
           ]}
         />
       </Stack>

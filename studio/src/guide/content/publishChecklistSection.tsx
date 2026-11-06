@@ -39,16 +39,16 @@ export const publishChecklistSection: GuideSection = {
         <GuideList
           items={[
             <>
-              Referenced documents (<strong>Posts</strong>, <strong>Photo Album</strong> entries) are{' '}
-              <strong>published</strong> themselves — see <strong>Referenced content</strong>
+              Referenced documents (photos, collections, journal entries) are{' '}
+              <strong>published</strong> themselves (see <strong>Referenced content</strong>)
             </>,
             <>
-              <strong>Photo Grid</strong> sections only show content
-              you pick in the section — publish both the section&apos;s parent page and each referenced
-              document
+              Collections used in a <strong>Series Grid</strong> have a <strong>Cover Photo</strong>,
+              or their card will be empty
             </>,
             <>
-              Photo Album uploads with EXIF — review auto-filled gear and camera settings before publishing
+              New photos: review the gear and camera settings that EXIF filled in, and add a title and
+              alt text
             </>,
           ]}
         />

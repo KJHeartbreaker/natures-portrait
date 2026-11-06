@@ -1,6 +1,23 @@
-import {defineField, defineType} from 'sanity'
+import {defineField, defineType, type Path} from 'sanity'
 
 const DESTINATIONS = ['landingPageRoute', 'link', 'anchor', 'fileDownload'] as const
+
+/**
+ * A navigation dropdown reuses this type for its own label (Settings → menuItems[] → cta),
+ * but the site only reads the title there: the label opens the dropdown and never links.
+ * Detect that position so the destination fields and their warning are skipped.
+ */
+function isDropdownLabel(path: Path | undefined, document: unknown): boolean {
+  if (!path || path[0] !== 'menuItems' || path[2] !== 'cta') return false
+  const segment = path[1]
+  const key = typeof segment === 'object' && segment && '_key' in segment ? segment._key : null
+  const items = (document as {menuItems?: Array<{_key?: string; _type?: string}>} | undefined)
+    ?.menuItems
+  return items?.find((item) => item._key === key)?._type === 'navDropdownCTA'
+}
+
+const hiddenOnDropdownLabel = ({path, document}: {path: Path; document?: unknown}) =>
+  isDropdownLabel(path, document)
 
 export const cta = defineType({
   title: 'Call to action',
@@ -15,8 +32,9 @@ export const cta = defineType({
     },
   ],
   validation: (Rule) =>
-    Rule.custom((value: Record<string, unknown> | undefined) => {
+    Rule.custom((value: Record<string, unknown> | undefined, context) => {
       if (!value) return true
+      if (isDropdownLabel(context.path, context.document)) return true
       const set = DESTINATIONS.filter((key) => {
         const v = value[key]
         if (key === 'fileDownload') return Boolean((v as {asset?: unknown} | undefined)?.asset)
@@ -35,6 +53,7 @@ export const cta = defineType({
     defineField({
       title: 'Page',
       name: 'landingPageRoute',
+      hidden: hiddenOnDropdownLabel,
       type: 'reference',
       description: 'A page or journal entry on this site',
       fieldset: 'destination',
@@ -43,6 +62,7 @@ export const cta = defineType({
     defineField({
       title: 'External link',
       name: 'link',
+      hidden: hiddenOnDropdownLabel,
       type: 'string',
       description: 'Example: https://www.instagram.com/natures.portrait.photography/',
       fieldset: 'destination',
@@ -50,6 +70,7 @@ export const cta = defineType({
     defineField({
       title: 'Anchor link',
       name: 'anchor',
+      hidden: hiddenOnDropdownLabel,
       type: 'string',
       description:
         'Example: #my-link for same page linking, or https://www.mywebsite.com/#my-link for linking to anchors on other pages',
@@ -58,6 +79,7 @@ export const cta = defineType({
     defineField({
       title: 'Downloadable file',
       name: 'fileDownload',
+      hidden: hiddenOnDropdownLabel,
       type: 'file',
       fieldset: 'destination',
     }),

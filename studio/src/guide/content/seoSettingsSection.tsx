@@ -1,6 +1,7 @@
 import {Stack} from '@sanity/ui'
 
 import {GuideCallout} from '../components/GuideCallout'
+import {GuideShot} from '../components/GuideScreenshot'
 import {GuideList, GuideParagraph, GuideSubheading} from '../components/GuideProse'
 import type {GuideSection} from '../types'
 
@@ -29,7 +30,7 @@ export const seoSettingsSection: GuideSection = {
               the document
             </>,
             <>
-              <strong>Posts</strong> — SEO tab (default group on post documents)
+              <strong>Journal Entries</strong> — SEO tab (the tab an entry opens on)
             </>,
             <>
               <strong>Settings and Menus</strong> — default social sharing image used when a page does
@@ -38,6 +39,12 @@ export const seoSettingsSection: GuideSection = {
           ]}
         />
       </Stack>
+
+      <GuideShot
+        file="seo-tab.webp"
+        alt="The SEO tab of a page, showing the SEO Title and Meta Description fields with character counters"
+        caption="Click the SEO tab at the top of any page or journal entry. The counters under each field show how much room you have left."
+      />
 
       <Stack gap={4}>
         <GuideSubheading>What each field does</GuideSubheading>

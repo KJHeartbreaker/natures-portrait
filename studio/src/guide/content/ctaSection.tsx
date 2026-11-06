@@ -1,6 +1,7 @@
 import {Stack} from '@sanity/ui'
 
 import {GuideCallout} from '../components/GuideCallout'
+import {GuideShot} from '../components/GuideScreenshot'
 import {GuideList, GuideParagraph, GuideSubheading} from '../components/GuideProse'
 import type {GuideSection} from '../types'
 
@@ -35,6 +36,12 @@ export const ctaSection: GuideSection = {
           ]}
         />
       </Stack>
+
+      <GuideShot
+        file="cta-fields.webp"
+        alt="A link's fields: Title set to Contact, and under Link to, the Page field pointing at the Contact page"
+        caption="Title is the text people see. Under Link to, fill in just one option; here it is the Contact page."
+      />
 
       <GuideCallout tone="primary" title="One destination per CTA">
         Fill in only one link option — Studio shows a warning if none or more than one is set. CTAs in

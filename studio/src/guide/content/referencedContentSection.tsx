@@ -10,8 +10,8 @@ export const referencedContentSection: GuideSection = {
   content: (
     <Stack gap={5}>
       <GuideParagraph>
-        Some sidebar areas are <strong>documents</strong> you maintain once — blog posts, photos in the
-        album, and gear records. Page sections do not usually copy that content inline; they{' '}
+        Some sidebar areas are <strong>documents</strong> you maintain once: journal entries, photos and
+        collections in the Photo Library, and gear. Page sections do not usually copy that content inline; they{' '}
         <strong>reference</strong> those documents and pull in the latest published version on the
         website.
       </GuideParagraph>
@@ -26,8 +26,8 @@ export const referencedContentSection: GuideSection = {
         <GuideList
           items={[
             <>
-              <strong>Edit once</strong> — update a post excerpt in <strong>Posts</strong> and every grid
-              that references it updates after you publish.
+              <strong>Edit once</strong>: update a photo&apos;s title in the <strong>Photo Library</strong>{' '}
+              and every grid, gallery, and series page that shows it updates after you publish.
             </>,
             <>
               <strong>Stay consistent</strong> — the same title, image, and wording everywhere that
@@ -46,17 +46,21 @@ export const referencedContentSection: GuideSection = {
         <GuideList
           items={[
             <>
-              <strong>Journal Entries</strong> — their own URL at <code>/journal/slug</code>, and listed
-              on the <code>/journal</code> page.
+              <strong>Journal Entries</strong>: their own page at <code>/journal/slug</code>, listed on{' '}
+              <code>/journal</code>, and available as a destination for CTAs, menu items, and internal
+              links.
             </>,
             <>
-              <strong>Photo Album</strong> (<code>photo</code> documents) — canonical photo records with
-              location, gear, and camera settings. Photo Grid sections can embed photos inline or
-              reference album entries depending on how the section is configured.
+              <strong>Photos</strong>: shown by Photo Grid, Featured Collection, Auto Gallery, and every
+              series page they belong to.
             </>,
             <>
-              <strong>Gear</strong> — linked from Photo Album entries (camera/lens references) and used
-              when EXIF auto-matching runs on upload.
+              <strong>Collections</strong>: their own series page at <code>/series/slug</code>, a card
+              in Series Grid, the link target of Featured Collection, and a filter in Auto Gallery.
+            </>,
+            <>
+              <strong>Gear</strong>: linked from photos (camera and lens) and shown in the photo
+              viewer. Also used when EXIF auto-matching runs on upload.
             </>,
           ]}
         />
@@ -66,11 +70,11 @@ export const referencedContentSection: GuideSection = {
         <GuideSubheading>Your workflow</GuideSubheading>
         <GuideList
           items={[
-            <>Create or edit the document in the sidebar (for example <strong>Posts</strong> or <strong>Photo Album</strong>).</>,
+            <>Create or edit the document in the sidebar (for example a photo or collection in the <strong>Photo Library</strong>).</>,
             <>Fill in the fields and <strong>Publish</strong> the document.</>,
             <>
-              On a page, open the relevant section (Photo Grid, Series Grid, etc.) and use the reference
-              picker to add it.
+              On a page, open the relevant section (Photo Grid, Series Grid, Featured Collection) and
+              use its picker to add it.
             </>,
             <><strong>Publish</strong> the page (or Home) so the live site picks up the link.</>,
           ]}
@@ -82,8 +86,9 @@ export const referencedContentSection: GuideSection = {
       </Stack>
 
       <GuideCallout tone="positive" title="Tip">
-        A grid is only a <strong>window</strong> onto your library. Adding more posts or photos does not
-        change existing pages until you add those references somewhere new.
+        Hand-picked sections (Photo Grid, Series Grid, Featured Collection) only show what you picked.
+        New photos appear on their own only in <strong>Auto Gallery</strong>, and on a series page
+        once they are added to that collection.
       </GuideCallout>
     </Stack>
   ),

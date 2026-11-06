@@ -1,6 +1,7 @@
 import {Stack} from '@sanity/ui'
 
 import {GuideCallout} from '../components/GuideCallout'
+import {GuideShot} from '../components/GuideScreenshot'
 import {GuideList, GuideParagraph, GuideSteps, GuideSubheading} from '../components/GuideProse'
 import type {GuideSection} from '../types'
 import {pageBuilderSections} from './pageBuilderBlocks'
@@ -12,97 +13,98 @@ const pageBuilderParent: GuideSection = {
   content: (
     <Stack gap={5}>
       <GuideParagraph>
-        The page builder is the <strong>Page sections</strong> field on <strong>Home</strong>{' '}
-        and <strong>Pages</strong>. Each entry in the list is one section on the
-        live page — hero, multi-column row, photo grid, and so on. Sections stack top to
-        bottom in the order you arrange them in Studio.
+        Every page, including Home, is built from <strong>sections</strong> stacked top to bottom: a
+        hero photo, a block of text, a quote, a grid of photos, and so on. You will find them in the{' '}
+        <strong>Page sections</strong> list on each page. The order of the list is the order on the
+        page.
       </GuideParagraph>
 
+      <GuideShot
+        file="page-sections.webp"
+        alt="The Page sections list on the About page, with drag handles, ⋯ menus, and the Add item button highlighted"
+        caption="Left: drag handles for reordering. Right: each section's ⋯ menu. Bottom: Add item."
+      />
+
       <Stack gap={4}>
-        <GuideSubheading>Choosing a section (insert menu)</GuideSubheading>
+        <GuideSubheading>Add a section</GuideSubheading>
         <GuideSteps
           steps={[
             <>
-              Open a page document and scroll to <strong>Page sections</strong>.
+              Open the page and scroll to <strong>Page sections</strong>.
             </>,
             <>
-              Click <strong>Add item…</strong> (or the + control at the bottom of the list).
+              Click <strong>Add item…</strong> under the list. A menu of previews opens; each one is a
+              real example of that section on the site.
             </>,
             <>
-              The insert menu opens as a <strong>grid of previews</strong> when thumbnails are available
-              — each matches a section type (Hero Banner, Multi Column Row, Photo Grid, etc.). Use search
-              or switch to <strong>list</strong> view if you prefer.
+              Click the one you want. It is added to the bottom of the list and opens so you can fill
+              it in.
             </>,
             <>
-              Click the section you want. It is added to the page and opens so you can fill in fields.
+              Drag it into place, then <strong>Publish</strong> the page.
             </>,
           ]}
         />
+        <GuideShot
+          file="insert-menu.webp"
+          alt="The Add item menu showing preview images of all ten section types"
+          caption="All ten section types. Each one has its own entry at the end of this guide."
+        />
         <GuideParagraph>
-          Not every document has every section type. Check the
-          insert menu for what is available on the document you are editing.
+          To add a section somewhere in the middle, use <strong>Add item before…</strong> or{' '}
+          <strong>Add item after…</strong> from the <strong>⋯</strong> menu of a neighbouring
+          section.
         </GuideParagraph>
       </Stack>
 
       <Stack gap={4}>
-        <GuideSubheading>Populating a section</GuideSubheading>
+        <GuideSubheading>Edit a section</GuideSubheading>
         <GuideParagraph>
-          After you add a section, click it in the list to expand it. There are two common patterns:
+          Click a section in the list and its fields open in a panel. Close it with the{' '}
+          <strong>×</strong> at the top right when you are done; your changes are kept. Some fields
+          start folded (a small ▸ next to the name): click the name to open them.
         </GuideParagraph>
-        <GuideList
-          items={[
-            <>
-              <strong>Content lives inside the section</strong> — headings, portable text, and images
-              typed directly in that block (Hero Banner, Single Column Content Block, Multi Column Row).
-            </>,
-            <>
-              <strong>Content is referenced from elsewhere</strong> — you pick existing{' '}
-              photos or series and the site pulls in their published data.
-              See <strong>Referenced content</strong>.
-            </>,
-          ]}
+        <GuideShot
+          file="section-dialog.webp"
+          alt="A Two Column section open in a panel, showing Title, Title Options, Column Split, and the Left Panel"
+          caption="The path at the top shows which section you are in."
         />
         <GuideParagraph>
-          Fill in the fields, then <strong>Publish</strong> the page. If a grid looks empty, publish the
-          referenced documents too.
+          Some sections hold their own words and images (Hero Banner, Single Column Content Block,
+          Pull Quote, Two Column, Accordion, Contact Form). Others show photos or collections from the
+          Photo Library (Photo Grid, Featured Collection, Series Grid, Auto Gallery); see{' '}
+          <strong>Referenced content</strong>.
         </GuideParagraph>
       </Stack>
 
       <Stack gap={4}>
-        <GuideSubheading>Arranging sections on the page</GuideSubheading>
+        <GuideSubheading>Move, copy, hide, or remove a section</GuideSubheading>
         <GuideList
           items={[
             <>
-              <strong>Order</strong> — drag sections by the handle on the left. First in the list is the
-              top of the page.
+              <strong>Move</strong>: drag the dotted handle on the left of a section up or down.
             </>,
             <>
-              <strong>Collapse</strong> — click the section header to fold it closed while you work on
-              another block.
+              <strong>Duplicate</strong>, <strong>Remove</strong>, and <strong>Copy</strong> (for
+              pasting into another page) are in the section&apos;s <strong>⋯</strong> menu.
             </>,
             <>
-              Prefer <strong>Disabled</strong> over delete when you might turn a block back on later.
+              <strong>Hide without deleting</strong>: open the section and tick{' '}
+              <strong>Disabled</strong>. It stays in the list marked <code>*** DISABLED ***</code> but
+              does not appear on the website. Untick it to bring it back.
             </>,
           ]}
         />
+        <GuideShot
+          file="section-item-menu.webp"
+          alt="A section's ⋯ menu open, showing Remove, Copy, Duplicate, Add item before, and Add item after"
+        />
       </Stack>
 
-      <GuideCallout tone="positive" title="Disabled sections">
-        Most blocks include a <strong>Disabled</strong> checkbox. When checked, the section stays in
-        Studio but does not render on the live site.
+      <GuideCallout tone="primary" title="Check before you publish">
+        Open the page in <strong>Presentation</strong> to see how the sections look together, on a
+        laptop and at phone width.
       </GuideCallout>
-
-      <GuideCallout tone="primary" title="Preview before publish">
-        Use <strong>Presentation</strong> to see how stacked sections look on the real site layout.
-        Section order in Studio matches scroll order on the page.
-      </GuideCallout>
-
-      <Stack gap={3}>
-        <GuideSubheading>Section types (detail)</GuideSubheading>
-        <GuideParagraph>
-          Each type below has its own guide entry with key fields and tips.
-        </GuideParagraph>
-      </Stack>
     </Stack>
   ),
   children: pageBuilderSections,

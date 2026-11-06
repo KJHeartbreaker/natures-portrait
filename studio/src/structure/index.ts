@@ -35,11 +35,11 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
         .title('Pages')
         .icon(GiCobweb)
         .child(S.documentTypeList('page').title('Pages')),
-      // Posts
+      // Journal entries
       S.listItem()
-        .title('Posts')
+        .title('Journal Entries')
         .icon(BsSignpostSplit)
-        .child(S.documentTypeList('post').title('Posts')),
+        .child(S.documentTypeList('post').title('Journal Entries')),
       // Gear
       S.listItem()
         .title('Gear')

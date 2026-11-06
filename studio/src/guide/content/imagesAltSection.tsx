@@ -1,7 +1,8 @@
 import {Stack} from '@sanity/ui'
 
 import {GuideCallout} from '../components/GuideCallout'
-import {GuideList, GuideParagraph, GuideSubheading} from '../components/GuideProse'
+import {GuideShot} from '../components/GuideScreenshot'
+import {GuideList, GuideParagraph, GuideSteps, GuideSubheading} from '../components/GuideProse'
 import type {GuideSection} from '../types'
 
 export const imagesAltSection: GuideSection = {
@@ -26,8 +27,9 @@ export const imagesAltSection: GuideSection = {
         <GuideList
           items={[
             <>
-              <strong>Image</strong> fields (hero backgrounds, row images, photo grids, post header
-              images) — open the image and fill in <strong>Alternative text</strong>
+              <strong>Image</strong> fields (Hero Banner backgrounds, Two Column image panels, Accordion
+              images, journal Header Images). Open the image and fill in{' '}
+              <strong>Alternative text</strong>
             </>,
             <>
               <strong>Portable text</strong> — images embedded in body copy have their own alt field on
@@ -40,10 +42,63 @@ export const imagesAltSection: GuideSection = {
               <strong>Settings and Menus</strong> — site logo, favicon, and default Open Graph image
             </>,
             <>
-              <strong>Photo Album</strong> — alt on the main photo asset; title and location can
-              supplement captions elsewhere
+              <strong>Photo Library</strong>: alt text on each photo. Every grid, gallery, and series
+              page that shows the photo uses it
             </>,
           ]}
+        />
+      </Stack>
+
+      <GuideShot
+        file="image-field.webp"
+        alt="An image field showing a heron photo with the crop button highlighted, and the Alternative text field below it"
+        caption="Alternative text sits right under the image. The crop button (top right of the image) opens the hotspot and crop tool."
+      />
+
+      <Stack gap={4}>
+        <GuideSubheading>Adding or replacing an image</GuideSubheading>
+        <GuideList
+          items={[
+            <>
+              On an empty image field, drag a file onto it, or click <strong>Upload</strong>. Use{' '}
+              <strong>Select</strong> to reuse an image you have uploaded before.
+            </>,
+            <>
+              To replace or remove an image, click the <strong>⋯</strong> at its top right.
+            </>,
+          ]}
+        />
+      </Stack>
+
+      <Stack gap={4}>
+        <GuideSubheading>Keeping the subject in frame (hotspot and crop)</GuideSubheading>
+        <GuideParagraph>
+          The site shows the same photo at different shapes: wide on a laptop, tall on a phone,
+          square in some grids. Tell Studio which part of the photo matters most and it will keep that
+          part in view.
+        </GuideParagraph>
+        <GuideSteps
+          steps={[
+            <>
+              Click the crop button at the top right of the image.
+            </>,
+            <>
+              Drag the <strong>circle</strong> over the subject (the heron, the peak, the barn). Drag
+              its edge to resize it.
+            </>,
+            <>
+              Optionally drag the corners of the <strong>rectangle</strong> to crop out parts of the
+              photo you never want shown.
+            </>,
+            <>
+              Check the previews underneath (3:4, square, 16:9, panorama), then close the panel.
+            </>,
+          ]}
+        />
+        <GuideShot
+          file="hotspot-crop.webp"
+          alt="The Edit hotspot and crop panel, with an oval over the heron and four preview shapes below"
+          caption="The oval is the hotspot; the corner handles are the crop. The previews show how each shape will be framed."
         />
       </Stack>
 

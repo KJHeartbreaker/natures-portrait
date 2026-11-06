@@ -16,7 +16,23 @@ const splitColsClass: Record<string, string> = {
   '60-40': 'md:grid-cols-[3fr_2fr]',
 }
 
-function PanelView({panel, mobileOrder}: {panel: Panel | null; mobileOrder?: 'first' | 'last'}) {
+// Literal class strings so Tailwind can statically detect them. Matches the container padding,
+// so an inset image lines up with the row title and the header.
+const insetClass = {
+  left: 'md:pl-12 xl:pl-20',
+  right: 'md:pr-12 xl:pr-20',
+} as const
+
+function PanelView({
+  panel,
+  mobileOrder,
+  inset,
+}: {
+  panel: Panel | null
+  mobileOrder?: 'first' | 'last'
+  /** Pull an image panel in from the row edge on this side (md+), used when the row has a title. */
+  inset?: 'left' | 'right'
+}) {
   if (!panel) return null
 
   const orderClass =
@@ -29,22 +45,24 @@ function PanelView({panel, mobileOrder}: {panel: Panel | null; mobileOrder?: 'fi
     const imgH = dims ? Math.round((imgW / dims.width) * dims.height) : Math.round(imgW * (3 / 4))
 
     return (
-      <div className={`relative min-h-[42svh] md:min-h-[420px] ${orderClass}`}>
-        {imageId ? (
-          <Image
-            id={imageId}
-            alt={panel.image?.alt || ''}
-            className="absolute inset-0 h-full w-full object-cover object-center"
-            width={imgW}
-            height={imgH}
-            mode="cover"
-            crop={adaptCrop(panel.image?.crop)}
-            hotspot={adaptHotspot(panel.image?.hotspot)}
-            sizes="(min-width: 768px) 50vw, 100vw"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-coastal-pine" aria-hidden />
-        )}
+      <div className={`flex ${inset ? insetClass[inset] : ''} ${orderClass}`}>
+        <div className="relative min-h-[42svh] flex-1 md:min-h-[420px]">
+          {imageId ? (
+            <Image
+              id={imageId}
+              alt={panel.image?.alt || ''}
+              className="absolute inset-0 h-full w-full object-cover object-center"
+              width={imgW}
+              height={imgH}
+              mode="cover"
+              crop={adaptCrop(panel.image?.crop)}
+              hotspot={adaptHotspot(panel.image?.hotspot)}
+              sizes="(min-width: 1440px) 864px, (min-width: 768px) 60vw, 100vw"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-coastal-pine" aria-hidden />
+          )}
+        </div>
       </div>
     )
   }
@@ -138,10 +156,12 @@ export default function RowContainer({block}: Props) {
         <PanelView
           panel={block.leftPanel ?? null}
           mobileOrder={block.leftPanel?.panelType === 'image' ? 'first' : 'last'}
+          inset={showTitle ? 'left' : undefined}
         />
         <PanelView
           panel={block.rightPanel ?? null}
           mobileOrder={block.rightPanel?.panelType === 'image' ? 'first' : 'last'}
+          inset={showTitle ? 'right' : undefined}
         />
       </div>
     </section>

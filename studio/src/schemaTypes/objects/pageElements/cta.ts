@@ -1,6 +1,6 @@
 import {defineField, defineType, type Path} from 'sanity'
 
-const DESTINATIONS = ['landingPageRoute', 'link', 'anchor', 'fileDownload'] as const
+const DESTINATIONS = ['landingPageRoute', 'siteSection', 'link', 'anchor', 'fileDownload'] as const
 
 /**
  * A navigation dropdown reuses this type for its own label (Settings → menuItems[] → cta).
@@ -25,7 +25,7 @@ export const cta = defineType({
       title: 'Link to',
       name: 'destination',
       description:
-        'Fill in one of these. If more than one is set, the anchor link wins, then the external link, the page, and the file.',
+        'Fill in one of these. If more than one is set, the anchor link wins, then the external link, the page, the site section, and the file.',
     },
   ],
   validation: (Rule) =>
@@ -56,6 +56,16 @@ export const cta = defineType({
       to: [{type: 'page'}, {type: 'post'}],
     }),
     defineField({
+      title: 'Site section',
+      name: 'siteSection',
+      type: 'string',
+      description: 'A built-in section of the site that isn’t a Page, like the list of all journal entries',
+      fieldset: 'destination',
+      options: {
+        list: [{title: 'Journal (all entries)', value: 'journal'}],
+      },
+    }),
+    defineField({
       title: 'External link',
       name: 'link',
       type: 'string',
@@ -81,13 +91,15 @@ export const cta = defineType({
     select: {
       title: 'title',
       landingPage: 'landingPageRoute.slug.current',
+      siteSection: 'siteSection',
       file: 'fileDownload.asset.originalFilename',
       link: 'link',
       anchor: 'anchor',
     },
-    prepare({title, landingPage, file, link, anchor}) {
+    prepare({title, landingPage, siteSection, file, link, anchor}) {
       let subtitle = 'Not set'
       if (file) subtitle = `File: ${file}`
+      if (siteSection) subtitle = `Section: /${siteSection}`
       if (landingPage) subtitle = `Page: /${landingPage}`
       if (link) subtitle = `External: ${link}`
       if (anchor) subtitle = `Anchor: ${anchor}`

@@ -15,11 +15,15 @@ export const navCTA = defineType({
     select: {
       title: 'cta.title',
       landingPage: 'cta.landingPageRoute.slug.current',
+      siteSection: 'cta.siteSection',
       route: 'cta.route',
       link: 'cta.link',
     },
-    prepare({title, landingPage, route, link}) {
+    prepare({title, landingPage, siteSection, route, link}) {
       let subtitle = 'Not set'
+      if (siteSection) {
+        subtitle = `Route: /${siteSection}`
+      }
       if (landingPage) {
         subtitle = `Route: /${landingPage}`
       }

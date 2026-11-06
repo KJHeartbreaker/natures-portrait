@@ -31,7 +31,8 @@ export const navigationSection: GuideSection = {
             <>
               For a Navigation Item, fill in the <strong>CTA</strong> fields (label and destination) —
               see <strong>Call to action (CTA)</strong> in this guide. For a Navigation Dropdown, give
-              the <strong>Label</strong> a title, then add at least one <strong>Dropdown Item</strong>.
+              the <strong>Label</strong> a title (and a destination if it should link somewhere), then
+              add at least one <strong>Dropdown Item</strong>.
             </>,
             <>Drag items to reorder them. The order in Studio is the order in the header.</>,
             <>To remove a link, open the item and delete it from the list, then <strong>Publish</strong>.</>,
@@ -55,8 +56,9 @@ export const navigationSection: GuideSection = {
             </>,
             <>
               <strong>Navigation Dropdown</strong> — a parent label plus <strong>Dropdown Items</strong>:
-              a list of links shown when visitors hover or tap the menu. The parent label only opens
-              the dropdown, so it has no destination of its own.
+              a list of links shown when visitors open the menu. The parent label can link to a page
+              of its own (for example Journal → the Journal page); visitors then open the dropdown with
+              the small arrow beside it. Without a destination, clicking the label opens the dropdown.
             </>,
           ]}
         />

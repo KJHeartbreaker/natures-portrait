@@ -9,7 +9,8 @@ export const navDropdownCTA = defineType({
       title: 'Label',
       name: 'cta',
       type: 'cta',
-      description: 'The name shown in the menu. It opens the dropdown, so it doesn’t link anywhere.',
+      description:
+        'The name shown in the menu. Optionally choose where it links (e.g. the Journal page). Visitors open the dropdown with the arrow next to it. Leave the link empty and the name just opens the dropdown.',
       validation: (Rule) =>
         Rule.custom((value: {title?: string} | undefined) =>
           value?.title?.trim() ? true : 'Give the dropdown a title.',

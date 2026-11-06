@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { homeMetaQuery, settingsQuery } from '@/sanity/lib/queries'
 import { sanityFetch } from '@/sanity/lib/live'
+import { linkResolver } from '@/sanity/lib/utils'
 import Cta from '@/app/components/Cta'
 import Image from '@/app/components/SanityImage'
 import { adaptCrop, adaptHotspot, getImageId } from '@/app/lib/sanityImageHelpers'
@@ -61,7 +62,7 @@ export default async function Header() {
                 if (item._type === 'navDropdownCTA' && item.cta) {
                   return (
                     <li key={item._key}>
-                      <NavDropdown label={item.cta?.title || 'Menu'}>
+                      <NavDropdown label={item.cta?.title || 'Menu'} href={linkResolver(item.cta)}>
                         <div className="absolute right-0 mt-2 bg-luxe-noir border border-linen-clay/20 p-2 min-w-56">
                           <ul role="list" className="flex flex-col gap-1">
                             {(item.subnav || []).map((sub) => (

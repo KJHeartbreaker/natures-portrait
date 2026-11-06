@@ -19,7 +19,8 @@ const splitColsClass: Record<string, string> = {
 function PanelView({panel, mobileOrder}: {panel: Panel | null; mobileOrder?: 'first' | 'last'}) {
   if (!panel) return null
 
-  const orderClass = mobileOrder === 'first' ? 'order-first md:order-none' : 'order-last md:order-none'
+  const orderClass =
+    mobileOrder === 'first' ? 'order-first md:order-none' : 'order-last md:order-none'
 
   if (panel.panelType === 'image') {
     const imageId = getImageId(panel.image)
@@ -80,6 +81,23 @@ type Props = {
   block: Block
 }
 
+const PAGE_BG = '#F0EDE5' // softOat, the page background
+
+/**
+ * On screens wider than the container, the panels stop at the container width and
+ * the leftover space on each side is filled with a "band" colour, so coloured rows
+ * still run edge to edge without stretching the image panel.
+ * A text panel's side uses its own background; an image panel's side borrows the
+ * colour of the text panel next to it (or the page background if there is none).
+ */
+function bandColors(left: Panel | null, right: Panel | null): [string, string] {
+  const textBg = (p: Panel | null) =>
+    p && p.panelType !== 'image' ? p.backgroundColor || PAGE_BG : null
+  const l = textBg(left)
+  const r = textBg(right)
+  return [l ?? r ?? PAGE_BG, r ?? l ?? PAGE_BG]
+}
+
 export default function RowContainer({block}: Props) {
   if (block.disabled) return null
 
@@ -90,10 +108,15 @@ export default function RowContainer({block}: Props) {
   const anyPageBg = panelBgs.some((bg) => !bg || bg.toLowerCase() === '#f0ede5')
   const dividerClass = anyPageBg ? 'border-linen-clay' : 'border-soft-oat'
 
+  const [leftBand, rightBand] = bandColors(block.leftPanel ?? null, block.rightPanel ?? null)
+
   return (
-    <section className={`w-full border-b ${dividerClass}`} aria-label={block.title || 'Two column section'}>
+    <section
+      className={`w-full border-b ${dividerClass}`}
+      aria-label={block.title || 'Two column section'}
+    >
       {showTitle ? (
-        <div className="px-6 pt-12 md:px-10 xl:px-14">
+        <div className="mx-auto max-w-[1440px] px-6 pt-12 md:px-12 xl:px-20">
           <h2
             className={`font-serif font-light tracking-tight text-[clamp(28px,3vw,40px)] ${block.centerTitle ? 'text-center' : 'text-left'}`}
             style={block.titleColor ? {color: block.titleColor} : undefined}
@@ -103,15 +126,19 @@ export default function RowContainer({block}: Props) {
         </div>
       ) : null}
 
-      <div className={`grid grid-cols-1 ${splitColsClass[split] ?? splitColsClass['50-50']}`}>
-        <PanelView
-          panel={block.leftPanel ?? null}
-          mobileOrder={block.leftPanel?.panelType === 'image' ? 'first' : 'last'}
-        />
-        <PanelView
-          panel={block.rightPanel ?? null}
-          mobileOrder={block.rightPanel?.panelType === 'image' ? 'first' : 'last'}
-        />
+      <div style={{background: `linear-gradient(to right, ${leftBand} 50%, ${rightBand} 50%)`}}>
+        <div
+          className={`mx-auto grid max-w-[1440px] grid-cols-1 ${splitColsClass[split] ?? splitColsClass['50-50']}`}
+        >
+          <PanelView
+            panel={block.leftPanel ?? null}
+            mobileOrder={block.leftPanel?.panelType === 'image' ? 'first' : 'last'}
+          />
+          <PanelView
+            panel={block.rightPanel ?? null}
+            mobileOrder={block.rightPanel?.panelType === 'image' ? 'first' : 'last'}
+          />
+        </div>
       </div>
     </section>
   )

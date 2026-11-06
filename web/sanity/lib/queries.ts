@@ -516,7 +516,7 @@ export const getCollectionQuery = defineQuery(`
 `)
 
 export const sitemapData = defineQuery(`
-  *[_type in ["page", "post"] && defined(slug.current)] | order(_type asc) {
+  *[_type in ["page", "post", "collection"] && defined(slug.current)] | order(_type asc) {
     "slug": slug.current,
     _type,
     _updatedAt,

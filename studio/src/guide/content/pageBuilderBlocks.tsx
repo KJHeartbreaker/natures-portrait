@@ -8,6 +8,7 @@ import {
 } from '../components/GuideBlockDoc'
 import type {GuideScreenshotItem} from '../components/GuideScreenshot'
 import type {GuideSection} from '../types'
+import {guideImage} from '../utils/guideImages'
 
 type PageBuilderBlock = {
   id: string
@@ -132,8 +133,8 @@ const blocks: PageBuilderBlock[] = [
       ),
     ],
     fields: [
-      'Title: optional heading shown above the two columns',
-      'Title Options: Hide Title (kept in Studio, hidden on the site), Center Title, and Title Colour',
+      'Title: optional heading shown above the two columns. Adding one turns the row into a framed section (see With or without a title below)',
+      'Title Options: Hide Title (kept in Studio, hidden on the site) and Center Title',
       'Column Split: 40 / 60, 50 / 50 (default), or 60 / 40 width ratio on desktop',
       'Left Panel and Right Panel: each set to Image or Text',
       'Image panel: an image with alt text (required when the panel type is Image)',
@@ -142,10 +143,31 @@ const blocks: PageBuilderBlock[] = [
     ],
     gotchas: [
       'Hide Title keeps a label in the CMS but removes it from the live page, which is handy for organising sections.',
-      'On mobile the Left Panel always appears first (above the Right Panel).',
+      'On mobile the panels stack: image panels go above text panels. If both panels are the same type, the Left Panel comes first.',
       'Image panels stretch to match the height of the text panel beside them on desktop.',
     ],
     subsections: [
+      {
+        title: 'With or without a title',
+        whenToUse:
+          'The Title changes the shape of the row. Without one, the panels run edge to edge. With one, the row becomes a framed section: the title sits on the row’s own background colour, there is space above the title and below the panels, and the image pulls in so it lines up with the title.',
+        images: [
+          {
+            src: guideImage('two-column-no-title.webp'),
+            alt: 'A Two Column row without a title: a heron photo fills the left panel to the edge of the page, with text on a black panel to the right',
+            caption: 'No title: the image runs to the edge of the page and the row has no extra spacing.',
+          },
+          {
+            src: guideImage('two-column-with-title.webp'),
+            alt: 'The same row with the title Behind the Lens: the title sits on the black background above the panels, and the heron photo is inset to line up with it',
+            caption: 'With a title: the same row becomes a framed section, with the title on the black background and the photo lined up beneath it.',
+          },
+        ],
+        fields: [
+          'The title colour is picked for you so it always reads clearly: light on Luxe Noir, Coastal Pine, and Dusty Sage; dark on Linen Clay and Soft Oat',
+          'Hide Title keeps the edge-to-edge layout, so you can still label the section in Studio',
+        ],
+      },
       {
         title: 'Image + Text',
         whenToUse:

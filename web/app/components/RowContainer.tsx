@@ -1,7 +1,7 @@
 import type {PortableTextBlock} from 'next-sanity'
 
 import PortableText from '@/app/components/PortableText'
-import {proseThemeForBg} from '@/app/lib/proseTheme'
+import {headingColorForBg, proseThemeForBg} from '@/app/lib/proseTheme'
 import Image from '@/app/components/SanityImage'
 import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
 import type {ExtractPageSectionType} from '@/sanity/lib/types'
@@ -16,10 +16,27 @@ const splitColsClass: Record<string, string> = {
   '60-40': 'md:grid-cols-[3fr_2fr]',
 }
 
-function PanelView({panel, mobileOrder}: {panel: Panel | null; mobileOrder?: 'first' | 'last'}) {
+// Literal class strings so Tailwind can statically detect them. Matches the container padding,
+// so an inset image lines up with the row title and the header.
+const insetClass = {
+  left: 'md:pl-12 xl:pl-20',
+  right: 'md:pr-12 xl:pr-20',
+} as const
+
+function PanelView({
+  panel,
+  mobileOrder,
+  inset,
+}: {
+  panel: Panel | null
+  mobileOrder?: 'first' | 'last'
+  /** Pull an image panel in from the row edge on this side (md+), used when the row has a title. */
+  inset?: 'left' | 'right'
+}) {
   if (!panel) return null
 
-  const orderClass = mobileOrder === 'first' ? 'order-first md:order-none' : 'order-last md:order-none'
+  const orderClass =
+    mobileOrder === 'first' ? 'order-first md:order-none' : 'order-last md:order-none'
 
   if (panel.panelType === 'image') {
     const imageId = getImageId(panel.image)
@@ -28,22 +45,24 @@ function PanelView({panel, mobileOrder}: {panel: Panel | null; mobileOrder?: 'fi
     const imgH = dims ? Math.round((imgW / dims.width) * dims.height) : Math.round(imgW * (3 / 4))
 
     return (
-      <div className={`relative min-h-[42svh] md:min-h-[420px] ${orderClass}`}>
-        {imageId ? (
-          <Image
-            id={imageId}
-            alt={panel.image?.alt || ''}
-            className="absolute inset-0 h-full w-full object-cover object-center"
-            width={imgW}
-            height={imgH}
-            mode="cover"
-            crop={adaptCrop(panel.image?.crop)}
-            hotspot={adaptHotspot(panel.image?.hotspot)}
-            sizes="(min-width: 768px) 50vw, 100vw"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-coastal-pine" aria-hidden />
-        )}
+      <div className={`flex ${inset ? insetClass[inset] : ''} ${orderClass}`}>
+        <div className="relative min-h-[42svh] flex-1 md:min-h-[420px]">
+          {imageId ? (
+            <Image
+              id={imageId}
+              alt={panel.image?.alt || ''}
+              className="absolute inset-0 h-full w-full object-cover object-center"
+              width={imgW}
+              height={imgH}
+              mode="cover"
+              crop={adaptCrop(panel.image?.crop)}
+              hotspot={adaptHotspot(panel.image?.hotspot)}
+              sizes="(min-width: 1440px) 864px, (min-width: 768px) 60vw, 100vw"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-coastal-pine" aria-hidden />
+          )}
+        </div>
       </div>
     )
   }
@@ -80,6 +99,23 @@ type Props = {
   block: Block
 }
 
+const PAGE_BG = '#F0EDE5' // softOat, the page background
+
+/**
+ * On screens wider than the container, the panels stop at the container width and
+ * the leftover space on each side is filled with a "band" colour, so coloured rows
+ * still run edge to edge without stretching the image panel.
+ * A text panel's side uses its own background; an image panel's side borrows the
+ * colour of the text panel next to it (or the page background if there is none).
+ */
+function bandColors(left: Panel | null, right: Panel | null): [string, string] {
+  const textBg = (p: Panel | null) =>
+    p && p.panelType !== 'image' ? p.backgroundColor || PAGE_BG : null
+  const l = textBg(left)
+  const r = textBg(right)
+  return [l ?? r ?? PAGE_BG, r ?? l ?? PAGE_BG]
+}
+
 export default function RowContainer({block}: Props) {
   if (block.disabled) return null
 
@@ -90,27 +126,48 @@ export default function RowContainer({block}: Props) {
   const anyPageBg = panelBgs.some((bg) => !bg || bg.toLowerCase() === '#f0ede5')
   const dividerClass = anyPageBg ? 'border-linen-clay' : 'border-soft-oat'
 
+  const [leftBand, rightBand] = bandColors(block.leftPanel ?? null, block.rightPanel ?? null)
+
+  // The title belongs to the row: it sits on the same band as the panels, and its colour
+  // follows the band under it (the left band, where a left-aligned title starts).
+  const titleColorClass = headingColorForBg(leftBand)
+  // When the two sides differ (two text panels in different colours), a long or centred title
+  // would cross onto the other colour, so give the title strip one solid colour: the left band's.
+  const titleStripStyle =
+    leftBand.toLowerCase() !== rightBand.toLowerCase() ? {backgroundColor: leftBand} : undefined
+
   return (
-    <section className={`w-full border-b ${dividerClass}`} aria-label={block.title || 'Two column section'}>
+    <section
+      className={`w-full border-b ${dividerClass}`}
+      aria-label={block.title || 'Two column section'}
+      style={{background: `linear-gradient(to right, ${leftBand} 50%, ${rightBand} 50%)`}}
+    >
       {showTitle ? (
-        <div className="px-6 pt-12 md:px-10 xl:px-14">
-          <h2
-            className={`font-serif font-light tracking-tight text-[clamp(28px,3vw,40px)] ${block.centerTitle ? 'text-center' : 'text-left'}`}
-            style={block.titleColor ? {color: block.titleColor} : undefined}
-          >
-            {block.title}
-          </h2>
+        <div style={titleStripStyle}>
+          <div className="mx-auto max-w-[1440px] px-6 pt-12 pb-8 md:px-12 md:pt-16 md:pb-10 xl:px-20">
+            <h2
+              className={`font-serif font-light tracking-tight text-[clamp(28px,3vw,40px)] ${titleColorClass} ${block.centerTitle ? 'text-center' : 'text-left'}`}
+            >
+              {block.title}
+            </h2>
+          </div>
         </div>
       ) : null}
 
-      <div className={`grid grid-cols-1 ${splitColsClass[split] ?? splitColsClass['50-50']}`}>
+      <div
+        // With a title the row reads as a framed section, so mirror the title's top padding
+        // below the panels (md+ only: on mobile the stacked text panel already pads the bottom).
+        className={`mx-auto grid max-w-[1440px] grid-cols-1 ${showTitle ? 'md:pb-16' : ''} ${splitColsClass[split] ?? splitColsClass['50-50']}`}
+      >
         <PanelView
           panel={block.leftPanel ?? null}
           mobileOrder={block.leftPanel?.panelType === 'image' ? 'first' : 'last'}
+          inset={showTitle ? 'left' : undefined}
         />
         <PanelView
           panel={block.rightPanel ?? null}
           mobileOrder={block.rightPanel?.panelType === 'image' ? 'first' : 'last'}
+          inset={showTitle ? 'right' : undefined}
         />
       </div>
     </section>

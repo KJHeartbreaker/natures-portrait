@@ -45,6 +45,7 @@ export const ctaProjection = `
   title,
   anchor,
   link,
+  siteSection,
   fileDownload{
     ${fileDownloadProjection}
   },

@@ -9,6 +9,7 @@ import SanityImage from '@/app/components/SanityImage'
 import {sanityFetch} from '@/sanity/lib/live'
 import {journalPostQuery, postPagesSlugs} from '@/sanity/lib/queries'
 import {seoMetadata} from '@/app/lib/seo'
+import {resolveOpenGraphImage} from '@/sanity/lib/utils'
 import {adaptCrop, adaptHotspot, getImageId} from '@/app/lib/sanityImageHelpers'
 
 type Props = {
@@ -28,11 +29,12 @@ export async function generateMetadata(props: Props, parent: ResolvingMetadata):
   const params = await props.params
   const {data: post} = await sanityFetch({query: journalPostQuery, params, stega: false})
   const previousImages = (await parent).openGraph?.images || []
+  const coverImage = resolveOpenGraphImage(post?.image)
 
   const meta = seoMetadata(post?.seo, {title: post?.title, description: post?.subheader})
   return {
     ...meta,
-    openGraph: meta.openGraph ?? {images: previousImages},
+    openGraph: meta.openGraph ?? {images: coverImage ? [coverImage] : previousImages},
   } satisfies Metadata
 }
 

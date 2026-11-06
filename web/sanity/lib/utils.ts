@@ -59,6 +59,7 @@ export type CtaLike = {
   title?: string | null
   anchor?: string | null
   link?: string | null
+  siteSection?: string | null
   fileDownload?: {
     _type?: string
     asset?: {
@@ -66,6 +67,11 @@ export type CtaLike = {
     } | null
   } | null
   landingPage?: ResolvedLandingPage | null
+}
+
+/** Built-in site sections that a CTA can link to (Studio: CTA → Site section). */
+const SITE_SECTION_PATHS: Record<string, string> = {
+  journal: '/journal',
 }
 
 function resolveLandingPageHref(landingPage: ResolvedLandingPage): string | null {
@@ -98,12 +104,19 @@ export function linkResolver(link: PortableTextMarkLink | CtaLike | undefined) {
   }
 
   // CTA object (or CTA-like, after GROQ projection)
-  if ('anchor' in link || 'link' in link || 'landingPage' in link || 'fileDownload' in link) {
+  if (
+    'anchor' in link ||
+    'link' in link ||
+    'landingPage' in link ||
+    'siteSection' in link ||
+    'fileDownload' in link
+  ) {
     const cta = link as CtaLike
 
     if (cta.anchor) return cta.anchor
     if (cta.link) return cta.link
     if (cta.landingPage) return resolveLandingPageHref(cta.landingPage)
+    if (cta.siteSection && SITE_SECTION_PATHS[cta.siteSection]) return SITE_SECTION_PATHS[cta.siteSection]
     if (cta.fileDownload?.asset?.url) return cta.fileDownload.asset.url
   }
 

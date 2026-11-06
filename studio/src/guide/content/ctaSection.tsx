@@ -24,6 +24,10 @@ export const ctaSection: GuideSection = {
               the site builds the correct URL.
             </>,
             <>
+              <strong>Site section</strong> — a built-in part of the site that isn’t a Page. Choose{' '}
+              <strong>Journal (all entries)</strong> to link to the Journal page.
+            </>,
+            <>
               <strong>External link</strong> — full URL (for example a gallery on another platform).
             </>,
             <>

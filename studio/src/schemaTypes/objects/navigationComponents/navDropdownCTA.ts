@@ -6,15 +6,23 @@ export const navDropdownCTA = defineType({
   title: 'Navigation Dropdown',
   fields: [
     defineField({
-      title: 'CTA',
+      title: 'Label',
       name: 'cta',
       type: 'cta',
+      description:
+        'The name shown in the menu. Optionally choose where it links (e.g. the Journal page). Visitors open the dropdown with the arrow next to it. Leave the link empty and the name just opens the dropdown.',
+      validation: (Rule) =>
+        Rule.custom((value: {title?: string} | undefined) =>
+          value?.title?.trim() ? true : 'Give the dropdown a title.',
+        ),
     }),
     defineField({
       type: 'array',
       title: 'Dropdown Items',
       name: 'subnav',
+      description: 'The links that appear when the dropdown opens.',
       of: [defineArrayMember({type: 'cta'})],
+      validation: (Rule) => Rule.required().min(1).error('Add at least one link to the dropdown.'),
     }),
   ],
   preview: {

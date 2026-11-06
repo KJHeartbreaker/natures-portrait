@@ -8,6 +8,7 @@ import Cta from '@/app/components/Cta'
 import Image from '@/app/components/SanityImage'
 import type { SanityImageCrop, SanityImageHotspot } from '@/sanity.types'
 import { adaptCrop, adaptHotspot } from '@/app/lib/sanityImageHelpers'
+import { linkResolver, type CtaLike } from '@/sanity/lib/utils'
 
 type NavCTA = {
   _key: string
@@ -194,31 +195,64 @@ export default function MobileNav({ menuItems, siteTitle, logoId, logoAlt, logoC
                 if (item._type === 'navDropdownCTA' && item.cta) {
                   const isExpanded = expandedKey === item._key
                   const hasSubnav = (item.subnav?.length ?? 0) > 0
+                  const label = item.cta?.title || 'Menu'
+                  const href = linkResolver(item.cta as CtaLike)
+                  const isExternal = href ? /^https?:\/\//.test(href) : false
+                  const submenuId = `mobile-submenu-${item._key}`
+                  const labelClass =
+                    'font-serif font-light text-[40px] leading-none tracking-[-0.01em] text-soft-oat'
+                  const plus = (
+                    <span
+                      className="font-sans text-[18px] font-light text-dusty-sage transition-transform duration-200 shrink-0"
+                      style={{ transform: isExpanded ? 'rotate(45deg)' : 'none' }}
+                      aria-hidden="true"
+                    >
+                      +
+                    </span>
+                  )
 
                   return (
                     <li key={item._key} className="border-t border-white/[0.06]">
-                      <button
-                        type="button"
-                        onClick={() => (hasSubnav ? toggleExpanded(item._key) : close())}
-                        className="w-full flex items-baseline justify-between py-4 text-left"
-                        aria-expanded={hasSubnav ? isExpanded : undefined}
-                      >
-                        <span className="font-serif font-light text-[40px] leading-none tracking-[-0.01em] text-soft-oat">
-                          {item.cta?.title || 'Menu'}
-                        </span>
-                        {hasSubnav && (
-                          <span
-                            className="font-sans text-[18px] font-light text-dusty-sage transition-transform duration-200 shrink-0"
-                            style={{ transform: isExpanded ? 'rotate(45deg)' : 'none' }}
-                            aria-hidden="true"
+                      {href ? (
+                        // Label links to its own page; the + is a separate submenu toggle
+                        <div className="flex items-baseline justify-between py-4">
+                          <Link
+                            href={href}
+                            target={isExternal ? '_blank' : undefined}
+                            rel={isExternal ? 'noopener noreferrer' : undefined}
+                            className={labelClass}
                           >
-                            +
-                          </span>
-                        )}
-                      </button>
+                            {label}
+                          </Link>
+                          {hasSubnav && (
+                            <button
+                              type="button"
+                              onClick={() => toggleExpanded(item._key)}
+                              aria-expanded={isExpanded}
+                              aria-controls={submenuId}
+                              aria-label={`${label} submenu`}
+                              className="-m-3 p-3"
+                            >
+                              {plus}
+                            </button>
+                          )}
+                        </div>
+                      ) : (
+                        // No destination: the whole row toggles the submenu
+                        <button
+                          type="button"
+                          onClick={() => (hasSubnav ? toggleExpanded(item._key) : close())}
+                          className="w-full flex items-baseline justify-between py-4 text-left"
+                          aria-expanded={hasSubnav ? isExpanded : undefined}
+                          aria-controls={hasSubnav ? submenuId : undefined}
+                        >
+                          <span className={labelClass}>{label}</span>
+                          {hasSubnav && plus}
+                        </button>
+                      )}
 
                       {hasSubnav && isExpanded && (
-                        <ul role="list" className="flex flex-col pb-4 pl-1 gap-0">
+                        <ul id={submenuId} role="list" className="flex flex-col pb-4 pl-1 gap-0">
                           {(item.subnav || []).map((sub) => (
                             <li key={sub._key}>
                               <Cta

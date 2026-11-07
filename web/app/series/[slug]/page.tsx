@@ -58,8 +58,14 @@ export default async function CollectionPage({params}: Props) {
         </p>
       )}
 
-      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      <PhotoGrid images={(collection.photos ?? []) as any[]} columns={3} gap={12} showCaptions />
+      <PhotoGrid
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        images={(collection.photos ?? []) as any[]}
+        columns={3}
+        gap={12}
+        showCaptions
+        currentSeriesSlug={collection.slug}
+      />
     </div>
   )
 }

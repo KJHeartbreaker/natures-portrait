@@ -1,7 +1,8 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
+import Link from 'next/link'
 import type { PortableTextBlock } from 'next-sanity'
 
 import Image from '@/app/components/SanityImage'
@@ -29,8 +30,20 @@ type GearLike = {
   link?: string | null
 } | null
 
+type SeriesLike = {
+  _id?: string
+  title?: string | null
+  slug?: string | null
+} | null
+
 type PhotoItemLike = {
   _key?: string
+  // Photo document id. On the gallery and series pages this is `_id` (and
+  // `_key` equals it); on Photo Grid blocks that reference a photo it is
+  // `photoId`, because `_key` there is the array item key.
+  _id?: string
+  photoId?: string | null
+  series?: SeriesLike[] | null
   title?: string | null
   location?: string | null
   description?: { portableTextBlock?: unknown[] | null } | null
@@ -57,11 +70,14 @@ export default function PhotoGrid({
   columns,
   gap,
   showCaptions,
+  currentSeriesSlug,
 }: {
   images: PhotoItemLike[]
   columns?: number | null
   gap?: number | null
   showCaptions?: boolean | null
+  // Set on a series page so the lightbox doesn't link back to the series being viewed.
+  currentSeriesSlug?: string | null
 }) {
   const THUMB_BAR_HEIGHT_PX = 92
   const PEEK_BAR_HEIGHT_PX = 86
@@ -137,19 +153,24 @@ export default function PhotoGrid({
     const prevTop = document.body.style.top
     const prevWidth = document.body.style.width
 
+    const lockedPath = window.location.pathname
+
     // Robust scroll lock that prevents "jump to top" on iOS/desktop
     document.body.style.overflow = 'hidden'
     document.body.style.position = 'fixed'
     document.body.style.top = `-${scrollY}px`
     document.body.style.width = '100%'
 
+    // Runs on close, and on unmount when a series link (or Back) navigates
+    // away with the lightbox still open. The body lock is always released.
     return () => {
       document.body.style.overflow = prevOverflow
       document.body.style.position = prevPosition
       document.body.style.top = prevTop
       document.body.style.width = prevWidth
-      // Restore scroll position
-      window.scrollTo(0, scrollY)
+      // Restore the grid's scroll position, but only if we're still on the
+      // page that locked it: after navigating, the new page owns the scroll.
+      if (window.location.pathname === lockedPath) window.scrollTo(0, scrollY)
     }
   }, [isOpen])
 
@@ -187,8 +208,36 @@ export default function PhotoGrid({
   const activeLocation = active?.location || null
   const activeCamera = gearLabel(active?.cameraRef) || active?.cameraText || null
   const activeLens = gearLabel(active?.lensRef) || active?.lensText || null
-  const hasInfo = Boolean(activeTitle || activeLocation || active?.description?.portableTextBlock?.length || activeCamera || activeLens)
-  const bottomReservePx = (safeItems.length > 1 ? THUMB_BAR_HEIGHT_PX : 0) + (hasInfo ? PEEK_BAR_HEIGHT_PX : 0)
+  const activePhotoId = active?.photoId || active?._id || null
+  const activeSeries = activePhotoId
+    ? (active?.series ?? []).filter(
+        (s): s is NonNullable<SeriesLike> & { slug: string } => Boolean(s?.slug) && s?.slug !== currentSeriesSlug,
+      )
+    : []
+  const hasInfo = Boolean(
+    activeTitle ||
+      activeLocation ||
+      activeSeries.length ||
+      active?.description?.portableTextBlock?.length ||
+      activeCamera ||
+      activeLens,
+  )
+
+  // The peek area grows when the series links wrap (several series, phone
+  // width), so measure it rather than assuming a fixed height.
+  const peekRef = useRef<HTMLDivElement | null>(null)
+  const [peekPx, setPeekPx] = useState(PEEK_BAR_HEIGHT_PX)
+  useLayoutEffect(() => {
+    const el = peekRef.current
+    if (!el) return
+    const measure = () => setPeekPx(Math.max(PEEK_BAR_HEIGHT_PX, Math.ceil(el.getBoundingClientRect().height)))
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [isOpen, hasInfo, index])
+
+  const bottomReservePx = (safeItems.length > 1 ? THUMB_BAR_HEIGHT_PX : 0) + (hasInfo ? peekPx : 0)
 
   const toggleDrawer = useCallback(() => {
     setDrawer((s) => (s === 'open' ? 'peek' : 'open'))
@@ -294,7 +343,7 @@ export default function PhotoGrid({
                       transform:
                         drawer === 'open'
                           ? 'translateY(0)'
-                          : `translateY(calc(100% - ${PEEK_BAR_HEIGHT_PX}px))`,
+                          : `translateY(calc(100% - ${peekPx}px))`,
                       transition: 'transform 220ms ease',
                       pointerEvents: 'auto',
                     }}
@@ -305,42 +354,71 @@ export default function PhotoGrid({
                         maxHeight: `calc(80vh - ${(safeItems.length > 1 ? THUMB_BAR_HEIGHT_PX : 0)}px)`,
                       }}
                     >
-                      {/* Header (peek area) */}
-                      <button
-                        type="button"
-                        onClick={toggleDrawer}
-                        className="w-full px-4 py-3 text-left text-white"
+                      {/* Header (peek area): title, location, series links, chevron. */}
+                      <div
+                        ref={peekRef}
+                        className="px-4 py-3 text-white cursor-pointer"
                         style={{ minHeight: `${PEEK_BAR_HEIGHT_PX}px` }}
-                        aria-label={drawer === 'open' ? 'Hide details' : 'Show details'}
+                        onClick={toggleDrawer}
                       >
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="min-w-0">
-                            {activeTitle ? <div className="text-sm font-semibold truncate">{activeTitle}</div> : null}
-                            {activeLocation ? <div className="text-xs text-white/75 truncate">{activeLocation}</div> : null}
-                          </div>
+                        <div className="min-w-0">
+                          {activeTitle ? <div className="text-sm font-semibold truncate">{activeTitle}</div> : null}
+                          {activeLocation ? <div className="text-xs text-white/75 truncate">{activeLocation}</div> : null}
+                          {activeSeries.length ? (
+                            <div className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                              <span className="font-sans font-normal text-[10px] uppercase tracking-[0.25em] text-dusty-sage">
+                                Series
+                              </span>
+                              <span className="font-sans font-light text-xs text-white/80">
+                                {activeSeries.map((s, i) => (
+                                  <span key={s._id || s.slug}>
+                                    {i > 0 ? <span aria-hidden="true">{' · '}</span> : null}
+                                    <Link
+                                      href={`/series/${s.slug}?photo=${encodeURIComponent(activePhotoId as string)}`}
+                                      onClick={(e) => e.stopPropagation()}
+                                      className="underline underline-offset-4 decoration-white/30 hover:text-white hover:decoration-white focus-visible:text-white focus-visible:decoration-white"
+                                    >
+                                      {s.title || s.slug}
+                                    </Link>
+                                  </span>
+                                ))}
+                              </span>
+                            </div>
+                          ) : null}
                         </div>
                         <div className="mt-2 flex items-center justify-center">
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            {drawer === 'open' ? (
-                              <path
-                                d="M6 9l6 6 6-6"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            ) : (
-                              <path
-                                d="M6 15l6-6 6 6"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            )}
-                          </svg>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              toggleDrawer()
+                            }}
+                            className="text-white"
+                            aria-expanded={drawer === 'open'}
+                            aria-label={drawer === 'open' ? 'Hide details' : 'Show details'}
+                          >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                              {drawer === 'open' ? (
+                                <path
+                                  d="M6 9l6 6 6-6"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              ) : (
+                                <path
+                                  d="M6 15l6-6 6 6"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              )}
+                            </svg>
+                          </button>
                         </div>
-                      </button>
+                      </div>
 
                       {/* Content (only when open) */}
                       {drawer === 'open' ? (

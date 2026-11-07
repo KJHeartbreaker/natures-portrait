@@ -116,3 +116,14 @@ export const gearProjection = `
   notes,
   link
 `
+
+// Series (collection documents) a photo belongs to, for the lightbox's
+// "Series" links. Evaluated inside a photo document projection, so `^._id`
+// is the photo. Only series with a slug can be linked to.
+export const photoSeriesProjection = `
+  "series": *[_type == "collection" && references(^._id) && defined(slug.current)] | order(title asc){
+    _id,
+    title,
+    "slug": slug.current
+  }
+`

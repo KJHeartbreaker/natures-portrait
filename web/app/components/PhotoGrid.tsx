@@ -214,14 +214,10 @@ export default function PhotoGrid({
         (s): s is NonNullable<SeriesLike> & { slug: string } => Boolean(s?.slug) && s?.slug !== currentSeriesSlug,
       )
     : []
-  const hasInfo = Boolean(
-    activeTitle ||
-      activeLocation ||
-      activeSeries.length ||
-      active?.description?.portableTextBlock?.length ||
-      activeCamera ||
-      activeLens,
-  )
+  // Details live in the expandable part of the drawer. Without any, the info
+  // bar is a plain caption: no chevron, nothing to open.
+  const hasDetails = Boolean(active?.description?.portableTextBlock?.length || activeCamera || activeLens)
+  const hasInfo = Boolean(activeTitle || activeLocation || activeSeries.length || hasDetails)
 
   // The peek area grows when the series links wrap (several series, phone
   // width), so measure it rather than assuming a fixed height.
@@ -230,12 +226,13 @@ export default function PhotoGrid({
   useLayoutEffect(() => {
     const el = peekRef.current
     if (!el) return
-    const measure = () => setPeekPx(Math.max(PEEK_BAR_HEIGHT_PX, Math.ceil(el.getBoundingClientRect().height)))
+    const floor = hasDetails ? PEEK_BAR_HEIGHT_PX : 0
+    const measure = () => setPeekPx(Math.max(floor, Math.ceil(el.getBoundingClientRect().height)))
     measure()
     const ro = new ResizeObserver(measure)
     ro.observe(el)
     return () => ro.disconnect()
-  }, [isOpen, hasInfo, index])
+  }, [isOpen, hasInfo, hasDetails, index])
 
   const bottomReservePx = (safeItems.length > 1 ? THUMB_BAR_HEIGHT_PX : 0) + (hasInfo ? peekPx : 0)
 
@@ -341,7 +338,7 @@ export default function PhotoGrid({
                     style={{
                       bottom: `${safeItems.length > 1 ? THUMB_BAR_HEIGHT_PX : 0}px`,
                       transform:
-                        drawer === 'open'
+                        drawer === 'open' || !hasDetails
                           ? 'translateY(0)'
                           : `translateY(calc(100% - ${peekPx}px))`,
                       transition: 'transform 220ms ease',
@@ -357,9 +354,9 @@ export default function PhotoGrid({
                       {/* Header (peek area): title, location, series links, chevron. */}
                       <div
                         ref={peekRef}
-                        className="px-4 py-3 text-white cursor-pointer"
-                        style={{ minHeight: `${PEEK_BAR_HEIGHT_PX}px` }}
-                        onClick={toggleDrawer}
+                        className={`px-4 py-3 text-white ${hasDetails ? 'cursor-pointer' : ''}`}
+                        style={hasDetails ? { minHeight: `${PEEK_BAR_HEIGHT_PX}px` } : undefined}
+                        onClick={hasDetails ? toggleDrawer : undefined}
                       >
                         <div className="min-w-0">
                           {activeTitle ? <div className="text-sm font-semibold truncate">{activeTitle}</div> : null}
@@ -374,8 +371,12 @@ export default function PhotoGrid({
                                   <span key={s._id || s.slug}>
                                     {i > 0 ? <span aria-hidden="true">{' · '}</span> : null}
                                     <Link
-                                      href={`/series/${s.slug}?photo=${encodeURIComponent(activePhotoId as string)}`}
-                                      onClick={(e) => e.stopPropagation()}
+                                      href={`/series/${s.slug}`}
+                                      onClick={(e) => {
+                                        e.stopPropagation()
+                                        // Leave the lightbox behind: the series page opens on its grid.
+                                        close()
+                                      }}
                                       className="underline underline-offset-4 decoration-white/30 hover:text-white hover:decoration-white focus-visible:text-white focus-visible:decoration-white"
                                     >
                                       {s.title || s.slug}
@@ -386,6 +387,7 @@ export default function PhotoGrid({
                             </div>
                           ) : null}
                         </div>
+                        {hasDetails ? (
                         <div className="mt-2 flex items-center justify-center">
                           <button
                             type="button"
@@ -418,10 +420,11 @@ export default function PhotoGrid({
                             </svg>
                           </button>
                         </div>
+                        ) : null}
                       </div>
 
                       {/* Content (only when open) */}
-                      {drawer === 'open' ? (
+                      {hasDetails && drawer === 'open' ? (
                         <div className="px-4 pb-4 space-y-3 text-white overflow-auto">
                           {active?.description?.portableTextBlock?.length ? (
                             <div className="text-white/90">

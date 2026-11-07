@@ -1,4 +1,5 @@
 import type {Metadata} from 'next'
+import Link from 'next/link'
 import {notFound} from 'next/navigation'
 
 import PhotoGrid from '@/app/components/PhotoGrid'
@@ -45,6 +46,14 @@ export default async function CollectionPage({params}: Props) {
 
   return (
     <div className="container pt-32 pb-24 md:pt-40">
+      {collection.galleryPath ? (
+        <Link
+          href={`/${collection.galleryPath}`}
+          className="mb-8 inline-block font-sans text-[10px] font-light uppercase tracking-[0.25em] text-dusty-sage transition-colors hover:text-coastal-pine focus-visible:text-coastal-pine"
+        >
+          <span aria-hidden="true">←</span> Full gallery
+        </Link>
+      ) : null}
       <SectionEyebrow label="Series" />
       <h1
         className={`font-serif font-light text-luxe-noir ${description ? 'mb-6' : 'mb-12'}`}

@@ -535,7 +535,10 @@ export const getCollectionQuery = defineQuery(`
     },
     "coverImage": coverPhoto->image{
       ${imageProjection}
-    }
+    },
+    // The page that holds the full gallery (an Auto Gallery block), for the
+    // "back to the gallery" link. Looked up so a renamed slug can't break it.
+    "galleryPath": *[_type == "page" && "autoGallery" in content[]._type && defined(slug.current)][0].slug.current
   }
 `)
 

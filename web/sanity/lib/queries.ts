@@ -1,11 +1,18 @@
 import {defineQuery} from 'next-sanity'
-import {ctaProjection, gearProjection, imageProjection, portableTextProjection} from '@/sanity/lib/query-fragments'
+import {
+  ctaProjection,
+  gearProjection,
+  imageProjection,
+  photoSeriesProjection,
+  portableTextProjection,
+} from '@/sanity/lib/query-fragments'
 
 // TODO(decision): `photoGridContainer.images` currently allows BOTH `photoItem` and raw `mainImage`.
 // Because that creates two possible shapes, the Photo Grid projections in `homeQuery` and `getPageQuery`
 // normalize with: `"image": coalesce(image, @){ ${imageProjection} }`.
 // If we later restrict Studio to ONLY `photoItem`, update both projections to use `image{ ${imageProjection} }`
 // and remove the `coalesce(image, @)` normalization.
+
 export const settingsQuery = defineQuery(`
   *[_type == "settings"][0]{
     _id,
@@ -175,6 +182,12 @@ export const homeQuery = defineQuery(`
             "cameraRef": photo->.cameraRef->{ ${gearProjection} },
             "lensRef": photo->.lensRef->{ ${gearProjection} },
             "image": photo->.image{ ${imageProjection} },
+            "photoId": photo._ref,
+            "series": *[_type == "collection" && references(^.photo._ref) && defined(slug.current)] | order(title asc){
+              _id,
+              title,
+              "slug": slug.current
+            },
           },
           _type == "photoItem" => {
             "_key": _key,
@@ -393,6 +406,12 @@ export const getPageQuery = defineQuery(`
             "cameraRef": photo->.cameraRef->{ ${gearProjection} },
             "lensRef": photo->.lensRef->{ ${gearProjection} },
             "image": photo->.image{ ${imageProjection} },
+            "photoId": photo._ref,
+            "series": *[_type == "collection" && references(^.photo._ref) && defined(slug.current)] | order(title asc){
+              _id,
+              title,
+              "slug": slug.current
+            },
           },
           _type == "photoItem" => {
             "_key": _key,
@@ -510,7 +529,8 @@ export const getCollectionQuery = defineQuery(`
       },
       "image": image{
         ${imageProjection}
-      }
+      },
+      ${photoSeriesProjection}
     },
     "coverImage": coverPhoto->image{
       ${imageProjection}
@@ -597,7 +617,8 @@ export const autoGalleryQuery = defineQuery(`
       "image": image{
         ${imageProjection}
       },
-      "collectionIds": *[_type == "collection" && references(^._id)]._id
+      "collectionIds": *[_type == "collection" && references(^._id)]._id,
+      ${photoSeriesProjection}
     },
     "collections": *[_type == "collection"] | order(title asc) {
       _id,

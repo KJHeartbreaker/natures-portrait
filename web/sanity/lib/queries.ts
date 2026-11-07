@@ -509,6 +509,7 @@ export const getCollectionQuery = defineQuery(`
     _type,
     title,
     "slug": slug.current,
+    description,
     "photos": photos[]->{
       _id,
       "_key": _id,
@@ -624,6 +625,21 @@ export const autoGalleryQuery = defineQuery(`
       _id,
       title,
       "slug": slug.current
+    }
+  }
+`)
+
+/**
+ * SEO for the Journal index page (/journal), edited in Settings → Journal page.
+ */
+export const journalSeoQuery = defineQuery(`
+  *[_type == "settings"][0].journalSeo{
+    seoTitle,
+    seoDescription,
+    noindex,
+    canonicalUrl,
+    ogImage{
+      ${imageProjection}
     }
   }
 `)

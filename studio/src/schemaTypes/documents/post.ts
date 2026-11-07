@@ -11,20 +11,20 @@ export const post = defineType({
   icon,
   groups: [
     {
-      title: 'SEO',
-      name: 'seo',
-      icon: BsSearch,
-      default: true,
-    },
-    {
       title: 'Post Settings',
       name: 'postSettings',
       icon: VscSettings,
+      default: true,
     },
     {
       title: 'Post Content',
       name: 'postContent',
       icon: TbMeat,
+    },
+    {
+      title: 'SEO',
+      name: 'seo',
+      icon: BsSearch,
     },
   ],
   fields: [

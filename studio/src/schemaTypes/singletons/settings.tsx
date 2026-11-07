@@ -6,9 +6,14 @@ export const settings = defineType({
   title: 'Settings and Menus',
   type: 'document',
   icon,
+  groups: [
+    {name: 'site', title: 'Site', default: true},
+    {name: 'journal', title: 'Journal page'},
+  ],
   fields: [
     defineField({
       name: 'siteLogo',
+      group: 'site',
       title: 'Site logo',
       type: 'image',
       description: 'Shown in the header next to the site title (links home).',
@@ -29,6 +34,7 @@ export const settings = defineType({
     }),
     defineField({
       name: 'siteFavicon',
+      group: 'site',
       title: 'Favicon',
       type: 'image',
       description:
@@ -49,6 +55,7 @@ export const settings = defineType({
     }),
     defineField({
       name: 'menuItems',
+      group: 'site',
       title: 'Menu Item list',
       description: 'Links displayed on the header of your site.',
       type: 'array',
@@ -59,6 +66,7 @@ export const settings = defineType({
     }),
     defineField({
       name: 'ogImage',
+      group: 'site',
       title: 'Open Graph Image',
       type: 'image',
       description: 'Displayed on social cards and search engine results.',
@@ -96,6 +104,14 @@ export const settings = defineType({
           ),
         }),
       ],
+    }),
+    defineField({
+      name: 'journalSeo',
+      type: 'seo',
+      title: 'Journal page: search and sharing',
+      description:
+        'How the Journal page (the list of all entries) appears in Google and when it is shared. Leave any of these empty to keep the current wording.',
+      group: 'journal',
     }),
   ],
   preview: {

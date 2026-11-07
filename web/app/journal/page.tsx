@@ -5,13 +5,20 @@ import {toPlainText} from 'next-sanity'
 import SanityImage from '@/app/components/SanityImage'
 import SectionEyebrow from '@/app/components/SectionEyebrow'
 import {sanityFetch} from '@/sanity/lib/live'
-import {journalIndexQuery} from '@/sanity/lib/queries'
+import {journalIndexQuery, journalSeoQuery} from '@/sanity/lib/queries'
+import {seoMetadata} from '@/app/lib/seo'
 import {adaptCrop, adaptHotspot, getImageId} from '@/app/lib/sanityImageHelpers'
 import {format} from 'date-fns'
 
-export const metadata: Metadata = {
+// Used when the Journal page fields in Settings are empty.
+const fallbackMeta = {
   title: 'Journal',
   description: 'Notes from the field — reflections on light, landscape, and the practice of photography.',
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const {data: seo} = await sanityFetch({query: journalSeoQuery, stega: false})
+  return seoMetadata(seo, fallbackMeta)
 }
 
 export default async function JournalPage() {

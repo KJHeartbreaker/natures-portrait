@@ -22,6 +22,16 @@ export const collection = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'description',
+      title: 'Description (optional)',
+      type: 'text',
+      rows: 3,
+      description:
+        'A sentence or two about this series. Shown under the series title, and used in Google results and when the page is shared. Search results show about the first 155 characters. Leave empty to use a short automatic line ("… a series of 12 photographs by Jill Genereux").',
+      validation: (Rule) =>
+        Rule.max(300).warning('Keep it short: a sentence or two reads best under the title.'),
+    }),
+    defineField({
       name: 'photos',
       title: 'Photos',
       type: 'array',

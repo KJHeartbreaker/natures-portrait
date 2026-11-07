@@ -25,7 +25,9 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const ogImage = resolveOpenGraphImage(collection.coverImage ?? collection.photos?.[0]?.image)
   return {
     title: collection.title,
-    description: `${collection.title}: a series of ${count} photograph${count === 1 ? '' : 's'} by ${ARTIST_NAME}.`,
+    description:
+      collection.description?.trim() ||
+      `${collection.title}: a series of ${count} photograph${count === 1 ? '' : 's'} by ${ARTIST_NAME}.`,
     ...(ogImage ? {openGraph: {images: [ogImage]}} : {}),
   }
 }
@@ -39,15 +41,22 @@ export default async function CollectionPage({params}: Props) {
 
   if (!collection) notFound()
 
+  const description = collection.description?.trim()
+
   return (
     <div className="container pt-32 pb-24 md:pt-40">
       <SectionEyebrow label="Series" />
       <h1
-        className="font-serif font-light text-luxe-noir mb-12"
+        className={`font-serif font-light text-luxe-noir ${description ? 'mb-6' : 'mb-12'}`}
         style={{fontSize: 'clamp(36px, 5vw, 64px)', lineHeight: 1.08}}
       >
         {collection.title}
       </h1>
+      {description && (
+        <p className="mb-12 max-w-[36rem] font-sans text-sm font-light leading-[1.9] text-coastal-pine whitespace-pre-line">
+          {description}
+        </p>
+      )}
 
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       <PhotoGrid images={(collection.photos ?? []) as any[]} columns={3} gap={12} showCaptions />

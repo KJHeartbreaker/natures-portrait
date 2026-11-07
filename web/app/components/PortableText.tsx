@@ -12,6 +12,7 @@ import {PortableText, type PortableTextComponents, type PortableTextBlock} from 
 import Cta, {textLinkClass} from '@/app/components/Cta'
 import ResolvedLink from '@/app/components/ResolvedLink'
 import Image from '@/app/components/SanityImage'
+import {linkifyEmails} from '@/app/lib/linkifyEmails'
 
 export default function CustomPortableText({
   className,
@@ -61,7 +62,7 @@ export default function CustomPortableText({
 
   return (
     <div className={`prose-a:text-brand prose ${className}`}>
-      <PortableText components={components} value={value} />
+      <PortableText components={components} value={linkifyEmails(value)} />
     </div>
   )
 }

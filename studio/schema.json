@@ -2334,6 +2334,19 @@
           },
           "optional": true
         },
+        "siteSection": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "journal"
+              }
+            ]
+          },
+          "optional": true
+        },
         "link": {
           "type": "objectAttribute",
           "value": {
@@ -2423,7 +2436,7 @@
               }
             }
           },
-          "optional": true
+          "optional": false
         }
       }
     }
@@ -2839,6 +2852,13 @@
           "name": "slug"
         },
         "optional": false
+      },
+      "description": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
       },
       "photos": {
         "type": "objectAttribute",
@@ -4016,6 +4036,14 @@
               }
             }
           }
+        },
+        "optional": true
+      },
+      "journalSeo": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "seo"
         },
         "optional": true
       }

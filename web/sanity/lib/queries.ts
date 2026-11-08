@@ -210,6 +210,7 @@ export const homeQuery = defineQuery(`
       },
       _type == "featuredCollection" => {
         eyebrow,
+        backgroundColor,
         heading,
         subheading,
         body{
@@ -434,6 +435,7 @@ export const getPageQuery = defineQuery(`
       },
       _type == "featuredCollection" => {
         eyebrow,
+        backgroundColor,
         heading,
         subheading,
         body{

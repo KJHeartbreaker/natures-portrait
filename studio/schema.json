@@ -2212,6 +2212,35 @@
           },
           "optional": true
         },
+        "backgroundColor": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "#F0EDE5"
+              },
+              {
+                "type": "string",
+                "value": "#C6C2bb"
+              },
+              {
+                "type": "string",
+                "value": "#758886"
+              },
+              {
+                "type": "string",
+                "value": "#3E5954"
+              },
+              {
+                "type": "string",
+                "value": "#060D0C"
+              }
+            ]
+          },
+          "optional": true
+        },
         "heading": {
           "type": "objectAttribute",
           "value": {

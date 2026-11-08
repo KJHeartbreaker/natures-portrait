@@ -1,11 +1,12 @@
 import Link from 'next/link'
 import type {PortableTextBlock} from 'next-sanity'
 
-import {textLinkClass} from '@/app/components/Cta'
+import {textLinkClass, textLinkLightClass} from '@/app/components/Cta'
 
 import Image from '@/app/components/SanityImage'
 import PortableText from '@/app/components/PortableText'
 import {adaptCrop, adaptHotspot, getImageDims, getImageId} from '@/app/lib/sanityImageHelpers'
+import {eyebrowThemeForBg, headingColorForBg, isDarkBg, proseThemeForBg} from '@/app/lib/proseTheme'
 import type {ExtractPageSectionType} from '@/sanity/lib/types'
 import SectionEyebrow from '@/app/components/SectionEyebrow'
 
@@ -25,11 +26,14 @@ export default function FeaturedCollection({block}: Props) {
   const collectionSlug = block.collection?.slug
   const ctaHref = collectionSlug ? `/series/${collectionSlug}` : null
 
+  const bg = block.backgroundColor ?? '#F0EDE5'
+  const isDark = isDarkBg(bg)
+
   return (
-    <section className="w-full py-20 md:py-28">
+    <section className="w-full py-20 md:py-28" style={{backgroundColor: bg}}>
       <div className="container">
         {/* Eyebrow */}
-        {block.eyebrow ? <SectionEyebrow label={block.eyebrow} /> : null}
+        {block.eyebrow ? <SectionEyebrow label={block.eyebrow} bg={bg} /> : null}
 
         {/* Two-column layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-start">
@@ -49,11 +53,11 @@ export default function FeaturedCollection({block}: Props) {
                 />
               </div>
             ) : (
-              <div className="aspect-[3/4] bg-linen-clay" />
+              <div className={`aspect-[3/4] ${isDark ? 'bg-luxe-noir/30' : 'bg-linen-clay'}`} />
             )}
             {/* Caption */}
             {photo?.location && (
-              <p className="text-[10px] font-sans font-light uppercase tracking-[0.25em] text-dusty-sage">
+              <p className={`text-[10px] font-sans font-light uppercase tracking-[0.25em] ${eyebrowThemeForBg(bg).label}`}>
                 {photo.location}
               </p>
             )}
@@ -62,13 +66,13 @@ export default function FeaturedCollection({block}: Props) {
           {/* Text column */}
           <div className="flex flex-col justify-center gap-6">
             {block.heading && (
-              <h2 className="font-serif font-light text-luxe-noir leading-[1.1]"
+              <h2 className={`font-serif font-light leading-[1.1] ${headingColorForBg(bg)}`}
                 style={{fontSize: 'clamp(28px, 3vw, 40px)'}}>
                 {block.heading}
               </h2>
             )}
             {block.subheading && (
-              <p className="font-serif font-light italic text-coastal-pine"
+              <p className={`font-serif font-light italic ${isDark ? 'text-soft-oat/80' : 'text-coastal-pine'}`}
                 style={{fontSize: 'clamp(18px, 2vw, 22px)'}}>
                 {block.subheading}
               </p>
@@ -76,11 +80,11 @@ export default function FeaturedCollection({block}: Props) {
             {bodyBlocks?.length ? (
               <PortableText
                 value={bodyBlocks}
-                className="prose-p:text-coastal-pine"
+                className={proseThemeForBg(bg)}
               />
             ) : null}
             {ctaHref && (
-              <Link href={ctaHref} className={`${textLinkClass} self-start`}>
+              <Link href={ctaHref} className={`${isDark ? textLinkLightClass : textLinkClass} self-start`}>
                 {ctaLabel}
                 <span className="ml-2">→</span>
               </Link>

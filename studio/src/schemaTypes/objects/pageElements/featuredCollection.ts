@@ -1,5 +1,6 @@
 import {MdPhotoLibrary as icon} from 'react-icons/md'
 import {defineField, defineType} from 'sanity'
+import {palette} from '../../palette'
 
 export const featuredCollection = defineType({
   name: 'featuredCollection',
@@ -8,6 +9,7 @@ export const featuredCollection = defineType({
   icon,
   initialValue: {
     eyebrow: 'Featured Work',
+    backgroundColor: palette.softOat.value,
   },
   fields: [
     defineField({
@@ -15,6 +17,16 @@ export const featuredCollection = defineType({
       title: 'Eyebrow Label',
       type: 'string',
       description: 'Short label displayed above the section (e.g. "Featured Work")',
+    }),
+    defineField({
+      name: 'backgroundColor',
+      title: 'Background Colour',
+      type: 'string',
+      options: {
+        list: [palette.softOat, palette.linenClay, palette.dustySage, palette.coastalPine, palette.luxeNoir],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
     }),
     defineField({
       name: 'heading',

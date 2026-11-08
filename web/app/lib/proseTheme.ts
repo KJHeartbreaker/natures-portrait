@@ -1,5 +1,11 @@
 const DARK_BGS = ['#060d0c', '#3e5954', '#758886']
 
+/** True for the mid/dark palette backgrounds (dusty-sage, coastal-pine, luxe-noir). */
+export function isDarkBg(bg: string | null | undefined): boolean {
+  const normalized = bg?.toLowerCase()
+  return Boolean(normalized && DARK_BGS.includes(normalized))
+}
+
 /**
  * Returns eyebrow label + hairline colour classes appropriate for a given background.
  *

@@ -8,10 +8,11 @@ const textLinkBase =
   'inline-block text-xs font-sans font-normal uppercase tracking-[0.22em] border-b border-current pb-1 transition-colors duration-200'
 
 export const textLinkClass = `${textLinkBase} text-luxe-noir hover:text-coastal-pine`
+export const textLinkLightClass = `${textLinkBase} text-soft-oat hover:text-linen-clay`
 
 const ctaVariantClass: Record<CtaVariant, string> = {
   dark: textLinkClass,
-  light: `${textLinkBase} text-soft-oat hover:text-linen-clay`,
+  light: textLinkLightClass,
 }
 
 type CtaProps = {

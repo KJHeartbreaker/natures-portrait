@@ -226,6 +226,7 @@ const blocks: PageBuilderBlock[] = [
     ],
     fields: [
       'Eyebrow Label: small label above the section (defaults to "Featured Work")',
+      'Background Colour: any of the five palette colours (defaults to Soft Oat); text switches to light on the darker ones',
       'Heading and Subheading: the subheading shows in italic below the heading',
       'Body: short text in Simple Portable Text',
       'CTA Label: link text (defaults to "View the full series")',

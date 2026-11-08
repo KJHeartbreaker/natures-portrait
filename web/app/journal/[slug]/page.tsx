@@ -2,10 +2,10 @@ import type {Metadata, ResolvingMetadata} from 'next'
 import {notFound} from 'next/navigation'
 import {type PortableTextBlock} from 'next-sanity'
 import {format} from 'date-fns'
-import Link from 'next/link'
 
 import CustomPortableText from '@/app/components/PortableText'
 import SanityImage from '@/app/components/SanityImage'
+import BackLink from '@/app/components/BackLink'
 import ShareLinks from '@/app/components/ShareLinks'
 import {sanityFetch} from '@/sanity/lib/live'
 import {journalPostQuery, postPagesSlugs} from '@/sanity/lib/queries'
@@ -109,6 +109,7 @@ export default async function JournalPostPage(props: Props) {
           <div className="mx-auto max-w-[720px] px-6 pb-24">
             <CustomPortableText
               value={bodyBlocks}
+              wideImages
               className="max-w-none prose-p:text-sm prose-p:leading-[1.9] prose-p:text-coastal-pine prose-p:font-light prose-headings:font-serif prose-headings:font-light prose-headings:text-luxe-noir"
             />
           </div>
@@ -116,15 +117,7 @@ export default async function JournalPostPage(props: Props) {
 
         {/* Back link */}
         <div className="mx-auto max-w-[720px] px-6 pb-24 mt-4">
-          <Link
-            href="/journal"
-            className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-dusty-sage font-sans font-normal hover:text-coastal-pine transition-colors"
-          >
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
-              <path d="M10 3L5 8l5 5"/>
-            </svg>
-            Back to journal
-          </Link>
+          <BackLink href="/journal" label="Back to journal" />
         </div>
       </div>
     </div>

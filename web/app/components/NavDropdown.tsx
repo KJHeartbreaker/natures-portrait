@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import {useEffect, useId, useRef, useState} from 'react'
 import {usePathname} from 'next/navigation'
+import {stegaClean} from 'next-sanity'
+import StegaText from '@/app/components/StegaText'
 
 const labelClass = 'text-soft-oat/80 hover:text-soft-oat transition-colors duration-200'
 
@@ -94,16 +96,21 @@ export default function NavDropdown({
             target={isExternal ? '_blank' : undefined}
             rel={isExternal ? 'noopener noreferrer' : undefined}
             className={labelClass}
+            data-sanity-edit-target
           >
-            {label}
+            <StegaText text={label} />
           </Link>
-          <button {...toggleProps} aria-label={`${label} submenu`} className={`-m-2 p-2 cursor-pointer ${labelClass}`}>
+          <button {...toggleProps} aria-label={`${stegaClean(label)} submenu`} className={`-m-2 p-2 cursor-pointer ${labelClass}`}>
             <Chevron open={open} />
           </button>
         </div>
       ) : (
-        <button {...toggleProps} className={`flex items-center gap-1.5 cursor-pointer uppercase tracking-[inherit] ${labelClass}`}>
-          {label}
+        <button
+          {...toggleProps}
+          data-sanity-edit-target
+          className={`flex items-center gap-1.5 cursor-pointer uppercase tracking-[inherit] ${labelClass}`}
+        >
+          <StegaText text={label} />
           <Chevron open={open} />
         </button>
       )}

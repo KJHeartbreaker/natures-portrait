@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 import CustomPortableText from '@/app/components/PortableText'
 import SanityImage from '@/app/components/SanityImage'
+import ShareLinks from '@/app/components/ShareLinks'
 import {sanityFetch} from '@/sanity/lib/live'
 import {journalPostQuery, postPagesSlugs} from '@/sanity/lib/queries'
 import {seoMetadata} from '@/app/lib/seo'
@@ -54,7 +55,7 @@ export default async function JournalPostPage(props: Props) {
       {/* Hero image */}
       {imageId && (
         <div
-          className="w-full overflow-hidden bg-luxeNoir"
+          className="w-full overflow-hidden bg-luxe-noir"
           style={{height: 'clamp(320px, 52vw, 600px)'}}
         >
           <SanityImage
@@ -77,26 +78,30 @@ export default async function JournalPostPage(props: Props) {
       >
         <div className="mx-auto max-w-[720px] px-6 pt-14 pb-2">
           {formattedDate && (
-            <p className="mb-4 text-[10px] uppercase tracking-[0.25em] text-dustySage font-sans font-normal">
+            <p className="mb-4 text-[10px] uppercase tracking-[0.25em] text-dusty-sage font-sans font-normal">
               {formattedDate}
             </p>
           )}
           <h1
-            className="font-serif font-light text-luxeNoir mb-5"
+            className="font-serif font-light text-luxe-noir mb-5"
             style={{fontSize: 'clamp(32px, 4.5vw, 52px)', lineHeight: 1.1}}
           >
             {post.title}
           </h1>
           {post.subheader && (
-            <p className="text-base leading-relaxed text-coastalPine font-sans font-light">
+            <p className="text-base leading-relaxed text-coastal-pine font-sans font-light">
               {post.subheader}
             </p>
           )}
         </div>
 
-        {/* Divider */}
-        <div className="mx-auto max-w-[720px] px-6 py-8">
-          <div className="h-px bg-linenClay" />
+        {/* Divider, with the share row closing it at the right */}
+        <div className="mx-auto max-w-[720px] px-6 py-8 flex items-center gap-5">
+          <div className="h-px flex-1 bg-linen-clay" />
+          <ShareLinks
+            title={post.title ?? ''}
+            imageUrl={resolveOpenGraphImage(post.image, 1000, 1500)?.url}
+          />
         </div>
 
         {/* Body */}
@@ -104,7 +109,7 @@ export default async function JournalPostPage(props: Props) {
           <div className="mx-auto max-w-[720px] px-6 pb-24">
             <CustomPortableText
               value={bodyBlocks}
-              className="prose-p:text-sm prose-p:leading-[1.9] prose-p:text-coastalPine prose-p:font-light prose-headings:font-serif prose-headings:font-light prose-headings:text-luxeNoir"
+              className="prose-p:text-sm prose-p:leading-[1.9] prose-p:text-coastal-pine prose-p:font-light prose-headings:font-serif prose-headings:font-light prose-headings:text-luxe-noir"
             />
           </div>
         ) : null}
@@ -113,7 +118,7 @@ export default async function JournalPostPage(props: Props) {
         <div className="mx-auto max-w-[720px] px-6 pb-24 mt-4">
           <Link
             href="/journal"
-            className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-dustySage font-sans font-normal hover:text-coastalPine transition-colors"
+            className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-dusty-sage font-sans font-normal hover:text-coastal-pine transition-colors"
           >
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
               <path d="M10 3L5 8l5 5"/>

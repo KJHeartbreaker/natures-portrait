@@ -31,7 +31,7 @@ export default async function JournalPage() {
       <div className="container pt-32 pb-8 md:pt-40">
         <SectionEyebrow label="Journal" bg={bg} />
         <h1
-          className="font-serif font-light text-luxeNoir"
+          className="font-serif font-light text-luxe-noir"
           style={{fontSize: 'clamp(40px, 5vw, 64px)', lineHeight: 1.08}}
         >
           Notes from the field
@@ -40,7 +40,7 @@ export default async function JournalPage() {
 
       {!posts?.length ? (
         <div className="container pb-24">
-          <p className="text-dustySage text-sm">No entries yet — check back soon.</p>
+          <p className="text-dusty-sage text-sm">No entries yet — check back soon.</p>
         </div>
       ) : (
         <div className="container pb-24">
@@ -128,20 +128,20 @@ function FeaturedPost({post}: {post: Post}) {
       )}
       <div className="flex flex-col justify-center">
         {date && (
-          <p className="mb-3 text-[10px] uppercase tracking-[0.25em] text-dustySage font-sans font-normal">
+          <p className="mb-3 text-[10px] uppercase tracking-[0.25em] text-dusty-sage font-sans font-normal">
             {date}
           </p>
         )}
         <h2
-          className="font-serif font-light text-luxeNoir mb-4"
+          className="font-serif font-light text-luxe-noir mb-4"
           style={{fontSize: 'clamp(26px, 3vw, 36px)', lineHeight: 1.15}}
         >
           {post.title}
         </h2>
         {excerpt && (
-          <p className="text-sm leading-relaxed text-coastalPine mb-6 line-clamp-3">{excerpt}</p>
+          <p className="text-sm leading-relaxed text-coastal-pine mb-6 line-clamp-3">{excerpt}</p>
         )}
-        <span className="text-[10px] uppercase tracking-[0.22em] text-dustySage font-sans font-normal border-b border-linenClay pb-px w-fit">
+        <span className="text-[10px] uppercase tracking-[0.22em] text-dusty-sage font-sans font-normal border-b border-linen-clay pb-px w-fit">
           Read
         </span>
       </div>
@@ -171,18 +171,18 @@ function PostCard({post, wide = false}: {post: Post; wide?: boolean}) {
         </div>
       )}
       {date && (
-        <p className="mb-2 text-[10px] uppercase tracking-[0.25em] text-dustySage font-sans font-normal">
+        <p className="mb-2 text-[10px] uppercase tracking-[0.25em] text-dusty-sage font-sans font-normal">
           {date}
         </p>
       )}
       <h2
-        className="font-serif font-light text-luxeNoir mb-3"
+        className="font-serif font-light text-luxe-noir mb-3"
         style={{fontSize: 'clamp(20px, 2vw, 26px)', lineHeight: 1.2}}
       >
         {post.title}
       </h2>
       {excerpt && (
-        <p className="text-sm leading-relaxed text-coastalPine line-clamp-2">{excerpt}</p>
+        <p className="text-sm leading-relaxed text-coastal-pine line-clamp-2">{excerpt}</p>
       )}
     </Link>
   )

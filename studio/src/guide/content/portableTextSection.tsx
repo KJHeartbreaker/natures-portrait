@@ -23,7 +23,8 @@ export const portableTextSection: GuideSection = {
             <>
               <strong>Full Portable Text</strong>: paragraphs, headings H1–H5, quotes, lists, links,
               and inserted blocks (images, CTAs, dividers). Used in Single Column Content Blocks, Two
-              Column text panels, and the Body of Journal Entries.
+              Column text panels, and the Body of Journal Entries. A Journal Entry Body can also
+              insert a <strong>Photo Grid</strong>.
             </>,
             <>
               <strong>Simple Portable Text</strong>: paragraphs with <strong>bold</strong>,{' '}
@@ -101,7 +102,8 @@ export const portableTextSection: GuideSection = {
         <GuideParagraph>
           Put the cursor where you want the block, then use the buttons at the right of the toolbar.{' '}
           <strong>CTA</strong> and <strong>HR</strong> are shown directly; <strong>Image</strong> is in
-          the <strong>⋯</strong> after them.
+          the <strong>⋯</strong> after them (in a Journal Entry Body, <strong>Photo Grid</strong> is
+          there too).
         </GuideParagraph>
         <GuideShot
           file="pt-insert.webp"
@@ -111,14 +113,21 @@ export const portableTextSection: GuideSection = {
           items={[
             <>
               <strong>Image</strong>: upload or choose from the media library, and add{' '}
-              <strong>alt text</strong>.
+              <strong>alt text</strong>. In a Journal Entry, landscape images show wider than the
+              text, matching Photo Grid.
             </>,
             <>
               <strong>CTA</strong>: an underlined text link with an arrow (see{' '}
               <strong>Call to action (CTA)</strong>).
             </>,
             <>
-              <strong>HR</strong>: a hairline divider between parts of the text.
+              <strong>HR</strong>: a hairline divider between parts of the text. Click it to set{' '}
+              <strong>Width</strong> (a percentage of the text column, default 70) and{' '}
+              <strong>Size</strong> (the space above and below the line in pixels, default 25).
+            </>,
+            <>
+              <strong>Photo Grid</strong> (Journal Entry Body only): a row of photos picked from the
+              Photo Library, shown full width between paragraphs. See <strong>Journal entries</strong>.
             </>,
           ]}
         />

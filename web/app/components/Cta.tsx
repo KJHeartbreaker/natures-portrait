@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import StegaText from '@/app/components/StegaText'
 import {linkResolver, type CtaLike} from '@/sanity/lib/utils'
 
 export type CtaVariant = 'light' | 'dark'
@@ -34,8 +35,9 @@ export default function Cta({cta, className, variant = 'dark', arrow = false}: C
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
       className={className ?? ctaVariantClass[variant]}
+      data-sanity-edit-target
     >
-      {cta.title}
+      <StegaText text={cta.title} />
       {arrow ? <span className="ml-2">→</span> : null}
     </Link>
   )

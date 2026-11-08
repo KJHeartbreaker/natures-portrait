@@ -313,8 +313,13 @@ const workflowSectionsAfterSeo: GuideSection[] = [
                 Lede.
               </>,
               <>
-                <strong>Header Image</strong> — the large image at the top of the entry and its image on
-                the journal list.
+                <strong>Header Image</strong> — the large image at the top of the entry, its image on the
+                journal list, and the image Pinterest uses when someone pins the entry.
+              </>,
+              <>
+                <strong>Share links</strong> — every entry shows Facebook, X, LinkedIn, Pinterest, and
+                email buttons under its header. They appear on their own; there is nothing to fill in.
+                Facebook, X, and LinkedIn use the entry&apos;s SEO title, description, and social image.
               </>,
               <>
                 If the <strong>SEO</strong> tab is left empty, search results use the Lede as the
@@ -339,6 +344,51 @@ const workflowSectionsAfterSeo: GuideSection[] = [
                 links to it; remove those links first.
               </>,
             ]}
+          />
+        </Stack>
+
+        <Stack gap={4}>
+          <GuideSubheading>Add photos inside the Body</GuideSubheading>
+          <GuideParagraph>
+            Journal entries don&apos;t have page sections, so a set of photos goes straight into the{' '}
+            <strong>Body</strong> as a <strong>Photo Grid</strong>.
+          </GuideParagraph>
+          <GuideSteps
+            steps={[
+              <>
+                In <strong>Post Content</strong>, put the cursor in the <strong>Body</strong> where the
+                photos should go.
+              </>,
+              <>
+                Click the <strong>⋯</strong> at the right of the text toolbar (after{' '}
+                <strong>CTA</strong> and <strong>HR</strong>) and choose <strong>Photo Grid</strong>.
+              </>,
+              <>
+                Add photos from the Photo Library, set <strong>Columns</strong> and{' '}
+                <strong>Gap</strong>, and turn on <strong>Show captions</strong> if you want titles
+                under the photos.
+              </>,
+            ]}
+          />
+          <GuideParagraph>
+            In a journal entry the grid has no background colour, and each photo always uses the
+            title and description from the Photo Library. To change them, edit the photo itself.
+          </GuideParagraph>
+          <GuideParagraph>
+            A single <strong>Image</strong> in the Body lines up with the grids: landscape photos run
+            at the same wide width, while portrait and square photos stay at the width of the text.
+            Every photo is sized to fit on screen without scrolling. This follows the photo&apos;s shape after any crop
+            you set, so there is nothing to choose.
+          </GuideParagraph>
+          <GuideShot
+            file="post-photo-grid-insert.webp"
+            alt="The ⋯ menu at the right of the Body toolbar open, showing Image and Photo Grid, with Photo Grid highlighted"
+            caption="In a journal entry's Body, Photo Grid sits in the ⋯ menu next to Image."
+          />
+          <GuideShot
+            file="post-photo-grid-example.webp"
+            alt="A journal entry on the website: a paragraph, then three winter photos in a row spanning the page, more text, and a thin centred divider line"
+            caption="How it looks on the site: the grid runs wider than the text, between paragraphs. The thin line further down is an HR divider."
           />
         </Stack>
 

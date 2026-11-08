@@ -41,7 +41,7 @@ export const accordion = defineType({
           type: 'object',
           title: 'Item',
           options: {
-            modal: {type: 'dialog', width: 'medium'},
+            modal: {type: 'dialog', width: 1},
           },
           fields: [
             defineField({

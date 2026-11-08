@@ -32,6 +32,7 @@ import {photoGridRef} from './objects/pageElements/photoGridRef'
 
 // Objects - Portable Text
 import {mainPortableText} from './objects/portableText/mainPortableText'
+import {postPortableText} from './objects/portableText/postPortableText'
 import {simplePortableText} from './objects/portableText/simplePortableText'
 
 // Objects - Rows
@@ -73,6 +74,7 @@ export const schemaTypes = [
   photoGridRef,
   // Objects - Portable Text
   mainPortableText,
+  postPortableText,
   simplePortableText,
   // Objects - Rows
   accordion,

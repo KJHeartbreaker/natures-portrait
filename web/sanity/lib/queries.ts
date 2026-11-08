@@ -3,8 +3,10 @@ import {
   ctaProjection,
   gearProjection,
   imageProjection,
+  photoGridContainerProjection,
   photoSeriesProjection,
   portableTextProjection,
+  postBodyProjection,
 } from '@/sanity/lib/query-fragments'
 
 // TODO(decision): `photoGridContainer.images` currently allows BOTH `photoItem` and raw `mainImage`.
@@ -159,51 +161,7 @@ export const homeQuery = defineQuery(`
         disabled
       },
       _type == "photoGridContainer" => {
-        eyebrow,
-        title,
-        backgroundColor,
-        columns,
-        gap,
-        showCaptions,
-        "images": images[]{
-          _key,
-          _type,
-          _type == "photoGridRef" => {
-            "_key": _key,
-            "_type": _type,
-            "title": coalesce(titleOverride, photo->.title),
-            "location": photo->.location,
-            "dateCaptured": photo->.dateCaptured,
-            "description": coalesce(descriptionOverride, photo->.description){
-              ${portableTextProjection}
-            },
-            "cameraText": photo->.cameraText,
-            "lensText": photo->.lensText,
-            "cameraRef": photo->.cameraRef->{ ${gearProjection} },
-            "lensRef": photo->.lensRef->{ ${gearProjection} },
-            "image": photo->.image{ ${imageProjection} },
-            "photoId": photo._ref,
-            "series": *[_type == "collection" && references(^.photo._ref) && defined(slug.current)] | order(title asc){
-              _id,
-              title,
-              "slug": slug.current
-            },
-          },
-          _type == "photoItem" => {
-            "_key": _key,
-            "_type": _type,
-            title,
-            location,
-            dateCaptured,
-            description{ ${portableTextProjection} },
-            cameraText,
-            lensText,
-            cameraRef->{ ${gearProjection} },
-            lensRef->{ ${gearProjection} },
-            "image": coalesce(image, @){ ${imageProjection} },
-          },
-        },
-        disabled
+        ${photoGridContainerProjection}
       },
       _type == "autoGallery" => {
         disabled
@@ -384,51 +342,7 @@ export const getPageQuery = defineQuery(`
         disabled
       },
       _type == "photoGridContainer" => {
-        eyebrow,
-        title,
-        backgroundColor,
-        columns,
-        gap,
-        showCaptions,
-        "images": images[]{
-          _key,
-          _type,
-          _type == "photoGridRef" => {
-            "_key": _key,
-            "_type": _type,
-            "title": coalesce(titleOverride, photo->.title),
-            "location": photo->.location,
-            "dateCaptured": photo->.dateCaptured,
-            "description": coalesce(descriptionOverride, photo->.description){
-              ${portableTextProjection}
-            },
-            "cameraText": photo->.cameraText,
-            "lensText": photo->.lensText,
-            "cameraRef": photo->.cameraRef->{ ${gearProjection} },
-            "lensRef": photo->.lensRef->{ ${gearProjection} },
-            "image": photo->.image{ ${imageProjection} },
-            "photoId": photo._ref,
-            "series": *[_type == "collection" && references(^.photo._ref) && defined(slug.current)] | order(title asc){
-              _id,
-              title,
-              "slug": slug.current
-            },
-          },
-          _type == "photoItem" => {
-            "_key": _key,
-            "_type": _type,
-            title,
-            location,
-            dateCaptured,
-            description{ ${portableTextProjection} },
-            cameraText,
-            lensText,
-            cameraRef->{ ${gearProjection} },
-            lensRef->{ ${gearProjection} },
-            "image": coalesce(image, @){ ${imageProjection} },
-          },
-        },
-        disabled
+        ${photoGridContainerProjection}
       },
       _type == "autoGallery" => {
         disabled
@@ -592,7 +506,7 @@ export const journalPostQuery = defineQuery(`
       }
     },
     image{ ${imageProjection} },
-    body{ ${portableTextProjection} }
+    body{ ${postBodyProjection} }
   }
 `)
 

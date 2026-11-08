@@ -95,7 +95,7 @@ export const post = defineType({
     defineField({
       name: 'body',
       title: 'Body',
-      type: 'mainPortableText',
+      type: 'postPortableText',
       group: 'postContent',
       validation: (Rule) => Rule.required(),
     }),

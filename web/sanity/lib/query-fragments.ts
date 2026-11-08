@@ -127,3 +127,89 @@ export const photoSeriesProjection = `
     "slug": slug.current
   }
 `
+
+// Fields of a Photo Grid block (`photoGridContainer`). Used by the page builder
+// queries and inside journal post bodies. Photos from the Photo Library
+// (`photoGridRef`) are dereferenced so they share one shape with inline `photoItem`s.
+export const photoGridContainerProjection = `
+  eyebrow,
+  title,
+  backgroundColor,
+  columns,
+  gap,
+  showCaptions,
+  "images": images[]{
+    _key,
+    _type,
+    _type == "photoGridRef" => {
+      "_key": _key,
+      "_type": _type,
+      "title": coalesce(titleOverride, photo->.title),
+      "location": photo->.location,
+      "dateCaptured": photo->.dateCaptured,
+      "description": coalesce(descriptionOverride, photo->.description){
+        ${portableTextProjection}
+      },
+      "cameraText": photo->.cameraText,
+      "lensText": photo->.lensText,
+      "cameraRef": photo->.cameraRef->{ ${gearProjection} },
+      "lensRef": photo->.lensRef->{ ${gearProjection} },
+      "image": photo->.image{ ${imageProjection} },
+      "photoId": photo._ref,
+      "series": *[_type == "collection" && references(^.photo._ref) && defined(slug.current)] | order(title asc){
+        _id,
+        title,
+        "slug": slug.current
+      },
+    },
+    _type == "photoItem" => {
+      "_key": _key,
+      "_type": _type,
+      title,
+      location,
+      dateCaptured,
+      description{ ${portableTextProjection} },
+      cameraText,
+      lensText,
+      cameraRef->{ ${gearProjection} },
+      lensRef->{ ${gearProjection} },
+      "image": coalesce(image, @){ ${imageProjection} },
+    },
+  },
+  disabled
+`
+
+// Journal post body: the shared rich text plus the layout blocks only posts allow.
+export const postBodyProjection = `
+  portableTextBlock[]{
+    ...,
+    _type == "cta" => {
+      ${ctaProjection}
+    },
+    _type == "image" => {
+      ...,
+      alt,
+      crop,
+      hotspot,
+      asset->{
+        _id,
+        _type,
+        metadata{
+          dimensions{
+            width,
+            height,
+            aspectRatio
+          },
+          lqip,
+          blurhash
+        }
+      }
+    },
+    _type == "photoGridContainer" => {
+      _key,
+      _type,
+      ${photoGridContainerProjection}
+    },
+    ${portableTextMarkDefsProjection}
+  }
+`

@@ -32,6 +32,8 @@ export const photoGridContainer = defineType({
       name: 'backgroundColor',
       title: 'Optional Background Colour',
       type: 'string',
+      // Inside a journal post the grid sits in the article, which keeps its own background.
+      hidden: ({document}) => document?._type === 'post',
       options: {
         list: [palette.luxeNoir, palette.coastalPine, palette.dustySage, palette.linenClay, palette.softOat],
         layout: 'radio',

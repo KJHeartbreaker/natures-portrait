@@ -12,6 +12,8 @@ import {PortableText, type PortableTextComponents, type PortableTextBlock} from 
 import Cta, {textLinkClass} from '@/app/components/Cta'
 import ResolvedLink from '@/app/components/ResolvedLink'
 import Image from '@/app/components/SanityImage'
+import PhotoGrid from '@/app/components/PhotoGrid'
+import SectionEyebrow from '@/app/components/SectionEyebrow'
 import {linkifyEmails} from '@/app/lib/linkifyEmails'
 
 export default function CustomPortableText({
@@ -40,6 +42,27 @@ export default function CustomPortableText({
             className="not-prose mx-auto h-0 border-0 border-t border-dusty-sage"
             style={{width: `${width}%`, marginBlock: `${spacing}px`}}
           />
+        )
+      },
+      // Photo Grid inside a journal post body (posts have no page builder).
+      // Breaks out of the text column to the full viewport, then sits in the
+      // standard page `container` so it lines up with page-builder sections.
+      // The block's background colour is ignored here: the article keeps its own.
+      // The post page clips horizontal overflow, so `w-screen` can't cause sideways scroll.
+      photoGridContainer: ({value}) => {
+        if (value?.disabled || !value?.images?.length) return null
+        return (
+          <div className="not-prose relative left-1/2 my-14 w-screen -translate-x-1/2">
+            <div className="container">
+              {value.eyebrow ? <SectionEyebrow label={value.eyebrow} /> : null}
+              <PhotoGrid
+                images={value.images}
+                columns={value.columns}
+                gap={value.gap}
+                showCaptions={value.showCaptions}
+              />
+            </div>
+          </div>
         )
       },
       image: ({value}) => {

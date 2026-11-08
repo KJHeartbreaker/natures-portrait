@@ -51,7 +51,7 @@ export default async function JournalPostPage(props: Props) {
   const bodyBlocks = post.body?.portableTextBlock as PortableTextBlock[] | undefined
 
   return (
-    <div className="w-full pt-16 md:pt-[72px]">
+    <div className="w-full overflow-x-clip pt-16 md:pt-[72px]">
       {/* Hero image */}
       {imageId && (
         <div
@@ -109,7 +109,7 @@ export default async function JournalPostPage(props: Props) {
           <div className="mx-auto max-w-[720px] px-6 pb-24">
             <CustomPortableText
               value={bodyBlocks}
-              className="prose-p:text-sm prose-p:leading-[1.9] prose-p:text-coastal-pine prose-p:font-light prose-headings:font-serif prose-headings:font-light prose-headings:text-luxe-noir"
+              className="max-w-none prose-p:text-sm prose-p:leading-[1.9] prose-p:text-coastal-pine prose-p:font-light prose-headings:font-serif prose-headings:font-light prose-headings:text-luxe-noir"
             />
           </div>
         ) : null}

@@ -25,10 +25,10 @@ const lightOnImage = {
 } as const
 
 const darkOnImage = {
-  heading: 'text-luxeNoir',
+  heading: 'text-luxe-noir',
   copyWrap:
-    'prose prose-lg max-w-2xl prose-p:leading-relaxed text-luxeNoir prose-headings:text-luxeNoir prose-strong:text-luxeNoir prose-p:text-luxeNoir/90',
-  portableText: 'prose-a:text-coastalPine hover:prose-a:text-coastalPine/90',
+    'prose prose-lg max-w-2xl prose-p:leading-relaxed text-luxe-noir prose-headings:text-luxe-noir prose-strong:text-luxe-noir prose-p:text-luxe-noir/90',
+  portableText: 'prose-a:text-coastal-pine hover:prose-a:text-coastal-pine/90',
 } as const
 
 // Controls how the copy block sits within the container

@@ -23,7 +23,10 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   if (!collection) return {}
 
   const count = collection.photos?.length ?? 0
-  const ogImage = resolveOpenGraphImage(collection.coverImage ?? collection.photos?.[0]?.image)
+  // An empty cover image field (alt text, no photo) counts as unset, so fall through to the first photo.
+  const ogImage =
+    resolveOpenGraphImage(collection.coverImage) ??
+    resolveOpenGraphImage(collection.photos?.[0]?.image)
   return {
     title: collection.title,
     description:

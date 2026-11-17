@@ -20,12 +20,24 @@ function urlForImage(source: SanityImageSource) {
   return builder.image(source)
 }
 
+/**
+ * An image field can exist without a photo in it: an editor types the alt text
+ * but hasn't uploaded yet, so the value is `{alt, asset: null}`. That's truthy,
+ * and the URL builder throws on it, which takes the whole page down.
+ */
+function hasAsset(image: unknown): image is SanityImageSource {
+  if (!image || typeof image !== 'object') return false
+  const asset = (image as {asset?: unknown}).asset
+  if (asset === undefined) return true // plain asset reference / id objects have no `asset` key
+  return Boolean(asset)
+}
+
 export function resolveOpenGraphImage(
   image?: SanityImageSource | null,
   width = 1200,
   height = 627,
 ) {
-  if (!image) return
+  if (!hasAsset(image)) return
   const url = urlForImage(image)?.width(width).height(height).fit('crop').url()
   if (!url) return
   return {url, alt: (image as {alt?: string})?.alt || '', width, height}
@@ -33,7 +45,7 @@ export function resolveOpenGraphImage(
 
 /** Square-cropped PNG URLs for favicon / apple-touch-icon from the site logo. */
 export function resolveSiteIcons(image?: SanityImageSource | null) {
-  if (!image) return undefined
+  if (!hasAsset(image)) return undefined
 
   const squareIcon = (size: number) => {
     const url = urlForImage(image)?.width(size).height(size).fit('crop').auto('format').url()
